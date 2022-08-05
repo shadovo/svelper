@@ -1,30 +1,23 @@
-<script>
-	console.log('hello!');
-
-	function func() {
-		console.log('I am a function');
-	}
-
-	const arrow = () => {
-		console.log('I am an arrow');
-	};
+<script lang="ts">
 </script>
 
-<h1>Welcome to SvelteKit</h1>
+<svelte:head>
+	<title>Level up!</title>
+	<meta name="description" content="A collection fun stuff built with Svelte." />
+</svelte:head>
 
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<div class="hey">
-	<p>Hello!</p>
+<div class="hero flex">
+	<h2>Collection of fun things built with Svelte</h2>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis
+		repellendus accusamus, veritatis dolore, unde quia minima similique asperiores sequi ratione
+		voluptate iusto enim. Magnam, veniam soluta.
+	</p>
 </div>
+<div class="main" />
 
 <style lang="scss">
-	.hey {
-		border: 1px solid red;
-
-		p {
-			color: blue;
-			font-size: 24px;
-		}
+	.main {
+		padding: var(--gap);
 	}
 </style>
