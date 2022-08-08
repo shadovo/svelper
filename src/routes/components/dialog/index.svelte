@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dialog from '$lib/Dialog.svelte';
+	import Dialog from '$lib/components/Dialog.svelte';
 
 	let showModal = false;
 	let acceptedDialogOption: Boolean | undefined;

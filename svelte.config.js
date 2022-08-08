@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import * as path from 'path';
 
 const dev = process.env.NODE_ENV === 'development';
 
@@ -21,6 +22,13 @@ const config = {
 		}),
 		paths: {
 			base: dev ? '' : '/homepage',
+		},
+		vite: {
+			resolve: {
+				alias: {
+					$img: path.resolve('src/images'),
+				},
+			},
 		},
 	},
 };

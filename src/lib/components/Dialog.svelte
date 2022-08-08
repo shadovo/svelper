@@ -76,7 +76,7 @@
 			0 7px 5px -2px hsl(220 3% 15% / 4%), 0 12px 10px -2px hsl(220 3% 15% / 5%),
 			0 22px 18px -2px hsl(220 3% 15% / 6%), 0 41px 33px -2px hsl(220 3% 15% / 7%),
 			0 100px 80px -2px hsl(220 3% 15% / 8%);
-		z-index: 2147483647;
+		z-index: var(--layer-impoetant);
 		overflow: hidden;
 		transition: opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
 		background: var(--c-background);

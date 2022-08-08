@@ -1,21 +1,31 @@
 <script lang="ts">
+	import 'ress';
 	import { base } from '$app/paths';
-	import Navigation from '$lib/Navigation.svelte';
-	import srcOscar from '$lib/static/img/oscar-head.svg';
+	import { beforeNavigate } from '$app/navigation';
+	import MainWithAside from '$lib/components/MainWithAside.svelte';
+	import srcOscar from '$img/oscar-head.svg';
+
+	let showAside = false;
+	beforeNavigate(() => {
+		showAside = false;
+	});
 </script>
 
-<div class="wrapper">
-	<header>
+<MainWithAside bind:showAside>
+	<svelte:fragment slot="header">
 		<h1>Level up!</h1>
-	</header>
-	<main>
-		<article>
-			<slot />
-		</article>
-		<aside>
-			<Navigation>
-				<div slot="header" class="flex">
-					<img src={srcOscar} alt="Avatar of the author" />
+	</svelte:fragment>
+	<svelte:fragment slot="article">
+		<slot />
+	</svelte:fragment>
+	<svelte:fragment slot="footer">
+		<p>Footer</p>
+	</svelte:fragment>
+	<svelte:fragment slot="aside">
+		<slot name="navigation">
+			<nav>
+				<div class="flex">
+					<img width="217" height="217" src={srcOscar} alt="Avatar of the author" />
 					<p>
 						<span class="accent">Hi!</span> Welcome to my collection of things I always forget or am
 						too lazy to look up when I need them.
@@ -41,17 +51,18 @@
 						</li>
 					</ul>
 				</div>
-			</Navigation>
-		</aside>
-	</main>
-	<footer>Footer</footer>
-</div>
+			</nav>
+		</slot>
+	</svelte:fragment>
+</MainWithAside>
 
 <style lang="scss">
 	:global(:root) {
-		--font-title: var(--font-mono);
-		--font-text: var(--font-sans);
-		--font-accent: var(--font-serif);
+		--font-title: ui-serif, serif;
+		--font-text: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
+			sans-serif, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+		--font-accent: Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco,
+			Droid Sans Mono, Source Code Pro, monospace;
 		--font-weight-bold: 700;
 
 		--font-size-base: 16px;
@@ -71,7 +82,8 @@
 
 		--c-text: #0d0d0d;
 		--c-background: #ffffff;
-		--c-accent: #0c8894;
+		/* --c-accent: #0c8894; */
+		--c-accent: #0b828d;
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -89,8 +101,7 @@
 	}
 
 	:global(h1, h2, h3, h4, h5) {
-		font-family: var(--font-title);
-		margin: unset;
+		font-family: var(--font-accent);
 	}
 
 	:global(p) {
@@ -99,8 +110,6 @@
 
 	:global(ul) {
 		list-style: none;
-		padding: 0;
-		margin: 0;
 	}
 
 	:global(li) {
@@ -129,7 +138,7 @@
 		background-color: var(--c-background);
 		border: 5px solid var(--c-text);
 		color: var(--c-text);
-		font-family: var(--font-mono);
+		font-family: var(--font-accent);
 		font-weight: var(--font-weight-bold);
 		font-size: 1.25rem;
 		flex-shrink: 0;
@@ -154,7 +163,7 @@
 	}
 
 	:global(.accent) {
-		font-family: var(--font-mono);
+		font-family: var(--font-accent);
 		font-weight: bold;
 	}
 
@@ -162,53 +171,39 @@
 		padding: var(--gap) 0;
 	}
 
-	.wrapper {
-		max-width: 1024px;
-		margin: 0 auto;
-		padding: var(--gap);
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap);
-		min-height: 100vmin;
-	}
-
-	header {
-		h1 {
-			font-family: var(--font-serif);
-			font-size: 8.2rem;
-			/* font-size: 10rem; */
-			/* margin-left: -16px; */
-		}
-	}
-
-	main {
-		display: grid;
-		grid-template-columns: 1fr 250px;
-		grid-template-rows: 1fr;
-		gap: var(--gap-2);
-	}
-
-	aside {
-		grid-column: 2 / span 1;
-		grid-row: 1 / span 1;
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap);
-		align-items: center;
-		border-left: 5px solid var(--c-text);
-		padding-left: var(--gap-2);
-	}
-
-	footer {
-		margin: auto 0 0;
+	h1 {
+		font-family: var(--font-title);
+		font-size: 8.2rem;
+		font-size: clamp(2rem, 12vw, 8.2rem);
 	}
 
 	.navigation {
 		padding-top: var(--gap);
-		/* border-top: 3px solid var(--c-text); */
 
 		h2 {
 			font-size: 1.3rem;
+		}
+	}
+
+	nav {
+		display: block;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap);
+		border-left: 5px solid var(--c-text);
+		padding: 0 var(--gap-2);
+	}
+
+	@media (max-width: 768px) {
+		nav {
+			padding: var(--gap);
+		}
+
+		img {
+			margin: 0 auto;
+			width: 150px;
+			height: 150px;
 		}
 	}
 </style>
