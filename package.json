@@ -1,5 +1,5 @@
 {
-	"name": "homepage",
+	"name": "level-up",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit dev",

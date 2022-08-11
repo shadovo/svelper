@@ -22,13 +22,14 @@
 	<section>
 		<p>
 			This implementation is pretty much a copy of Phptuts implementation at <a
-				href="https://github.com/phptuts/Svelte-PrismJS">github.com/phptuts/Svelte-PrismJS</a
+				href="https://github.com/phptuts/Svelte-PrismJS"
+				target="_blank">github.com/phptuts/Svelte-PrismJS</a
 			> exept that it uses css vars to allow for easy light/dark mode switching.
 		</p>
 		<p>
 			This implementation can be found at <a
-				href="https://github.com/shadovo/homepage/blob/main/src/lib/components/SyntaxHighlighting.svelte"
-				>github.com/shadovo/homepage/../SyntaxHighlighting.svelte</a
+				href="https://github.com/shadovo/level-up/blob/main/src/lib/components/SyntaxHighlighting.svelte"
+				>github.com/shadovo/level-up/../SyntaxHighlighting.svelte</a
 			>
 		</p>
 	</section>

@@ -21,7 +21,7 @@
 	<div class="footer" slot="footer">
 		<p>
 			Thanks for checking out the site! Feel free to use any and all parts of the code available at <a
-				href="https://github.com/shadovo/homepage">github</a
+				href="https://github.com/shadovo/level-up">github</a
 			> ♥ Oscar.
 		</p>
 	</div>

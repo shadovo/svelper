@@ -21,7 +21,7 @@ const config = {
 			precompress: true,
 		}),
 		paths: {
-			base: dev ? '' : '/homepage',
+			base: dev ? '' : '/level-up',
 		},
 		vite: {
 			resolve: {

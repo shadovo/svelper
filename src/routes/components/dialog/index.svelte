@@ -34,8 +34,8 @@
 	<section>
 		<p>
 			Check out the code at <a
-				href="https://github.com/shadovo/homepage/blob/main/src/lib/components/Dialog.svelte"
-				>github.com/shadovo/homepage/../Dialog.svelte</a
+				href="https://github.com/shadovo/level-up/blob/main/src/lib/components/Dialog.svelte"
+				target="_blank">github.com/shadovo/level-up/../Dialog.svelte</a
 			>
 		</p>
 	</section>
