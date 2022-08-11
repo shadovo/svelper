@@ -52,7 +52,7 @@
 									<a href="{base}/components/dialog">Dialog</a>
 								</li>
 								<li>
-									<a href="{base}/components/syntax-highlight">SyntaxHighlight</a>
+									<a href="{base}/components/syntax-highlighting">SyntaxHighlight</a>
 								</li>
 							</ul>
 						</li>

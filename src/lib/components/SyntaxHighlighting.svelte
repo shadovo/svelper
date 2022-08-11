@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, afterUpdate, tick } from 'svelte';
 	import Prism from 'prismjs';
-	import 'prismjs/components/prism-yaml';
+	import 'prismjs/components/prism-yaml.js';
 	import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.js';
 	import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 	import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
