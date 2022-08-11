@@ -14,22 +14,31 @@
 	};
 </script>
 
-<div class="hero flex">
-	<h2>Dialog implementation as Svelte component</h2>
-	<p>
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis
-		repellendus accusamus, veritatis dolore, unde quia minima similique asperiores sequi ratione
-		voluptate iusto enim. Magnam, veniam soluta.
-	</p>
-</div>
-
 <article>
-	<button on:click={() => (showModal = !showModal)}>Show modal!</button>
-	{#if acceptedDialogOption === true}
-		<p>You have accepted the info in the modal!</p>
-	{:else if acceptedDialogOption === false}
-		<p>You did not accept it? :(</p>
-	{/if}
+	<section>
+		<h2>Dialog implementation as Svelte component</h2>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis
+			repellendus accusamus, veritatis dolore, unde quia minima similique asperiores sequi ratione
+			voluptate iusto enim. Magnam, veniam soluta.
+		</p>
+	</section>
+	<section class="row">
+		<button on:click={() => (showModal = !showModal)}>Show modal!</button>
+		{#if acceptedDialogOption === true}
+			<p>You have accepted the info in the modal!</p>
+		{:else if acceptedDialogOption === false}
+			<p>You did not accept it? :(</p>
+		{/if}
+	</section>
+	<section>
+		<p>
+			Check out the code at <a
+				href="https://github.com/shadovo/homepage/blob/main/src/lib/components/Dialog.svelte"
+				>github.com/shadovo/homepage/../Dialog.svelte</a
+			>
+		</p>
+	</section>
 </article>
 
 <Dialog title="Test dialog" bind:show={showModal}>
@@ -85,12 +94,12 @@
 </Dialog>
 
 <style lang="scss">
-	article {
+	/* article {
 		display: flex;
 		gap: var(--gap);
 		flex-direction: column;
 		align-items: flex-start;
-	}
+	} */
 
 	.dialog__header h2 {
 		font-size: 2.5rem;
@@ -103,9 +112,9 @@
 	}
 
 	@media (min-width: 650px) {
-		article {
+		/* article {
 			flex-direction: row;
 			align-items: center;
-		}
+		} */
 	}
 </style>

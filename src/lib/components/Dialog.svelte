@@ -72,10 +72,11 @@
 		position: fixed;
 		inset: 0;
 		border: 5px solid var(--c-text);
-		box-shadow: 0 -1px 2px 0 hsl(220 3% 15% / 3%), 0 3px 2px -2px hsl(220 3% 15% / 4%),
-			0 7px 5px -2px hsl(220 3% 15% / 4%), 0 12px 10px -2px hsl(220 3% 15% / 5%),
-			0 22px 18px -2px hsl(220 3% 15% / 6%), 0 41px 33px -2px hsl(220 3% 15% / 7%),
-			0 100px 80px -2px hsl(220 3% 15% / 8%);
+		box-shadow: 0 -1px 3px 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+			0 1px 2px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+			0 2px 5px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+			0 4px 12px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+			0 12px 15px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
 		z-index: var(--layer-impoetant);
 		overflow: hidden;
 		transition: opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);

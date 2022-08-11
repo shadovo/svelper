@@ -3,43 +3,58 @@
 
 	const SWIPE_START_THRESHOLD = 30;
 	const SWIPE_END_THRESHOLD = 100;
+	const SWIPE_EDGE_THRESHOLD = 30;
 
 	let touchStartX: number = -1;
 	let asideTransform = 'none';
+
+	const closeAside = () => {
+		showAside = false;
+	};
+
+	const openAside = () => {
+		showAside = true;
+		asideTransform = 'translateX(0)';
+	};
 
 	const asideClick = (event: MouseEvent) => {
 		const ele = event?.target as HTMLElement | undefined;
 		// Compare the event offsetX and target element offsetLeft to determine
 		// if the click was on the pseudo-element :after outside of the regular element.
 		if (ele?.nodeName === 'ASIDE' && event.offsetX < ele?.offsetLeft) {
-			showAside = false;
+			closeAside();
 		}
 	};
 
 	const swipeStart = (event: TouchEvent | MouseEvent) => {
-		touchStartX = event instanceof MouseEvent ? event.screenX : event.touches[0].screenX;
+		touchStartX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
 	};
 
 	const swipeMove = (event: TouchEvent | MouseEvent) => {
 		if (touchStartX === -1) {
 			return;
 		}
-		const x = event instanceof MouseEvent ? event.screenX : event.touches[0].screenX;
+		const x = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
+
 		const delta = x - touchStartX;
 		if (delta > SWIPE_START_THRESHOLD) {
+			if (x > window.innerWidth - SWIPE_EDGE_THRESHOLD) {
+				closeAside();
+				touchStartX = -1;
+				return;
+			}
 			asideTransform = `translateX(${delta}px)`;
 		}
 	};
 
 	const swipeEnd = (event: TouchEvent | MouseEvent) => {
-		const x = event instanceof MouseEvent ? event.screenX : event.touches[0].screenX;
+		const x = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
 		const delta = x - touchStartX;
 		touchStartX = -1;
 		if (delta > SWIPE_END_THRESHOLD) {
-			showAside = false;
+			closeAside();
 		} else {
-			showAside = true;
-			asideTransform = 'translateX(0)';
+			openAside();
 		}
 	};
 
@@ -57,12 +72,14 @@
 		<slot name="header" />
 	</header>
 	<article>
-		<button on:click={() => (showAside = !showAside)}>Show aside</button>
 		<slot name="article" />
 	</article>
 	<footer>
 		<slot name="footer" />
 	</footer>
+	<nav>
+		<slot name="mobile-sticky" />
+	</nav>
 	<aside
 		class:animateTransform={touchStartX === -1}
 		style:transform={asideTransform}
@@ -76,14 +93,21 @@
 	>
 		<slot name="aside" />
 	</aside>
+	<button class="show-aside button-icon" on:click={() => (showAside = !showAside)}>
+		<svg width="24" height="24" viewBox="0 0 24 24">
+			<line x1="3" y1="6" x2="21" y2="6" />
+			<line x1="3" y1="12" x2="21" y2="12" />
+			<line x1="3" y1="18" x2="21" y2="18" />
+		</svg>
+	</button>
 </main>
 
 <style lang="scss">
 	main {
-		--aside-width: 270px;
+		--aside-width: 280px;
 		display: grid;
-		grid-template-columns: 1fr var(--aside-width);
-		grid-template-rows: auto 1fr 50px;
+		grid-template-columns: calc(100% - var(--aside-width)) var(--aside-width);
+		grid-template-rows: auto 1fr auto;
 		gap: var(--gap-2);
 		max-width: 1024px;
 		margin: 0 auto;
@@ -102,7 +126,7 @@
 	}
 
 	footer {
-		grid-column: 1 / span 1;
+		grid-column: 1 / span 2;
 		grid-row: 3 / span 1;
 	}
 
@@ -112,33 +136,51 @@
 		z-index: var(--layer-2);
 	}
 
+	.show-aside {
+		background-color: var(--c-background);
+		position: fixed;
+		bottom: var(--gap-2);
+		right: var(--gap-2);
+		/* z-index: var(--layer-5); */
+		box-shadow: 0 -1px 3px 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+			0 1px 2px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+			0 2px 5px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+			0 4px 12px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+			0 12px 15px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
+	}
+
 	@media (min-width: 769px) {
 		aside {
 			transform: translateX(0) !important;
+		}
+
+		.show-aside {
+			display: none;
 		}
 	}
 
 	@media (max-width: 768px) {
 		main {
 			--aside-width: 300px;
-			grid-template-columns: 1fr 0px;
-			grid-template-rows: auto 1fr 50px;
+			/* grid-template-columns: 1fr 0px; */
+			grid-template-columns: 100% 0;
+			grid-template-rows: auto 1fr auto 50px;
 		}
-
+		/* 
 		header {
 			grid-column: 1 / span 2;
 			grid-row: 1 / span 1;
 		}
 
 		article {
-			grid-column: 1 / span 1;
+			grid-column: 1 / span 2;
 			grid-row: 2 / span 1;
 		}
 
 		footer {
-			grid-column: 1 / span 1;
+			grid-column: 1 / span 2;
 			grid-row: 3 / span 1;
-		}
+		} */
 
 		aside {
 			display: flex;
@@ -148,7 +190,6 @@
 			top: 0;
 			right: 0;
 			bottom: 0;
-			/* transition: transform 0.2s ease-in-out; */
 			transform: translateX(100%);
 		}
 
