@@ -165,6 +165,7 @@
 		background-color: var(--c-background);
 		font-family: var(--font-text);
 		color: var(--c-text);
+		overflow-y: scroll;
 	}
 
 	:global(h1, h2, h3, h4, h5) {

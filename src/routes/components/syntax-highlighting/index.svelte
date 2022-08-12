@@ -3,7 +3,7 @@
 </script>
 
 <article>
-	<section class="flex">
+	<section>
 		<h2>Element with syntax highlighting</h2>
 		<p>This is an element with syntax highlighting.</p>
 		<p>The following code:</p>
