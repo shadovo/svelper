@@ -1,3 +1,10 @@
+<svelte:head>
+	<title>ress.css - A moderns CSS reset - Tips & tricks!</title>
+	<meta
+		name="description"
+		content="A minimal, modern, default css setup - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."
+	/>
+</svelte:head>
 <article>
 	<section>
 		<h2>A moderns CSS reset - ress</h2>

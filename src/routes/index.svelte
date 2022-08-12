@@ -2,8 +2,11 @@
 </script>
 
 <svelte:head>
-	<title>Level up!</title>
-	<meta name="description" content="A collection fun stuff built with Svelte." />
+	<title>Tips & tricks!</title>
+	<meta
+		name="description"
+		content="A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."
+	/>
 </svelte:head>
 
 <article>

@@ -20,6 +20,16 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Dialog implementation as Svelte component - Tips & tricks!</title>
+	<meta
+		name="description"
+		content="This component uses the standard HTML &lt;dialog&gt;
+		element and adds some basic functionality to it. - A collection fun stuff
+		built with Svelte, useful libraries, frameworks and copy/paste utils."
+	/>
+</svelte:head>
+
 <article>
 	<section>
 		<h2>Dialog implementation as Svelte component</h2>
@@ -34,11 +44,9 @@
 		<h3>Simple dialog</h3>
 		<p>The follwing code will show the simplest of dialogs.</p>
 		<SyntaxHighlighting language="html"
-			>{`
-		<Dialog title="Simple dialog" bind:show={showSimpleDialog}>
-			<p>Hello world</p>
-		</Dialog>
-		`}</SyntaxHighlighting
+			>{`<Dialog title="Simple dialog" bind:show={showSimpleDialog}>
+	<p>Hello world</p>
+</Dialog>`}</SyntaxHighlighting
 		>
 		<button on:click={() => (showSimpleDialog = !showSimpleDialog)}>Show modal!</button>
 		<Dialog title="Simple dialog" bind:show={showSimpleDialog}>
@@ -49,20 +57,18 @@
 		<h3>Dialog with custom header element</h3>
 		<p>The follwing code will show a dialog with a custom header.</p>
 		<SyntaxHighlighting language="html"
-			>{`
-		<Dialog bind:show={showCustomHeaderDialog}>
-			<div slot="header" class="row">
-				<img src={srcOscar} alt="Author image" height="50" width="50" />
-				<h4>Hi! It's me!</h4>
-			</div>
-			<p>Hello world</p>
-		</Dialog>
-		`}</SyntaxHighlighting
+			>{`<Dialog bind:show={showCustomHeaderDialog}>
+	<div slot="header" class="row">
+		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+		<h4>Hi! It's me!</h4>
+	</div>
+	<p>Hello world</p>
+</Dialog>`}</SyntaxHighlighting
 		>
 		<button on:click={() => (showCustomHeaderDialog = !showCustomHeaderDialog)}>Show modal!</button>
 		<Dialog title="" bind:show={showCustomHeaderDialog}>
 			<div slot="header" class="row">
-				<img src={srcOscar} alt="Author image" height="50" width="50" />
+				<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 				<h4>Hi! It's me!</h4>
 			</div>
 			<p>Hello world</p>
@@ -72,33 +78,29 @@
 		<h3>Dialog with custom header and footer</h3>
 		<p>The following code will show a dialog with a custom footer.</p>
 		<SyntaxHighlighting language="javascript"
-			>{`
-	const acceptDialog = () => {
-		acceptedDialogOption = true;
-		showCustomFooterDialog = false;
-	};
-	const declinedDialog = () => {
-		acceptedDialogOption = false;
-		showCustomFooterDialog = false;
-	};
-	`}</SyntaxHighlighting
+			>{`const acceptDialog = () => {
+	acceptedDialogOption = true;
+	showCustomFooterDialog = false;
+};
+const declinedDialog = () => {
+	acceptedDialogOption = false;
+	showCustomFooterDialog = false;
+};`}</SyntaxHighlighting
 		>
 		<SyntaxHighlighting language="html"
-			>{`
-		<Dialog title="Test dialog" bind:show={showCustomFooterDialog}>
-			<div slot="header" class="row">
-				<img src={srcOscar} alt="Author image" height="50" width="50" />
-				<h4>Hi! It's me!</h4>
-			</div>
-			<div class="flex">
-				<p>This is a dialog with custom header and footer.</p>
-			</div>
-			<div class="dialog__footer" slot="footer">
-				<button on:click={declinedDialog}>No way!</button>
-				<button on:click={acceptDialog}>Sure!</button>
-			</div>
-		</Dialog>
-	`}</SyntaxHighlighting
+			>{`<Dialog title="Test dialog" bind:show={showCustomFooterDialog}>
+	<div slot="header" class="row">
+		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+		<h4>Hi! It's me!</h4>
+	</div>
+	<div class="flex">
+		<p>This is a dialog with custom header and footer.</p>
+	</div>
+	<div class="dialog__footer" slot="footer">
+		<button on:click={declinedDialog}>No way!</button>
+		<button on:click={acceptDialog}>Sure!</button>
+	</div>
+</Dialog>`}</SyntaxHighlighting
 		>
 		<div class="row">
 			<button on:click={() => (showCustomFooterDialog = !showCustomFooterDialog)}
@@ -112,7 +114,7 @@
 		</div>
 		<Dialog title="Test dialog" bind:show={showCustomFooterDialog}>
 			<div slot="header" class="row">
-				<img src={srcOscar} alt="Author image" height="50" width="50" />
+				<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 				<h4>Hi! It's me!</h4>
 			</div>
 			<div class="flex">
@@ -128,8 +130,7 @@
 		<h3>Dialog with scroll</h3>
 		<p>This will show a dialog with scroll</p>
 		<SyntaxHighlighting language="html"
-			>{`
-			<Dialog title="Test dialog" bind:show={showScrollingDialog}>
+			>{`<Dialog title="Test dialog" bind:show={showScrollingDialog}>
 	<div class="dialog__header" slot="header">
 		<h2>Hello!</h2>
 	</div>
@@ -195,8 +196,7 @@
 			ab. Illo, qui.
 		</p>
 	</div>
-</Dialog>
-			`}</SyntaxHighlighting
+</Dialog>`}</SyntaxHighlighting
 		>
 		<button on:click={() => (showScrollingDialog = !showScrollingDialog)}>Show modal!</button>
 		<Dialog title="Test dialog" bind:show={showScrollingDialog}>

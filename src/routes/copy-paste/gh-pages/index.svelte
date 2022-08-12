@@ -2,6 +2,14 @@
 	import SyntaxHighlight from '$lib/components/SyntaxHighlighting.svelte';
 </script>
 
+<svelte:head>
+	<title>GitHub page action with npm - Tips & tricks!</title>
+	<meta
+		name="description"
+		content="Using npm and GitHub actions to build and deploy a static site to GitHub pages - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."
+	/>
+</svelte:head>
+
 <article>
 	<section>
 		<h2>Deploy npm build output to GitHub pages.</h2>

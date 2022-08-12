@@ -13,7 +13,7 @@
 
 <MainWithAside bind:showAside>
 	<svelte:fragment slot="header">
-		<h1>Level up!</h1>
+		<h1>Tips & tricks!</h1>
 	</svelte:fragment>
 	<svelte:fragment slot="article">
 		<slot />
@@ -91,6 +91,8 @@
 		--font-text: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
 			sans-serif, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
 		--font-accent: Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco,
+			Droid Sans Mono, Source Code Pro, monospace;
+		--font-code: Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco,
 			Droid Sans Mono, Source Code Pro, monospace;
 		--font-weight-bold: 700;
 

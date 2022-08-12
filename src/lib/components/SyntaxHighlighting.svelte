@@ -16,16 +16,7 @@
 	let code: string | undefined;
 	let formattedCode: string | undefined;
 
-	onMount(() => {
-		Prism.plugins.NormalizeWhitespace.setDefaults({
-			'remove-trailing': true,
-			'remove-indent': true,
-			'left-trim': true,
-			'right-trim': true,
-		});
-	});
-
-	afterUpdate(async () => {
+	const updateHighlight = async () => {
 		// code variable if they are using a prop
 		// Have to use innerText because innerHTML will create weird escape characaters
 		if (fakeCodeEl && fakeCodeEl.innerText !== '') {
@@ -39,6 +30,20 @@
 		if (preEl) {
 			Prism.highlightAllUnder(preEl);
 		}
+	};
+
+	onMount(() => {
+		Prism.plugins.NormalizeWhitespace.setDefaults({
+			'remove-trailing': true,
+			'remove-indent': true,
+			'left-trim': true,
+			'right-trim': true,
+		});
+		updateHighlight();
+	});
+
+	afterUpdate(() => {
+		updateHighlight();
 	});
 
 	// creates the prism classes
@@ -50,7 +55,10 @@
 	}
 </script>
 
-<code style:display="none" bind:this={fakeCodeEl}><slot /></code>
+<code style:display={formattedCode ? 'none' : ''} class="placeholder" bind:this={fakeCodeEl}
+	><slot /></code
+>
+
 {#if formattedCode}
 	<div class="syntax-highlighting">
 		<pre bind:this={preEl} class={prismClasses}><code class="language-{language}"
@@ -60,11 +68,20 @@
 {/if}
 
 <style lang="scss">
+	.placeholder {
+		padding: var(--gap) 0 var(--gap) 4em;
+		margin: var(--gap) 0;
+		display: block;
+		overflow-x: auto;
+		background: var(--c-background-code);
+	}
+
 	pre,
 	code {
 		color: var(--prism-text);
 		background: var(--prism-background);
 		text-shadow: var(--prism-text-shadow);
+		font-family: var(--font-code);
 		font-size: 1em;
 		text-align: left;
 		white-space: pre;
