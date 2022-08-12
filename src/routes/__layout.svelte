@@ -127,12 +127,12 @@
 		--prism-punctuation: #999999;
 		--prism-tag: #905;
 		--prism-number: #905;
-		--prism-string: #690;
+		--prism-string: #3a5700;
 		--prism-url: #9a6e3a;
 		--prism-variable: #f8f8f2;
-		--prism-atrule: #07a;
-		--prism-keyword: #07a;
-		--prism-function: #dd4a68;
+		--prism-atrule: #005478;
+		--prism-keyword: #005478;
+		--prism-function: #8a2e41;
 		--prism-regex: #e90;
 	}
 
@@ -151,7 +151,7 @@
 			--prism-selection-background: none;
 			--prism-comment: #535e68;
 			--prism-punctuation: #f8f8f2;
-			--prism-tag: #f92672;
+			--prism-tag: #ff8bb5;
 			--prism-number: #ae81ff;
 			--prism-string: #a6e22e;
 			--prism-url: #8a8a2b;

@@ -93,7 +93,11 @@
 	>
 		<slot name="aside" />
 	</aside>
-	<button class="show-aside button-icon" on:click={() => (showAside = !showAside)}>
+	<button
+		aria-label="show navigation"
+		class="show-aside button-icon"
+		on:click={() => (showAside = !showAside)}
+	>
 		<svg width="24" height="24" viewBox="0 0 24 24">
 			<line x1="3" y1="6" x2="21" y2="6" />
 			<line x1="3" y1="12" x2="21" y2="12" />
@@ -165,22 +169,8 @@
 			/* grid-template-columns: 1fr 0px; */
 			grid-template-columns: 100% 0;
 			grid-template-rows: auto 1fr auto 50px;
+			grid-column-gap: 0;
 		}
-		/* 
-		header {
-			grid-column: 1 / span 2;
-			grid-row: 1 / span 1;
-		}
-
-		article {
-			grid-column: 1 / span 2;
-			grid-row: 2 / span 1;
-		}
-
-		footer {
-			grid-column: 1 / span 2;
-			grid-row: 3 / span 1;
-		} */
 
 		aside {
 			display: flex;

@@ -11,6 +11,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		inlineStyleThreshold: 10000,
 		prerender: {
 			default: true,
 		},

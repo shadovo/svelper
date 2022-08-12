@@ -60,7 +60,7 @@
 >
 
 {#if formattedCode}
-	<div class="syntax-highlighting">
+	<div>
 		<pre bind:this={preEl} class={prismClasses}><code class="language-{language}"
 				>{@html formattedCode}</code
 			></pre>
@@ -125,86 +125,86 @@
 		display: block;
 	}
 
-	.syntax-highlighting {
+	div {
 		padding-right: var(--gap);
 		background-color: var(--c-background-code);
 		margin: var(--gap) 0;
 
-		:global(.token.namespace) {
-			opacity: 0.7;
+		:global(.namespace) {
+			opacity: 1;
 		}
 
-		:global(.token.comment),
-		:global(.token.prolog),
-		:global(.token.doctype),
-		:global(.token.cdata) {
+		:global(.comment),
+		:global(.prolog),
+		:global(.doctype),
+		:global(.cdata) {
 			color: var(--prism-comment);
 		}
 
-		:global(.token.punctuation) {
+		:global(.punctuation) {
 			color: var(--prism-punctuation);
 		}
 
-		:global(.token.property),
-		:global(.token.tag),
-		:global(.token.constant),
-		:global(.token.symbol),
-		:global(.token.deleted) {
+		:global(.property),
+		:global(.tag),
+		:global(.constant),
+		:global(.symbol),
+		:global(.deleted) {
 			color: var(--prism-tag);
 		}
 
-		:global(.token.boolean),
-		:global(.token.number) {
+		:global(.boolean),
+		:global(.number) {
 			color: var(--prism-number);
 		}
 
-		:global(.token.selector),
-		:global(.token.attr-name),
-		:global(.token.string),
-		:global(.token.char),
-		:global(.token.builtin),
-		:global(.token.inserted) {
+		:global(.selector),
+		:global(.attr-name),
+		:global(.string),
+		:global(.char),
+		:global(.builtin),
+		:global(.inserted) {
 			color: var(--prism-string);
 		}
 
-		:global(.token.operator),
-		:global(.token.entity),
-		:global(.token.url),
-		:global(.token.language-css .string),
-		:global(.token.style .string) {
+		:global(.operator),
+		:global(.entity),
+		:global(.url),
+		:global(.language-css .string),
+		:global(.style .string) {
 			color: var(--prism-url);
 			background: none;
 		}
 
-		:global(.token.atrule),
-		:global(.token.attr-value) {
+		:global(.atrule),
+		:global(.attr-value) {
 			color: var(--prism-atrule);
 		}
 
-		:global(.token.keyword) {
+		:global(.keyword) {
 			color: var(--prism-keyword);
 		}
 
-		:global(.token.function),
-		:global(.token.class-name) {
+		:global(.function),
+		:global(.class-name) {
 			color: var(--prism-function);
 		}
 
-		:global(.token.regex),
-		:global(.token.important),
-		:global(.token.variable) {
+		:global(.regex),
+		:global(.important),
+		:global(.variable) {
 			color: var(--prism-regex);
 		}
 
-		:global(.token.important),
-		:global(.token.bold) {
+		:global(.important),
+		:global(.bold) {
 			font-weight: bold;
 		}
-		:global(.token.italic) {
+		:global(.italic) {
 			font-style: italic;
 		}
 
-		:global(.token.entity) {
+		:global(.entity) {
 			cursor: help;
 		}
 	}
