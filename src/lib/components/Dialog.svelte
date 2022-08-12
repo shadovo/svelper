@@ -48,11 +48,13 @@
 			</button>
 		</header>
 		<article>
-			<slot name="content" />
+			<slot />
 		</article>
-		<footer>
-			<slot name="footer" />
-		</footer>
+		{#if $$slots?.footer}
+			<footer>
+				<slot name="footer" />
+			</footer>
+		{/if}
 	</div>
 </dialog>
 

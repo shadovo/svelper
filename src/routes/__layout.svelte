@@ -228,8 +228,8 @@
 	}
 
 	:global(code) {
-		/* background-color: var(--c-background-code);
-		padding: 0 4px; */
+		background-color: var(--c-background-code);
+		padding: 0 4px;
 	}
 
 	:global(.button-icon) {
@@ -258,7 +258,8 @@
 	:global(.row) {
 		display: flex;
 		flex-direction: row;
-		gap: var(--gap-half);
+		gap: var(--gap);
+		align-items: center;
 	}
 
 	h1 {

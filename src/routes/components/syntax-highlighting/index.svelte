@@ -7,7 +7,7 @@
 		<h2>Element with syntax highlighting</h2>
 		<p>This is an element with syntax highlighting.</p>
 		<p>The following code:</p>
-		<SyntaxHighlighting lang="html">
+		<SyntaxHighlighting language="html">
 			{`<SyntaxHighlighting lang="javascript">
 {\`
 	console.log('Hello World!');

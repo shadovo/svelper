@@ -60,11 +60,6 @@
 {/if}
 
 <style lang="scss">
-	div {
-		padding-right: var(--gap);
-		background-color: var(--c-background-code);
-	}
-
 	pre,
 	code {
 		color: var(--prism-text);
@@ -114,6 +109,10 @@
 	}
 
 	.syntax-highlighting {
+		padding-right: var(--gap);
+		background-color: var(--c-background-code);
+		margin: var(--gap) 0;
+
 		:global(.token.namespace) {
 			opacity: 0.7;
 		}
