@@ -1,8 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import * as path from 'path';
-
-const dev = process.env.NODE_ENV === 'development';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -22,14 +19,7 @@ const config = {
 			precompress: true,
 		}),
 		paths: {
-			base: dev ? '' : '/level-up',
-		},
-		vite: {
-			resolve: {
-				alias: {
-					$img: path.resolve('src/images'),
-				},
-			},
+			base: '/level-up',
 		},
 	},
 };
