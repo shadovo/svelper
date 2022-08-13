@@ -166,7 +166,6 @@
 	@media (max-width: 768px) {
 		main {
 			--aside-width: 300px;
-			/* grid-template-columns: 1fr 0px; */
 			grid-template-columns: 100% 0;
 			grid-template-rows: auto 1fr auto 50px;
 			grid-column-gap: 0;

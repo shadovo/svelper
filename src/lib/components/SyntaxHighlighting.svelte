@@ -7,8 +7,6 @@
 	import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 	import 'prismjs/themes/prism.css';
 
-	// import './prism-theme.css';
-
 	export let language: string = 'javascript';
 
 	let preEl: HTMLElement | undefined;
@@ -82,7 +80,7 @@
 		background: var(--prism-background);
 		text-shadow: var(--prism-text-shadow);
 		font-family: var(--font-code);
-		font-size: 1em;
+		font-size: 1rem;
 		text-align: left;
 		white-space: pre;
 		word-spacing: normal;
@@ -105,6 +103,13 @@
 		& ::selection {
 			text-shadow: none;
 			background: var(--prism-selection-background);
+		}
+	}
+
+	@media (max-width: 768px) {
+		pre,
+		code {
+			font-size: 0.75rem;
 		}
 	}
 

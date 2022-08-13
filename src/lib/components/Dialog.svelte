@@ -115,7 +115,6 @@
 				padding: var(--gap-2) var(--gap);
 				font-family: var(--font-title);
 				border-bottom: 3px solid var(--c-text);
-				/* box-shadow: 0px 1px 4px 0px rgb(125 125 125 / 50%); */
 				display: flex;
 				align-items: center;
 
@@ -128,7 +127,6 @@
 				}
 			}
 			& > footer {
-				/* box-shadow: 0px calc(-1 * var(--gap)) var(--gap-2) 0px var(--c-background); */
 				border-top: 3px solid var(--c-text);
 			}
 		}
