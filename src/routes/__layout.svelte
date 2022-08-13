@@ -37,7 +37,7 @@
 				</div>
 				<div class="navigation flex">
 					<ul>
-						<li class="flex">
+						<li>
 							<h2>Navigation</h2>
 							<ul>
 								<li>
@@ -45,7 +45,7 @@
 								</li>
 							</ul>
 						</li>
-						<li class="flex">
+						<li>
 							<h3>Svelte components</h3>
 							<ul>
 								<li>
@@ -56,7 +56,18 @@
 								</li>
 							</ul>
 						</li>
-						<li class="flex">
+						<li>
+							<h3>Animations</h3>
+							<ul>
+								<li>
+									<a href="{base}/animations/annoying-bounce">Annoying bounce</a>
+								</li>
+								<li>
+									<a href="{base}/animations/attention-shake">Attention shake</a>
+								</li>
+							</ul>
+						</li>
+						<li>
 							<h3>Copy/paste</h3>
 							<ul>
 								<li>
@@ -64,17 +75,17 @@
 								</li>
 							</ul>
 						</li>
-						<li class="flex">
+						<li>
 							<h3>Libraries</h3>
 							<ul>
-								<li>
-									<a href="{base}/libraries/sveltekit">SvelteKit</a>
-								</li>
 								<li>
 									<a href="{base}/libraries/ress-css">CSS Ress</a>
 								</li>
 								<li>
 									<a href="{base}/libraries/prism">Prism - highlighting</a>
+								</li>
+								<li>
+									<a href="{base}/libraries/sveltekit">SvelteKit</a>
 								</li>
 							</ul>
 						</li>
@@ -180,11 +191,12 @@
 	}
 
 	:global(ul) {
+		margin-bottom: var(--gap);
 		list-style: none;
 	}
 
 	:global(li) {
-		margin-bottom: var(--gap-half);
+		margin-bottom: var(--gap-quarter);
 	}
 
 	:global(a) {
@@ -287,6 +299,7 @@
 		gap: var(--gap);
 		border-left: 5px solid var(--c-text);
 		padding: 0 var(--gap-2);
+		overflow-y: auto;
 	}
 
 	.footer {
