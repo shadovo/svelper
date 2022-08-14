@@ -330,7 +330,7 @@
 		svg {
 			height: 100%;
 			max-height: 150px;
-			max-width: 100%;
+			max-width: 70%;
 		}
 	}
 
