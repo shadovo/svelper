@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>SvelteKit - Getting up and running - Tips & tricks!</title>
+	<title>SvelteKit - Getting up and running - Svelper</title>
 	<meta
 		name="description"
 		content="Getting up and running with Svelte - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."

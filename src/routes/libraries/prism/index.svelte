@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Prism - Syntax highlighting - Tips & tricks!</title>
+	<title>Prism - Syntax highlighting - Svelper</title>
 	<meta
 		name="description"
 		content="Add syntax highlighting to your code examples online with Prism - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."

@@ -2,7 +2,7 @@
 </script>
 
 <svelte:head>
-	<title>Tips & tricks!</title>
+	<title>Svelper - the Svelte helper</title>
 	<meta
 		name="description"
 		content="A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."

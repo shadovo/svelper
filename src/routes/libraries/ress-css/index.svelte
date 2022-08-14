@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>ress.css - A moderns CSS reset - Tips & tricks!</title>
+	<title>ress.css - A moderns CSS reset - Svelper</title>
 	<meta
 		name="description"
 		content="A minimal, modern, default css setup - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."

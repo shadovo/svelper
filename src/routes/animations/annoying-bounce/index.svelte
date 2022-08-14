@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Bounce animation - Tips & tricks!</title>
+	<title>Bounce animation - Svelper</title>
 	<meta
 		name="description"
 		content="This is an annoying bounce animation to let the user know they need to take action on something. - A collection fun stuff
