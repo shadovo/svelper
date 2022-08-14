@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Dialog implementation as Svelte component - Tips & tricks!</title>
+	<title>Dialog implementation as Svelte component - Svelper</title>
 	<meta
 		name="description"
 		content="This component uses the standard HTML &lt;dialog&gt;

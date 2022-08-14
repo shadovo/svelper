@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>SyntaxHighlighting via Prism as a component - Tips & tricks!</title>
+	<title>SyntaxHighlighting via Prism as a component - Svelper</title>
 	<meta
 		name="description"
 		content="A svelte component implementing Prism for syntax highlighting - A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils."

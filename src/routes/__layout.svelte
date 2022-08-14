@@ -13,7 +13,7 @@
 
 <MainWithAside bind:showAside>
 	<svelte:fragment slot="header">
-		<h1>Tips & tricks!</h1>
+		<h1>Svelper</h1>
 	</svelte:fragment>
 	<svelte:fragment slot="article">
 		<slot />

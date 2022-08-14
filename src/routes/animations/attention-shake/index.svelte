@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Shake animation - Tips & tricks!</title>
+	<title>Shake animation - Svelper</title>
 	<meta
 		name="description"
 		content="A shaking animation to grab attention. - A collection fun stuff
