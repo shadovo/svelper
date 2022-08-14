@@ -270,8 +270,8 @@ const declinedDialog = () => {
 	<section>
 		<p>
 			Check out the code at <a
-				href="https://github.com/shadovo/level-up/blob/main/src/lib/components/Dialog.svelte"
-				target="_blank">github.com/shadovo/level-up/../Dialog.svelte</a
+				href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Dialog.svelte"
+				target="_blank">github.com/shadovo/svelper/../Dialog.svelte</a
 			>
 		</p>
 	</section>

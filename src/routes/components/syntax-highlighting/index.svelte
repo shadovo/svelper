@@ -83,8 +83,8 @@
 		</p>
 		<p>
 			This implementation can be found at <a
-				href="https://github.com/shadovo/level-up/blob/main/src/lib/components/SyntaxHighlighting.svelte"
-				>github.com/shadovo/level-up/../SyntaxHighlighting.svelte</a
+				href="https://github.com/shadovo/svelper/blob/main/src/lib/components/SyntaxHighlighting.svelte"
+				>github.com/shadovo/svelper/../SyntaxHighlighting.svelte</a
 			>
 		</p>
 	</section>

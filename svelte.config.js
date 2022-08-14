@@ -18,9 +18,6 @@ const config = {
 			fallback: null,
 			precompress: true,
 		}),
-		paths: {
-			base: '/level-up',
-		},
 	},
 };
 
