@@ -271,7 +271,8 @@ const declinedDialog = () => {
 		<p>
 			Check out the code at <a
 				href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Dialog.svelte"
-				target="_blank">github.com/shadovo/svelper/../Dialog.svelte</a
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/../Dialog.svelte</a
 			>
 		</p>
 	</section>

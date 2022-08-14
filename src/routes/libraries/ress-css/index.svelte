@@ -14,7 +14,11 @@
 			consistent look and feel for web applications across all browsers.
 		</p>
 		<p>
-			Read more at <a href="https://github.com/filipelinhares/ress" target="_blank"
+			Read more at <a
+				href="https://github.com/filipelinhares/ress"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				>github.com/filipelinhares/ress</a
 			>.
 		</p>
