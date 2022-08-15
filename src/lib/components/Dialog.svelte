@@ -59,10 +59,8 @@
 </dialog>
 
 <style lang="scss">
-	:global {
-		body:has(dialog[open]) {
-			overflow: hidden;
-		}
+	:global(body:has(dialog[open])) {
+		overflow: hidden;
 	}
 
 	.dialog {
