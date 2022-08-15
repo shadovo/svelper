@@ -28,8 +28,9 @@
 	<h3>Step 2 - Add the config for the action</h3>
 	<p>In your newly created pages.yml file add the following content:</p>
 	<SyntaxHighlight language="yaml">
-		{`# Sample workflow for building and deploying a SvelteKit site to GitHub Pages name: Deploy SvelteKit site to Pages
-		
+		{`# Workflow for building with npm and deploying artifact to GitHub Pages
+name: Deploy site to GitHub Pages
+
 on:
 	# Runs on pushes targeting the default branch
 	push:
@@ -66,7 +67,7 @@ jobs:
 			- name: Setup Pages
 				id: pages
 				uses: actions/configure-pages@v1
-			- name: Build with SvelteKit
+			- name: Build with npm run build
 				run: |
 					npm ci
 					npm run build
@@ -85,7 +86,8 @@ jobs:
 		steps:
 			- name: Deploy to GitHub Pages
 				id: deployment
-				uses: actions/deploy-pages@v1`}
+				uses: actions/deploy-pages@v1
+`}
 	</SyntaxHighlight>
 </section>
 <section>

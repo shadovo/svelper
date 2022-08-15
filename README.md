@@ -1,18 +1,8 @@
-# create-svelte
+<img height="150" alt="Svelper" src="http://www.svelper.com/svelper-logo.svg" />
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+![GitHub pages workflow](https://github.com/shadovo/svelper/actions/workflows/pages.yml/badge.svg)
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
+This is the source for [www.svelper.com](http://www.svelper.com) which is a for free, for fun project. I build this to learn more about Svelte and SvelteKit as well as have a collection things I find useful when developing but always have to look up everytime I create a new project 😅.
 
 ## Developing
 
@@ -20,9 +10,6 @@ Once you've created a project and installed dependencies with `npm install` (or 
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
 ## Building
@@ -35,4 +22,8 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Great libraries that you should check out
+
+[ress.css](https://github.com/filipelinhares/ress) - A modern css reset  
+[Prism](https://prismjs.com/) - Online syntax highlighting  
+[SvelteKit](https://kit.svelte.dev/) - Easy way to create new projects

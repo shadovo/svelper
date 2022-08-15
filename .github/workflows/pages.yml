@@ -1,5 +1,5 @@
-# Sample workflow for building and deploying a SvelteKit site to GitHub Pages
-name: Deploy SvelteKit site to Pages
+# Workflow for building with npm and deploying artifact to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -37,7 +37,7 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v1
-      - name: Build with SvelteKit
+      - name: Build with npm run build
         run: |
           npm ci
           npm run build

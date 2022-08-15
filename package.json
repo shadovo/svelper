@@ -1,8 +1,11 @@
 {
 	"name": "svelper",
-	"version": "0.0.1",
+	"version": "1.0.0",
+	"author": {
+		"name": "Oscar Rundh"
+	},
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --open",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
