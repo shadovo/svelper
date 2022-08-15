@@ -13,21 +13,18 @@
 	/>
 </svelte:head>
 
-<article>
-	<section>
-		<h2>Attention shake animation</h2>
-		<p>This is a shaking animation to grab attention.</p>
-	</section>
-	<section>
-		<button
-			class:attentionShake={animattionRunning}
-			on:click={() => (animattionRunning = true)}
-			on:animationend={() => (animattionRunning = false)}
-		>
-			Play animation
-		</button>
-		<SyntaxHighlighting language="css"
-			>{`@keyframes attention-shake {
+<section>
+	<h2>Attention shake animation</h2>
+	<p>This is a shaking animation to grab attention.</p>
+	<button
+		class:attentionShake={animattionRunning}
+		on:click={() => (animattionRunning = true)}
+		on:animationend={() => (animattionRunning = false)}
+	>
+		Play animation
+	</button>
+	<SyntaxHighlighting language="css"
+		>{`@keyframes attention-shake {
 	0% {
 		transform: rotate(0deg) scale(1);
 	}
@@ -57,9 +54,8 @@
 .attentionShake {
 	animation: attention-shake 1s 1 ease-in-out;
 }`}</SyntaxHighlighting
-		>
-	</section>
-</article>
+	>
+</section>
 
 <style>
 	@keyframes attention-shake {

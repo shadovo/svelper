@@ -242,6 +242,12 @@
 		list-style: none;
 	}
 
+	:global(.list) {
+		list-style: disc;
+		margin-left: var(--gap-2);
+		margin-top: var(--gap-half);
+	}
+
 	:global(li) {
 		margin-bottom: var(--gap-quarter);
 	}

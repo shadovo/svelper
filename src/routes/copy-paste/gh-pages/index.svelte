@@ -10,29 +10,26 @@
 	/>
 </svelte:head>
 
-<article>
-	<section>
-		<h2>Deploy npm build output to GitHub pages.</h2>
-		<p>
-			Using GitHub actions to deploy the result of `npm build` has never been simpler. Following
-			these steps should have you up and running with a static page in no time!
-		</p>
-	</section>
-	<section>
-		<h3>Step 1 - Create a github action</h3>
-		<p>
-			In your project add a file named <code>deploy.sh</code> with the following content:
-		</p>
-	</section>
-	<section>
-		<h3>Step 2 - Push your project to GitHub</h3>
-		<p>Push your project to GitHub. This should automatically start the build process.</p>
-	</section>
-</article>
-
-<SyntaxHighlight language="yaml">
-	{`# Sample workflow for building and deploying a SvelteKit site to GitHub Pages name: Deploy SvelteKit site to Pages
-
+<section>
+	<h2>Deploy npm build output to GitHub pages.</h2>
+	<p>
+		Using GitHub actions to deploy the result of <code>npm build</code> has never been simpler. Following
+		these steps should have you up and running with a static page in no time!
+	</p>
+</section>
+<section>
+	<h3>Step 1 - Create a github action</h3>
+	<p>
+		In your project add a YAML file at <code>.guthub/workflows</code> lets call it
+		<code>pages.yml</code>.
+	</p>
+</section>
+<section>
+	<h3>Step 2 - Add the config for the action</h3>
+	<p>In your newly created pages.yml file add the following content:</p>
+	<SyntaxHighlight language="yaml">
+		{`# Sample workflow for building and deploying a SvelteKit site to GitHub Pages name: Deploy SvelteKit site to Pages
+		
 on:
 	# Runs on pushes targeting the default branch
 	push:
@@ -89,4 +86,9 @@ jobs:
 			- name: Deploy to GitHub Pages
 				id: deployment
 				uses: actions/deploy-pages@v1`}
-</SyntaxHighlight>
+	</SyntaxHighlight>
+</section>
+<section>
+	<h3>Step 3 - Push your project to GitHub</h3>
+	<p>Push your project to GitHub. This should automatically start the build process.</p>
+</section>

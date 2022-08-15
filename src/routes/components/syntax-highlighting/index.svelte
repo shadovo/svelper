@@ -10,31 +10,37 @@
 	/>
 </svelte:head>
 
-<article>
-	<section>
-		<h2>Component with syntax highlighting</h2>
-		<p>This is a component with syntax highlighting.</p>
-		<p>The following code:</p>
-		<SyntaxHighlighting language="html">
-			{`<SyntaxHighlighting lang="javascript">
+<section>
+	<h2>Component with syntax highlighting</h2>
+	<p>This is a component with syntax highlighting.</p>
+	<p>
+		Check out the implementation at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/SyntaxHighlighting.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/.../SyntaxHighlighting.svelte</a
+		>
+	</p>
+	<p>The following code:</p>
+	<SyntaxHighlighting language="html">
+		{`<SyntaxHighlighting lang="javascript">
 {\`
 	console.log('Hello World!');
 \`}
 </SyntaxHighlighting>`}
-		</SyntaxHighlighting>
-		<p>will result in this output.</p>
-		<SyntaxHighlighting>
-			{`console.log('Hello World!');`}
-		</SyntaxHighlighting>
-	</section>
-	<section>
-		<h3>Styling</h3>
-		<p>
-			The syntax highlighting colors are defined via css variables. This page uses the following
-			colors for light and dark mode.
-		</p>
-		<SyntaxHighlighting language="css"
-			>{`	:global(:root) {
+	</SyntaxHighlighting>
+	<p>will result in this output.</p>
+	<SyntaxHighlighting>
+		{`console.log('Hello World!');`}
+	</SyntaxHighlighting>
+</section>
+<section>
+	<h3>Styling</h3>
+	<p>
+		The syntax highlighting colors are defined via css variables. This page uses the following
+		colors for light and dark mode.
+	</p>
+	<SyntaxHighlighting language="css"
+		>{`	:global(:root) {
 	--prism-background: none;
 	--prism-text: #000000;
 	--prism-text-shadow: 0 1px white;
@@ -71,23 +77,22 @@
 		--prism-regex: #fd971f;
 	}
 }`}</SyntaxHighlighting
+	>
+</section>
+<section>
+	<h3>Implementation</h3>
+	<p>
+		This implementation is pretty much a copy of Phptuts implementation at <a
+			href="https://github.com/phptuts/Svelte-PrismJS"
+			target="_blank"
+			rel="noopener noreferrer">github.com/phptuts/Svelte-PrismJS</a
+		> exept that it uses css vars to allow for easy light/dark mode switching.
+	</p>
+	<p>
+		This implementation can be found at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/SyntaxHighlighting.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/../SyntaxHighlighting.svelte</a
 		>
-	</section>
-	<section>
-		<h3>Implementation</h3>
-		<p>
-			This implementation is pretty much a copy of Phptuts implementation at <a
-				href="https://github.com/phptuts/Svelte-PrismJS"
-				target="_blank"
-				rel="noopener noreferrer">github.com/phptuts/Svelte-PrismJS</a
-			> exept that it uses css vars to allow for easy light/dark mode switching.
-		</p>
-		<p>
-			This implementation can be found at <a
-				href="https://github.com/shadovo/svelper/blob/main/src/lib/components/SyntaxHighlighting.svelte"
-				target="_blank"
-				rel="noopener noreferrer">github.com/shadovo/svelper/../SyntaxHighlighting.svelte</a
-			>
-		</p>
-	</section>
-</article>
+	</p>
+</section>

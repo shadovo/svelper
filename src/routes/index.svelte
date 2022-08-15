@@ -9,13 +9,11 @@
 	/>
 </svelte:head>
 
-<article>
-	<section>
-		<h2>Collection of fun things built with Svelte</h2>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis
-			repellendus accusamus, veritatis dolore, unde quia minima similique asperiores sequi ratione
-			voluptate iusto enim. Magnam, veniam soluta.
-		</p>
-	</section>
-</article>
+<section>
+	<h2>Collection of fun things built with Svelte</h2>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis
+		repellendus accusamus, veritatis dolore, unde quia minima similique asperiores sequi ratione
+		voluptate iusto enim. Magnam, veniam soluta.
+	</p>
+</section>

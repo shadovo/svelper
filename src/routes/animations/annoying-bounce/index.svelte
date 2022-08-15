@@ -13,24 +13,20 @@
 	/>
 </svelte:head>
 
-<article>
-	<section>
-		<h2>Annoying bounce animation</h2>
-		<p>
-			This is an annoying bounce animation to let the user know they need to take action on
-			something.
-		</p>
-	</section>
-	<section>
-		<button
-			class:annoyingBounce={animationRunning}
-			on:click={() => (animationRunning = true)}
-			on:animationend={() => (animationRunning = false)}
-		>
-			Play animation
-		</button>
-		<SyntaxHighlighting language="css"
-			>{`@keyframes annoying-bounce {
+<section>
+	<h2>Annoying bounce animation</h2>
+	<p>
+		This is an annoying bounce animation to let the user know they need to take action on something.
+	</p>
+	<button
+		class:annoyingBounce={animationRunning}
+		on:click={() => (animationRunning = true)}
+		on:animationend={() => (animationRunning = false)}
+	>
+		Play animation
+	</button>
+	<SyntaxHighlighting language="css"
+		>{`@keyframes annoying-bounce {
 	0% {
 		transform: translateY(0);
 	}
@@ -54,9 +50,8 @@
 .annoyingBounce {
 	animation: annoying-bounce 1s 2 ease-in-out;
 }`}</SyntaxHighlighting
-		>
-	</section>
-</article>
+	>
+</section>
 
 <style>
 	@keyframes annoying-bounce {
