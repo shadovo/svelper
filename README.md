@@ -1,4 +1,4 @@
-<img height="150" alt="Svelper" src="/assets/svelper-logo.svg" />
+<img height="150" alt="Svelper" src="/static/svelper-logo.svg" />
 
 ![GitHub pages workflow](https://github.com/shadovo/svelper/actions/workflows/pages.yml/badge.svg)
 
