@@ -59,8 +59,16 @@
 </dialog>
 
 <style lang="scss">
-	:global(body:has(dialog[open])) {
-		overflow: hidden;
+	:global {
+		// css nomarlize sets html overflow-y which causes
+		// issues when trying to lock the scroll position.
+		html:has(dialog[open]) {
+			overflow-y: initial;
+		}
+
+		body:has(dialog[open]) {
+			overflow: hidden;
+		}
 	}
 
 	.dialog {
