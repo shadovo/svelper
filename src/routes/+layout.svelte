@@ -230,7 +230,8 @@
 
 	:global(h1, h2, h3, h4, h5) {
 		font-family: var(--font-accent);
-		line-height: 1.6;
+		line-height: 1.2;
+		margin-bottom: var(--gap-half);
 	}
 
 	:global(p) {
@@ -332,6 +333,7 @@
 
 	h1 {
 		margin-top: var(--gap-2);
+		margin-bottom: 0;
 		color: var(--c-accent);
 		line-height: 1;
 
@@ -345,8 +347,10 @@
 	.navigation {
 		padding-top: var(--gap);
 
-		h2 {
+		h2,
+		h3 {
 			font-size: 1.3rem;
+			margin: 0;
 		}
 	}
 

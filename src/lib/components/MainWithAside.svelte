@@ -110,7 +110,7 @@
 	main {
 		--aside-width: 280px;
 		display: grid;
-		grid-template-columns: calc(100% - var(--aside-width)) var(--aside-width);
+		grid-template-columns: calc(100% - var(--aside-width) - var(--gap-2)) var(--aside-width);
 		grid-template-rows: auto 1fr auto;
 		gap: var(--gap-2);
 		max-width: 1024px;
