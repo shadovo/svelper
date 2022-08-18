@@ -2,7 +2,7 @@
 
 ![GitHub pages workflow](https://github.com/shadovo/svelper/actions/workflows/pages.yml/badge.svg)
 
-This is the source for [www.svelper.com](http://www.svelper.com) which is a for free, for fun project. I build this to learn more about Svelte and SvelteKit as well as have a collection things I find useful when developing but always have to look up everytime I create a new project 😅.
+This is the source for [www.svelper.com](http://www.svelper.com) which is a for free, for fun project. I build this to learn more about Svelte and SvelteKit as well as have a collection of things I find useful when developing but always have to look up everytime I create a new project 😅.
 
 ## Developing
 

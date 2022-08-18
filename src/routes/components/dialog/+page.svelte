@@ -76,7 +76,7 @@
 </Dialog>`}</SyntaxHighlighting
 	>
 	<button on:click={() => (showCustomHeaderDialog = !showCustomHeaderDialog)}>Show modal!</button>
-	<Dialog title="" bind:show={showCustomHeaderDialog}>
+	<Dialog bind:show={showCustomHeaderDialog}>
 		<div slot="header" class="row">
 			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 			<h4>Hi! It's me!</h4>
@@ -98,7 +98,7 @@ const declinedDialog = () => {
 };`}</SyntaxHighlighting
 	>
 	<SyntaxHighlighting language="html"
-		>{`<Dialog title="Test dialog" bind:show={showCustomFooterDialog}>
+		>{`<Dialog bind:show={showCustomFooterDialog}>
 	<div slot="header" class="row">
 		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 		<h4>Hi! It's me!</h4>
@@ -120,7 +120,7 @@ const declinedDialog = () => {
 			<p>You did not accept it? :(</p>
 		{/if}
 	</div>
-	<Dialog title="Test dialog" bind:show={showCustomFooterDialog}>
+	<Dialog bind:show={showCustomFooterDialog}>
 		<div slot="header" class="row">
 			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 			<h4>Hi! It's me!</h4>
@@ -138,7 +138,7 @@ const declinedDialog = () => {
 	<h3>Dialog with scroll</h3>
 	<p>This will show a dialog with scroll</p>
 	<SyntaxHighlighting language="html"
-		>{`<Dialog title="Test dialog" bind:show={showScrollingDialog}>
+		>{`<Dialog bind:show={showScrollingDialog}>
 	<div class="dialog__header" slot="header">
 		<h2>Hello!</h2>
 	</div>
@@ -207,7 +207,7 @@ const declinedDialog = () => {
 </Dialog>`}</SyntaxHighlighting
 	>
 	<button on:click={() => (showScrollingDialog = !showScrollingDialog)}>Show modal!</button>
-	<Dialog title="Test dialog" bind:show={showScrollingDialog}>
+	<Dialog bind:show={showScrollingDialog}>
 		<div class="dialog__header" slot="header">
 			<h2>Hello!</h2>
 		</div>

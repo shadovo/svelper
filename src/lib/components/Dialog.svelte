@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let show = false;
-	export let title: string;
+	export let title: string | null = null;
 
 	let dialogEle: HTMLDialogElement | null = null;
 
