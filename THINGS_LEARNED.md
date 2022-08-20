@@ -38,6 +38,8 @@
 
 https://css-tricks.com/the-css-has-selector/
 
+https://webkit.org/blog/13096/css-has-pseudo-class/
+
 ## css :is() selector
 
 https://css-tricks.com/almanac/selectors/i/is/
