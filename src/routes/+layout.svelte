@@ -285,6 +285,12 @@
 		}
 	}
 
+	:global(button[disabled]) {
+		background-color: var(--c-text);
+		color: var(--c-background);
+		cursor: not-allowed;
+	}
+
 	:global(article) {
 		display: flex;
 		flex-direction: column;
