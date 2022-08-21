@@ -12,7 +12,7 @@
 
 	let maxPage = 1;
 
-	$: maxPage = Math.ceil(items.length / itemsPerPage);
+	$: maxPage = Math.ceil(items.length / itemsPerPage) - 1;
 	$: filteredItems = items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
 </script>
 
@@ -23,21 +23,55 @@
 		{/each}
 	</div>
 	<div class="pagination-controlls">
-		<button class:hidden={page <= 0} on:click={() => (page = page - 1)}>&lt;</button>
+		<!-- arrow previous -->
+		<button class="arrow" class:hidden={page === 0} on:click={() => (page = page - 1)}>&lt;</button>
 		<div class="pagination-page-buttons">
-			<div class:hidden={page - 2 <= 0} class="pagination-more">...</div>
-			<button class:hidden={page - 1 <= 0} on:click={() => (page = page - 2)}>{page - 1}</button>
-			<button class:hidden={page <= 0} on:click={() => (page = page - 1)}>{page}</button>
+			<!-- first page -->
+			<button class="first pagination-button" class:shown={page > 2}>1</button>
+
+			<!-- ... -->
+			<div class:shown={page > 3} class="pagination-button pagination-more">...</div>
+
+			<!-- previous previous page -->
+			<button
+				class="pagination-button"
+				class:shown={page > 1 && page < 4}
+				on:click={() => (page = page - 2)}>{page - 1}</button
+			>
+
+			<!-- previous page -->
+			<button class="pagination-button" class:shown={page > 0} on:click={() => (page = page - 1)}
+				>{page}</button
+			>
+
+			<!-- current page -->
 			<button disabled>{page + 1}</button>
-			<button class:hidden={page + 2 > maxPage} on:click={() => (page = page + 1)}
-				>{page + 2}</button
+
+			<!-- next page -->
+			<button
+				class="pagination-button"
+				class:shown={page < maxPage}
+				on:click={() => (page = page + 1)}>{page + 2}</button
 			>
-			<button class:hidden={page + 3 > maxPage} on:click={() => (page = page + 2)}
-				>{page + 3}</button
+
+			<!-- next next page -->
+			<button
+				class="pagination-button"
+				class:shown={page > maxPage - 4 && page < maxPage - 1}
+				on:click={() => (page = page + 2)}>{page + 3}</button
 			>
-			<div class:hidden={page + 4 > maxPage} class="pagination-more">...</div>
+
+			<!-- ... -->
+			<div class:shown={page < maxPage - 3} class="pagination-button pagination-more">...</div>
+
+			<!-- last page -->
+			<button class="pagination-button last" class:shown={page < maxPage - 2}>{maxPage + 1}</button>
 		</div>
-		<button class:hidden={page + 1 >= maxPage} on:click={() => (page = page + 1)}>&gt;</button>
+
+		<!-- arrow next -->
+		<button class="arrow" class:hidden={page === maxPage} on:click={() => (page = page + 1)}
+			>&gt;</button
+		>
 	</div>
 </div>
 
@@ -63,5 +97,14 @@
 	}
 	.hidden {
 		visibility: hidden;
+	}
+
+	.pagination-button {
+		min-width: 55px;
+		text-align: center;
+		display: none;
+	}
+	.shown {
+		display: block;
 	}
 </style>
