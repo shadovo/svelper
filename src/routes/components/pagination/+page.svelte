@@ -1,208 +1,15 @@
 <script lang="ts">
 	import Pagination from '$lib/components/Pagination.svelte';
+	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
+	import lorem from '$lib/utils/lorem-ipsum';
 
-	const items = [
-		{
-			name: 'item 1',
-			id: '1',
-		},
-		{
-			name: 'item 2',
-			id: '2',
-		},
-		{
-			name: 'item 3',
-			id: '3',
-		},
-		{
-			name: 'item 4',
-			id: '4',
-		},
-		{
-			name: 'item 5',
-			id: '5',
-		},
-		{
-			name: 'item 6',
-			id: '6',
-		},
-		{
-			name: 'item 7',
-			id: '7',
-		},
-		{
-			name: 'item 8',
-			id: '8',
-		},
-		{
-			name: 'item 9',
-			id: '9',
-		},
-		{
-			name: 'item 10',
-			id: '10',
-		},
-		{
-			name: 'item 11',
-			id: '11',
-		},
-		{
-			name: 'item 12',
-			id: '12',
-		},
-		{
-			name: 'item 13',
-			id: '13',
-		},
-		{
-			name: 'item 14',
-			id: '14',
-		},
-		{
-			name: 'item 15',
-			id: '15',
-		},
-		{
-			name: 'item 16',
-			id: '16',
-		},
-		{
-			name: 'item 17',
-			id: '17',
-		},
-		{
-			name: 'item 18',
-			id: '18',
-		},
-		{
-			name: 'item 19',
-			id: '19',
-		},
-		{
-			name: 'item 20',
-			id: '20',
-		},
-		{
-			name: 'item 21',
-			id: '21',
-		},
-		{
-			name: 'item 22',
-			id: '22',
-		},
-		{
-			name: 'item 23',
-			id: '23',
-		},
-		{
-			name: 'item 24',
-			id: '24',
-		},
-		{
-			name: 'item 25',
-			id: '25',
-		},
-		{
-			name: 'item 26',
-			id: '26',
-		},
-		{
-			name: 'item 27',
-			id: '27',
-		},
-		{
-			name: 'item 28',
-			id: '28',
-		},
-		{
-			name: 'item 29',
-			id: '29',
-		},
-		{
-			name: 'item 30',
-			id: '30',
-		},
-		{
-			name: 'item 31',
-			id: '31',
-		},
-		{
-			name: 'item 32',
-			id: '32',
-		},
-		{
-			name: 'item 33',
-			id: '33',
-		},
-		{
-			name: 'item 34',
-			id: '34',
-		},
-		{
-			name: 'item 35',
-			id: '35',
-		},
-		{
-			name: 'item 36',
-			id: '36',
-		},
-		{
-			name: 'item 37',
-			id: '37',
-		},
-		{
-			name: 'item 38',
-			id: '38',
-		},
-		{
-			name: 'item 39',
-			id: '39',
-		},
-		{
-			name: 'item 40',
-			id: '40',
-		},
-		{
-			name: 'item 41',
-			id: '41',
-		},
-		{
-			name: 'item 42',
-			id: '42',
-		},
-		{
-			name: 'item 43',
-			id: '43',
-		},
-		{
-			name: 'item 44',
-			id: '44',
-		},
-		{
-			name: 'item 45',
-			id: '45',
-		},
-		{
-			name: 'item 46',
-			id: '46',
-		},
-		{
-			name: 'item 47',
-			id: '47',
-		},
-		{
-			name: 'item 48',
-			id: '48',
-		},
-		{
-			name: 'item 49',
-			id: '49',
-		},
-		{
-			name: 'item 50',
-			id: '50',
-		},
-	];
+	const smallItems = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`);
+
+	const largeItems = lorem.slice(0, 30).map((p, i) => ({
+		id: i,
+		title: `Item ${i + 1}`,
+		text: p.substring(0, 250),
+	}));
 </script>
 
 <svelte:head>
@@ -214,15 +21,154 @@
 </svelte:head>
 
 <section>
-	<h2>Pagination component</h2>
+	<h2>Pagination Svelte component</h2>
+	<p>This is a component that lets you paginate content.</p>
+	<p>
+		The <code>&lt;Pagination&gt;</code> accepts a list of items as the <code>items</code> attribute.
+		It will then expose the them as <code>item</code> for each item that should currently be shown.
+	</p>
+</section>
+<section>
+	<div class="sidescroll-container">
+		<div class="grid-table">
+			<div class="attribute">Attribute</div>
+			<div class="type">Type</div>
+			<div class="default">Default</div>
+			<div class="description">Description</div>
 
-	<Pagination {items} let:item>
-		<svelte:fragment>
-			{#if item}
-				<div>
-					<p>{item.name}</p>
-				</div>
-			{/if}
-		</svelte:fragment>
+			<div class="attribute"><code>items</code></div>
+			<div class="type"><code>Array of &lt;T&gt;</code></div>
+			<div class="default"><code>[]</code></div>
+			<div class="description">The list of items to paginate</div>
+
+			<div class="attribute"><code>item</code></div>
+			<div class="type"><code>&lt;T&gt;</code></div>
+			<div class="default"><code>undefined</code></div>
+			<div class="description">The item that should currently be shown</div>
+
+			<div class="attribute"><code>itemsPerPage</code></div>
+			<div class="type"><code>Number</code></div>
+			<div class="default"><code>5</code></div>
+			<div class="description">The number of items that should be shown per page.</div>
+
+			<div class="attribute"><code>page</code></div>
+			<div class="type"><code>Number</code></div>
+			<div class="default"><code>0</code></div>
+			<div class="description">
+				The selected page. Either as a one time start value or with <code>bind:page</code> to have updates
+				synced to the parent as well.
+			</div>
+		</div>
+	</div>
+</section>
+<section>
+	<p>
+		Check out the code at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Pagination.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/../Pagination.svelte</a
+		>
+	</p>
+</section>
+<section>
+	<h3>Paginate list of strings</h3>
+	<SyntaxHighlighting language="javascript"
+		>{`
+		const smallItems = [
+			'Item 1',
+			'Item 2',
+			//...
+			'Item 20',
+		]
+	`}</SyntaxHighlighting
+	>
+	<SyntaxHighlighting language="html"
+		>{`	
+	<Pagination items={smallItems} itemsPerPage={4} let:item>
+		<p>{item}</p>
+	</Pagination>	
+	`}</SyntaxHighlighting
+	>
+	<Pagination items={smallItems} itemsPerPage={4} let:item>
+		<p>{item}</p>
 	</Pagination>
 </section>
+<section>
+	<h3>Paginate list of objects</h3>
+	<SyntaxHighlighting language="javascript"
+		>{`	
+		const items = [{
+			title: 'Item 1',
+			text: 'Lorem ipsum...'
+		},{
+			title: 'Item 2',
+			text: 'Vivamus mattis...'
+		},{
+			// ...
+		},{
+			title: 'Item 30',
+			text: 'Sed malesuada...'
+		}]
+	`}</SyntaxHighlighting
+	>
+	<SyntaxHighlighting language="html"
+		>{`
+		<Pagination {items} itemsPerPage={4} let:item>
+			<div class="row">
+				<h4>{item.title}</h4>
+				<p>{item.text}</p>
+			</div>
+		</Pagination>
+	`}</SyntaxHighlighting
+	>
+
+	<Pagination items={largeItems} itemsPerPage={4} let:item>
+		<div class="row">
+			<h4>{item.title}</h4>
+			<p>{item.text}</p>
+		</div>
+	</Pagination>
+</section>
+
+<style lang="scss">
+	.row {
+		margin-bottom: var(--gap);
+		padding-bottom: var(--gap);
+		border-bottom: 3px solid var(--c-text);
+
+		&:last-child {
+			margin-bottom: var(--gap-2);
+			padding-bottom: 0;
+			border-bottom: 0;
+		}
+	}
+
+	.sidescroll-container {
+		max-width: 100%;
+		overflow-x: auto;
+	}
+
+	.grid-table {
+		display: grid;
+		grid-template-columns: max-content max-content max-content 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: 'Attribute Type Default Description';
+		margin-bottom: var(--gap);
+		border: 4px solid var(--c-table-border);
+		min-width: 620px;
+		> div {
+			padding: var(--gap-half);
+			border: 1px solid var(--c-table-border);
+		}
+
+		> div:nth-child(-n + 4) {
+			font-weight: bold;
+		}
+		> div:nth-child(8n + 5),
+		> div:nth-child(8n + 6),
+		> div:nth-child(8n + 7),
+		> div:nth-child(8n + 8) {
+			background-color: var(--c-table-row);
+		}
+	}
+</style>

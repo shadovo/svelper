@@ -2,11 +2,14 @@
 	import Dialog from '$lib/components/Dialog.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 	import srcOscar from '$img/oscar-head.svg';
+	import lorem from '$lib/utils/lorem-ipsum';
 
 	let showSimpleDialog = false;
 	let showCustomHeaderDialog = false;
 	let showCustomFooterDialog = false;
 	let showScrollingDialog = false;
+
+	let longTextParagraphs = lorem.slice(0, 10);
 
 	let acceptedDialogOption: Boolean | undefined;
 
@@ -68,7 +71,7 @@
 	<p>The follwing code will show a dialog with a custom header.</p>
 	<SyntaxHighlighting language="html"
 		>{`<Dialog bind:show={showCustomHeaderDialog}>
-	<div slot="header" class="row">
+	<div slot="header" class="flex-row">
 		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 		<h4>Hi! It's me!</h4>
 	</div>
@@ -77,7 +80,7 @@
 	>
 	<button on:click={() => (showCustomHeaderDialog = !showCustomHeaderDialog)}>Show modal!</button>
 	<Dialog bind:show={showCustomHeaderDialog}>
-		<div slot="header" class="row">
+		<div slot="header" class="flex-row">
 			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 			<h4>Hi! It's me!</h4>
 		</div>
@@ -99,7 +102,7 @@ const declinedDialog = () => {
 	>
 	<SyntaxHighlighting language="html"
 		>{`<Dialog bind:show={showCustomFooterDialog}>
-	<div slot="header" class="row">
+	<div slot="header" class="flex-row">
 		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 		<h4>Hi! It's me!</h4>
 	</div>
@@ -112,7 +115,7 @@ const declinedDialog = () => {
 	</div>
 </Dialog>`}</SyntaxHighlighting
 	>
-	<div class="row">
+	<div class="flex-row">
 		<button on:click={() => (showCustomFooterDialog = !showCustomFooterDialog)}>Show modal!</button>
 		{#if acceptedDialogOption === true}
 			<p>You have accepted the info in the modal!</p>
@@ -121,7 +124,7 @@ const declinedDialog = () => {
 		{/if}
 	</div>
 	<Dialog bind:show={showCustomFooterDialog}>
-		<div slot="header" class="row">
+		<div slot="header" class="flex-row">
 			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
 			<h4>Hi! It's me!</h4>
 		</div>
@@ -143,66 +146,9 @@ const declinedDialog = () => {
 		<h2>Hello!</h2>
 	</div>
 	<div class="flex">
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-			dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa, dicta
-			ab. Illo, qui.
-		</p>
+		{#each longTextParagraphs as paragraph}
+			<p>{paragraph}</p>
+		{/each}
 	</div>
 </Dialog>`}</SyntaxHighlighting
 	>
@@ -212,66 +158,9 @@ const declinedDialog = () => {
 			<h2>Hello!</h2>
 		</div>
 		<div class="flex">
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit voluptate ullam ex itaque sit
-				dolor corporis ducimus esse in exercitationem blanditiis saepe natus libero neque culpa,
-				dicta ab. Illo, qui.
-			</p>
+			{#each longTextParagraphs as paragraph}
+				<p>{paragraph}</p>
+			{/each}
 		</div>
 	</Dialog>
 </section>

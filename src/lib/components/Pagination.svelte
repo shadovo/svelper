@@ -8,16 +8,16 @@
 	export let items: T[] = [];
 	export let filteredItems: T[] = [];
 	export let page = 0;
-	export let limit = 5;
+	export let itemsPerPage = 5;
 
 	let maxPage = 1;
 
-	$: maxPage = Math.ceil(items.length / limit);
-	$: filteredItems = items.slice(page * limit, page * limit + limit);
+	$: maxPage = Math.ceil(items.length / itemsPerPage);
+	$: filteredItems = items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
 </script>
 
 <div class="pagination">
-	<div class="list">
+	<div class="pagination-list">
 		{#each filteredItems as item}
 			<slot {item} />
 		{/each}
@@ -59,6 +59,7 @@
 		font-size: 3rem;
 		line-height: 1;
 		padding: 0 var(--gap-half);
+		user-select: none;
 	}
 	.hidden {
 		visibility: hidden;

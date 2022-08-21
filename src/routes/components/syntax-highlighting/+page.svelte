@@ -22,7 +22,7 @@
 	</p>
 	<p>The following code:</p>
 	<SyntaxHighlighting language="html">
-		{`<SyntaxHighlighting lang="javascript">
+		{`<SyntaxHighlighting language="javascript">
 {\`
 	console.log('Hello World!');
 \`}
