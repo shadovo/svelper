@@ -1,0 +1,36 @@
+{
+	"short_name": "Svelper",
+	"name": "Svelper",
+	"description": "A collection fun stuff built with Svelte, useful libraries, frameworks and copy/paste utils.",
+	"start_url": "/",
+	"scope": "/",
+	"theme_color": "#202020",
+	"background_color": "#00838f",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "app-icons/svelper-icon-maskable.svg",
+			"type": "image/svg+xml",
+			"sizes": "any",
+			"purpose": "maskable"
+		},
+		{
+			"src": "app-icons/svelper-icon.svg",
+			"type": "image/svg+xml",
+			"sizes": "any",
+			"purpose": "any"
+		},
+		{
+			"src": "app-icons/svelper-icon-maskable.png",
+			"type": "image/png",
+			"sizes": "1024x1024",
+			"purpose": "maskable"
+		},
+		{
+			"src": "app-icons/svelper-icon.png",
+			"type": "image/png",
+			"sizes": "1024x1024",
+			"purpose": "any"
+		}
+	]
+}
