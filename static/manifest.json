@@ -6,7 +6,7 @@
 	"scope": "/",
 	"theme_color": "#202020",
 	"background_color": "#00838f",
-	"display": "fullscreen",
+	"display": "minimal-ui",
 	"icons": [
 		{
 			"src": "app-icons/svelper-icon-maskable.svg",
