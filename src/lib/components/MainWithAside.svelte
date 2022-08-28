@@ -113,7 +113,7 @@
 		grid-template-columns: calc(100% - var(--aside-width) - var(--gap-2)) var(--aside-width);
 		grid-template-rows: auto 1fr auto;
 		gap: var(--gap-2);
-		max-width: 1024px;
+		max-width: min(1024px, 100vw);
 		margin: 0 auto;
 		padding: 0 var(--gap);
 		min-height: 100vh;

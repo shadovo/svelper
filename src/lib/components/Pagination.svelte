@@ -45,7 +45,7 @@
 			>
 
 			<!-- current page -->
-			<button disabled>{page + 1}</button>
+			<button class="pagination-button shown" disabled>{page + 1}</button>
 
 			<!-- next page -->
 			<button
@@ -106,5 +106,22 @@
 	}
 	.shown {
 		display: block;
+	}
+
+	@media (max-width: 768px) {
+		.pagination-controlls {
+			gap: var(--gap-quarter);
+		}
+		.arrow,
+		.pagination-button {
+			min-width: unset;
+			flex-grow: 0;
+			padding: var(--gap-quarter) var(--gap-half);
+			font-size: 1rem;
+			line-height: 1;
+		}
+		.pagination-more {
+			padding: var(--gap-quarter);
+		}
 	}
 </style>
