@@ -88,6 +88,14 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your
 
 https://github.com/features/copilot
 
+## manifest.json
+
+https://developer.mozilla.org/en-US/docs/Web/Manifest
+
+### maskable icons
+
+https://web.dev/maskable-icon/
+
 ---
 
 # Things I have learnt exists but not explored yet
