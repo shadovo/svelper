@@ -5,7 +5,7 @@
 
 	const smallItems = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`);
 
-	const largeItems = lorem.slice(0, 30).map((p, i) => ({
+	const largeItems = lorem.slice(0, 60).map((p, i) => ({
 		id: i,
 		title: `Item ${i + 1}`,
 		text: p.substring(0, 250),
@@ -154,7 +154,7 @@
 		grid-template-rows: auto;
 		grid-template-areas: 'Attribute Type Default Description';
 		margin-bottom: var(--gap);
-		border: 4px solid var(--c-table-border);
+		border: 2px solid var(--c-table-border);
 		min-width: 620px;
 		> div {
 			padding: var(--gap-half);

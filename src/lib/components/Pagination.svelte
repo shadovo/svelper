@@ -24,10 +24,16 @@
 	</div>
 	<div class="pagination-controlls">
 		<!-- arrow previous -->
-		<button class="arrow" class:hidden={page === 0} on:click={() => (page = page - 1)}>&lt;</button>
+		<button class="button-icon arrow" class:hidden={page === 0} on:click={() => (page = page - 1)}>
+			<svg width="24" height="24" viewBox="0 0 24 24">
+				<polyline fill="none" points="16,6 8,12 16,18" />
+			</svg>
+		</button>
 		<div class="pagination-page-buttons">
 			<!-- first page -->
-			<button class="first pagination-button" class:shown={page > 2}>1</button>
+			<button class="first pagination-button" class:shown={page > 2} on:click={() => (page = 0)}
+				>1</button
+			>
 
 			<!-- ... -->
 			<div class:shown={page > 3} class="pagination-button pagination-more">...</div>
@@ -65,13 +71,23 @@
 			<div class:shown={page < maxPage - 3} class="pagination-button pagination-more">...</div>
 
 			<!-- last page -->
-			<button class="pagination-button last" class:shown={page < maxPage - 2}>{maxPage + 1}</button>
+			<button
+				class="pagination-button last"
+				class:shown={page < maxPage - 2}
+				on:click={() => (page = maxPage)}>{maxPage + 1}</button
+			>
 		</div>
 
 		<!-- arrow next -->
-		<button class="arrow" class:hidden={page === maxPage} on:click={() => (page = page + 1)}
-			>&gt;</button
+		<button
+			class="button-icon arrow"
+			class:hidden={page === maxPage}
+			on:click={() => (page = page + 1)}
 		>
+			<svg width="24" height="24" viewBox="0 0 24 24">
+				<polyline fill="none" points="8,6 16,12 8,18" />
+			</svg>
+		</button>
 	</div>
 </div>
 
@@ -88,10 +104,27 @@
 		gap: var(--gap-quarter);
 	}
 
+	.arrow,
+	.pagination-button {
+		min-width: 45px;
+		font-size: 1rem;
+		text-align: center;
+		padding: var(--gap-half);
+		justify-content: center;
+	}
+
+	.arrow {
+		stroke: currentColor;
+	}
+
+	.pagination-button {
+		display: none;
+	}
+
 	.pagination-more {
 		font-weight: bold;
-		font-size: 3rem;
-		line-height: 1;
+		font-size: 2rem;
+		line-height: 44px;
 		padding: 0 var(--gap-half);
 		user-select: none;
 	}
@@ -99,11 +132,6 @@
 		visibility: hidden;
 	}
 
-	.pagination-button {
-		min-width: 55px;
-		text-align: center;
-		display: none;
-	}
 	.shown {
 		display: block;
 	}
@@ -114,9 +142,11 @@
 		}
 		.arrow,
 		.pagination-button {
-			min-width: unset;
+			min-width: 32px;
+			height: 32px;
+			border-width: 4px;
 			flex-grow: 0;
-			padding: var(--gap-quarter) var(--gap-half);
+			padding: var(--gap-quarter);
 			font-size: 1rem;
 			line-height: 1;
 		}

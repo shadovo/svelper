@@ -292,7 +292,7 @@
 			display: flex;
 			padding: var(--gap-half) var(--gap);
 			background-color: var(--c-background);
-			border: 5px solid var(--c-text);
+			border: 3px solid var(--c-text);
 			color: var(--c-text);
 			font-family: var(--font-accent);
 			font-weight: var(--font-weight-bold);
