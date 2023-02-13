@@ -9,9 +9,6 @@ const config = {
 
 	kit: {
 		inlineStyleThreshold: 10000,
-		prerender: {
-			default: true,
-		},
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
