@@ -107,6 +107,14 @@
 							</ul>
 						</li>
 						<li>
+							<h3>Svelte games</h3>
+							<ul>
+								<li>
+									<a href="{base}/games/minesweeper">Minesweeper</a>
+								</li>
+							</ul>
+						</li>
+						<li>
 							<h3>Animations</h3>
 							<ul>
 								<li>

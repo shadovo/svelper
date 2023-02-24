@@ -1,0 +1,30 @@
+<script lang="ts">
+	import Minesweeper from '$lib/games/Minesweeper.svelte';
+</script>
+
+<svelte:head>
+	<title>Minesweeper as Svelte component - Svelper</title>
+	<meta
+		name="description"
+		content="A simple implementation of the classic game
+		Minesweeper as Svelte component. - A collection fun stuff"
+	/>
+</svelte:head>
+
+<section>
+	<h2>Minesweeper as Svelte component</h2>
+	<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
+	<p>
+		Check out the implementation at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/lib/games/Minesweeper.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/.../Minesweeper.svelte</a
+		>
+	</p>
+</section>
+<section>
+	<Minesweeper width={9} height={10} mines={10} />
+</section>
+
+<style lang="scss">
+</style>
