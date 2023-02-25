@@ -273,8 +273,8 @@
 	}
 
 	td {
-		width: 2em;
-		height: 2em;
+		width: 2.5em;
+		height: 2.5em;
 		text-align: center;
 		border: 1px solid #ccc;
 		cursor: pointer;
