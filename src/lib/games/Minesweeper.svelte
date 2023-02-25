@@ -268,6 +268,8 @@
 
 	table {
 		border-collapse: collapse;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
 		user-select: none;
 		font-weight: bold;
 	}
