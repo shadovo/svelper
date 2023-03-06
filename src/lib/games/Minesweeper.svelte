@@ -117,14 +117,19 @@
 	}
 
 	function cellRightClicked(x: number, y: number) {
-		if (game.board[y][x].isRevealed) {
+		if (game.status !== 'playing' || game.board[y][x].isRevealed) {
 			return;
 		}
 		game.board[y][x].isFlagged = !game.board[y][x].isFlagged;
 	}
 
 	function cellClicked(x: number, y: number) {
-		if (game.board[y][x].isRevealed || game.board[y][x].isFlagged) {
+		if (
+			game.status === 'won' ||
+			game.status === 'lost' ||
+			game.board[y][x].isRevealed ||
+			game.board[y][x].isFlagged
+		) {
 			return;
 		}
 		if (game.status === 'notstarted') {
@@ -172,7 +177,7 @@
 	createGame(width, height, mines);
 </script>
 
-<div class="board">
+<div class="board {game.status}">
 	<div class="stats">
 		<div class="stat">
 			<span class="value"
@@ -279,10 +284,13 @@
 		height: 2.5em;
 		text-align: center;
 		border: 1px solid #ccc;
-		cursor: pointer;
 
-		&:not(.revealed):hover {
-			background-color: rgba(125, 125, 125, 0.2);
+		.board:not(.lost):not(.won) &:not(.revealed) {
+			cursor: pointer;
+
+			&:hover {
+				background-color: rgba(125, 125, 125, 0.2);
+			}
 		}
 
 		span {
