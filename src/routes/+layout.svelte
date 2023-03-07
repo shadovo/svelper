@@ -115,6 +115,14 @@
 							</ul>
 						</li>
 						<li>
+							<h3>Tools</h3>
+							<ul>
+								<li>
+									<a href="{base}/tools/breath">Breathing technique</a>
+								</li>
+							</ul>
+						</li>
+						<li>
 							<h3>Animations</h3>
 							<ul>
 								<li>
