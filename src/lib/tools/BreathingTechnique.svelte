@@ -35,7 +35,7 @@
 	function toggleDirection() {
 		let currentConfig = directionIsIn ? BREATH_OUT_CONFIG : BREATH_IN_CONFIG;
 		if (browser) {
-			window.navigator.vibrate(currentConfig.vibrationPattern);
+			window.navigator?.vibrate?.(currentConfig.vibrationPattern);
 		}
 		breath.set(currentConfig.value, {
 			duration: currentConfig.duration,
@@ -103,5 +103,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		font-size: 5rem;
+		pointer-events: none;
+		user-select: none;
 	}
 </style>
