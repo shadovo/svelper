@@ -91,10 +91,9 @@
 		position: absolute;
 		inset: 0;
 		border-radius: 50%;
-		background-color: var(--c-text);
+		background-color: white;
 		margin: 0 auto;
 		pointer-events: none;
-		color: white;
 		mix-blend-mode: difference;
 	}
 	.direction {
