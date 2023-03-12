@@ -3,22 +3,32 @@
 	import { onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
+	import { playNotes } from '../utils/audio/sound-board';
 
 	type BreathConfig = {
 		duration: number;
 		delay: number;
 	};
 
-	type BreathValues = BreathConfig & {
-		value: number;
+	type BreathAlert = {
 		vibrationPattern: number[];
+		soundPattern: string[][];
 	};
+
+	type BreathValues = BreathConfig &
+		BreathAlert & {
+			value: number;
+		};
 
 	const DEFAULT_BREATH_IN_CONFIG: BreathValues = {
 		duration: 4000,
 		delay: 700,
 		value: 1,
 		vibrationPattern: [200, 100, 200],
+		soundPattern: [
+			['A#3', 'D3', 'F3', 'A4'],
+			['D#3', 'G3', 'A#4', 'D4'],
+		],
 	};
 
 	const DEFAULT_BREATH_OUT_CONFIG: BreathValues = {
@@ -26,10 +36,21 @@
 		delay: 700,
 		value: 0,
 		vibrationPattern: [200],
+		soundPattern: [
+			['D3', 'F3', 'A3', 'C4'],
+			['E3', 'G#3', 'B3', 'D4'],
+		],
+	};
+
+	const DEFAULT_HOLD_ALERT_CONFIG: BreathAlert = {
+		vibrationPattern: [600],
+		soundPattern: [['B3', 'D3', 'F3', 'A3']],
 	};
 
 	export let breathInConfig: BreathConfig = DEFAULT_BREATH_IN_CONFIG;
 	export let breathOutConfig: BreathConfig = DEFAULT_BREATH_OUT_CONFIG;
+	export let sound = true;
+	export let vibration = true;
 
 	let breathInValues: BreathValues = {
 		...DEFAULT_BREATH_IN_CONFIG,
@@ -52,21 +73,29 @@
 		delay: 0,
 	});
 
+	function changeAlert(config: BreathAlert) {
+		if (browser) {
+			if (vibration) {
+				window.navigator?.vibrate?.(config.vibrationPattern);
+			}
+			if (sound) {
+				config.soundPattern.forEach((chord, i) => playNotes(2, i * 0.3, chord));
+			}
+		}
+	}
+
 	function toggleDirection() {
 		let currentConfig = directionIsIn ? breathOutValues : breathInValues;
 		if (currentConfig.delay >= 1500) {
 			hold = true;
-			window.navigator?.vibrate?.([600]);
+			changeAlert(DEFAULT_HOLD_ALERT_CONFIG);
+
 			delayTimeout = setTimeout(() => {
 				hold = false;
-				if (browser) {
-					window.navigator?.vibrate?.(currentConfig.vibrationPattern);
-				}
+				changeAlert(currentConfig);
 			}, currentConfig.delay);
 		} else {
-			if (browser) {
-				window.navigator?.vibrate?.(currentConfig.vibrationPattern);
-			}
+			changeAlert(currentConfig);
 		}
 		breath.set(currentConfig.value, {
 			duration: currentConfig.duration,
