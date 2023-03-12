@@ -224,4 +224,8 @@
 		gap: var(--gap);
 		align-items: center;
 	}
+
+	.padded {
+		padding: var(--gap) 0;
+	}
 </style>

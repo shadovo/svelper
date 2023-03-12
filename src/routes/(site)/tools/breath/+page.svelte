@@ -34,7 +34,9 @@ breathing techique as Svelte component. - A collection fun stuff"
 </section>
 <section>
 	<h3>4 seconds in 6 seconds out.</h3>
-	<BreathingTechnique />
+	<div class="padded">
+		<BreathingTechnique />
+	</div>
 	<p>This is the default behaviour that you get by simply including the following</p>
 	<SyntaxHighlight language="html">
 		{`<BreathingTechnique />`}
@@ -56,7 +58,9 @@ const breathOutConfig = {
 </section>
 <section>
 	<h3>4 seconds box breathing</h3>
-	<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />
+	<div class="padded">
+		<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />
+	</div>
 	<p>
 		You can also customize the duration and delay of the breathing in and out by passing in the
 		following props:
@@ -77,10 +81,12 @@ const breathOutConfig = {
 		This one is configured for the 4, 7, 8 breathing technique. The duration of the breathing in is
 		4 seconds, hold for 7 seconds and breath out for 8 seconds.
 	</p>
-	<BreathingTechnique
-		breathInConfig={{ duration: 4000, delay: 700 }}
-		breathOutConfig={{ duration: 8000, delay: 7000 }}
-	/>
+	<div class="padded">
+		<BreathingTechnique
+			breathInConfig={{ duration: 4000, delay: 700 }}
+			breathOutConfig={{ duration: 8000, delay: 7000 }}
+		/>
+	</div>
 	<SyntaxHighlighting language="javascript">
 		{`const breathInConfig = {
 	duration: 4000,
@@ -102,7 +108,9 @@ const breathOutConfig = {
 		You can also mute the sound and vibration by passing in the following props:
 		<SyntaxHighlight language="html">{`sound={false} vibration={false}`}</SyntaxHighlight>
 	</p>
-	<BreathingTechnique sound={false} vibration={false} />
+	<div class="padded">
+		<BreathingTechnique sound={false} vibration={false} />
+	</div>
 	<SyntaxHighlighting language="html">
 		{`<BreathingTechnique sound={false} vibration={false} />`}
 	</SyntaxHighlighting>

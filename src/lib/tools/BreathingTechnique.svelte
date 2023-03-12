@@ -165,10 +165,10 @@
 	.outer {
 		position: relative;
 		width: 300px;
-		height: 300px;
+		max-width: 100%;
+		aspect-ratio: 1;
 		border-radius: 50%;
 		border: 1px solid var(--c-text);
-		margin: var(--gap) auto;
 		cursor: pointer;
 		overflow: hidden;
 	}
@@ -187,6 +187,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		font-size: 5rem;
+		font-size: clamp(2rem, 25vw, 5rem);
 		pointer-events: none;
 		user-select: none;
 	}
