@@ -96,6 +96,14 @@ https://developer.mozilla.org/en-US/docs/Web/Manifest
 
 https://web.dev/maskable-icon/
 
+### CSS mix-blend-mode
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+
+### Web API AudioContext
+
+https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+
 ---
 
 # Things I have learnt exists but not explored yet
