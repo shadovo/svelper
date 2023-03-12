@@ -13,11 +13,24 @@
 		<meta name="theme-color" content="#202020" />
 		<meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
 		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#202020" />
-		<link rel="stylesheet" href="%sveltekit.assets%/css/theme.css" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
 		<link rel="manifest" href="%sveltekit.assets%/manifest.json" crossorigin="use-credentials" />
 		<link rel="apple-touch-icon" href="%sveltekit.assets%/app-icons/svelper-icon-maskable.png" />
+		<script>
+			const params = new Proxy(new URLSearchParams(window.location.search), {
+				get: (searchParams, prop) => searchParams.get(prop),
+			});
+			if (params.theme === 'dark') {
+				document.documentElement.classList.add('theme-dark');
+			}
+			if (params.theme === 'light') {
+				document.documentElement.classList.add('theme-light');
+			}
+			if (params.transparent === 'true') {
+				document.documentElement.classList.add('transparent');
+			}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body>

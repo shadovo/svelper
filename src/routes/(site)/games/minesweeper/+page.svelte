@@ -23,7 +23,7 @@
 	</p>
 </section>
 <section>
-	<Minesweeper width={9} height={10} mines={10} />
+	<Minesweeper columns="9" rows="10" mines="10" />
 </section>
 
 <style lang="scss">
