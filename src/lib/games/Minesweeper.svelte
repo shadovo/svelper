@@ -12,25 +12,25 @@
 	type Game = {
 		status: GameStatus;
 		board: Board;
-		width: number;
-		height: number;
+		columns: number;
+		rows: number;
 		mines: number;
 		currentTimer: string;
 		startTime: Date | null;
 		endTime: Date | null;
 	};
 
-	export let width = 9;
-	export let height = 10;
-	export let mines = 10;
+	export let columns = '9';
+	export let rows = '10';
+	export let mines = '10';
 
 	let game: Game;
 
-	function createGame(width: number, height: number, mines: number) {
+	function createGame(columns: number, rows: number, mines: number) {
 		const board: Cell[][] = [];
-		for (let y = 0; y < height; y++) {
+		for (let y = 0; y < rows; y++) {
 			board[y] = [];
-			for (let x = 0; x < width; x++) {
+			for (let x = 0; x < columns; x++) {
 				board[y][x] = {
 					isMine: false,
 					isRevealed: false,
@@ -42,16 +42,16 @@
 
 		let minesPlaced = 0;
 		while (minesPlaced < mines) {
-			const x = Math.floor(Math.random() * width);
-			const y = Math.floor(Math.random() * height);
+			const x = Math.floor(Math.random() * columns);
+			const y = Math.floor(Math.random() * rows);
 			if (!board[y][x].isMine) {
 				board[y][x].isMine = true;
 				minesPlaced++;
 			}
 		}
 
-		for (let y = 0; y < height; y++) {
-			for (let x = 0; x < width; x++) {
+		for (let y = 0; y < rows; y++) {
+			for (let x = 0; x < columns; x++) {
 				if (board[y][x].isMine) {
 					continue;
 				}
@@ -63,7 +63,7 @@
 						}
 						const nx = x + dx;
 						const ny = y + dy;
-						if (nx < 0 || nx >= width || ny < 0 || ny >= height) {
+						if (nx < 0 || nx >= columns || ny < 0 || ny >= rows) {
 							continue;
 						}
 						if (board[ny][nx].isMine) {
@@ -81,8 +81,8 @@
 			currentTimer: '00:00',
 			startTime: null,
 			endTime: null,
-			width,
-			height,
+			columns,
+			rows,
 			mines,
 		};
 	}
@@ -111,7 +111,7 @@
 
 	function checkGameWin() {
 		return (
-			game.width * game.height - game.mines ===
+			game.columns * game.rows - game.mines ===
 			game.board.flat().filter((cell) => cell.isRevealed).length
 		);
 	}
@@ -174,7 +174,9 @@
 		setTimeout(updateTimer, 1000);
 	}
 
-	createGame(width, height, mines);
+	$: {
+		createGame(Number(columns), Number(rows), Number(mines));
+	}
 </script>
 
 <div class="board {game.status}">
@@ -185,7 +187,7 @@
 			>
 		</div>
 		<div class="stat">
-			<button on:click={() => createGame(width, height, mines)}>
+			<button on:click={() => createGame(Number(columns), Number(rows), Number(mines))}>
 				{#if game.status === 'notstarted' || game.status === 'playing'}
 					🙂
 				{:else if game.status === 'won'}
@@ -291,12 +293,6 @@
 			&:hover {
 				background-color: rgba(125, 125, 125, 0.2);
 			}
-		}
-
-		span {
-			display: block;
-			width: 100%;
-			height: 100%;
 		}
 	}
 
