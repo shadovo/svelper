@@ -71,6 +71,42 @@ const breathOutConfig = {
 		{`<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />`}
 	</SyntaxHighlight>
 </section>
+<section>
+	<h3>4, 7, 8 breathing.</h3>
+	<p>
+		This one is configured for the 4, 7, 8 breathing technique. The duration of the breathing in is
+		4 seconds, hold for 7 seconds and breath out for 8 seconds.
+	</p>
+	<BreathingTechnique
+		breathInConfig={{ duration: 4000, delay: 700 }}
+		breathOutConfig={{ duration: 8000, delay: 7000 }}
+	/>
+	<SyntaxHighlighting language="javascript">
+		{`const breathInConfig = {
+	duration: 4000,
+	delay: 700,
+};
+const breathOutConfig = {
+	duration: 8000,
+	delay: 7000,
+};`}
+	</SyntaxHighlighting>
+	<SyntaxHighlight language="html">
+		{`<BreathingTechnique {breathInConfig} {breathOutConfig} />`}
+	</SyntaxHighlight>
+</section>
+
+<section>
+	<h3>Default timing with muted sound and no vibration</h3>
+	<p>
+		You can also mute the sound and vibration by passing in the following props:
+		<SyntaxHighlight language="html">{`sound={false} vibration={false}`}</SyntaxHighlight>
+	</p>
+	<BreathingTechnique sound={false} vibration={false} />
+	<SyntaxHighlighting language="html">
+		{`<BreathingTechnique sound={false} vibration={false} />`}
+	</SyntaxHighlighting>
+</section>
 
 <style lang="scss">
 </style>
