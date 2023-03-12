@@ -3,7 +3,7 @@
 	import { onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
-	import { playNotes } from '../utils/audio/sound-board';
+	import createSoundboard from '../utils/audio/sound-board';
 
 	type BreathConfig = {
 		duration: number;
@@ -47,6 +47,8 @@
 		soundPattern: [['B3', 'D3', 'F3', 'A3']],
 	};
 
+	let soundBoard = createSoundboard();
+
 	export let breathInConfig: BreathConfig = DEFAULT_BREATH_IN_CONFIG;
 	export let breathOutConfig: BreathConfig = DEFAULT_BREATH_OUT_CONFIG;
 	export let sound = true;
@@ -79,7 +81,7 @@
 				window.navigator?.vibrate?.(config.vibrationPattern);
 			}
 			if (sound) {
-				config.soundPattern.forEach((chord, i) => playNotes(2, i * 0.3, chord));
+				config.soundPattern.forEach((chord, i) => soundBoard.playNotes(2, i * 0.3, chord));
 			}
 		}
 	}
@@ -135,6 +137,7 @@
 
 	onDestroy(() => {
 		stopTimout();
+		soundBoard.destroy();
 	});
 </script>
 
