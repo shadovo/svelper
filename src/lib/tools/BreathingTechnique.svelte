@@ -170,7 +170,6 @@
 		border-radius: 50%;
 		border: 1px solid var(--c-text);
 		cursor: pointer;
-		overflow: hidden;
 	}
 	.inner {
 		position: absolute;
