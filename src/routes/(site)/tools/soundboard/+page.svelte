@@ -142,6 +142,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Web Audio API based soundboard - Svelper</title>
+	<meta
+		name="description"
+		content="Just an experiment with what types of sounds cna be produced by the Web Audio API. - A collection fun stuff"
+	/>
+</svelte:head>
+
 <section>
 	<h2>Simple soundboard</h2>
 	<p>
@@ -162,53 +170,57 @@
 </section>
 <section>
 	<h3>Notes (sine)</h3>
-	<table class="notes">
-		<tr
-			><th />
-			{#each octaves as octave}
-				<th>{octave}</th>
-			{/each}
-		</tr>
-		{#each notes as note}
-			<tr>
-				<td>
-					{note}
-				</td>
+	<div class="sidescroll">
+		<table class="notes">
+			<tr
+				><th />
 				{#each octaves as octave}
-					<td>
-						<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
-							>{`${note}${octave}`}</button
-						>
-					</td>
+					<th>{octave}</th>
 				{/each}
 			</tr>
-		{/each}
-	</table>
+			{#each notes as note}
+				<tr>
+					<td>
+						{note}
+					</td>
+					{#each octaves as octave}
+						<td>
+							<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
+								>{`${note}${octave}`}</button
+							>
+						</td>
+					{/each}
+				</tr>
+			{/each}
+		</table>
+	</div>
 </section>
 <section>
 	<h3>Bass (triangle)</h3>
-	<table class="notes">
-		<tr
-			><th />
-			{#each octaves as octave}
-				<th>{octave}</th>
-			{/each}
-		</tr>
-		{#each notes as note}
-			<tr>
-				<td>
-					{note}
-				</td>
+	<div class="sidescroll">
+		<table class="notes">
+			<tr
+				><th />
 				{#each octaves as octave}
-					<td>
-						<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
-							>{`${note}${octave}`}</button
-						>
-					</td>
+					<th>{octave}</th>
 				{/each}
 			</tr>
-		{/each}
-	</table>
+			{#each notes as note}
+				<tr>
+					<td>
+						{note}
+					</td>
+					{#each octaves as octave}
+						<td>
+							<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
+								>{`${note}${octave}`}</button
+							>
+						</td>
+					{/each}
+				</tr>
+			{/each}
+		</table>
+	</div>
 </section>
 
 <section>
@@ -300,12 +312,23 @@ const melody =[
 			display: inline-block;
 		}
 	}
+	.sidescroll {
+		width: 100%;
+		max-width: 100%;
+		overflow-x: scroll;
+	}
 	@media (max-width: 500px) {
 		.notes {
 			font-size: 0.7rem;
+
+			tr:first-child,
+			td:first-child {
+				display: none;
+			}
 			:global(button) {
-				/* font-size: 0.6rem; */
-				padding: 0.2rem;
+				padding: 0.5rem 0.3rem;
+				min-width: 48px;
+				min-height: 48px;
 				border: 1px solid #ccc;
 				width: 100%;
 				display: inline-block;
