@@ -1,6 +1,5 @@
 <script lang="ts">
 	import BreathingTechnique from '$lib/tools/BreathingTechnique.svelte';
-	import SyntaxHighlight from '$lib/components/SyntaxHighlighting.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 
 	const boxBreathing = {
@@ -38,9 +37,9 @@ breathing techique as Svelte component. - A collection fun stuff"
 		<BreathingTechnique />
 	</div>
 	<p>This is the default behaviour that you get by simply including the following</p>
-	<SyntaxHighlight language="html">
+	<SyntaxHighlighting language="html">
 		{`<BreathingTechnique />`}
-	</SyntaxHighlight>
+	</SyntaxHighlighting>
 	<p>This would be the same as passing in the following props:</p>
 	<SyntaxHighlighting language="javascript">
 		{`const breathInConfig = {
@@ -52,9 +51,9 @@ const breathOutConfig = {
 	delay: 700,
 };`}
 	</SyntaxHighlighting>
-	<SyntaxHighlight language="html">
+	<SyntaxHighlighting language="html">
 		{`<BreathingTechnique {breathInConfig} {breathOutConfig} />`}
-	</SyntaxHighlight>
+	</SyntaxHighlighting>
 </section>
 <section>
 	<h3>4 seconds box breathing</h3>
@@ -71,9 +70,9 @@ const breathOutConfig = {
 	delay: 4000,
 };`}
 	</SyntaxHighlighting>
-	<SyntaxHighlight language="html">
+	<SyntaxHighlighting language="html">
 		{`<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />`}
-	</SyntaxHighlight>
+	</SyntaxHighlighting>
 </section>
 <section>
 	<h3>4, 7, 8 breathing.</h3>
@@ -97,16 +96,16 @@ const breathOutConfig = {
 	delay: 7000,
 };`}
 	</SyntaxHighlighting>
-	<SyntaxHighlight language="html">
+	<SyntaxHighlighting language="html">
 		{`<BreathingTechnique {breathInConfig} {breathOutConfig} />`}
-	</SyntaxHighlight>
+	</SyntaxHighlighting>
 </section>
 
 <section>
 	<h3>Default timing with muted sound and no vibration</h3>
 	<p>
 		You can also mute the sound and vibration by passing in the following props:
-		<SyntaxHighlight language="html">{`sound={false} vibration={false}`}</SyntaxHighlight>
+		<SyntaxHighlighting language="html">{`sound={false} vibration={false}`}</SyntaxHighlighting>
 	</p>
 	<div class="padded">
 		<BreathingTechnique sound={false} vibration={false} />
