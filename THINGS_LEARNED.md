@@ -76,7 +76,7 @@ https://vitejs.dev/
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 
-## GutHub actions
+## GitHub actions
 
 https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
 
@@ -103,6 +103,10 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
 ### Web API AudioContext
 
 https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+
+### Find commit deleting a file
+
+`git log --full-history -- [file path]`
 
 ---
 
