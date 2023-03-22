@@ -225,6 +225,11 @@
 		align-items: center;
 	}
 
+	.flex-wrap {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
 	.padded {
 		padding: var(--gap) 0;
 	}

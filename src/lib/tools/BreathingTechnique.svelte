@@ -81,7 +81,7 @@
 				window.navigator?.vibrate?.(config.vibrationPattern);
 			}
 			if (sound) {
-				config.soundPattern.forEach((chord, i) => soundBoard.playNotes(2, i * 0.3, chord));
+				config.soundPattern.forEach((chord, i) => soundBoard.playNotes(chord, 2, i * 0.3));
 			}
 		}
 	}
