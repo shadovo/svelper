@@ -62,7 +62,7 @@
 	const TEMPO = 240;
 	let playing = false;
 	let soundboard = createSoundboard();
-	let soundLoop: NodeJS.Timeout;
+	let soundLoop: ReturnType<typeof setTimeout>;
 	let currentMelody = melody;
 
 	const keys = Object.keys(noteFrequencies)

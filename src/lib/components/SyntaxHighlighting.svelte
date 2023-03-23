@@ -7,7 +7,7 @@
 	import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 	import 'prismjs/themes/prism.css';
 
-	export let language: string = 'javascript';
+	export let language = 'javascript';
 
 	let preEl: HTMLElement | undefined;
 	let fakeCodeEl: HTMLElement | undefined;

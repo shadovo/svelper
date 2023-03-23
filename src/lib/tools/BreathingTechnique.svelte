@@ -64,11 +64,11 @@
 		...breathOutConfig,
 	};
 
-	let directionIsIn: boolean = false;
-	let running: boolean = false;
-	let hold: boolean = false;
-	let breathTimeout: NodeJS.Timeout;
-	let delayTimeout: NodeJS.Timeout;
+	let directionIsIn = false;
+	let running = false;
+	let hold = false;
+	let breathTimeout: ReturnType<typeof setTimeout>;
+	let delayTimeout: ReturnType<typeof setTimeout>;
 
 	let breath = tweened(0, {
 		duration: breathOutConfig.duration,

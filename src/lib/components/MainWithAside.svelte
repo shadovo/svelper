@@ -5,7 +5,7 @@
 	const SWIPE_END_THRESHOLD = 100;
 	const SWIPE_EDGE_THRESHOLD = 30;
 
-	let touchStartX: number = -1;
+	let touchStartX = -1;
 	let asideTransform = 'none';
 
 	const closeAside = () => {
