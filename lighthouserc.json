@@ -1,11 +1,14 @@
 {
 	"ci": {
 		"collect": {
-			"lighthouse": "all",
+			"preset": "lighthouse:no-pwa",
 			"staticDistDir": "./build",
 			"numberOfRuns": 2,
 			"maxAutodiscoverUrls": 20,
 			"onlyCategories": ["performance", "best-practices", "accessibility", "seo"]
+		},
+		"upload": {
+			"target": "temporary-public-storage"
 		}
 	}
 }
