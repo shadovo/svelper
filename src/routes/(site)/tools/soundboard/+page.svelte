@@ -253,7 +253,7 @@ const melody = [
 	<SyntaxHighlighting language="javascript">
 		{`
 // each row is [notes, bass, hihat, kick, snare]
-const melody =[
+const melody = [
 	[[], [], false, false, true],
 	[[], [], false, false, false],
 	[[], [], false, false, true],
