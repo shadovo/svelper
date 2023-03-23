@@ -1,7 +1,11 @@
 {
 	"ci": {
 		"collect": {
-			"staticDistDir": "./build"
+			"lighthouse": "all",
+			"staticDistDir": "./build",
+			"numberOfRuns": 2,
+			"maxAutodiscoverUrls": 20,
+			"onlyCategories": ["performance", "best-practices", "accessibility", "seo"]
 		}
 	}
 }
