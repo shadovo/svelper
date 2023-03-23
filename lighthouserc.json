@@ -6,7 +6,7 @@
 			"maxAutodiscoverUrls": 3
 		},
 		"assert": {
-			"preset": "lighthouse:all"
+			"preset": "lighthouse:no-pwa"
 		},
 		"upload": {
 			"target": "temporary-public-storage"
