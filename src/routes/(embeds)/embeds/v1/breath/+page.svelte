@@ -33,6 +33,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Beathing tecnique embed - Svelper</title>
+	<meta
+		name="description"
+		content="An embed version of the Svelper breathing technique widget. - A collection fun stuff"
+	/>
+</svelte:head>
+
 {#if browser}
 	<BreathingTechnique {breathInConfig} {breathOutConfig} />
 {/if}
