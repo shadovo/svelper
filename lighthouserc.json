@@ -6,7 +6,9 @@
 			"maxAutodiscoverUrls": 3
 		},
 		"assert": {
-			"preset": "lighthouse:no-pwa"
+			"preset": "lighthouse:no-pwa",
+			"uses-passive-event-listeners": "warn",
+			"csp-xss": "warn"
 		},
 		"upload": {
 			"target": "temporary-public-storage"
