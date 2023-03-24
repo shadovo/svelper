@@ -108,6 +108,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 
 `git log --full-history -- [file path]`
 
+## Setting CSP headers for GitHub pages
+
+`<meta http-equiv="Content-Security-Policy" content="default-src 'self'" />`
+
 ---
 
 # Things I have learnt exists but not explored yet
