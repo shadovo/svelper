@@ -83,7 +83,7 @@
 		--prism-atrule: #005478;
 		--prism-keyword: #005478;
 		--prism-function: #8a2e41;
-		--prism-regex: #e90;
+		--prism-regex: #b64a00;
 	}
 
 	html.theme-dark {
