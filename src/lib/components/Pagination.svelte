@@ -24,15 +24,23 @@
 	</div>
 	<div class="pagination-controlls">
 		<!-- arrow previous -->
-		<button class="button-icon arrow" class:hidden={page === 0} on:click={() => (page = page - 1)}>
+		<button
+			name="previous page"
+			class="button-icon arrow"
+			class:hidden={page === 0}
+			on:click={() => (page = page - 1)}
+		>
 			<svg width="24" height="24" viewBox="0 0 24 24">
 				<polyline fill="none" points="16,6 8,12 16,18" />
 			</svg>
 		</button>
 		<div class="pagination-page-buttons">
 			<!-- first page -->
-			<button class="first pagination-button" class:shown={page > 2} on:click={() => (page = 0)}
-				>1</button
+			<button
+				name="first page"
+				class="first pagination-button"
+				class:shown={page > 2}
+				on:click={() => (page = 0)}>1</button
 			>
 
 			<!-- ... -->
@@ -40,21 +48,26 @@
 
 			<!-- previous previous page -->
 			<button
+				name="Go to page {page - 1}"
 				class="pagination-button"
 				class:shown={page > 1 && page < 4}
 				on:click={() => (page = page - 2)}>{page - 1}</button
 			>
 
 			<!-- previous page -->
-			<button class="pagination-button" class:shown={page > 0} on:click={() => (page = page - 1)}
-				>{page}</button
+			<button
+				name="Go to page {page}"
+				class="pagination-button"
+				class:shown={page > 0}
+				on:click={() => (page = page - 1)}>{page}</button
 			>
 
 			<!-- current page -->
-			<button class="pagination-button shown" disabled>{page + 1}</button>
+			<button name="current page" class="pagination-button shown" disabled>{page + 1}</button>
 
 			<!-- next page -->
 			<button
+				name="Go to page {page + 2}"
 				class="pagination-button"
 				class:shown={page < maxPage}
 				on:click={() => (page = page + 1)}>{page + 2}</button
@@ -62,6 +75,7 @@
 
 			<!-- next next page -->
 			<button
+				name="Go to page {page + 3}"
 				class="pagination-button"
 				class:shown={page > maxPage - 4 && page < maxPage - 1}
 				on:click={() => (page = page + 2)}>{page + 3}</button
@@ -72,6 +86,7 @@
 
 			<!-- last page -->
 			<button
+				name="last page"
 				class="pagination-button last"
 				class:shown={page < maxPage - 2}
 				on:click={() => (page = maxPage)}>{maxPage + 1}</button
@@ -80,6 +95,7 @@
 
 		<!-- arrow next -->
 		<button
+			name="next page"
 			class="button-icon arrow"
 			class:hidden={page === maxPage}
 			on:click={() => (page = page + 1)}
