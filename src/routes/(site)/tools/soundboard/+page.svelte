@@ -62,7 +62,7 @@
 	const TEMPO = 240;
 	let playing = false;
 	let soundboard = createSoundboard();
-	let soundLoop: NodeJS.Timeout;
+	let soundLoop: ReturnType<typeof setTimeout>;
 	let currentMelody = melody;
 
 	const keys = Object.keys(noteFrequencies)
@@ -253,7 +253,7 @@ const melody = [
 	<SyntaxHighlighting language="javascript">
 		{`
 // each row is [notes, bass, hihat, kick, snare]
-const melody =[
+const melody = [
 	[[], [], false, false, true],
 	[[], [], false, false, false],
 	[[], [], false, false, true],

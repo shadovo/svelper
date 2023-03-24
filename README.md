@@ -2,6 +2,7 @@
 
 ![GitHub pages workflow](https://github.com/shadovo/svelper/actions/workflows/pages.yml/badge.svg)
 [![CodeQL](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml)
+[![Lighthouse CI](https://github.com/shadovo/svelper/actions/workflows/tests.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/tests.yml)
 
 This is the source for [www.svelper.com](http://www.svelper.com) which is a for free, for fun project. I build this to learn more about Svelte and SvelteKit as well as have a collection of things I find useful when developing but always have to look up everytime I create a new project 😅.
 

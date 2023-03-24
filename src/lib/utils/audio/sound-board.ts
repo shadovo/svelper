@@ -2,7 +2,7 @@ import noteFrequencies from './note-frequencies';
 
 export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 	let audioContext: AudioContext | null = null;
-	let suspensionTimeout: NodeJS.Timeout;
+	let suspensionTimeout: ReturnType<typeof setTimeout>;
 
 	return {
 		playKickDrum(note = 'D2', duration = 0.25, time = 0) {

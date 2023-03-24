@@ -11,7 +11,7 @@
 
 	let longTextParagraphs = lorem.slice(0, 10);
 
-	let acceptedDialogOption: Boolean | undefined;
+	let acceptedDialogOption: boolean | undefined;
 
 	const acceptDialog = () => {
 		acceptedDialogOption = true;

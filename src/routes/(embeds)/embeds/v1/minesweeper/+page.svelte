@@ -14,6 +14,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Minesweeper embed - Svelper</title>
+	<meta
+		name="description"
+		content="An embed version of the Svelper minesweeper widget. - A collection fun stuff"
+	/>
+</svelte:head>
+
 {#if browser}
 	<Minesweeper {columns} {rows} {mines} />
 {/if}

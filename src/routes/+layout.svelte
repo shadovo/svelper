@@ -66,15 +66,15 @@
 
 		--c-text: #0d0d0d;
 		--c-background: #ffffff;
-		--c-background-code: #ebeef5;
+		--c-background-code: #f9f9f9;
 		--c-accent: #0b828d;
 
 		--prism-background: none;
 		--prism-text: #000000;
 		--prism-text-shadow: 0 1px white;
 		--prism-selection-background: #b3d4fc;
-		--prism-comment: #708090;
-		--prism-punctuation: #999999;
+		--prism-comment: #0055ab;
+		--prism-punctuation: #484848;
 		--prism-tag: #905;
 		--prism-number: #905;
 		--prism-string: #3a5700;
@@ -83,7 +83,7 @@
 		--prism-atrule: #005478;
 		--prism-keyword: #005478;
 		--prism-function: #8a2e41;
-		--prism-regex: #e90;
+		--prism-regex: #b64a00;
 	}
 
 	html.theme-dark {

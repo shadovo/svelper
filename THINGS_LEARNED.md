@@ -96,15 +96,15 @@ https://developer.mozilla.org/en-US/docs/Web/Manifest
 
 https://web.dev/maskable-icon/
 
-### CSS mix-blend-mode
+## CSS mix-blend-mode
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
 
-### Web API AudioContext
+## Web API AudioContext
 
 https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 
-### Find commit deleting a file
+## Find commit deleting a file
 
 `git log --full-history -- [file path]`
 
@@ -119,3 +119,7 @@ https://pnpm.io/
 ## Playwright
 
 https://playwright.dev/
+
+## Lighthouse checks as GitHub action
+
+https://github.com/marketplace/actions/lighthouse-ci-action
