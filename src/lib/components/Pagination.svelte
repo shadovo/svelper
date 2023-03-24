@@ -25,7 +25,7 @@
 	<div class="pagination-controlls">
 		<!-- arrow previous -->
 		<button
-			name="previous page"
+			aria-label="previous page"
 			class="button-icon arrow"
 			class:hidden={page === 0}
 			on:click={() => (page = page - 1)}
@@ -37,7 +37,7 @@
 		<div class="pagination-page-buttons">
 			<!-- first page -->
 			<button
-				name="first page"
+				aria-label="first page"
 				class="first pagination-button"
 				class:shown={page > 2}
 				on:click={() => (page = 0)}>1</button
@@ -48,7 +48,7 @@
 
 			<!-- previous previous page -->
 			<button
-				name="Go to page {page - 1}"
+				aria-label="Go to page {page - 1}"
 				class="pagination-button"
 				class:shown={page > 1 && page < 4}
 				on:click={() => (page = page - 2)}>{page - 1}</button
@@ -56,18 +56,18 @@
 
 			<!-- previous page -->
 			<button
-				name="Go to page {page}"
+				aria-label="Go to page {page}"
 				class="pagination-button"
 				class:shown={page > 0}
 				on:click={() => (page = page - 1)}>{page}</button
 			>
 
 			<!-- current page -->
-			<button name="current page" class="pagination-button shown" disabled>{page + 1}</button>
+			<button aria-label="current page" class="pagination-button shown" disabled>{page + 1}</button>
 
 			<!-- next page -->
 			<button
-				name="Go to page {page + 2}"
+				aria-label="Go to page {page + 2}"
 				class="pagination-button"
 				class:shown={page < maxPage}
 				on:click={() => (page = page + 1)}>{page + 2}</button
@@ -75,7 +75,7 @@
 
 			<!-- next next page -->
 			<button
-				name="Go to page {page + 3}"
+				aria-label="Go to page {page + 3}"
 				class="pagination-button"
 				class:shown={page > maxPage - 4 && page < maxPage - 1}
 				on:click={() => (page = page + 2)}>{page + 3}</button
@@ -86,7 +86,7 @@
 
 			<!-- last page -->
 			<button
-				name="last page"
+				aria-label="last page"
 				class="pagination-button last"
 				class:shown={page < maxPage - 2}
 				on:click={() => (page = maxPage)}>{maxPage + 1}</button
@@ -95,7 +95,7 @@
 
 		<!-- arrow next -->
 		<button
-			name="next page"
+			aria-label="next page"
 			class="button-icon arrow"
 			class:hidden={page === maxPage}
 			on:click={() => (page = page + 1)}
