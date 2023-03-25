@@ -58,6 +58,7 @@ defaults:
 jobs:
 	# Build job
 	build:
+		name: Build
 		runs-on: ubuntu-latest
 		steps:
 			- name: Checkout
@@ -78,6 +79,7 @@ jobs:
 
 	# Deployment job
 	deploy:
+		name: Deploy
 		environment:
 			name: github-pages
 			url: $\{{ steps.deployment.outputs.page_url }}
