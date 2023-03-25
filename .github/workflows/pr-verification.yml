@@ -80,7 +80,7 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const files = JSON.parse(${{ steps.changed-files.outputs.all_changed_files }});
+            const files = JSON.parse("${{ steps.changed-files.outputs.all_changed_files }}");
             files.forEach(file => {
               console.log('File changed:', file);
             });
