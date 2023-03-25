@@ -1,8 +1,8 @@
 <img height="150" alt="Svelper" src="/static/svelper-logo.svg" />
 
-![GitHub pages workflow](https://github.com/shadovo/svelper/actions/workflows/pages.yml/badge.svg)
+[![Deploy to GitHub Pages](https://github.com/shadovo/svelper/actions/workflows/main.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/main.yml)
 [![CodeQL](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml)
-[![Lighthouse CI](https://github.com/shadovo/svelper/actions/workflows/tests.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/tests.yml)
+[![Post deploy checks](https://github.com/shadovo/svelper/actions/workflows/main-post-deploy.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/main-post-deploy.yml)
 
 This is the source for [www.svelper.com](http://www.svelper.com) which is a for free, for fun project. I build this to learn more about Svelte and SvelteKit as well as have a collection of things I find useful when developing but always have to look up everytime I create a new project 😅.
 
