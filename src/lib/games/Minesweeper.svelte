@@ -164,7 +164,7 @@
 
 	function updateTimer() {
 		if (game.status === 'playing') {
-			const seconds = Math.floor((new Date().getTime() - game.startTime!.getTime()) / 1000);
+			const seconds = Math.floor((new Date().getTime() - (game.startTime?.getTime() || 0)) / 1000);
 			const minutes = Math.floor(seconds / 60);
 			const secondsLeft = seconds % 60;
 			const secondsString = secondsLeft < 10 ? `0${secondsLeft}` : `${secondsLeft}`;

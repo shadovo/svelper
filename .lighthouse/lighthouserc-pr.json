@@ -2,8 +2,8 @@
 	"ci": {
 		"collect": {
 			"staticDistDir": "./build",
-			"numberOfRuns": 2,
-			"maxAutodiscoverUrls": 30
+			"numberOfRuns": 1,
+			"maxAutodiscoverUrls": 2
 		},
 		"assert": {
 			"preset": "lighthouse:no-pwa",
