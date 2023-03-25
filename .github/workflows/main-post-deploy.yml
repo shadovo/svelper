@@ -1,0 +1,32 @@
+name: Post deploy
+
+on:
+  workflow_run:
+    workflows: ['Deploy site to GitHub Pages']
+    types:
+      - completed
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: 'lighthouse-production'
+  cancel-in-progress: true
+
+jobs:
+  # Lighthouse production
+  Lighthouse:
+    name: Lighthouse CI production
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install lhci/cli
+        run: npm install -g @lhci/cli@0.11.x
+      - name: lhci autorun
+        run: lhci autorun --config=./.lighthouse/lighthouserc-production.json
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
