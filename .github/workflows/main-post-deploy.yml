@@ -17,7 +17,6 @@ jobs:
   Lighthouse:
     name: Lighthouse CI production
     runs-on: ubuntu-latest
-    needs: deploy
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
