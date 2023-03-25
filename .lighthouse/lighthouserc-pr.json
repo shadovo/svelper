@@ -2,7 +2,7 @@
 	"ci": {
 		"collect": {
 			"staticDistDir": "./build",
-			"numberOfRuns": 1,
+			"numberOfRuns": 2,
 			"maxAutodiscoverUrls": 30
 		},
 		"assert": {
