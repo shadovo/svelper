@@ -46,7 +46,6 @@ function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changed
 	while (null != (currentMatch = MATCH_IMPORTS.exec(fileContent))) {
 		deps.push(currentMatch[1]);
 	}
-	console.log(deps);
 	const normalizedDeps = deps
 		.map((dep) => {
 			if (dep.match(/^\.+\//)) {
@@ -64,13 +63,10 @@ function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changed
 			}
 			return depPath;
 		});
-	console.log({ normalizedDeps, changedFiles });
 	if (normalizedDeps.some((importPath) => changedFiles.includes(importPath))) {
-		console.log('MATCH!');
 		return true;
 	}
 	for (const dep of normalizedDeps) {
-		console.log('RECURSION!');
 		if (fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles)) {
 			return true;
 		}

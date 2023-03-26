@@ -30,23 +30,6 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run check
-  lighthouse:
-    name: Lighthouse CI
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - name: Run Lighthouse on urls with lighthouserc-pr
-        uses: treosh/lighthouse-ci-action@v9
-        with:
-          configPath: './.lighthouse/lighthouserc-pr.json'
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
   # Dependency Review Action
   #
@@ -91,3 +74,23 @@ jobs:
               console.log('URLs changed:', url);
             });
             core.setOutput("urlsChanged", urlsChanged);
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: changed-files
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Run Lighthouse on urls with lighthouserc-pr
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          configPath: './.lighthouse/lighthouserc-pr.json'
+          urls: ${{ steps.changed-files.outputs.urlsChanged }}
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
