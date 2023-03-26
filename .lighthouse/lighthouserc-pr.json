@@ -1,7 +1,10 @@
 {
 	"ci": {
 		"collect": {
-			"url": ["http://localhost/tools/breath", "http://localhost/games/minesweeper"],
+			"url": [
+				"http://localhost/tools/breath/index.html",
+				"http://localhost/games/minesweeper/index.html"
+			],
 			"staticDistDir": "./build"
 		},
 		"assert": {
