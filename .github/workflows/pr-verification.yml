@@ -46,15 +46,18 @@ jobs:
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v2
 
-  changed-files:
-    name: Changed files
+  lighthouse:
+    name: Lighthouse CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
       - name: Get changed files
-        id: changed-files
         uses: tj-actions/changed-files@v35
         with:
           json: true
@@ -74,23 +77,12 @@ jobs:
               console.log('URLs changed:', url);
             });
             core.setOutput("urlsChanged", urlsChanged.join(' '));
-
-  lighthouse:
-    name: Lighthouse CI
-    runs-on: ubuntu-latest
-    needs: changed-files
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
       - run: npm ci
       - run: npm run build
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
           configPath: './.lighthouse/lighthouserc-pr.json'
-          urls: ${{ steps.changed-files.outputs.urlsChanged }}
+          urls: ${{ steps.format_changed_files.outputs.urlsChanged }}
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
