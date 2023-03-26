@@ -73,7 +73,7 @@ jobs:
             urlsChanged.forEach(url => {
               console.log('URLs changed:', url);
             });
-            core.setOutput("urlsChanged", urlsChanged);
+            core.setOutput("urlsChanged", urlsChanged.join(' '));
 
   lighthouse:
     name: Lighthouse CI

@@ -104,5 +104,5 @@ export default function getChangedPageUrls(domain, sveltekitProjectPath, changed
 	]);
 
 	// Return the URLs of the changed pages
-	return [...changedUrls].map((page) => getUrlOfPage(domain, page)).join(' ');
+	return [...changedUrls].map((page) => getUrlOfPage(domain, page));
 }
