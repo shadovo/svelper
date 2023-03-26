@@ -77,13 +77,14 @@ jobs:
             urlsChanged.forEach(url => {
               console.log('URLs changed:', url);
             });
-            core.setOutput("urlsChanged", urlsChanged.join(' '));
+            core.setOutput("urlsChanged", urlsChanged.join('\n'));
       - run: npm ci
       - run: npm run build
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
+          urls: |
+            ${{ steps.changed-urls.outputs.urlsChanged }}
           configPath: './.lighthouse/lighthouserc-pr.json'
-          urls: ${{ steps.changed-urls.outputs.urlsChanged }}
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
