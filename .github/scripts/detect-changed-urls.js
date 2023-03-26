@@ -33,11 +33,13 @@ function findFiles(sveltekitProjectPath, dir, ending) {
 }
 
 function getUrlOfPage(domain, pagePath) {
-	return path
-		.dirname(pagePath)
-		.replace('src/routes', '')
-		.replace(/\(.*\)\//g, '')
-		.map((pagePath) => domain + pagePath);
+	return (
+		domain +
+		path
+			.dirname(pagePath)
+			.replace('src/routes', '')
+			.replace(/\(.*\)\//g, '')
+	);
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
