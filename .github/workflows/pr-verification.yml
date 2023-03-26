@@ -77,7 +77,7 @@ jobs:
             urlsChanged.forEach(url => {
               console.log('URLs changed:', url);
             });
-            core.setOutput("urlsChanged", urlsChanged.join('\n'));
+            core.setOutput("urlsChanged", urlsChanged.map(url => url + '.html').join('\n'));
       - run: npm ci
       - run: npm run build
       - name: Run Lighthouse on urls with lighthouserc-pr
