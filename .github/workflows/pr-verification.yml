@@ -77,11 +77,17 @@ jobs:
           json: true
       - name: List all changed files
         id: format_changed_files
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             const files = JSON.parse("${{ steps.changed-files.outputs.all_changed_files }}");
             files.forEach(file => {
               console.log('File changed:', file);
             });
-            core.setOutput("comment", files);
+            const { default: getChangedPageUrls } = await import('${{ github.workspace }}/.github/scripts/detect-changed-urls.js')
+            const urlsChanged = await getChangedPageUrls('${{ github.workspace }}', files);
+            console.log('Changed URLs');
+            urlsChanged.forEach(url => {
+              console.log('URLs changed:', url);
+            });
+            core.setOutput("urlsChanged", urlsChanged);
