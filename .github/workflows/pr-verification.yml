@@ -68,7 +68,7 @@ jobs:
               console.log('File changed:', file);
             });
             const { default: getChangedPageUrls } = await import('${{ github.workspace }}/.github/scripts/detect-changed-urls.js')
-            const urlsChanged = await getChangedPageUrls('${{ github.workspace }}', files);
+            const urlsChanged = await getChangedPageUrls('http://localhost','${{ github.workspace }}', files);
             console.log('Changed URLs');
             urlsChanged.forEach(url => {
               console.log('URLs changed:', url);
