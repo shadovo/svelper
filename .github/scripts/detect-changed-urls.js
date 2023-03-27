@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-const MATCH_IMPORTS = /\s*import\s+(?:.|\{[^\}]*\})*from\s+(?:'|")((?:\$lib|\.+\/).*)(?:'|");?\s*/g;
+const MATCH_IMPORTS = /import\s+(?:[\w*\s{},]+\s+from\s+?|)["']((?:\$lib\/|\.+\/).*?)["']/g;
 
 function findFiles(sveltekitProjectPath, dir, ending) {
 	// Get all files and directories in the given directory
