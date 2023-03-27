@@ -45,8 +45,8 @@
 	<BreathingTechnique {breathInConfig} {breathOutConfig} />
 {/if}
 
-<style global>
-	body {
+<style>
+	:global(body) {
 		padding: 1px;
 	}
 </style>
