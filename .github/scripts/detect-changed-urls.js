@@ -90,9 +90,7 @@ export default function getChangedPageUrls(domain, sveltekitProjectPath, changed
 		.map((path) => allPages.filter((page) => page.startsWith(path)))
 		.flat();
 
-	const pagesWithChangedDependencies = [
-		'src/routes/(site)/components/syntax-highlighting/+page.svelte',
-	].filter((page) => {
+	const pagesWithChangedDependencies = allPages.filter((page) => {
 		return fileContainsChangedDependencies(sveltekitProjectPath, page, changedFiles);
 	});
 
