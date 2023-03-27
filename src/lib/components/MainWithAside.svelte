@@ -58,6 +58,12 @@
 		}
 	};
 
+	const asideKeyUp = (event: KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			closeAside();
+		}
+	};
+
 	$: {
 		if (showAside) {
 			asideTransform = 'translateX(0)';
@@ -90,6 +96,7 @@
 		on:touchstart={swipeStart}
 		on:touchmove={swipeMove}
 		on:touchend={swipeEnd}
+		on:keyup={asideKeyUp}
 	>
 		<slot name="aside" />
 	</aside>

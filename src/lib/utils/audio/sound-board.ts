@@ -58,7 +58,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			noise.stop(relativeStop);
 			osc.stop(relativeStop);
 		},
-		playHiHat(duration = 0.1, time = 0, note = 'C4') {
+		playHiHat(duration = 0.1, time = 0) {
 			clearTimeout(suspensionTimeout);
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
