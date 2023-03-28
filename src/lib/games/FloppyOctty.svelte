@@ -260,6 +260,11 @@
 	.game-container {
 		position: relative;
 	}
+	canvas {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-tap-highlight-color: transparent;
+		user-select: none;
+	}
 	.playing canvas {
 		cursor: pointer;
 	}
