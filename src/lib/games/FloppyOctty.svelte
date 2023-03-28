@@ -85,14 +85,11 @@
 		ctx.textBaseline = 'top';
 		ctx.fillStyle = '#fff';
 		ctx.fillText(`${score}`, SCORE_POS_X, SCORE_POS_Y);
-		ctx.textAlign = 'center';
 		// octty
 		ctx.font = `${OCTTY_SIZE}px sans-serif`;
-		ctx.textBaseline = 'top';
-
 		ctx.save();
 		ctx.translate(OCTTY_POS_X, octtyPosY);
-		ctx.scale(-1, 1);
+		ctx.scale(-1, 1); // flip due to android octopus emoji facing the wrong way
 		ctx.fillText('🐙', 0, 0);
 		if (octtyIsDead) {
 			ctx.fillText('💀', 0, 0);
@@ -202,7 +199,6 @@
 		if (context) {
 			ctx = context;
 			render();
-			// setupGame();
 		}
 	});
 </script>
