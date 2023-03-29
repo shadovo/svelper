@@ -56,6 +56,13 @@ const breathOutConfig = {
 	</SyntaxHighlighting>
 </section>
 <section>
+	<p>
+		This game is also available in an embed version at
+		<a href="/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
+	</p>
+</section>
+
+<section>
 	<h3>4 seconds box breathing</h3>
 	<div class="padded">
 		<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import createSoundboard from '$lib/utils/audio/sound-board';
+	import createSoundboard from '$lib/utils/audio/soundboard';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 	import noteFrequencies from '$lib/utils/audio/note-frequencies';
 
@@ -159,6 +159,13 @@
 		>
 		on the fly instead of bundeling MP3s.
 	</p>
+	<p>
+		Check out the implementation at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/lib/utils/soundboard.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard.svelte</a
+		>
+	</p>
 </section>
 <section>
 	<h3>Drums</h3>
@@ -228,6 +235,13 @@
 	<p>
 		I wrote a function that can take a list of instructions on which instruments to play for each
 		"beat".
+	</p>
+	<p>
+		Check out the implementation at <a
+			href="https://github.com/shadovo/svelper/blob/main/src/routes/(site)/tools/soundboard/%2Bpage.svelte"
+			target="_blank"
+			rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard/+page.svelte</a
+		>
 	</p>
 	<SyntaxHighlighting language="javascript">
 		{`

@@ -109,6 +109,9 @@
 								<h3>Svelte games</h3>
 								<ul>
 									<li>
+										<a href="{base}/games/floppy-octty">Floppy Octty</a>
+									</li>
+									<li>
 										<a href="{base}/games/minesweeper">Minesweeper</a>
 									</li>
 								</ul>
@@ -118,6 +121,9 @@
 								<ul>
 									<li>
 										<a href="{base}/tools/breath">Breathing technique</a>
+									</li>
+									<li>
+										<a href="{base}/tools/soundboard">Soundboard</a>
 									</li>
 								</ul>
 							</li>

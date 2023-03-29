@@ -25,6 +25,14 @@
 <section>
 	<Minesweeper columns="9" rows="10" mines="10" />
 </section>
+<section>
+	<p>
+		This game is also available in an embed version at
+		<a href="/embeds/v1/minesweeper" target="_blank"
+			>https://www.svelper.com/embeds/v1/minesweeper</a
+		>
+	</p>
+</section>
 
 <style lang="scss">
 </style>

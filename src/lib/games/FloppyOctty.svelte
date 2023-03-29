@@ -9,15 +9,17 @@
 		scored?: boolean;
 	};
 
-	const GAME_WIDTH = 300;
-	const GAME_HEIGHT = 450;
+	export let width = '300';
+	export let height = '450';
+	const GAME_WIDTH = Math.max(300, parseInt(width));
+	const GAME_HEIGHT = Math.max(300, parseInt(height));
 	const PIXEL_RATIO = browser ? window.devicePixelRatio : 1;
 	const RELATIVE_WIDTH = relativeSize(GAME_WIDTH);
 	const RELATIVE_HEIGHT = relativeSize(GAME_HEIGHT);
-	const TOP_MARGIN = RELATIVE_HEIGHT * 0.3;
+	const TOP_MARGIN = RELATIVE_HEIGHT * 0.4;
 	const GROUND_HEIGHT = relativeSize(50);
 	const OCTTY_SIZE = relativeSize(40);
-	const CORAL_SIZE = relativeSize(50);
+	const CORAL_SIZE = relativeSize(40);
 	const SCORE_SIZE = relativeSize(60);
 	const SCORE_POS_Y = relativeSize(10);
 	const SCORE_POS_X = RELATIVE_WIDTH * 0.5;
@@ -83,7 +85,7 @@
 		ctx.font = `${SCORE_SIZE}px sans-serif`;
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'top';
-		ctx.fillStyle = '#fff';
+		ctx.fillStyle = '#9ddde2';
 		ctx.fillText(`${score}`, SCORE_POS_X, SCORE_POS_Y);
 		// octty
 		ctx.font = `${OCTTY_SIZE}px sans-serif`;
@@ -211,8 +213,9 @@
 	<canvas
 		tabindex="0"
 		on:click={jump}
-		on:keydown|preventDefault={(e) => {
+		on:keydown={(e) => {
 			if (e.key === ' ') {
+				e.preventDefault();
 				jump();
 			}
 		}}
@@ -221,34 +224,36 @@
 		height={RELATIVE_HEIGHT}
 		style="width: {GAME_WIDTH}px; height: {GAME_HEIGHT}px;"
 	/>
-	{#if octtyIsDead}
-		<div class="box flex game-stats">
-			<div>
-				<h1>Game over</h1>
-				<hr />
+	{#if browser}
+		{#if octtyIsDead}
+			<div class="box flex game-stats">
+				<div>
+					<h1>Game over</h1>
+					<hr />
+				</div>
+				<div>
+					<p class="game-score">Score: {score}</p>
+					<p class="game-high-score">Highscore: {highScore}</p>
+				</div>
+				<div>
+					<button class="center game-restart" on:click={setupGame}>Restart</button>
+				</div>
 			</div>
-			<div>
-				<p class="game-score">Score: {score}</p>
-				<p class="game-high-score">Highscore: {highScore}</p>
+		{/if}
+		{#if !gameInitiated}
+			<div class="box flex game-stats">
+				<div>
+					<h1>Octty Jump</h1>
+					<hr />
+				</div>
+				<div>
+					<p>Use the spacebar or click to jump</p>
+				</div>
+				<div>
+					<button class="center game-start" on:click={setupGame}>Start</button>
+				</div>
 			</div>
-			<div>
-				<button class="center game-restart" on:click={setupGame}>Restart</button>
-			</div>
-		</div>
-	{/if}
-	{#if !gameInitiated}
-		<div class="box flex game-stats">
-			<div>
-				<h1>Octty Jump</h1>
-				<hr />
-			</div>
-			<div>
-				<p>Use the spacebar or click to jump</p>
-			</div>
-			<div>
-				<button class="center game-start" on:click={setupGame}>Start</button>
-			</div>
-		</div>
+		{/if}
 	{/if}
 </div>
 
