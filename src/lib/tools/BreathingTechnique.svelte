@@ -3,7 +3,7 @@
 	import { onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
-	import createSoundboard from '../utils/audio/sound-board';
+	import createSoundboard from '../utils/audio/soundboard';
 
 	type BreathConfig = {
 		duration: number;

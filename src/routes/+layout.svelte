@@ -233,4 +233,11 @@
 	.padded {
 		padding: var(--gap) 0;
 	}
+
+	.box {
+		padding: var(--gap);
+		border: 3px solid var(--c-text);
+		border-radius: var(--radius);
+		background-color: var(--c-background);
+	}
 </style>
