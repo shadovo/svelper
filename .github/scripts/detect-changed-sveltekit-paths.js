@@ -39,7 +39,7 @@ function getPathOfPage(pagePath) {
 	return path
 		.dirname(pagePath)
 		.replace('src/routes', '')
-		.replace(/\(.*\)\//g, '');
+		.replace(/\/\(.*\)/g, '');
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
