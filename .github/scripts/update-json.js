@@ -1,4 +1,4 @@
-const { promises: fs } = require('fs');
+import { promises as fs } from 'fs';
 
 export default async function updateJSON(filePath, jsonPath, value) {
 	const content = await fs.readFile(filePath, 'utf8');
