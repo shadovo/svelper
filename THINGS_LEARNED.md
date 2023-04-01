@@ -108,6 +108,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 
 `git log --full-history -- [file path]`
 
+## Lighthouse checks as GitHub action
+
+https://github.com/marketplace/actions/lighthouse-ci-action
+
 ---
 
 # Things I have learnt exists but not explored yet
@@ -119,7 +123,3 @@ https://pnpm.io/
 ## Playwright
 
 https://playwright.dev/
-
-## Lighthouse checks as GitHub action
-
-https://github.com/marketplace/actions/lighthouse-ci-action

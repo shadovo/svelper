@@ -63,10 +63,8 @@ jobs:
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const message = [
               '# URLs updated',
-              '',
               'URLs affected by changes in this PR',
-              '',
-              paths.map(path => `- http://localhost:5173${path}`).join('\n'),
+              ...paths.map(path => `- http://localhost:5173${path}`),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs

@@ -142,6 +142,9 @@
 								<h3>Copy/paste</h3>
 								<ul>
 									<li>
+										<a href="{base}/copy-paste/changed-sveltekit-paths">Changed SvelteKit paths</a>
+									</li>
+									<li>
 										<a href="{base}/copy-paste/gh-pages">GitHub pages action</a>
 									</li>
 								</ul>
