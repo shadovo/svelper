@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
 	ci: {
 		collect: {
 			url: [
@@ -23,3 +23,5 @@ module.exports = {
 		},
 	},
 };
+
+export default config;
