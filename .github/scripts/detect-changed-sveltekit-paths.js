@@ -36,10 +36,20 @@ function findFiles(sveltekitProjectPath, dir, ending) {
 }
 
 function getPathOfPage(pagePath) {
-	return path
-		.dirname(pagePath)
-		.replace('src/routes', '')
-		.replace(/\/\(.*\)/g, '');
+	return (
+		path
+			.dirname(pagePath)
+			// remove routes folder names
+			.replace('src/routes', '')
+			// remove layout group folders
+			.replace(/\/\(.*\)/g, '')
+			// if path is empty add a slash
+			.replace(/^$/, '/')
+			// if path ends with a slash add index
+			.replace(/\/$/, '/index') +
+		// add .html extension
+		'.html'
+	);
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
