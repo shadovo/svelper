@@ -94,9 +94,10 @@ jobs:
           script: |
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const urls = paths.map(path => `http://localhost${path}`);
-            core.setOutput('urls', urls);
+            const urlsString = `url: [urls.join(', ')],`;
+            core.setOutput('urlsString', urlsString);
       - name: Update lighthouse config
-        run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urls}}, // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
+        run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urlsString}} // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
