@@ -26,6 +26,6 @@ jobs:
       - name: Run Lighthouse on urls with lighthouserc-production
         uses: treosh/lighthouse-ci-action@v9
         with:
-          configPath: './.lighthouse/lighthouserc-production.js'
+          configPath: './.lighthouse/lighthouserc-production.cjs'
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

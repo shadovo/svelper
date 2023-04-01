@@ -96,10 +96,10 @@ jobs:
             const urls = paths.map(path => `http://localhost${path}`);
             core.setOutput('urls', urls);
       - name: Update lighthouse config
-        run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urls}}, // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.js
+        run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urls}}, // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
-          configPath: './.lighthouse/lighthouserc-pr.js'
+          configPath: './.lighthouse/lighthouserc-pr.cjs'
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

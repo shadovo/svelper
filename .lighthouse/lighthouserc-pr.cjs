@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
 	ci: {
 		collect: {
 			staticDistDir: './build',
@@ -18,5 +18,3 @@ const config = {
 		},
 	},
 };
-
-export default config;
