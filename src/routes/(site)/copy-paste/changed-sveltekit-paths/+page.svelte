@@ -77,8 +77,7 @@ jobs:
 						pathsChanged.forEach(path => {
 							console.log('Paths changed:', path);
 						});
-						core.setOutput("pathsChanged", pathsChanged.map(path => path + '.html').join('\\n'));
-	
+						core.setOutput("pathsChanged", pathsChanged.join('\\n'));
 `}
 	</SyntaxHighlighting>
 	<p>
@@ -139,10 +138,14 @@ function findFiles(sveltekitProjectPath, dir, ending) {
 }
 
 function getPathOfPage(pagePath) {
-	return path
-		.dirname(pagePath)
-		.replace('src/routes', '')
-		.replace(/\\/\\(.*\\)/g, '');
+	return (
+		path
+			.dirname(pagePath)
+			// remove routes folder names
+			.replace('src/routes', '')
+			// remove layout group folders
+			.replace(/\\/\\(.*\\)/g, '')
+	);
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
