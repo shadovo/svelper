@@ -50,6 +50,30 @@ jobs:
     name: Changed URLs
     uses: ./.github/workflows/changed-sveltekit-urls.yml
 
+  comment-changed-urls:
+    name: Post comment with changed URLs
+    runs-on: ubuntu-latest
+    needs: changed-urls
+    steps:
+      - name: Format message
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const urls = ${{ needs.changed-urls.outputs.urlsChanged }}
+            const message = [
+              '# URLs updated'
+              '',
+              'URLs affected by changes in this PR',
+              '',
+              urls.map(url => `- ${url}`).join('\n'),
+            ].join('\n');
+            core.setOutput('message', message)
+      - name: Comment changed URLs
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            ${{ steps.format-message.outputs.message }}
+
   lighthouse:
     name: Lighthouse CI
     runs-on: ubuntu-latest
