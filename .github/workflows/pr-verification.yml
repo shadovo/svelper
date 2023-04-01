@@ -59,7 +59,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const urls = ${{ needs.changed-urls.outputs.urlsChanged }}
+            const urls = "${{ needs.changed-urls.outputs.urlsChanged }}".split(' ');
             const message = [
               '# URLs updated'
               '',
