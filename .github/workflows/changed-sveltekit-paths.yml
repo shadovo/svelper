@@ -1,0 +1,43 @@
+name: Changed SvelteKit paths
+
+on:
+  workflow_call:
+    outputs:
+      pathsChanged:
+        description: 'The changed paths'
+        value: ${{ jobs.changed-paths-job.outputs.output1 }}
+
+jobs:
+  changed-paths-job:
+    name: Changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.changed-paths.outputs.pathsChanged }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          json: true
+      - name: List all changed paths
+        id: changed-paths
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { default: getChangedPagePaths } = await import('${{ github.workspace }}/.github/scripts/detect-changed-sveltekit-paths.js')
+            const pathsChanged = await getChangedPagePaths(
+              '${{ github.workspace }}',
+              JSON.parse("${{ steps.changed-files.outputs.all_changed_files }}")
+            );
+            console.log('Changed paths');
+            pathsChanged.forEach(path => {
+              console.log('Paths changed:', path);
+            });
+            core.setOutput("pathsChanged", pathsChanged.map(path => path + '.html').join('\n'));

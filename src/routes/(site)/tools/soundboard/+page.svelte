@@ -151,7 +151,7 @@
 </svelte:head>
 
 <section>
-	<h2>Simple soundboard</h2>
+	<h2>Simple soundboard with Web Audio API</h2>
 	<p>
 		Let me first prefix this with I have no knowledge of music, harmonies, scales or rhythm. This is
 		just to explore the different sounds that could be produced by the <a

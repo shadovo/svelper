@@ -23,9 +23,9 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Install lhci/cli
-        run: npm install -g @lhci/cli@0.11.x
-      - name: lhci autorun
-        run: lhci autorun --config=./.lighthouse/lighthouserc-production.json
+      - name: Run Lighthouse on urls with lighthouserc-production
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          configPath: './.lighthouse/lighthouserc-production.cjs'
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
