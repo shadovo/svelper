@@ -3,6 +3,9 @@ import fs from 'fs';
 
 const MATCH_IMPORTS = /import\s+(?:[\w*\s{},]+\s+from\s+?|)["']((?:\$lib\/|\.+\/).*?)["']/g;
 
+const PAGE_FILES = ['+page.svelte', '+page.js', '+page.ts'];
+const LAYOUT_FILES = ['+layout.svelte', '+layout.js', '+layout.ts'];
+
 function findFiles(sveltekitProjectPath, dir, ending) {
 	// Get all files and directories in the given directory
 	const files = fs.readdirSync(path.join(sveltekitProjectPath, dir));
@@ -81,15 +84,18 @@ export default function getChangedPageUrls(domain, sveltekitProjectPath, changed
 	const allPages = findFiles(sveltekitProjectPath, 'src/routes', '+page.svelte');
 
 	// Changed pages
-	const changedPages = changedFiles.filter((file) => file.endsWith('+page.svelte'));
+	const changedPages = changedFiles.filter((file) =>
+		PAGE_FILES.some((pageFile) => file.endsWith(pageFile)),
+	);
 
 	// Pages changed due to a layout change
 	const changedLayoutPages = changedFiles
-		.filter((file) => file.endsWith('+layout.svelte'))
-		.map((file) => file.replace('+layout.svelte', ''))
+		.filter((file) => LAYOUT_FILES.some((layoutFile) => file.endsWith(layoutFile)))
+		.map((file) => LAYOUT_FILES.reduce((res, layoutFile) => res.replace(layoutFile, ''), file))
 		.map((path) => allPages.filter((page) => page.startsWith(path)))
 		.flat();
 
+	// Pages that depend on changed files
 	const pagesWithChangedDependencies = allPages.filter((page) => {
 		return fileContainsChangedDependencies(sveltekitProjectPath, page, changedFiles);
 	});
