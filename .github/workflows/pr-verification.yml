@@ -98,6 +98,8 @@ jobs:
             core.setOutput('urlsString', urlsString);
       - name: Update lighthouse config
         run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urlsString}} // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
+      - name: Log config
+        run: cat ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
