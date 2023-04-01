@@ -56,6 +56,7 @@ jobs:
     needs: changed-urls
     steps:
       - name: Format message
+        id: format-message
         uses: actions/github-script@v6
         with:
           script: |
