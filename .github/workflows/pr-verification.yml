@@ -59,15 +59,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const urls = "${{ needs.changed-urls.outputs.urlsChanged }}".split(' ');
+            const urls = `${{ needs.changed-urls.outputs.urlsChanged }}`.split('\n');
             const message = [
-              '# URLs updated'
+              '# URLs updated',
               '',
               'URLs affected by changes in this PR',
               '',
               urls.map(url => `- ${url}`).join('\n'),
             ].join('\n');
-            core.setOutput('message', message)
+            core.setOutput('message', message);
       - name: Comment changed URLs
         uses: mshick/add-pr-comment@v2
         with:
