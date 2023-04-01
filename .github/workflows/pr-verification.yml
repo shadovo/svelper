@@ -91,7 +91,10 @@ jobs:
         with:
           script: |
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
-            const urls = paths.map(path => `'http://localhost${path}'`);
+            const urls = paths.map(path => {
+              // if path is empty, it's the root, so we want to use index.html
+              const staticPath = path.replace(/^$/, '/').replace(/\/$/, '/index') + '.html';
+            }`'http://localhost${staticPath}'`);
             const urlsString = `url: [${urls.join(', ')}],`;
             core.setOutput('urlsString', urlsString);
       - name: Update lighthouse config
