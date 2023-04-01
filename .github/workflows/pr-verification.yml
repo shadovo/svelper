@@ -46,27 +46,27 @@ jobs:
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v2
 
-  changed-urls:
+  changed-paths:
     name: Changed URLs
-    uses: ./.github/workflows/changed-sveltekit-urls.yml
+    uses: ./.github/workflows/changed-sveltekit-paths.yml
 
-  comment-changed-urls:
+  comment-changed-paths:
     name: Post comment with changed URLs
     runs-on: ubuntu-latest
-    needs: changed-urls
+    needs: changed-paths
     steps:
       - name: Format message
         id: format-message
         uses: actions/github-script@v6
         with:
           script: |
-            const urls = `${{ needs.changed-urls.outputs.urlsChanged }}`.split('\n');
+            const urls = `${{ needs.changed-paths.outputs.urlsChanged }}`.split('\n');
             const message = [
               '# URLs updated',
               '',
               'URLs affected by changes in this PR',
               '',
-              urls.map(url => `- ${url}`).join('\n'),
+              urls.map(url => `- http://localhost:5173${url}`).join('\n'),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs
@@ -78,7 +78,7 @@ jobs:
   lighthouse:
     name: Lighthouse CI
     runs-on: ubuntu-latest
-    needs: changed-urls
+    needs: changed-paths
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -87,11 +87,20 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - name: Update lighthouse config
+        id: update-lighthouse-config
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { default: updateJSON } = await import('${{ github.workspace }}/.github/scripts/update-json.js');
+            const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
+            const urls = paths.map(path => `http://localhost${path}`);
+            await updateJSON('${{ github.workspace }}/.lighthouse/lighthouserc-pr.json', 'ci.collect.url', urls);
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v9
         with:
-          urls: |
-            ${{ needs.changed-urls.outputs.urlsChanged }}
+          # urls: |
+          #   ${{ needs.update-lighthouse-config.outputs.urls }}
           configPath: './.lighthouse/lighthouserc-pr.json'
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

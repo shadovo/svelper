@@ -35,14 +35,11 @@ function findFiles(sveltekitProjectPath, dir, ending) {
 	return matchingFiles;
 }
 
-function getUrlOfPage(domain, pagePath) {
-	return (
-		domain +
-		path
-			.dirname(pagePath)
-			.replace('src/routes', '')
-			.replace(/\(.*\)\//g, '')
-	);
+function getPathOfPage(pagePath) {
+	return path
+		.dirname(pagePath)
+		.replace('src/routes', '')
+		.replace(/\(.*\)\//g, '');
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
@@ -79,7 +76,7 @@ function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changed
 	}
 }
 
-export default function getChangedPageUrls(domain, sveltekitProjectPath, changedFiles) {
+export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) {
 	// All pages in the project
 	const allPages = findFiles(sveltekitProjectPath, 'src/routes', '+page.svelte');
 
@@ -101,12 +98,12 @@ export default function getChangedPageUrls(domain, sveltekitProjectPath, changed
 	});
 
 	// Combine the two arrays and remove duplicates
-	const changedUrls = new Set([
+	const changedPaths = new Set([
 		...changedPages,
 		...changedLayoutPages,
 		...pagesWithChangedDependencies,
 	]);
 
-	// Return the URLs of the changed pages
-	return [...changedUrls].map((page) => getUrlOfPage(domain, page));
+	// Return the paths of the changed pages
+	return [...changedPaths].map((page) => getPathOfPage(page));
 }
