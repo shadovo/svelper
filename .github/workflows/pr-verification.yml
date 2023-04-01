@@ -94,7 +94,8 @@ jobs:
             const urls = paths.map(path => {
               // if path is empty, it's the root, so we want to use index.html
               const staticPath = path.replace(/^$/, '/').replace(/\/$/, '/index') + '.html';
-            }`'http://localhost${staticPath}'`);
+              return `'http://localhost${staticPath}'`;
+            });
             const urlsString = `url: [${urls.join(', ')}],`;
             core.setOutput('urlsString', urlsString);
       - name: Update lighthouse config
