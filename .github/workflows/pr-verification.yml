@@ -64,7 +64,9 @@ jobs:
             const message = [
               '# URLs updated',
               'URLs affected by changes in this PR',
-              ...paths.map(path => `- http://localhost:5173${path}`),
+              '| Verified | PR | Reference |',
+              '| - | - | - |',
+              ...paths.map(path => `| <li>- [ ] </li> | http://localhost:5173${path} | https://www.svelper.com${path} |`),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs

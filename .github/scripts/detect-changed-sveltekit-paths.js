@@ -109,5 +109,5 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 	]);
 
 	// Return the paths of the changed pages
-	return [...changedPaths].map((page) => getPathOfPage(page));
+	return [...changedPaths].map((page) => getPathOfPage(page)).sort();
 }
