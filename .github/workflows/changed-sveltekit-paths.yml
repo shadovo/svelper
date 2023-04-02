@@ -40,4 +40,4 @@ jobs:
             pathsChanged.forEach(path => {
               console.log('Paths changed:', path);
             });
-            core.setOutput("pathsChanged", pathsChanged.map(path => path + '.html').join('\n'));
+            core.setOutput("pathsChanged", pathsChanged.join('\n'));

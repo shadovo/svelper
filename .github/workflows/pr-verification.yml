@@ -63,10 +63,10 @@ jobs:
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const message = [
               '# URLs updated',
-              '',
               'URLs affected by changes in this PR',
-              '',
-              paths.map(path => `- http://localhost:5173${path}`).join('\n'),
+              '| Reviewed | PR | Reference |',
+              '| - | - | - |',
+              ...paths.map(path => `| <li>- [ ] </li> | http://localhost:5173${path} | [pro](https://www.svelper.com${path}) |`),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs
@@ -93,7 +93,11 @@ jobs:
         with:
           script: |
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
-            const urls = paths.map(path => `'http://localhost${path}'`);
+            const urls = paths.map(path => {
+              // if path is empty, it's the root, so we want to use index.html
+              const staticPath = path.replace(/^$/, '/').replace(/\/$/, '/index') + '.html';
+              return `'http://localhost${staticPath}'`;
+            });
             const urlsString = `url: [${urls.join(', ')}],`;
             core.setOutput('urlsString', urlsString);
       - name: Update lighthouse config

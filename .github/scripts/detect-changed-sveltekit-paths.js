@@ -36,10 +36,14 @@ function findFiles(sveltekitProjectPath, dir, ending) {
 }
 
 function getPathOfPage(pagePath) {
-	return path
-		.dirname(pagePath)
-		.replace('src/routes', '')
-		.replace(/\(.*\)\//g, '');
+	return (
+		path
+			.dirname(pagePath)
+			// remove routes folder names
+			.replace('src/routes', '')
+			// remove layout group folders
+			.replace(/\/\(.*\)/g, '')
+	);
 }
 
 function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
@@ -105,5 +109,5 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 	]);
 
 	// Return the paths of the changed pages
-	return [...changedPaths].map((page) => getPathOfPage(page));
+	return [...changedPaths].map((page) => getPathOfPage(page)).sort();
 }
