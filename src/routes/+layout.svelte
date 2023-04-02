@@ -185,7 +185,7 @@
 		gap: var(--gap-2);
 	}
 
-	article h3 {
+	article section + section {
 		border-top: 1px solid var(--c-text);
 		padding-top: var(--gap-2);
 	}

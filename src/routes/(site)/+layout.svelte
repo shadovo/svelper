@@ -128,7 +128,7 @@
 								</ul>
 							</li>
 							<li>
-								<h3>Animations</h3>
+								<h3>CSS Animations</h3>
 								<ul>
 									<li>
 										<a href="{base}/animations/annoying-bounce">Annoying bounce</a>
@@ -139,13 +139,15 @@
 								</ul>
 							</li>
 							<li>
-								<h3>Copy/paste</h3>
+								<h3>GitHub actions</h3>
 								<ul>
 									<li>
-										<a href="{base}/copy-paste/changed-sveltekit-paths">Changed SvelteKit paths</a>
+										<a href="{base}/github-actions/changed-sveltekit-paths"
+											>Changed SvelteKit paths</a
+										>
 									</li>
 									<li>
-										<a href="{base}/copy-paste/gh-pages">GitHub pages action</a>
+										<a href="{base}/github-actions/gh-pages">Deploy GitHub pages</a>
 									</li>
 								</ul>
 							</li>
@@ -172,13 +174,35 @@
 </div>
 
 <style lang="scss">
+	:global(html) {
+		background-image: linear-gradient(
+				180deg,
+				var(--c-background),
+				rgba(32, 32, 32, 0.01) 50%,
+				var(--c-background) 100%
+			),
+			radial-gradient(ellipse at top left, rgb(139 0 255), transparent 50%),
+			radial-gradient(ellipse at top right, rgb(0 206 214 / 89%), transparent 50%),
+			radial-gradient(ellipse at center right, rgb(45 1 235 / 80%), transparent 50%),
+			radial-gradient(ellipse at center left, rgb(32 255 255 / 97%), transparent 50%);
+		background-size: 100% 120vh;
+		background-size: 100% clamp(900px, 70vw, 120vh);
+		background-repeat: no-repeat;
+	}
+
+	:global(article) {
+		padding: var(--gap-2);
+		background-color: var(--c-background);
+		border-radius: var(--gap);
+	}
+
 	h1 {
-		margin-top: var(--gap-2);
-		margin-bottom: 0;
 		color: var(--c-accent);
 		line-height: 1;
+		color: var(--c-text);
 
 		svg {
+			color: var(--c-text);
 			height: 100%;
 			max-height: 150px;
 			max-width: 70%;
@@ -201,9 +225,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap);
-		border-left: 5px solid var(--c-text);
-		padding: 0 var(--gap-2);
+		padding: var(--gap) var(--gap-2);
 		overflow-y: auto;
+		background: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(80px);
+		border-radius: var(--gap);
+
+		img {
+			margin: 0 auto;
+		}
 	}
 
 	.footer {
@@ -213,14 +243,17 @@
 	}
 
 	@media (max-width: 768px) {
-		nav {
+		:global(article) {
 			padding: var(--gap);
 		}
-
-		img {
-			margin: 0 auto;
-			width: 150px;
-			height: 150px;
+		nav {
+			padding: var(--gap);
+			border-radius: 0;
+			background: rgba(0, 0, 0, 0.6);
+			img {
+				width: 150px;
+				height: 150px;
+			}
 		}
 
 		.footer {

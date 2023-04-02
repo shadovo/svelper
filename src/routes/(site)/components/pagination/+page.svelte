@@ -27,9 +27,7 @@
 		The <code>&lt;Pagination&gt;</code> accepts a list of items as the <code>items</code> attribute.
 		It will then expose the them as <code>item</code> for each item that should currently be shown.
 	</p>
-</section>
-<section>
-	<div class="sidescroll-container">
+	<div class="padded sidescroll-container">
 		<div class="grid-table">
 			<div class="attribute">Attribute</div>
 			<div class="type">Type</div>
@@ -60,8 +58,6 @@
 			</div>
 		</div>
 	</div>
-</section>
-<section>
 	<p>
 		Check out the code at <a
 			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Pagination.svelte"

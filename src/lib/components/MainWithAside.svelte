@@ -121,7 +121,7 @@
 		grid-template-rows: auto 1fr auto;
 		gap: var(--gap-2);
 		max-width: min(1024px, 100vw);
-		margin: 0 auto;
+		margin: 60px auto 0;
 		padding: 0 var(--gap);
 		min-height: 100vh;
 	}
@@ -143,7 +143,7 @@
 
 	aside {
 		grid-column: 2 / span 1;
-		grid-row: 2 / span 1;
+		grid-row: 1 / span 2;
 		z-index: var(--layer-2);
 	}
 
@@ -176,11 +176,11 @@
 			grid-template-columns: 100% 0;
 			grid-template-rows: auto 1fr auto 50px;
 			grid-column-gap: 0;
+			padding: 0 var(--gap-half);
 		}
 
 		aside {
 			display: flex;
-			background-color: var(--c-background);
 			width: var(--aside-width);
 			position: fixed;
 			top: 0;
@@ -194,12 +194,6 @@
 		}
 
 		.asideShown {
-			header,
-			article,
-			footer {
-				filter: blur(4px);
-			}
-
 			aside {
 				transform: translateX(0);
 				box-shadow: 0 -1px 2px 0 hsl(220 3% 15% / 3%), 0 3px 2px -2px hsl(220 3% 15% / 4%),
@@ -215,7 +209,8 @@
 					width: 100vw;
 					height: 100%;
 					opacity: 1;
-					background: rgba(75, 75, 75, 0.2);
+					background: rgba(0, 0, 0, 0.6);
+					backdrop-filter: blur(4px);
 				}
 			}
 		}
