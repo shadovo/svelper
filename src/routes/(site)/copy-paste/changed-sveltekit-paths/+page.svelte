@@ -10,7 +10,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Affected SvelteKit paths in PR.</h2>
 	<p>Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.</p>
 	<p>
@@ -26,7 +26,7 @@
 		the imported files have changed. (Exception being updated dependencies for now.)
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 1 - Create a reusable GitHub Action</h3>
 	<p>
 		In your project add a YAML file at <code>.guthub/workflows</code> called
@@ -89,7 +89,7 @@ jobs:
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 2 - Add the script file.</h3>
 	<p>In addition to the file we created above we will also add the script that it will use.</p>
 	<p>
@@ -224,7 +224,7 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 3 - Use the list of changed paths!</h3>
 	<p>Now you have everything you need to get a list of paths affected by the changes in your PR.</p>
 	<p>Some examples of what you can use it for:</p>

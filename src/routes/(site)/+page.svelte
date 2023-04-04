@@ -9,7 +9,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Collection of fun things built with Svelte</h2>
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nobis eius veniam perspiciatis

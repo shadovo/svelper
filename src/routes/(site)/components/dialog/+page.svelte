@@ -33,7 +33,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Dialog implementation as Svelte component</h2>
 	<p>
 		This component uses the standard HTML <code>&lt;dialog&gt;</code> element and adds some basic functionality
@@ -53,7 +53,7 @@
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Simple dialog</h3>
 	<p>The follwing code will show the simplest of dialogs.</p>
 	<SyntaxHighlighting language="html"
@@ -66,7 +66,7 @@
 		<p>Hello world</p>
 	</Dialog>
 </section>
-<section>
+<section class="content-width">
 	<h3>Dialog with custom header element</h3>
 	<p>The follwing code will show a dialog with a custom header.</p>
 	<SyntaxHighlighting language="html"
@@ -87,7 +87,7 @@
 		<p>Hello world</p>
 	</Dialog>
 </section>
-<section>
+<section class="content-width">
 	<h3>Dialog with custom header and footer</h3>
 	<p>The following code will show a dialog with a custom footer.</p>
 	<SyntaxHighlighting language="javascript"
@@ -137,7 +137,7 @@ const declinedDialog = () => {
 		</div>
 	</Dialog>
 </section>
-<section>
+<section class="content-width">
 	<h3>Dialog with scroll</h3>
 	<p>This will show a dialog with scroll</p>
 	<SyntaxHighlighting language="html"
@@ -164,7 +164,7 @@ const declinedDialog = () => {
 		</div>
 	</Dialog>
 </section>
-<section>
+<section class="content-width">
 	<p>
 		Check out the code at <a
 			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Dialog.svelte"

@@ -17,7 +17,7 @@ breathing techique as Svelte component. - A collection fun stuff"
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Relaxing breathing technique timer as Svelte component</h2>
 	<p>
 		A simple implementation of an animated breathing timer for relaxing breathing techniques as
@@ -31,7 +31,7 @@ breathing techique as Svelte component. - A collection fun stuff"
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>4 seconds in 6 seconds out.</h3>
 	<div class="padded">
 		<BreathingTechnique />
@@ -55,14 +55,14 @@ const breathOutConfig = {
 		{`<BreathingTechnique {breathInConfig} {breathOutConfig} />`}
 	</SyntaxHighlighting>
 </section>
-<section>
+<section class="content-width">
 	<p>
 		This game is also available in an embed version at
 		<a href="/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
 	</p>
 </section>
 
-<section>
+<section class="content-width">
 	<h3>4 seconds box breathing</h3>
 	<div class="padded">
 		<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />
@@ -81,7 +81,7 @@ const breathOutConfig = {
 		{`<BreathingTechnique breathInConfig={boxBreathing} breathOutConfig={boxBreathing} />`}
 	</SyntaxHighlighting>
 </section>
-<section>
+<section class="content-width">
 	<h3>4, 7, 8 breathing.</h3>
 	<p>
 		This one is configured for the 4, 7, 8 breathing technique. The duration of the breathing in is
@@ -108,7 +108,7 @@ const breathOutConfig = {
 	</SyntaxHighlighting>
 </section>
 
-<section>
+<section class="content-width">
 	<h3>Default timing with muted sound and no vibration</h3>
 	<p>
 		You can also mute the sound and vibration by passing in the following props:

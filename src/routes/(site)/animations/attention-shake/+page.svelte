@@ -13,7 +13,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Attention shake animation</h2>
 	<p>This is a shaking animation to grab attention.</p>
 	<button

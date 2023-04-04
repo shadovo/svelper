@@ -13,7 +13,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Annoying bounce animation</h2>
 	<p>
 		This is an annoying bounce animation to let the user know they need to take action on something.

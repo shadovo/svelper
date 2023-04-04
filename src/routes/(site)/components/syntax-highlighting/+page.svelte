@@ -10,7 +10,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Component with syntax highlighting</h2>
 	<p>This is a component with syntax highlighting.</p>
 	<p>
@@ -33,7 +33,7 @@
 		{`console.log('Hello World!');`}
 	</SyntaxHighlighting>
 </section>
-<section>
+<section class="content-width">
 	<h3>Styling</h3>
 	<p>
 		The syntax highlighting colors are defined via css variables. This page uses the following
@@ -79,7 +79,7 @@
 }`}</SyntaxHighlighting
 	>
 </section>
-<section>
+<section class="content-width">
 	<h3>Implementation</h3>
 	<p>
 		This implementation is pretty much a copy of Phptuts implementation at <a

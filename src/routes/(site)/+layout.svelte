@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { beforeNavigate } from '$app/navigation';
-	import MainWithAside from '$lib/components/MainWithAside.svelte';
 	import srcOscar from '$img/oscar-head.svg';
 
 	let showAside = false;
@@ -11,8 +10,8 @@
 </script>
 
 <div class="content">
-	<MainWithAside bind:showAside>
-		<svelte:fragment slot="header">
+	<header>
+		<div class="content-width">
 			<h1>
 				<a href={base || '/'}>
 					<svg
@@ -61,170 +60,216 @@
 					</svg>
 				</a>
 			</h1>
-		</svelte:fragment>
-		<svelte:fragment slot="article">
-			<slot />
-		</svelte:fragment>
-		<div class="footer" slot="footer">
+		</div>
+	</header>
+	<nav>
+		<div class="content-width">
+			<div class="menu">
+				<a href={base || '/'}>Home</a>
+				<span class="nav-activation">Code</span>
+				<a href="{base}/games">Games</a>
+				<a href="{base}/cookies">Cookies</a>
+				<a href="https://github.com/shadovo/svelper" target="_blank" rel="noopener noreferrer"
+					>GitHub</a
+				>
+			</div>
+			<div class="navigation">
+				<h2>Navigation</h2>
+				<ul>
+					<li>
+						<h3>Svelte components</h3>
+						<ul>
+							<li>
+								<a href="{base}/components/dialog">Dialog</a>
+							</li>
+							<li>
+								<a href="{base}/components/pagination">Pagination</a>
+							</li>
+							<li>
+								<a href="{base}/components/syntax-highlighting">SyntaxHighlight</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h3>Svelte games</h3>
+						<ul>
+							<li>
+								<a href="{base}/games/floppy-octty">Floppy Octty</a>
+							</li>
+							<li>
+								<a href="{base}/games/minesweeper">Minesweeper</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h3>Tools</h3>
+						<ul>
+							<li>
+								<a href="{base}/tools/breath">Breathing technique</a>
+							</li>
+							<li>
+								<a href="{base}/tools/soundboard">Soundboard</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h3>Animations</h3>
+						<ul>
+							<li>
+								<a href="{base}/animations/annoying-bounce">Annoying bounce</a>
+							</li>
+							<li>
+								<a href="{base}/animations/attention-shake">Attention shake</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h3>Copy/paste</h3>
+						<ul>
+							<li>
+								<a href="{base}/copy-paste/changed-sveltekit-paths">Changed SvelteKit paths</a>
+							</li>
+							<li>
+								<a href="{base}/copy-paste/gh-pages">GitHub pages action</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h3>Libraries</h3>
+						<ul>
+							<li>
+								<a href="{base}/libraries/ress-css">CSS Ress</a>
+							</li>
+							<li>
+								<a href="{base}/libraries/prism">Prism - highlighting</a>
+							</li>
+							<li>
+								<a href="{base}/libraries/sveltekit">SvelteKit</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<article>
+		<slot />
+	</article>
+
+	<footer>
+		<div class="content-width">
 			<p>
 				Thanks for checking out the site! Feel free to use any and all parts of the code available
 				at <a href="https://github.com/shadovo/svelper">github</a> ♥ Oscar.
 			</p>
 		</div>
-		<svelte:fragment slot="aside">
-			<slot name="navigation">
-				<nav>
-					<div class="flex">
-						<img width="217" height="217" src={srcOscar} alt="Avatar of the author" />
-						<p>
-							<span class="accent">Hi!</span> Welcome to my collection of things built in Svelte, helpful
-							libraries, frameworks and copy/paste utils.
-						</p>
-					</div>
-					<div class="navigation flex">
-						<ul>
-							<li>
-								<h2>Navigation</h2>
-								<ul>
-									<li>
-										<a href={base || '/'}>Home</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Svelte components</h3>
-								<ul>
-									<li>
-										<a href="{base}/components/dialog">Dialog</a>
-									</li>
-									<li>
-										<a href="{base}/components/pagination">Pagination</a>
-									</li>
-									<li>
-										<a href="{base}/components/syntax-highlighting">SyntaxHighlight</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Svelte games</h3>
-								<ul>
-									<li>
-										<a href="{base}/games/floppy-octty">Floppy Octty</a>
-									</li>
-									<li>
-										<a href="{base}/games/minesweeper">Minesweeper</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Tools</h3>
-								<ul>
-									<li>
-										<a href="{base}/tools/breath">Breathing technique</a>
-									</li>
-									<li>
-										<a href="{base}/tools/soundboard">Soundboard</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Animations</h3>
-								<ul>
-									<li>
-										<a href="{base}/animations/annoying-bounce">Annoying bounce</a>
-									</li>
-									<li>
-										<a href="{base}/animations/attention-shake">Attention shake</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Copy/paste</h3>
-								<ul>
-									<li>
-										<a href="{base}/copy-paste/changed-sveltekit-paths">Changed SvelteKit paths</a>
-									</li>
-									<li>
-										<a href="{base}/copy-paste/gh-pages">GitHub pages action</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<h3>Libraries</h3>
-								<ul>
-									<li>
-										<a href="{base}/libraries/ress-css">CSS Ress</a>
-									</li>
-									<li>
-										<a href="{base}/libraries/prism">Prism - highlighting</a>
-									</li>
-									<li>
-										<a href="{base}/libraries/sveltekit">SvelteKit</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</slot>
-		</svelte:fragment>
-	</MainWithAside>
+	</footer>
 </div>
 
 <style lang="scss">
-	h1 {
-		margin-top: var(--gap-2);
-		margin-bottom: 0;
-		color: var(--c-accent);
-		line-height: 1;
-
-		svg {
-			height: 100%;
-			max-height: 150px;
-			max-width: 70%;
-		}
+	.content {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
 	}
+	header {
+		margin-top: var(--gap);
 
-	.navigation {
-		padding-top: var(--gap);
-
-		h2,
-		h3 {
-			font-size: 1.3rem;
+		h1,
+		a {
+			display: flex;
+			align-items: center;
+			height: 100%;
 			margin: 0;
+		}
+		svg {
+			height: 120px;
 		}
 	}
 
 	nav {
-		display: block;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap);
-		border-left: 5px solid var(--c-text);
-		padding: 0 var(--gap-2);
-		overflow-y: auto;
-	}
+		position: relative;
+		margin: var(--gap) 0 var(--gap-2);
 
-	.footer {
-		font-size: 0.8rem;
-		padding: var(--gap-2) 0 0;
-		border-top: 3px solid var(--c-text);
-	}
+		> div {
+			position: relative;
+		}
 
-	@media (max-width: 768px) {
-		nav {
+		.menu {
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+			height: 100%;
+			margin: 0;
+			height: 50px;
+			border: 1px solid var(--c-text);
+			border-left: none;
+			border-right: none;
+
+			> * {
+				padding: var(--gap) var(--gap-2);
+				color: var(--c-text);
+				font-weight: bold;
+				cursor: pointer;
+
+				&:hover {
+					color: var(--c-accent);
+				}
+			}
+		}
+
+		.navigation {
+			display: none;
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			background-color: #272727;
 			padding: var(--gap);
+			box-shadow: 0px 11px 10px rgba(0, 0, 0, 0.5);
+			margin-left: calc(-1 * var(--gap));
+			& > ul {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: var(--gap);
+
+				h2,
+				h3 {
+					font-size: 1rem;
+				}
+			}
+
+			.show,
+			&:hover {
+				display: block;
+			}
 		}
 
-		img {
-			margin: 0 auto;
-			width: 150px;
-			height: 150px;
+		&:has(.nav-activation:hover),
+		&:has(.navigation:hover) {
+			.nav-activation {
+				text-decoration: underline;
+			}
+			.navigation {
+				display: block;
+			}
 		}
+	}
 
-		.footer {
-			border: none;
-		}
+	article {
+		flex: 1;
+	}
+
+	footer {
+		margin-top: var(--gap-2);
+		font-size: 0.9rem;
+		padding: var(--gap);
+		background: var(--c-background-footer);
+	}
+
+	:global(.content-width) {
+		max-width: 800px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 var(--gap);
 	}
 </style>

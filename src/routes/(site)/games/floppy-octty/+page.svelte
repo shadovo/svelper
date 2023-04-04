@@ -12,7 +12,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>FLOPPY OCTTY!</h2>
 	<p>
 		A simple game inspired by the classic Flappy Bird game built as a Svelte component using
@@ -26,10 +26,10 @@
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<FloppyOctty />
 </section>
-<section>
+<section class="content-width">
 	<p>
 		This game is also available in an embed version at
 		<a href="/embeds/v1/floppy-octty" target="_blank"

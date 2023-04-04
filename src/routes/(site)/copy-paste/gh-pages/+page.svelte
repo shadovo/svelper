@@ -10,21 +10,21 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Deploy npm build output to GitHub pages.</h2>
 	<p>
 		Using GitHub actions to deploy the result of <code>npm build</code> has never been simpler. Following
 		these steps should have you up and running with a static page in no time!
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 1 - Create a github action</h3>
 	<p>
 		In your project add a YAML file at <code>.guthub/workflows</code> lets call it
 		<code>pages.yml</code>.
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 2 - Add the config for the action</h3>
 	<p>In your newly created pages.yml file add the following content:</p>
 	<SyntaxHighlight language="yaml">
@@ -92,7 +92,7 @@ jobs:
 `}
 	</SyntaxHighlight>
 </section>
-<section>
+<section class="content-width">
 	<h3>Step 3 - Push your project to GitHub</h3>
 	<p>Push your project to GitHub. This should automatically start the build process.</p>
 </section>

@@ -11,7 +11,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Minesweeper as Svelte component</h2>
 	<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
 	<p>
@@ -22,10 +22,10 @@
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<Minesweeper columns="9" rows="10" mines="10" />
 </section>
-<section>
+<section class="content-width">
 	<p>
 		This game is also available in an embed version at
 		<a href="/embeds/v1/minesweeper" target="_blank"

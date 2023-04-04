@@ -20,7 +20,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>Pagination Svelte component</h2>
 	<p>This is a component that lets you paginate content.</p>
 	<p>
@@ -28,7 +28,7 @@
 		It will then expose the them as <code>item</code> for each item that should currently be shown.
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<div class="sidescroll-container">
 		<div class="grid-table">
 			<div class="attribute">Attribute</div>
@@ -61,7 +61,7 @@
 		</div>
 	</div>
 </section>
-<section>
+<section class="content-width">
 	<p>
 		Check out the code at <a
 			href="https://github.com/shadovo/svelper/blob/main/src/lib/components/Pagination.svelte"
@@ -70,7 +70,7 @@
 		>
 	</p>
 </section>
-<section>
+<section class="content-width">
 	<h3>Paginate list of strings</h3>
 	<SyntaxHighlighting language="javascript"
 		>{`
@@ -93,7 +93,7 @@
 		<p>{item}</p>
 	</Pagination>
 </section>
-<section>
+<section class="content-width">
 	<h3>Paginate list of objects</h3>
 	<SyntaxHighlighting language="javascript"
 		>{`	

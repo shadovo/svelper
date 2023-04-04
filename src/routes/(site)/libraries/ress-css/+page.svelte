@@ -6,7 +6,7 @@
 	/>
 </svelte:head>
 
-<section>
+<section class="content-width">
 	<h2>A moderns CSS reset - ress</h2>
 	<p>
 		Having a stable foundation is important for building modern web applications. This library

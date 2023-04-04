@@ -8,6 +8,7 @@
 	@mixin darkTheme {
 		--c-text: #f2f2f2;
 		--c-background: #202020;
+		--c-background-footer: #131313;
 		--c-background-code: #131313;
 		--c-accent: #39b2bd;
 		--shadow-color: 220 40% 2%;
@@ -66,6 +67,7 @@
 
 		--c-text: #0d0d0d;
 		--c-background: #ffffff;
+		--c-background-footer: #f9f9f9;
 		--c-background-code: #f9f9f9;
 		--c-accent: #0b828d;
 
