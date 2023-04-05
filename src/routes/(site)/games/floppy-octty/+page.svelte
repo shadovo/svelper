@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png';
 </script>
 
 <svelte:head>
@@ -13,7 +14,11 @@
 </svelte:head>
 
 <section>
-	<h2>FLOPPY OCTTY!</h2>
+	<div class="hero">
+		<img src={floppyOcctyHeroImage} alt="Floppy Octty" />
+		<h2>Floppy Octty</h2>
+	</div>
+
 	<p>
 		A simple game inspired by the classic Flappy Bird game built as a Svelte component using
 		<code>&lt;canvas&gt;</code> and emojies 🐙.

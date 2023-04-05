@@ -1,4 +1,6 @@
 <script lang="ts">
+	import minesweeperHeroImage from '$img/games/minesweeper.png';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png';
 </script>
 
 <svelte:head>
@@ -10,12 +12,12 @@
 	<h2>Games built in Svelte</h2>
 	<div class="grid">
 		<a class="card" href="/games/minesweeper">
-			<p class="icon">💣</p>
+			<img src={minesweeperHeroImage} alt="" />
 			<h3>Minesweeper</h3>
 			<p>The classic game Minesweeper as Svelte component.</p>
 		</a>
 		<a class="card" href="/games/floppy-octty">
-			<p class="icon">🐙</p>
+			<img src={floppyOcctyHeroImage} alt="" />
 			<h3>Floppy Octty</h3>
 			<p>Underwater version of the classic Flappy Bird game.</p>
 		</a>
@@ -25,7 +27,7 @@
 <style lang="scss">
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(200px, 1fr));
+		grid-template-columns: repeat(2, minmax(200px, 1fr));
 		gap: var(--gap);
 	}
 
@@ -33,7 +35,6 @@
 		background: var(--color-bg);
 		box-shadow: 0 2px 3px 1px rgb(0, 0, 0, 0.3);
 		padding: 1rem;
-		border: 1px solid var(--c-text);
 		background: var(--c-table-row);
 		display: flex;
 		flex-direction: column;
@@ -47,11 +48,10 @@
 			box-shadow: 0 3px 6px 1px rgb(0, 0, 0, 0.3);
 		}
 
-		.icon {
-			text-align: center;
-			font-size: 4rem;
-			margin-bottom: 0.5rem;
-			padding: var(--gap-half) 0;
+		> img {
+			margin: calc(-1 * var(--gap));
+			margin-bottom: var(--gap);
+			padding: 0;
 		}
 
 		h3 {
@@ -60,12 +60,6 @@
 		}
 		p {
 			font-weight: normal;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.grid {
-			grid-template-columns: repeat(2, minmax(200px, 1fr));
 		}
 	}
 
