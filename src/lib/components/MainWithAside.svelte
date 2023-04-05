@@ -77,7 +77,7 @@
 	<header>
 		<slot name="header" />
 	</header>
-	<article>
+	<article class="main-article">
 		<slot name="article" />
 	</article>
 	<footer>

@@ -179,17 +179,6 @@
 		cursor: not-allowed;
 	}
 
-	article {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap-2);
-	}
-
-	article section + section {
-		border-top: 1px solid var(--c-text);
-		padding-top: var(--gap-2);
-	}
-
 	code {
 		background-color: var(--c-background-code);
 		padding: 0 4px;
@@ -212,10 +201,6 @@
 	.accent {
 		font-family: var(--font-accent);
 		font-weight: bold;
-	}
-
-	.hero {
-		padding: var(--gap) 0;
 	}
 
 	.flex-row {
