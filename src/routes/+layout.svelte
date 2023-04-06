@@ -6,12 +6,15 @@
 
 <style global lang="scss">
 	@mixin darkTheme {
-		--c-text: #f2f2f2;
-		--c-background: #202020;
-		--c-background-code: #131313;
-		--c-accent: #39b2bd;
 		--shadow-color: 220 40% 2%;
 		--shadow-strength: 25%;
+
+		--c-text: #f2f2f2;
+		--c-background: #202020;
+		--c-background-rgb: 32, 32, 32;
+		--c-background-code: #131313;
+		--c-accent: #39b2bd;
+		--c-logo: var(--c-text);
 
 		--c-table-border: #464646;
 		--c-table-row: #2f2f2f;
@@ -66,8 +69,10 @@
 
 		--c-text: #0d0d0d;
 		--c-background: #ffffff;
+		--c-background-rgb: 255, 255, 255;
 		--c-background-code: #f9f9f9;
 		--c-accent: #0b828d;
+		--c-logo: var(--c-accent);
 
 		--prism-background: none;
 		--prism-text: #000000;

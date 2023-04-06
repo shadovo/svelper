@@ -121,7 +121,7 @@
 		grid-template-rows: auto 1fr auto;
 		gap: var(--gap-2);
 		max-width: min(1024px, 100vw);
-		margin: 60px auto 0;
+		margin: var(--gap-2) auto 0;
 		padding: 0 var(--gap);
 		min-height: 100vh;
 	}
@@ -143,7 +143,7 @@
 
 	aside {
 		grid-column: 2 / span 1;
-		grid-row: 1 / span 2;
+		grid-row: 2 / span 1;
 		z-index: var(--layer-2);
 	}
 
