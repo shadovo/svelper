@@ -197,6 +197,7 @@
 		padding: var(--gap-2);
 		background-color: var(--c-background);
 		border-radius: var(--gap);
+		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
 	}
 
 	:global(.main-article section + section) {
@@ -234,10 +235,11 @@
 	h1 {
 		color: var(--c-accent);
 		line-height: 1;
-		color: var(--c-text);
+		margin: var(--gap-2) 0 0;
+		color: var(--c-logo);
 
 		svg {
-			color: var(--c-text);
+			color: var(--c-logo);
 			height: 100%;
 			max-height: 150px;
 			max-width: 70%;
@@ -262,7 +264,7 @@
 		gap: var(--gap);
 		padding: var(--gap) var(--gap-2);
 		overflow-y: auto;
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(var(--c-background-rgb), 0.3);
 		backdrop-filter: blur(80px);
 		border-radius: var(--gap);
 
