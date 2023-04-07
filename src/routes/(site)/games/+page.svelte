@@ -1,6 +1,7 @@
 <script lang="ts">
-	import minesweeperHeroImage from '$img/games/minesweeper.png';
-	import floppyOcctyHeroImage from '$img/games/floppy-octty.png';
+	import Image from '$lib/components/Image.svelte';
+	import minesweeperHeroImage from '$img/games/minesweeper.png?scale-width=312;366';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?scale-width=312;366';
 </script>
 
 <svelte:head>
@@ -12,12 +13,16 @@
 	<h2>Games built in Svelte</h2>
 	<div class="grid">
 		<a class="card" href="/games/minesweeper">
-			<img src={minesweeperHeroImage} alt="" />
+			<div class="img">
+				<Image src={minesweeperHeroImage} alt="" />
+			</div>
 			<h3>Minesweeper</h3>
 			<p>The classic game Minesweeper as Svelte component.</p>
 		</a>
 		<a class="card" href="/games/floppy-octty">
-			<img src={floppyOcctyHeroImage} alt="" />
+			<div class="img">
+				<Image src={floppyOcctyHeroImage} alt="" />
+			</div>
 			<h3>Floppy Octty</h3>
 			<p>Underwater version of the classic Flappy Bird game.</p>
 		</a>
@@ -48,7 +53,7 @@
 			box-shadow: 0 3px 6px 1px rgb(0, 0, 0, 0.3);
 		}
 
-		> img {
+		> .img {
 			margin: calc(-1 * var(--gap));
 			margin-bottom: var(--gap);
 			padding: 0;
