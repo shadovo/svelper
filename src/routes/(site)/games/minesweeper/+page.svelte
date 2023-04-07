@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
-	import minesweeperHeroImage from '$img/games/minesweeper.png';
+	import minesweeperHeroImage from '$img/games/minesweeper.png?scale-width=688;398';
 </script>
 
 <svelte:head>
@@ -14,7 +15,7 @@
 
 <section>
 	<div class="hero">
-		<img src={minesweeperHeroImage} alt="Floppy Octty" />
+		<Image src={minesweeperHeroImage} alt="Minesweeper" />
 		<h2>Minesweeper</h2>
 	</div>
 	<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
