@@ -14,14 +14,14 @@
 	<div class="grid">
 		<a class="card" href="/games/minesweeper">
 			<div class="img">
-				<Image src={minesweeperHeroImage} alt="" />
+				<Image src={minesweeperHeroImage} alt="" aspectRatio="3/1" />
 			</div>
 			<h3>Minesweeper</h3>
 			<p>The classic game Minesweeper as Svelte component.</p>
 		</a>
 		<a class="card" href="/games/floppy-octty">
 			<div class="img">
-				<Image src={floppyOcctyHeroImage} alt="" />
+				<Image src={floppyOcctyHeroImage} alt="" aspectRatio="3/1" />
 			</div>
 			<h3>Floppy Octty</h3>
 			<p>Underwater version of the classic Flappy Bird game.</p>

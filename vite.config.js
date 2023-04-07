@@ -22,10 +22,10 @@ export default defineConfig(() => {
 								return acc;
 							}, [])
 							.flat()
-							.sort((a, b) => a - b)
+							.sort((a, b) => b - a)
 							.join(';');
 						return new URLSearchParams({
-							format: 'avif;webp;' + extension,
+							format: 'webp;' + extension,
 							picture: true,
 							...(upscaledWidths.length > 0 ? { w: upscaledWidths } : {}),
 						});
