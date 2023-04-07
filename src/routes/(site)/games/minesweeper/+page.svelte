@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
-	import minesweeperHeroImage from '$img/games/minesweeper.png?scale-width=688;398&imagetools';
+	import minesweeperHeroImage from '$img/games/minesweeper.png?w=398;688;796;1194;1376;2064&imagetools';
 </script>
 
 <svelte:head>

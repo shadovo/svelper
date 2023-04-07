@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
-	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?scale-width=688;398&imagetools';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=398;688;796;1194;1376;2064&imagetools';
 </script>
 
 <svelte:head>
