@@ -1,7 +1,13 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
-	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=398;688;796;1194;1376;2064&imagetools';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2064;1376;1194;796;688;398&imagetools';
+
+	const heroImageSize = `
+		(min-width: 1024px)	688px,
+		(min-width: 769px) calc(100vw - 336px),
+		calc(100vw - 16px)
+	`;
 </script>
 
 <svelte:head>
@@ -16,7 +22,7 @@
 
 <section>
 	<div class="hero">
-		<Image src={floppyOcctyHeroImage} alt="Floppy Octty" aspectRatio="3/1" />
+		<Image alt="Floppy Octty" src={floppyOcctyHeroImage} sizes={heroImageSize} aspectRatio="3/1" />
 		<h2>Floppy Octty</h2>
 	</div>
 

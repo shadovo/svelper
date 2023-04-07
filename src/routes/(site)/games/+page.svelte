@@ -1,7 +1,12 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
-	import minesweeperHeroImage from '$img/games/minesweeper.png?w=250;312;366;500;624;732;750;936;1098&imagetools';
-	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=250;312;366;500;624;732;750;936;1098&imagetools';
+	import minesweeperHeroImage from '$img/games/minesweeper.png?w=1098;936;750;732;624;500;366;312;275;250&imagetools';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=1098;936;750;732;624;500;366;312;275;250&imagetools';
+	const imageSizes = `
+	(min-width: 1024px)	312px,
+	(min-width: 769px)	calc((100vw - 388px) / 2),
+	(min-width: 481px)	calc(50vw - 28px),
+	calc(100vw - 48px)`;
 </script>
 
 <svelte:head>
@@ -14,14 +19,14 @@
 	<div class="grid">
 		<a class="card" href="/games/minesweeper">
 			<div class="img">
-				<Image src={minesweeperHeroImage} alt="" aspectRatio="3/1" />
+				<Image alt="Minesweeper" src={minesweeperHeroImage} sizes={imageSizes} aspectRatio="3/1" />
 			</div>
 			<h3>Minesweeper</h3>
 			<p>The classic game Minesweeper as Svelte component.</p>
 		</a>
 		<a class="card" href="/games/floppy-octty">
 			<div class="img">
-				<Image src={floppyOcctyHeroImage} alt="" aspectRatio="3/1" />
+				<Image alt="Floppy Octty" src={floppyOcctyHeroImage} sizes={imageSizes} aspectRatio="3/1" />
 			</div>
 			<h3>Floppy Octty</h3>
 			<p>Underwater version of the classic Flappy Bird game.</p>

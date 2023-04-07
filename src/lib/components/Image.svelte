@@ -16,11 +16,16 @@
 	export let src: Image;
 	export let alt: string;
 	export let aspectRatio: string;
+	export let sizes: string;
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}">
 	{#each Object.entries(src.sources) as [format, images]}
-		<source srcset={images.map((i) => `${i.src} ${i.w}w`).join(', ')} type={'image/' + format} />
+		<source
+			srcset={images.map((i) => `${i.src} ${i.w}w`).join(', ')}
+			type={'image/' + format}
+			{sizes}
+		/>
 	{/each}
 	<img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.fallback.src} {alt} />
 </picture>
