@@ -265,8 +265,8 @@
 		padding: var(--gap) var(--gap-2);
 		overflow-y: auto;
 		background: rgba(var(--c-background-rgb), 0.3);
-		-webkit-backdrop-filter: blur(80px) brightness(0.5);
-		backdrop-filter: blur(80px) brightness(0.5);
+		-webkit-backdrop-filter: blur(80px);
+		backdrop-filter: blur(80px);
 		border-radius: var(--gap);
 
 		img {
@@ -294,6 +294,8 @@
 			padding: var(--gap);
 			border-radius: 0;
 			background: rgba(var(--c-background-rgb), 0.6);
+			-webkit-backdrop-filter: blur(80px) brightness(0.5);
+			backdrop-filter: blur(80px) brightness(0.5);
 			img {
 				width: 150px;
 				height: 150px;
