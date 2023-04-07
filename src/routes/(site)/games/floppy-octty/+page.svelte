@@ -16,7 +16,7 @@
 
 <section>
 	<div class="hero">
-		<Image src={floppyOcctyHeroImage} alt="Floppy Octty" />
+		<Image src={floppyOcctyHeroImage} alt="Floppy Octty" aspectRatio="3/1" />
 		<h2>Floppy Octty</h2>
 	</div>
 

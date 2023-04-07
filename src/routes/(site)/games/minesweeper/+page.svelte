@@ -15,7 +15,7 @@
 
 <section>
 	<div class="hero">
-		<Image src={minesweeperHeroImage} alt="Minesweeper" />
+		<Image src={minesweeperHeroImage} alt="Minesweeper" aspectRatio="3/1" />
 		<h2>Minesweeper</h2>
 	</div>
 	<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
