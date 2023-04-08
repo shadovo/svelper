@@ -1,6 +1,14 @@
 <script lang="ts">
 	import BreathingTechnique from '$lib/tools/BreathingTechnique.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
+	import Image from '$lib/components/Image.svelte';
+	import breathingHeroImage from '$img/tools/breath.png?w=2064;1376;1194;796;688;398&imagetools';
+
+	const heroImageSize = `
+		(min-width: 1024px)	688px,
+		(min-width: 769px) calc(100vw - 336px),
+		calc(100vw - 16px)
+	`;
 
 	const boxBreathing = {
 		duration: 4000,
@@ -18,7 +26,16 @@ breathing techique as Svelte component. - A collection fun stuff"
 </svelte:head>
 
 <section>
-	<h2>Relaxing breathing technique timer as Svelte component</h2>
+	<div class="hero">
+		<Image
+			alt="Breathing timer"
+			src={breathingHeroImage}
+			sizes={heroImageSize}
+			aspectRatio="3/1"
+			background="#202b3f"
+		/>
+		<h2>Breathing timer</h2>
+	</div>
 	<p>
 		A simple implementation of an animated breathing timer for relaxing breathing techniques as
 		Svelte component.

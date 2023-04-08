@@ -2,10 +2,19 @@
 	import createSoundboard from '$lib/utils/audio/soundboard';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 	import noteFrequencies from '$lib/utils/audio/note-frequencies';
+	import Image from '$lib/components/Image.svelte';
+	import soundboardHeroImage from '$img/tools/soundboard.png?w=2064;1376;1194;796;688;398&imagetools';
 
 	type BassNote = [string, number];
 	type Note = string;
 	type Melody = [Note[], BassNote[], boolean, boolean, boolean][];
+
+	const heroImageSize = `
+		(min-width: 1024px)	688px,
+		(min-width: 769px) calc(100vw - 336px),
+		calc(100vw - 16px)
+	`;
+
 	const melody: Melody = [
 		[['C4', 'E4', 'G4', 'B4'], [['D2', 3]], true, true, false],
 		[['D4', 'F4', 'A4', 'C5'], [], true, false, false],
@@ -151,7 +160,16 @@
 </svelte:head>
 
 <section>
-	<h2>Simple soundboard with Web Audio API</h2>
+	<div class="hero">
+		<Image
+			alt="Breathing timer"
+			src={soundboardHeroImage}
+			sizes={heroImageSize}
+			aspectRatio="3/1"
+			background="#1d6a64"
+		/>
+		<h2>Soundboard</h2>
+	</div>
 	<p>
 		Let me first prefix this with I have no knowledge of music, harmonies, scales or rhythm. This is
 		just to explore the different sounds that could be produced by the <a

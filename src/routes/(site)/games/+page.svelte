@@ -3,10 +3,10 @@
 	import minesweeperHeroImage from '$img/games/minesweeper.png?w=1098;936;750;732;624;500;366;312;275;250&imagetools';
 	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=1098;936;750;732;624;500;366;312;275;250&imagetools';
 	const imageSizes = `
-	(min-width: 1024px)	312px,
-	(min-width: 769px)	calc((100vw - 388px) / 2),
-	(min-width: 481px)	calc(50vw - 28px),
-	calc(100vw - 48px)`;
+		(min-width: 1024px)	312px,
+		(min-width: 769px)	calc((100vw - 388px) / 2),
+		(min-width: 481px)	calc(50vw - 28px),
+		calc(100vw - 48px)`;
 </script>
 
 <svelte:head>
