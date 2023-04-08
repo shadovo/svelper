@@ -17,9 +17,11 @@
 	export let alt: string;
 	export let aspectRatio: string;
 	export let sizes: string;
+	export let background = 'transparent';
+	export let loading: 'eager' | 'lazy' = 'eager';
 </script>
 
-<picture style="width: 100%; aspect-ratio:{aspectRatio}">
+<picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">
 	{#each Object.entries(src.sources) as [format, images]}
 		<source
 			srcset={images.map((i) => `${i.src} ${i.w}w`).join(', ')}
@@ -27,7 +29,7 @@
 			{sizes}
 		/>
 	{/each}
-	<img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.fallback.src} {alt} />
+	<img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.fallback.src} {alt} {loading} />
 </picture>
 
 <style>

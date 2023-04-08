@@ -22,7 +22,13 @@
 
 <section>
 	<div class="hero">
-		<Image alt="Floppy Octty" src={floppyOcctyHeroImage} sizes={heroImageSize} aspectRatio="3/1" />
+		<Image
+			alt="Floppy Octty"
+			src={floppyOcctyHeroImage}
+			sizes={heroImageSize}
+			aspectRatio="3/1"
+			background="#0f353a"
+		/>
 		<h2>Floppy Octty</h2>
 	</div>
 

@@ -17,19 +17,31 @@
 <section class="content-width">
 	<h2>Games built in Svelte</h2>
 	<div class="grid">
-		<a class="card" href="/games/minesweeper">
-			<div class="img">
-				<Image alt="Minesweeper" src={minesweeperHeroImage} sizes={imageSizes} aspectRatio="3/1" />
-			</div>
-			<h3>Minesweeper</h3>
-			<p>The classic game Minesweeper as Svelte component.</p>
-		</a>
 		<a class="card" href="/games/floppy-octty">
 			<div class="img">
-				<Image alt="Floppy Octty" src={floppyOcctyHeroImage} sizes={imageSizes} aspectRatio="3/1" />
+				<Image
+					alt="Floppy Octty"
+					background="#0f353a"
+					src={floppyOcctyHeroImage}
+					sizes={imageSizes}
+					aspectRatio="3/1"
+				/>
 			</div>
 			<h3>Floppy Octty</h3>
 			<p>Underwater version of the classic Flappy Bird game.</p>
+		</a>
+		<a class="card" href="/games/minesweeper">
+			<div class="img">
+				<Image
+					alt="Minesweeper"
+					src={minesweeperHeroImage}
+					sizes={imageSizes}
+					aspectRatio="3/1"
+					background="#6b3b19"
+				/>
+			</div>
+			<h3>Minesweeper</h3>
+			<p>The classic game Minesweeper as Svelte component.</p>
 		</a>
 	</div>
 </section>
