@@ -105,16 +105,11 @@ export default defineConfig(() => {
 <section>
 	<h3>Add the imagetools type in your <code>app.d.ts</code></h3>
 	<p>
-		To make TypeScript happy, we can follow <a
-			href="https://github.com/benblazak"
-			rel="noopener noreferrer"
-			target="_blank">benblazaks</a
-		>
-		workaround listed
+		To make TypeScript happy, we can follow
 		<a
 			href="https://github.com/JonasKruckenberg/imagetools/issues/160#issuecomment-1009292026"
 			rel="noopener noreferrer"
-			target="_blank">here</a
+			target="_blank">benblazaks workaround</a
 		>. We need to add a type definition for <code>vite-imagetools</code>. We can do this by creating
 		a <code>app.d.ts</code> file in the root of our project and adding the following code:
 	</p>
@@ -279,8 +274,8 @@ const imageSizes = \`
 		<a
 			href="https://ericportis.com/posts/2014/srcset-sizes/#part-2"
 			rel="noopener noreferrer"
-			target="_blank">this post</a
-		> by Eric Portis.
+			target="_blank">this post by Eric Portis</a
+		>.
 	</p>
 	<h4>HTML</h4>
 	<p>
