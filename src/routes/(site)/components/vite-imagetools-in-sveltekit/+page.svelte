@@ -19,8 +19,13 @@
 		to load.
 	</p>
 	<p>
-		Fortunately, there is a library called <code>vite-imagetools</code> that can help you optimize
-		your images and make them load faster. In this tutorial, we'll show you how to use
+		Fortunately, there is a library called <a
+			href="https://github.com/JonasKruckenberg/imagetools/tree/main/packages/vite"
+			rel="noopener noreferrer"
+			target="_blank">vite-imagetools</a
+		>
+		that can help you optimize your images and make them load faster. In this tutorial, we'll show you
+		how to use
 		<code>vite-imagetools</code> in a SvelteKit project to improve your website's performance.
 	</p>
 </section>
@@ -68,7 +73,7 @@ export default defineConfig(() => {
 					const extension = url.pathname.substring(url.pathname.lastIndexOf('.') + 1);
 					if (supportedExtensions.includes(extension)) {
 						return new URLSearchParams({
-							// In addition to the original format also generate a webp version
+							// In addition to the original format also generate a WebP version
 							format: 'webp;' + extension,
 							// picture: true means imagetools will generate data suited for the picture element 
 							picture: true,
@@ -98,12 +103,20 @@ export default defineConfig(() => {
 	</p>
 </section>
 <section>
-	<!-- TODO: explian more about &imagetools -->
 	<h3>Add the imagetools type in your <code>app.d.ts</code></h3>
 	<p>
-		To make TypeScript happy, we need to add a type definition for <code>vite-imagetools</code>. We
-		can do this by creating a <code>app.d.ts</code> file in the root of our project and adding the following
-		code:
+		To make TypeScript happy, we can follow <a
+			href="https://github.com/benblazak"
+			rel="noopener noreferrer"
+			target="_blank">benblazaks</a
+		>
+		workaround listed
+		<a
+			href="https://github.com/JonasKruckenberg/imagetools/issues/160#issuecomment-1009292026"
+			rel="noopener noreferrer"
+			target="_blank">here</a
+		>. We need to add a type definition for <code>vite-imagetools</code>. We can do this by creating
+		a <code>app.d.ts</code> file in the root of our project and adding the following code:
 	</p>
 	<SyntaxHighlighting language="typescript">
 		{`declare module '*&imagetools' {
@@ -117,10 +130,11 @@ export default defineConfig(() => {
 }`}
 	</SyntaxHighlighting>
 	<p>
-		This code defines a TypeScript module declaration for <code>*&imagetools</code> that tells the
-		TypeScript compiler that <code>vite-imagetools</code> has a default export that is of an unknown
-		type. We are essentially telling TypeScript to trust us that <code>vite-imagetools</code> will export
-		a valid type that we can use later.
+		This code defines a TypeScript module declaration for <code>*&imagetools</code>. All we have to
+		do is add <code>&imagetools</code> to the end of any image import path. This module declaration
+		then tells the TypeScript compiler that <code>vite-imagetools</code> has a default export that
+		is of an unknown type. We are essentially telling TypeScript to trust us that
+		<code>vite-imagetools</code> will export a valid type that we can use later.
 	</p>
 	<p>
 		With this type declaration in place, TypeScript will no longer complain about missing types when
@@ -132,10 +146,25 @@ export default defineConfig(() => {
 	<p>
 		Now that we have <code>vite-imagetools</code> installed and configured, we can create an
 		<code>Image.svelte</code>
-		component that uses the <code>picture</code> tag to load our images. This component will
-		automatically generate
-		<code>webp</code> versions of our images when the browser supports it, falling back to the original
-		image format otherwise.
+		component that uses the
+		<a
+			href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture"
+			rel="noopener noreferrer"
+			target="_blank">picture</a
+		>
+		tag to load our images. This component will uses
+		<a
+			href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset"
+			rel="noopener noreferrer"
+			target="_blank">srcset</a
+		>
+		to automatically use the
+		<a
+			href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types#webp_image"
+			rel="noopener noreferrer"
+			target="_blank">WebP</a
+		> versions of our images when the browser supports it, falling back to the original image format
+		otherwise.
 	</p>
 	<p>Here's an example implementation of the <code>Image.svelte</code> component:</p>
 	<h4>Script</h4>
@@ -183,7 +212,6 @@ img {
 	width: 100%;
 }`}
 	</SyntaxHighlighting>
-	<!-- TODO: explain background -->
 	<p>
 		This component defines an interface for an <code>Image</code> object that takes a
 		<code>fallback</code>
@@ -198,7 +226,7 @@ img {
 	</p>
 	<p>
 		Finally, we add an <code>img</code> tag with the <code>fallback</code> source and any additional
-		attributes like <code>alt</code>,sizes
+		attributes like <code>alt</code>, <code>sizes</code>
 		<code>aspectRatio</code>, <code>loading</code> and <code>sizes</code>.
 	</p>
 	<p>
@@ -227,11 +255,32 @@ const imageSizes = \`
 	275px
 \`;`}
 	</SyntaxHighlighting>
-	<!-- TODO: explain the query params on the image import -->
-	<!-- TODO: explain imageSizes and provide links -->
 	<p>
-		In this example, <code>myCoolImage</code> is the image file imported into the component, and imageSizes
-		is the set of sizes that the image can have based on the screen width.
+		In this example we're importing the image from the <code>images</code> directory and using the
+		<code>imagetools</code> plugin to generate the different image sizes.
+	</p>
+	<p>
+		In the import we add a query string with the <code>w</code> parameter to specify the different
+		image widths we want to generate. Here you can specify a single width or a comma-separated list
+		of widths. This example uses three different widths: <code>800px</code>, <code>600px</code> and
+		<code>275px</code>
+		in different viewports. However you could also specify double (and tripple) the width for high-density
+		displays like retina screens. Thanks to the <code>srcset</code> attribute, the browser will automatically
+		load the correct image for the screen density.
+	</p>
+	<p>
+		We also add the <code>&imagetools</code> at the end of the import so that the import matches the
+		module declaration we previously added to our <code>app.d.ts</code> file to get TypeScript to stop
+		complaining.
+	</p>
+	<p>
+		<code>imageSizes</code> is the set of sizes that the image can have based on the screen width.
+		To read more about how srcset and sizes work, check out
+		<a
+			href="https://ericportis.com/posts/2014/srcset-sizes/#part-2"
+			rel="noopener noreferrer"
+			target="_blank">this post</a
+		> by Eric Portis.
 	</p>
 	<h4>HTML</h4>
 	<p>
@@ -239,15 +288,29 @@ const imageSizes = \`
 	</p>
 	<SyntaxHighlighting language="svelte">
 		{`<div class="image-container">
-  <Image src={myCoolImage} sizes={imageSizes} aspectRatio="16 / 9" alt="My cool image" />
+  <Image src={myCoolImage} sizes={imageSizes} background="#202b3f" aspectRatio="16 / 9" alt="My cool image" />
 </div>`}</SyntaxHighlighting
 	>
-	<!-- TODO: explain aspectRatio -->
 	<p>
-		In this example, the <code>src</code> prop is set to <code>myCoolImage</code>, the
+		In this example, the <code>src</code> prop is set to the imported <code>myCoolImage</code>, the
 		<code>sizes</code>
-		prop is set to <code>imageSizes</code>, and the <code>aspectRatio</code> and <code>alt</code>16
-		/ 9 props are set to <code>16 / 9</code> and <code>My cool image</code>, respectively.
+		prop is set to <code>imageSizes</code>.
+	</p>
+	<p>
+		The <code>background</code> prop could be set either to a neutral color or to the dominant color
+		of the image. In this example, the color is set to <code>#202b3f</code>, which is the dominant
+		color of the image.
+	</p>
+	<p>
+		The <code>aspectRatio</code> prop is set to <code>16 / 9</code>, which is the aspect ratio of
+		the image. This is used to set the
+		<code>aspect-ratio</code> CSS property on the image container, which is used to reserve the height
+		relative to the width of the image before it is loaded. This prevents the page from jumping around
+		as the image loads.
+	</p>
+	<p>
+		The <code>alt</code> prop is set to <code>My cool image</code>, which is the alt text for the
+		image.
 	</p>
 	<h4>CSS</h4>
 	<p>Style the container to limit the maximum size of the image:</p>
@@ -270,6 +333,12 @@ const imageSizes = \`
 	<p>
 		In this example, the .image-container class limits the maximum width of the image to
 		<code>800px</code> and adjusts the width based on the screen size.
+	</p>
+	<p>
+		You can of course use any other CSS properties to style the image container, and make it
+		responsive however you like. The important thing is that the <code>width</code> and
+		<code>max-width</code>
+		properties are set to the same value as the <code>sizes</code> prop on the <code>Image</code>.
 	</p>
 	<p>
 		And that's it! You can now use the <code>Image.svelte</code> component to display optimized images
