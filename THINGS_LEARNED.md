@@ -112,6 +112,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 
 https://github.com/marketplace/actions/lighthouse-ci-action
 
+## Imagetools
+
+https://www.npmjs.com/package/vite-imagetools
+
+## Picture tag with sorces, srcset and sisez
+
+https://ericportis.com/posts/2014/srcset-sizes/#part-2
+
 ---
 
 # Things I have learnt exists but not explored yet
