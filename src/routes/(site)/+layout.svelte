@@ -98,6 +98,9 @@
 										<a href="{base}/components/dialog">Dialog</a>
 									</li>
 									<li>
+										<a href="{base}/components/vite-imagetools-in-sveltekit">Image</a>
+									</li>
+									<li>
 										<a href="{base}/components/pagination">Pagination</a>
 									</li>
 									<li>
@@ -156,6 +159,9 @@
 								<ul>
 									<li>
 										<a href="{base}/libraries/ress-css">CSS Ress</a>
+									</li>
+									<li>
+										<a href="{base}/libraries/vite-imagetools">Vite Imagetools</a>
 									</li>
 									<li>
 										<a href="{base}/libraries/prism">Prism - highlighting</a>
@@ -230,6 +236,14 @@
 			width: 100%;
 			background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent);
 		}
+	}
+
+	:global(p + p) {
+		margin-top: var(--gap);
+	}
+
+	:global(h4) {
+		margin-top: var(--gap);
 	}
 
 	h1 {
