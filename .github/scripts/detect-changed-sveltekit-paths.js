@@ -3,6 +3,7 @@ import fs from 'fs';
 
 const MATCH_IMPORTS = /import\s+(?:[\w*\s{},]+\s+from\s+?|)["']((?:\$lib\/|\.+\/).*?)["']/g;
 
+const EXTENSIONS = ['.svelte', '.js', '.ts'];
 const PAGE_FILES = ['+page.svelte', '+page.js', '+page.ts'];
 const LAYOUT_FILES = ['+layout.svelte', '+layout.js', '+layout.ts'];
 
@@ -74,10 +75,14 @@ function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changed
 		return true;
 	}
 	for (const dep of normalizedDeps) {
-		if (fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles)) {
+		if (
+			EXTENSIONS.includes(path.extname(dep)) &&
+			fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles)
+		) {
 			return true;
 		}
 	}
+	return false;
 }
 
 export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) {
