@@ -238,7 +238,7 @@
 		}
 	}
 
-	:global(p + p) {
+	:global(section > p + p) {
 		margin-top: var(--gap);
 	}
 
