@@ -9,6 +9,7 @@ on:
 
 jobs:
   changed-paths-job:
+    name: Changed paths
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.changed-paths.outputs.pathsChanged }}

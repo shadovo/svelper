@@ -1,10 +1,13 @@
 name: Lighthouse CI
 
 on:
-  workflow_call:
-    secrets:
-      LHCI_GITHUB_APP_TOKEN:
-        required: true
+  deployment:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: 'lighthouse-production'
+  cancel-in-progress: true
 
 jobs:
   # Lighthouse production
