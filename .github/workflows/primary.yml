@@ -60,7 +60,7 @@ jobs:
 
   changed-paths:
     if: github.event_name == 'pull_request'
-    name: Changed URLs
+    name: Changed paths
     uses: ./.github/workflows/changed-sveltekit-paths.yml
 
   comment-changed-paths:
@@ -146,12 +146,14 @@ jobs:
           npm ci
           npm run build
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./build
 
   # Deployment job
   deploy:
+    if: github.event_name == 'push'
     name: Deploy
     environment:
       name: github-pages
