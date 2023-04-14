@@ -28,7 +28,7 @@ jobs:
   code-ql:
     if: github.event_name == 'pull_request'
     name: CodeQL
-    uses: ./.github/workflows/changed-sveltekit-paths.yml
+    uses: ./.github/workflows/codeql-analysis.yml
 
   lint:
     name: Lint
