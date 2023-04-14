@@ -10,9 +10,8 @@
 		--shadow-strength: 25%;
 
 		--c-text: #f2f2f2;
-		--c-background: #202020;
-		--c-background-rgb: 32, 32, 32;
-		--c-background-code: #131313;
+		--c-background-rgb: 12, 18, 28;
+		--c-background-code: #030303;
 		--c-accent: #39b2bd;
 		--c-logo: var(--c-text);
 
@@ -68,8 +67,8 @@
 		--c-table-row: #f4f4f5;
 
 		--c-text: #0d0d0d;
-		--c-background: #ffffff;
 		--c-background-rgb: 255, 255, 255;
+		--c-background: rgb(var(--c-background-rgb));
 		--c-background-code: #f9f9f9;
 		--c-accent: #0b828d;
 		--c-logo: var(--c-accent);

@@ -19,6 +19,7 @@
 	export let sizes: string;
 	export let background = 'transparent';
 	export let loading: 'eager' | 'lazy' = 'eager';
+	export let role: string | undefined = undefined;
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">
@@ -29,7 +30,13 @@
 			{sizes}
 		/>
 	{/each}
-	<img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.fallback.src} {alt} {loading} />
+	<img
+		style="width: 100%; aspect-ratio:{aspectRatio}"
+		src={src.fallback.src}
+		{alt}
+		{loading}
+		{...role ? { role } : {}}
+	/>
 </picture>
 
 <style>

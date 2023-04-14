@@ -23,7 +23,8 @@
 <section>
 	<div class="hero">
 		<Image
-			alt="Floppy Octty"
+			alt=""
+			role="presentation"
 			src={floppyOcctyHeroImage}
 			sizes={heroImageSize}
 			aspectRatio="3/1"

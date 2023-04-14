@@ -28,7 +28,8 @@ breathing techique as Svelte component. - A collection fun stuff"
 <section>
 	<div class="hero">
 		<Image
-			alt="Breathing timer"
+			alt=""
+			role="presentation"
 			src={breathingHeroImage}
 			sizes={heroImageSize}
 			aspectRatio="3/1"

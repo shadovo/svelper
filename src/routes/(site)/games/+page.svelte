@@ -20,7 +20,8 @@
 		<a class="card" href="/games/floppy-octty">
 			<div class="img">
 				<Image
-					alt="Floppy Octty"
+					alt=""
+					role="presentation"
 					background="#0f353a"
 					src={floppyOcctyHeroImage}
 					sizes={imageSizes}
@@ -33,7 +34,8 @@
 		<a class="card" href="/games/minesweeper">
 			<div class="img">
 				<Image
-					alt="Minesweeper"
+					alt=""
+					role="presentation"
 					src={minesweeperHeroImage}
 					sizes={imageSizes}
 					aspectRatio="3/1"

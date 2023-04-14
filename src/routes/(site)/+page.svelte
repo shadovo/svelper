@@ -1,4 +1,11 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte';
+	import landingHeroImage from '$img/landing.png?w=2064;1376;1194;796;688;398&imagetools';
+	const heroImageSize = `
+		(min-width: 1024px)	688px,
+		(min-width: 769px) calc(100vw - 336px),
+		calc(100vw - 16px)
+	`;
 </script>
 
 <svelte:head>
@@ -10,7 +17,17 @@
 </svelte:head>
 
 <section>
-	<h2>Hello and welcome to Svelper!</h2>
+	<div class="hero">
+		<Image
+			src={landingHeroImage}
+			alt=""
+			role="presentation"
+			sizes={heroImageSize}
+			aspectRatio="3/1"
+			background="#0f111c"
+		/>
+		<h2>Hello!</h2>
+	</div>
 	<p>
 		If you're a <a href="https://svelte.dev/" rel="noopener noreferrer" target="_blank">Svelte</a> developer
 		or a web developer in general, you might be interested in checking out Svelper, which is my personal

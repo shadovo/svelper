@@ -23,7 +23,8 @@
 	<div class="hero">
 		<Image
 			src={minesweeperHeroImage}
-			alt="Minesweeper"
+			alt=""
+			role="presentation"
 			sizes={heroImageSize}
 			aspectRatio="3/1"
 			background="#6b3b19"
