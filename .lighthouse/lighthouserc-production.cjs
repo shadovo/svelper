@@ -14,8 +14,8 @@ module.exports = {
 		assert: {
 			preset: 'lighthouse:no-pwa',
 			assertions: {
-				'uses-passive-event-listeners': 'warn',
-				'csp-xss': 'warn',
+				'uses-passive-event-listeners': 'off',
+				'csp-xss': 'off',
 			},
 		},
 		upload: {
