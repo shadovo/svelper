@@ -162,7 +162,8 @@
 <section>
 	<div class="hero">
 		<Image
-			alt="Breathing timer"
+			alt=""
+			role="presentation"
 			src={soundboardHeroImage}
 			sizes={heroImageSize}
 			aspectRatio="3/1"

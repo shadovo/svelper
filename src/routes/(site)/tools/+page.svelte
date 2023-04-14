@@ -20,7 +20,8 @@
 		<a class="card" href="/tools/soundboard">
 			<div class="img">
 				<Image
-					alt="Soundboard"
+					alt=""
+					role="presentation"
 					background="#1d6a64"
 					src={soundboardHeroImage}
 					sizes={imageSizes}
@@ -33,7 +34,8 @@
 		<a class="card" href="/tools/breath">
 			<div class="img">
 				<Image
-					alt="Breathing technique"
+					alt=""
+					role="presentation"
 					background="#202b3f"
 					src={breathHeroImage}
 					sizes={imageSizes}
