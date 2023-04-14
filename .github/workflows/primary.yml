@@ -1,11 +1,28 @@
-name: PR verification
+name: CI
 
 on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
   pull_request:
     # The branches below must be a subset of the branches above
     branches: ['main']
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: '${{ github.workflow }}-${{ github.ref }}'
+  cancel-in-progress: true
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
 
 jobs:
   lint:
@@ -31,13 +48,8 @@ jobs:
       - run: npm ci
       - run: npm run check
 
-  # Dependency Review Action
-  #
-  # This Action will scan dependency manifest files that change as part of a Pull Request, surfacing known-vulnerable versions of the packages declared or updated in the PR. Once installed, if the workflow run is marked as required, PRs introducing known-vulnerable packages will be blocked from merging.
-  #
-  # Source repository: https://github.com/actions/dependency-review-action
-  # Public documentation: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review#dependency-review-enforcement
   dependency-review:
+    if: github.event_name == 'pull_request'
     name: Dependency review
     runs-on: ubuntu-latest
     steps:
@@ -47,10 +59,12 @@ jobs:
         uses: actions/dependency-review-action@v3
 
   changed-paths:
+    if: github.event_name == 'pull_request'
     name: Changed URLs
-    uses: ./.github/workflows/changed-sveltekit-paths.yml
+    uses: ./.github/reusable-workflows/changed-sveltekit-paths.yml
 
   comment-changed-paths:
+    if: github.event_name == 'pull_request'
     name: Post comment with changed URLs
     runs-on: ubuntu-latest
     needs: changed-paths
@@ -75,7 +89,8 @@ jobs:
           message: |
             ${{ steps.format-message.outputs.message }}
 
-  lighthouse:
+  lighthouse-pr:
+    if: github.event_name == 'pull_request'
     name: Lighthouse CI
     runs-on: ubuntu-latest
     needs: changed-paths
@@ -112,3 +127,45 @@ jobs:
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  # Build job
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, check]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+      - name: Build with npm run build
+        run: |
+          npm ci
+          npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./build
+
+  # Deployment job
+  deploy:
+    name: Deploy
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+  lighthouse-prod:
+    needs: deploy
+    name: Lighthouse Prod
+    uses: ./.github/reusable-workflows/prod-lighthouse.yml
+    secrets:
+      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
