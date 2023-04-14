@@ -1,4 +1,4 @@
-name: 'Primary'
+name: 'CI'
 
 on:
   # Runs on pushes targeting the default branch
@@ -156,7 +156,7 @@ jobs:
   # Deployment job
   deploy:
     if: github.event_name == 'push'
-    name: Deploy
+    name: Deploy GitHub pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -166,10 +166,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
-  lighthouse-prod:
-    needs: deploy
-    name: Lighthouse Prod
-    uses: ./.github/workflows/prod-lighthouse.yml
-    secrets:
-      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
