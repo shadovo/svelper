@@ -68,6 +68,8 @@ jobs:
     name: Post comment with changed URLs
     runs-on: ubuntu-latest
     needs: changed-paths
+    permissions:
+      pull-requests: write
     steps:
       - name: Format message
         id: format-message
