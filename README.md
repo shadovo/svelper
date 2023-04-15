@@ -1,6 +1,6 @@
 <img height="150" alt="Svelper" src="/static/svelper-logo.svg" />
 
-[![CI](https://github.com/shadovo/svelper/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shadovo/svelper/actions/workflows/ci.yml)
+[![Deploy](https://github.com/shadovo/svelper/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/shadovo/svelper/actions/workflows/main.yml)
 [![CodeQL](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/shadovo/svelper/actions/workflows/codeql-analysis.yml)
 [![Lighthouse](https://github.com/shadovo/svelper/actions/workflows/lighthouse-production.yml/badge.svg?branch=main)](https://github.com/shadovo/svelper/actions/workflows/lighthouse-production.yml)
 
