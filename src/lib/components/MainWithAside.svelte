@@ -210,7 +210,6 @@
 					height: 100%;
 					opacity: 1;
 					background: rgba(0, 0, 0, 0.6);
-					-webkit-backdrop-filter: blur(4px);
 					backdrop-filter: blur(4px);
 				}
 			}
