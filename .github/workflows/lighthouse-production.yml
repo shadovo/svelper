@@ -3,7 +3,6 @@ name: 'Lighthouse'
 on:
   deployment_status:
     state: [success]
-
   workflow_dispatch:
 
 jobs:
