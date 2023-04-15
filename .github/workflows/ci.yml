@@ -25,15 +25,6 @@ defaults:
     shell: bash
 
 jobs:
-  code-ql:
-    if: github.event_name == 'pull_request'
-    name: CodeQL
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    uses: ./.github/workflows/codeql-analysis.yml
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
