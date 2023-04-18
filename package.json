@@ -38,6 +38,6 @@
 		"tslib": "^2.5.0",
 		"typescript": "^5.0.4",
 		"vite": "^4.2.2",
-		"vite-imagetools": "^4.0.18"
+		"vite-imagetools": "^4.0.19"
 	}
 }
