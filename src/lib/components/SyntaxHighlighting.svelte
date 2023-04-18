@@ -95,9 +95,6 @@
 		-o-tab-size: 4;
 		tab-size: 4;
 
-		-webkit-hyphens: none;
-		-moz-hyphens: none;
-		-ms-hyphens: none;
 		hyphens: none;
 
 		&::-moz-selection,

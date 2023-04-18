@@ -94,7 +94,6 @@
 
 		&::backdrop {
 			background: rgba(75, 75, 75, 0.2);
-			-webkit-backdrop-filter: blur(4px);
 			backdrop-filter: blur(4px);
 		}
 
