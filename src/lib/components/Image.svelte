@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	interface ImageSource {
 		src: string;
 		w: number;
@@ -8,12 +8,14 @@
 		[format: string]: ImageSource[];
 	}
 
-	interface Image {
+	export interface ImageData {
 		fallback: ImageSource;
 		sources: ImageSources;
 	}
+</script>
 
-	export let src: Image;
+<script lang="ts">
+	export let src: ImageData;
 	export let alt: string;
 	export let aspectRatio: string;
 	export let sizes: string;
