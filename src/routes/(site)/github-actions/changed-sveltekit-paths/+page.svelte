@@ -1,4 +1,5 @@
 <script>
+	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 </script>
 
@@ -10,32 +11,32 @@
 	/>
 </svelte:head>
 
-<section>
-	<h2>Affected SvelteKit paths in PR.</h2>
-	<p>Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.</p>
-	<p>
-		This action will look at +page.svelte files in the routes folder adding those pages. Same goes
-		for +page.js and +page.ts.
-	</p>
-	<p>
-		It will also detect changes in +layout.svelte, +layout.js and +layout.ts files and add all
-		sibling and child pages to the list of affected pages.
-	</p>
-	<p>
-		Not only does it check if the pages or layouts themselves have changed, it also checks if any of
-		the imported files have changed. (Exception being updated dependencies for now.)
-	</p>
-</section>
-<section>
-	<h3>Step 1 - Create a reusable GitHub Action</h3>
-	<p>
-		In your project add a YAML file at <code>.guthub/workflows</code> called
-		<code>changed-sveltekit-paths.yml</code>. This will be our reusable action that we can call form
-		any other workflow.
-	</p>
-	<p>Add the following code to <code>changed-sveltekit-paths.yml</code>:</p>
-	<SyntaxHighlighting language="yaml">
-		{`name: Changed SvelteKit paths
+<Article title="Affected SvelteKit paths in PR.">
+	<section>
+		<p>Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.</p>
+		<p>
+			This action will look at +page.svelte files in the routes folder adding those pages. Same goes
+			for +page.js and +page.ts.
+		</p>
+		<p>
+			It will also detect changes in +layout.svelte, +layout.js and +layout.ts files and add all
+			sibling and child pages to the list of affected pages.
+		</p>
+		<p>
+			Not only does it check if the pages or layouts themselves have changed, it also checks if any
+			of the imported files have changed. (Exception being updated dependencies for now.)
+		</p>
+	</section>
+	<section>
+		<h3>Step 1 - Create a reusable GitHub Action</h3>
+		<p>
+			In your project add a YAML file at <code>.guthub/workflows</code> called
+			<code>changed-sveltekit-paths.yml</code>. This will be our reusable action that we can call
+			form any other workflow.
+		</p>
+		<p>Add the following code to <code>changed-sveltekit-paths.yml</code>:</p>
+		<SyntaxHighlighting language="yaml">
+			{`name: Changed SvelteKit paths
 
 on:
 	workflow_call:
@@ -79,28 +80,28 @@ jobs:
 						});
 						core.setOutput("pathsChanged", pathsChanged.join('\\n'));
 `}
-	</SyntaxHighlighting>
-	<p>
-		The most up to date version of this file can be found at
-		<a
-			href="https://github.com/shadovo/svelper/blob/main/.github/workflows/changed-sveltekit-paths.yml"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../changed-sveltekit-paths.yml</a
-		>
-	</p>
-</section>
-<section>
-	<h3>Step 2 - Add the script file.</h3>
-	<p>In addition to the file we created above we will also add the script that it will use.</p>
-	<p>
-		In your project add a file at <code>.guthub/scripts</code> called
-		<code>detect-changed-sveltekit-paths.js</code>.
-	</p>
-	<p>
-		Add the following code to <code>detect-changed-sveltekit-paths.js</code>:
-	</p>
-	<SyntaxHighlighting language="javascript">
-		{`import path from 'path';
+		</SyntaxHighlighting>
+		<p>
+			The most up to date version of this file can be found at
+			<a
+				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/changed-sveltekit-paths.yml"
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../changed-sveltekit-paths.yml</a
+			>
+		</p>
+	</section>
+	<section>
+		<h3>Step 2 - Add the script file.</h3>
+		<p>In addition to the file we created above we will also add the script that it will use.</p>
+		<p>
+			In your project add a file at <code>.guthub/scripts</code> called
+			<code>detect-changed-sveltekit-paths.js</code>.
+		</p>
+		<p>
+			Add the following code to <code>detect-changed-sveltekit-paths.js</code>:
+		</p>
+		<SyntaxHighlighting language="javascript">
+			{`import path from 'path';
 import fs from 'fs';
 
 const MATCH_IMPORTS = /import\\s+(?:[\\w*\\s{},]+\\s+from\\s+?|)["']((?:\\$lib\\/|\\.+\\/).*?)["']/g;
@@ -214,35 +215,38 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 	return [...changedPaths].map((page) => getPathOfPage(page)).sort();
 }
 `}
-	</SyntaxHighlighting>
-	<p>
-		The most up to date version of this file can be found at
-		<a
-			href="https://github.com/shadovo/svelper/blob/main/.github/scripts/detect-changed-sveltekit-paths.js"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../detect-changed-sveltekit-paths.js</a
-		>
-	</p>
-</section>
-<section>
-	<h3>Step 3 - Use the list of changed paths!</h3>
-	<p>Now you have everything you need to get a list of paths affected by the changes in your PR.</p>
-	<p>Some examples of what you can use it for:</p>
-	<ul class="list">
-		<li>Post links to those pages as a PR comment.</li>
-		<li>
-			You can also use it to run tests on only the affected pages. This can be useful if you have a
-			large application with many pages and you want to run tests on only the pages that have
-			changed.
-		</li>
-		<li>
-			Run Lighthoiuse on only the affected pages to make sure you haven't introduced any performance
-			or accessability regressions.
-		</li>
-	</ul>
-	<h4>Example of a workflow posting a comment to the PR.</h4>
-	<SyntaxHighlighting language="yaml">
-		{`name: Post changed URLs
+		</SyntaxHighlighting>
+		<p>
+			The most up to date version of this file can be found at
+			<a
+				href="https://github.com/shadovo/svelper/blob/main/.github/scripts/detect-changed-sveltekit-paths.js"
+				target="_blank"
+				rel="noopener noreferrer"
+				>github.com/shadovo/svelper/.../detect-changed-sveltekit-paths.js</a
+			>
+		</p>
+	</section>
+	<section>
+		<h3>Step 3 - Use the list of changed paths!</h3>
+		<p>
+			Now you have everything you need to get a list of paths affected by the changes in your PR.
+		</p>
+		<p>Some examples of what you can use it for:</p>
+		<ul class="list">
+			<li>Post links to those pages as a PR comment.</li>
+			<li>
+				You can also use it to run tests on only the affected pages. This can be useful if you have
+				a large application with many pages and you want to run tests on only the pages that have
+				changed.
+			</li>
+			<li>
+				Run Lighthoiuse on only the affected pages to make sure you haven't introduced any
+				performance or accessability regressions.
+			</li>
+		</ul>
+		<h4>Example of a workflow posting a comment to the PR.</h4>
+		<SyntaxHighlighting language="yaml">
+			{`name: Post changed URLs
 
 on:
 	pull_request:
@@ -276,18 +280,19 @@ jobs:
 					message: |
 						$\{{ steps.format-message.outputs.message }}
 `}
-	</SyntaxHighlighting>
-	<p>
-		You can of course change <code>http://localhost:5173</code> to point to your PR app domain/path if
-		you prefere.
-	</p>
-	<p>
-		Svelper uses the <code>changed-sveltekit-paths.yml</code> action both to post a comment in the
-		PR and run Lighthouse on only the affected pages in the PR. Implementation can be found here
-		<a
-			href="https://github.com/shadovo/svelper/blob/main/.github/workflows/pr-verification.yml"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../pr-verification.yml</a
-		>
-	</p>
-</section>
+		</SyntaxHighlighting>
+		<p>
+			You can of course change <code>http://localhost:5173</code> to point to your PR app domain/path
+			if you prefere.
+		</p>
+		<p>
+			Svelper uses the <code>changed-sveltekit-paths.yml</code> action both to post a comment in the
+			PR and run Lighthouse on only the affected pages in the PR. Implementation can be found here
+			<a
+				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/pr-verification.yml"
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../pr-verification.yml</a
+			>
+		</p>
+	</section>
+</Article>

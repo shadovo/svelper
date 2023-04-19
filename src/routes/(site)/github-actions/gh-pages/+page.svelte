@@ -1,4 +1,5 @@
 <script>
+	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlight from '$lib/components/SyntaxHighlighting.svelte';
 </script>
 
@@ -10,25 +11,25 @@
 	/>
 </svelte:head>
 
-<section>
-	<h2>Deploy npm build output to GitHub pages.</h2>
-	<p>
-		Using GitHub actions to deploy the result of <code>npm build</code> has never been simpler. Following
-		these steps should have you up and running with a static page in no time!
-	</p>
-</section>
-<section>
-	<h3>Step 1 - Create a github action</h3>
-	<p>
-		In your project add a YAML file at <code>.guthub/workflows</code> lets call it
-		<code>pages.yml</code>.
-	</p>
-</section>
-<section>
-	<h3>Step 2 - Add the config for the action</h3>
-	<p>In your newly created pages.yml file add the following content:</p>
-	<SyntaxHighlight language="yaml">
-		{`# Workflow for building with npm and deploying artifact to GitHub Pages
+<Article title="Deploy npm build output to GitHub pages.">
+	<section>
+		<p>
+			Using GitHub actions to deploy the result of <code>npm build</code> has never been simpler. Following
+			these steps should have you up and running with a static page in no time!
+		</p>
+	</section>
+	<section>
+		<h3>Step 1 - Create a github action</h3>
+		<p>
+			In your project add a YAML file at <code>.guthub/workflows</code> lets call it
+			<code>pages.yml</code>.
+		</p>
+	</section>
+	<section>
+		<h3>Step 2 - Add the config for the action</h3>
+		<p>In your newly created pages.yml file add the following content:</p>
+		<SyntaxHighlight language="yaml">
+			{`# Workflow for building with npm and deploying artifact to GitHub Pages
 name: Deploy site to GitHub Pages
 
 on:
@@ -90,9 +91,10 @@ jobs:
 				id: deployment
 				uses: actions/deploy-pages@v1
 `}
-	</SyntaxHighlight>
-</section>
-<section>
-	<h3>Step 3 - Push your project to GitHub</h3>
-	<p>Push your project to GitHub. This should automatically start the build process.</p>
-</section>
+		</SyntaxHighlight>
+	</section>
+	<section>
+		<h3>Step 3 - Push your project to GitHub</h3>
+		<p>Push your project to GitHub. This should automatically start the build process.</p>
+	</section>
+</Article>

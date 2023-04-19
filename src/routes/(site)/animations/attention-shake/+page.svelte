@@ -1,4 +1,5 @@
 <script>
+	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 
 	let animattionRunning = false;
@@ -13,18 +14,18 @@
 	/>
 </svelte:head>
 
-<section>
-	<h2>Attention shake animation</h2>
-	<p>This is a shaking animation to grab attention.</p>
-	<button
-		class:attentionShake={animattionRunning}
-		on:click={() => (animattionRunning = true)}
-		on:animationend={() => (animattionRunning = false)}
-	>
-		Play animation
-	</button>
-	<SyntaxHighlighting language="css"
-		>{`@keyframes attention-shake {
+<Article title="Attention shake animation">
+	<section>
+		<p>This is a shaking animation to grab attention.</p>
+		<button
+			class:attentionShake={animattionRunning}
+			on:click={() => (animattionRunning = true)}
+			on:animationend={() => (animattionRunning = false)}
+		>
+			Play animation
+		</button>
+		<SyntaxHighlighting language="css"
+			>{`@keyframes attention-shake {
 	0% {
 		transform: rotate(0deg) scale(1);
 	}
@@ -54,8 +55,9 @@
 .attentionShake {
 	animation: attention-shake 1s 1 ease-in-out;
 }`}</SyntaxHighlighting
-	>
-</section>
+		>
+	</section>
+</Article>
 
 <style>
 	@keyframes attention-shake {

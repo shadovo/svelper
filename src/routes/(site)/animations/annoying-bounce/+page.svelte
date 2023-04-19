@@ -1,4 +1,5 @@
 <script>
+	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 
 	let animationRunning = false;
@@ -13,20 +14,21 @@
 	/>
 </svelte:head>
 
-<section>
-	<h2>Annoying bounce animation</h2>
-	<p>
-		This is an annoying bounce animation to let the user know they need to take action on something.
-	</p>
-	<button
-		class:annoyingBounce={animationRunning}
-		on:click={() => (animationRunning = true)}
-		on:animationend={() => (animationRunning = false)}
-	>
-		Play animation
-	</button>
-	<SyntaxHighlighting language="css"
-		>{`@keyframes annoying-bounce {
+<Article title="Annoying bounce animation">
+	<section>
+		<p>
+			This is an annoying bounce animation to let the user know they need to take action on
+			something.
+		</p>
+		<button
+			class:annoyingBounce={animationRunning}
+			on:click={() => (animationRunning = true)}
+			on:animationend={() => (animationRunning = false)}
+		>
+			Play animation
+		</button>
+		<SyntaxHighlighting language="css"
+			>{`@keyframes annoying-bounce {
 	0% {
 		transform: translateY(0);
 	}
@@ -50,8 +52,9 @@
 .annoyingBounce {
 	animation: annoying-bounce 1s 2 ease-in-out;
 }`}</SyntaxHighlighting
-	>
-</section>
+		>
+	</section>
+</Article>
 
 <style>
 	@keyframes annoying-bounce {
