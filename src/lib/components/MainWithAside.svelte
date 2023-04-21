@@ -77,9 +77,9 @@
 	<header>
 		<slot name="header" />
 	</header>
-	<article class="main-article">
-		<slot name="article" />
-	</article>
+	<div class="main-content">
+		<slot name="main-content" />
+	</div>
 	<footer>
 		<slot name="footer" />
 	</footer>
@@ -131,7 +131,7 @@
 		grid-row: 1 / span 1;
 	}
 
-	article {
+	.main-content {
 		grid-column: 1 / span 1;
 		grid-row: 2 / span 1;
 	}

@@ -10,7 +10,7 @@
 		--shadow-strength: 25%;
 
 		--c-text: #f2f2f2;
-		--c-background-rgb: 12, 18, 28;
+		--c-background-rgb: 20, 20, 20;
 		--c-background-code: #030303;
 		--c-accent: #39b2bd;
 		--c-logo: var(--c-text);
