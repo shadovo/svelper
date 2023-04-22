@@ -1,13 +1,7 @@
 <script lang="ts">
-	import Image from '$lib/components/Image.svelte';
+	import Article from '$lib/components/Article.svelte';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
 	import minesweeperHeroImage from '$img/games/minesweeper.png?w=2064;1376;1194;796;688;398&imagetools';
-
-	const heroImageSize = `
-		(min-width: 1024px)	688px,
-		(min-width: 769px) calc(100vw - 336px),
-		calc(100vw - 16px)
-	`;
 </script>
 
 <svelte:head>
@@ -19,38 +13,29 @@
 	/>
 </svelte:head>
 
-<section>
-	<div class="hero">
-		<Image
-			src={minesweeperHeroImage}
-			alt=""
-			role="presentation"
-			sizes={heroImageSize}
-			aspectRatio="3/1"
-			background="#6b3b19"
-		/>
-		<h2>Minesweeper</h2>
-	</div>
-	<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
-	<p>
-		Check out the implementation at <a
-			href="https://github.com/shadovo/svelper/blob/main/src/lib/games/Minesweeper.svelte"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../Minesweeper.svelte</a
-		>
-	</p>
-</section>
-<section>
-	<Minesweeper columns="9" rows="10" mines="10" />
-</section>
-<section>
-	<p>
-		This game is also available in an embed version at
-		<a href="/embeds/v1/minesweeper" target="_blank"
-			>https://www.svelper.com/embeds/v1/minesweeper</a
-		>
-	</p>
-</section>
+<Article title="Minesweeper" image={minesweeperHeroImage} imageColor="#6b3b19">
+	<section>
+		<p>A simple implementation of the classic game Minesweeper as Svelte component.</p>
+		<p>
+			Check out the implementation at <a
+				href="https://github.com/shadovo/svelper/blob/main/src/lib/games/Minesweeper.svelte"
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../Minesweeper.svelte</a
+			>
+		</p>
+	</section>
+	<section>
+		<Minesweeper columns="9" rows="10" mines="10" />
+	</section>
+	<section>
+		<p>
+			This game is also available in an embed version at
+			<a href="/embeds/v1/minesweeper" target="_blank"
+				>https://www.svelper.com/embeds/v1/minesweeper</a
+			>
+		</p>
+	</section>
+</Article>
 
 <style lang="scss">
 </style>

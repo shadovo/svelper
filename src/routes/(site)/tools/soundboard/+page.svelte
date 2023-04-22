@@ -1,19 +1,13 @@
 <script lang="ts">
+	import Article from '$lib/components/Article.svelte';
 	import createSoundboard from '$lib/utils/audio/soundboard';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 	import noteFrequencies from '$lib/utils/audio/note-frequencies';
-	import Image from '$lib/components/Image.svelte';
 	import soundboardHeroImage from '$img/tools/soundboard.png?w=2064;1376;1194;796;688;398&imagetools';
 
 	type BassNote = [string, number];
 	type Note = string;
 	type Melody = [Note[], BassNote[], boolean, boolean, boolean][];
-
-	const heroImageSize = `
-		(min-width: 1024px)	688px,
-		(min-width: 769px) calc(100vw - 336px),
-		calc(100vw - 16px)
-	`;
 
 	const melody: Melody = [
 		[['C4', 'E4', 'G4', 'B4'], [['D2', 3]], true, true, false],
@@ -159,111 +153,101 @@
 	/>
 </svelte:head>
 
-<section>
-	<div class="hero">
-		<Image
-			alt=""
-			role="presentation"
-			src={soundboardHeroImage}
-			sizes={heroImageSize}
-			aspectRatio="3/1"
-			background="#1d6a64"
-		/>
-		<h2>Soundboard</h2>
-	</div>
-	<p>
-		Let me first prefix this with I have no knowledge of music, harmonies, scales or rhythm. This is
-		just to explore the different sounds that could be produced by the <a
-			href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Aduio API</a
-		>
-		on the fly instead of bundeling MP3s.
-	</p>
-	<p>
-		Check out the implementation at <a
-			href="https://github.com/shadovo/svelper/blob/main/src/lib/utils/soundboard.svelte"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard.svelte</a
-		>
-	</p>
-</section>
-<section>
-	<h3>Drums</h3>
-	<div class="flex-row flex-wrap">
-		<button on:click={() => soundboard.playHiHat()}>Hi-hat</button>
-		<button on:click={() => soundboard.playSnare()}>Snare</button>
-		<button on:click={() => soundboard.playKickDrum()}>Kick drum</button>
-	</div>
-</section>
-<section>
-	<h3>Notes (sine)</h3>
-	<div class="sidescroll">
-		<table class="notes">
-			<tr
-				><th />
-				{#each octaves as octave}
-					<th>{octave}</th>
-				{/each}
-			</tr>
-			{#each notes as note}
-				<tr>
-					<td>
-						{note}
-					</td>
+<Article title="Soundboard" image={soundboardHeroImage} imageColor="#1d6a64">
+	<section>
+		<p>
+			Let me first prefix this with I have no knowledge of music, harmonies, scales or rhythm. This
+			is just to explore the different sounds that could be produced by the <a
+				href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Aduio API</a
+			>
+			on the fly instead of bundeling MP3s.
+		</p>
+		<p>
+			Check out the implementation at <a
+				href="https://github.com/shadovo/svelper/blob/main/src/lib/utils/soundboard.svelte"
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard.svelte</a
+			>
+		</p>
+	</section>
+	<section>
+		<h3>Drums</h3>
+		<div class="flex-row flex-wrap">
+			<button on:click={() => soundboard.playHiHat()}>Hi-hat</button>
+			<button on:click={() => soundboard.playSnare()}>Snare</button>
+			<button on:click={() => soundboard.playKickDrum()}>Kick drum</button>
+		</div>
+	</section>
+	<section>
+		<h3>Notes (sine)</h3>
+		<div class="sidescroll">
+			<table class="notes">
+				<tr
+					><th />
 					{#each octaves as octave}
-						<td>
-							<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
-								>{`${note}${octave}`}</button
-							>
-						</td>
+						<th>{octave}</th>
 					{/each}
 				</tr>
-			{/each}
-		</table>
-	</div>
-</section>
-<section>
-	<h3>Bass (triangle)</h3>
-	<div class="sidescroll">
-		<table class="notes">
-			<tr
-				><th />
-				{#each octaves as octave}
-					<th>{octave}</th>
-				{/each}
-			</tr>
-			{#each notes as note}
-				<tr>
-					<td>
-						{note}
-					</td>
-					{#each octaves as octave}
+				{#each notes as note}
+					<tr>
 						<td>
-							<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
-								>{`${note}${octave}`}</button
-							>
+							{note}
 						</td>
+						{#each octaves as octave}
+							<td>
+								<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
+									>{`${note}${octave}`}</button
+								>
+							</td>
+						{/each}
+					</tr>
+				{/each}
+			</table>
+		</div>
+	</section>
+	<section>
+		<h3>Bass (triangle)</h3>
+		<div class="sidescroll">
+			<table class="notes">
+				<tr
+					><th />
+					{#each octaves as octave}
+						<th>{octave}</th>
 					{/each}
 				</tr>
-			{/each}
-		</table>
-	</div>
-</section>
+				{#each notes as note}
+					<tr>
+						<td>
+							{note}
+						</td>
+						{#each octaves as octave}
+							<td>
+								<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
+									>{`${note}${octave}`}</button
+								>
+							</td>
+						{/each}
+					</tr>
+				{/each}
+			</table>
+		</div>
+	</section>
 
-<section>
-	<h3>Melodies</h3>
-	<p>
-		I wrote a function that can take a list of instructions on which instruments to play for each
-		"beat".
-	</p>
-	<p>
-		Check out the implementation at <a
-			href="https://github.com/shadovo/svelper/blob/main/src/routes/(site)/tools/soundboard/%2Bpage.svelte"
-			target="_blank"
-			rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard/+page.svelte</a
-		>
-	</p>
-	<SyntaxHighlighting language="javascript">
-		{`
+	<section>
+		<h3>Melodies</h3>
+		<p>
+			I wrote a function that can take a list of instructions on which instruments to play for each
+			"beat".
+		</p>
+		<p>
+			Check out the implementation at <a
+				href="https://github.com/shadovo/svelper/blob/main/src/routes/(site)/tools/soundboard/%2Bpage.svelte"
+				target="_blank"
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../soundboard/+page.svelte</a
+			>
+		</p>
+		<SyntaxHighlighting language="javascript">
+			{`
 // each row is [notes, bass, hihat, kick, snare]
 const melody = [
 	[['C4', 'E4', 'G4', 'B4'], [['D2', 3]], true, true, false],
@@ -276,15 +260,15 @@ const melody = [
 	[['C5', 'E5', 'G5', 'B5'], [], true, false, false],
 ];
 `}
-	</SyntaxHighlighting>
-	<button on:click={() => togglePlay(melody)}>{playing ? 'Pause' : 'Play'}</button>
-</section>
+		</SyntaxHighlighting>
+		<button on:click={() => togglePlay(melody)}>{playing ? 'Pause' : 'Play'}</button>
+	</section>
 
-<section>
-	<h3>More complex melody</h3>
-	<p>This is a melody generated by ChatGPT given the data format.</p>
-	<SyntaxHighlighting language="javascript">
-		{`
+	<section>
+		<h3>More complex melody</h3>
+		<p>This is a melody generated by ChatGPT given the data format.</p>
+		<SyntaxHighlighting language="javascript">
+			{`
 // each row is [notes, bass, hihat, kick, snare]
 const melody = [
 	[[], [], false, false, true],
@@ -329,9 +313,10 @@ const melody = [
 	[['A4'], [], true, false, false],
 ];
 `}
-	</SyntaxHighlighting>
-	<button on:click={() => togglePlay(melody2)}>{playing ? 'Pause' : 'Play'}</button>
-</section>
+		</SyntaxHighlighting>
+		<button on:click={() => togglePlay(melody2)}>{playing ? 'Pause' : 'Play'}</button>
+	</section>
+</Article>
 
 <style lang="scss">
 	.notes {
