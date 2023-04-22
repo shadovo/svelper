@@ -40,8 +40,9 @@
 		background-color: var(--c-background);
 		border-radius: var(--gap);
 		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
+		height: 100%;
 
-		& > :global(*) {
+		& > :global(*:not(:last-child)) {
 			border-bottom: 1px solid var(--c-text);
 			padding-bottom: var(--gap-2);
 		}
