@@ -23,7 +23,7 @@ jobs:
           node-version: 18
           cache: 'npm'
       - name: Run Lighthouse on urls with lighthouserc-production
-        uses: treosh/lighthouse-ci-action@v9
+        uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc-production.cjs'
           uploadArtifacts: true # save results as an action artifacts
