@@ -11,7 +11,7 @@
 
 		--c-text: #f2f2f2;
 		--c-background-rgb: 20, 20, 20;
-		--c-background-code: #030303;
+		--c-background-code-rgb: 3, 3, 3;
 		--c-accent: #39b2bd;
 		--c-logo: var(--c-text);
 
@@ -69,7 +69,8 @@
 		--c-text: #0d0d0d;
 		--c-background-rgb: 255, 255, 255;
 		--c-background: rgb(var(--c-background-rgb));
-		--c-background-code: #f9f9f9;
+		--c-background-code-rgb: 249, 249, 249;
+		--c-background-code: rgb(var(--c-background-code-rgb));
 		--c-accent: #0b828d;
 		--c-logo: var(--c-accent);
 
@@ -109,6 +110,7 @@
 		font-family: var(--font-text);
 		color: var(--c-text);
 		overflow-y: scroll;
+		font-size: 18px;
 	}
 
 	h1,
@@ -116,9 +118,30 @@
 	h3,
 	h4,
 	h5 {
-		font-family: var(--font-accent);
+		font-family: var(--font-text);
 		line-height: 1.2;
 		margin-bottom: var(--gap-half);
+		font-weight: bold;
+		margin: 0;
+		&:not(:first-child) {
+			margin-top: var(--gap-3);
+		}
+	}
+
+	h1 {
+		font-size: 2.3rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	h3 {
+		font-size: 1.4rem;
+	}
+	h4 {
+		font-size: 1.3rem;
+	}
+	h5 {
+		font-size: 1.2rem;
 	}
 
 	p {

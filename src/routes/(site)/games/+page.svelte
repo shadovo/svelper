@@ -27,7 +27,7 @@
 	<meta name="description" content="A collection games built with Svelte." />
 </svelte:head>
 
-<Article title="Tools built in Svelte">
+<Article title="Games built in Svelte">
 	<section class="content-width">
 		<ArticleGrid {articles} />
 	</section>

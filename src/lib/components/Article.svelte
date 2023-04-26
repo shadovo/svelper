@@ -41,6 +41,8 @@
 		border-radius: var(--gap);
 		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
 		height: 100%;
+		max-width: 860px;
+		margin: var(--gap-2) auto;
 
 		& > :global(*:not(:last-child)) {
 			border-bottom: 1px solid var(--c-text);
@@ -48,11 +50,7 @@
 		}
 
 		& :global(section > p + p) {
-			margin-top: var(--gap);
-		}
-
-		& :global(h4) {
-			margin-top: var(--gap);
+			margin-top: var(--gap-2);
 		}
 	}
 
@@ -83,7 +81,7 @@
 			position: absolute;
 			color: white;
 			bottom: 0;
-			padding: var(--gap-half) var(--gap-2) calc(var(--gap-half) + 2px);
+			padding: var(--gap-2) var(--gap-2) calc(var(--gap-half) + 2px);
 			font-size: 2rem;
 			margin: 0;
 			margin-bottom: -2px;
