@@ -28,9 +28,10 @@
 	const MAX_LEAN = 35;
 
 	let gameRef: HTMLDivElement;
-	let gameScale = 1;
 	let game: Game;
+	let gameScale = 1;
 	let lean = 0;
+	let hasEventListener = false;
 
 	let shipY = tweened(0, {
 		duration: 2000,
@@ -69,8 +70,31 @@
 		setTimeout(updateTimer, 1000);
 	}
 
+	function reset() {
+		game.status = 'notstarted';
+		lean = 0;
+		shipY.set(300, {
+			duration: 0,
+		});
+		shipY.set(0);
+		shipX.set(100, {
+			duration: 0,
+		});
+		shipX.set(0);
+		waterOpacity.set(0, {
+			delay: 0,
+			duration: 0,
+		});
+		waterOpacity.set(1, {
+			delay: 2000,
+			duration: 2000,
+		});
+	}
+
 	async function createGame() {
-		await permission();
+		if (!hasEventListener) {
+			await permission();
+		}
 		game = {
 			status: 'playing',
 			currentTimer: '00:00',
@@ -85,10 +109,6 @@
 		try {
 			const response = await (DeviceOrientationEvent as any).requestPermission();
 			if (response == 'granted') {
-				window.addEventListener('devicemotion', (e) => {
-					// do something for 'e' here.
-					console.log(e);
-				});
 				window.addEventListener('deviceorientation', handleOrientation, true);
 			}
 		} catch {
@@ -98,7 +118,10 @@
 
 	onMount(() => {
 		gameScale = (gameRef.parentElement?.clientWidth || 512) / 512;
-		window.addEventListener('deviceorientation', handleOrientation, true);
+		// window.addEventListener('deviceorientation', handleOrientation, true);
+		return () => {
+			window.removeEventListener('deviceorientation', handleOrientation, true);
+		};
 	});
 
 	$: {
@@ -151,13 +174,14 @@
 			<p>{game.currentTimer}</p>
 		{:else if game?.status === 'lost'}
 			<p>You sank after {game.currentTimer}</p>
+			<button on:click={reset}>Play again</button>
 		{:else}
 			<button on:click={createGame}>Start</button>
 		{/if}
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.game {
 		width: 512px;
 		height: 512px;
@@ -181,12 +205,22 @@
 	.score-card {
 		bottom: 0;
 		height: 80px;
-		background: #177399;
+		background: #115c7c;
+		color: white;
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 3rem;
+		font-size: 2rem;
+		gap: var(--gap);
+
+		button {
+			border-radius: 4px;
+			border: 2px solid white;
+			color: white;
+			background: #3085a9;
+			cursor: pointer;
+		}
 	}
 
 	.water {
