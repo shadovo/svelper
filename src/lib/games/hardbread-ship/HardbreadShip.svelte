@@ -15,6 +15,10 @@
 		endTime: Date | null;
 	};
 
+	interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
+		requestPermission?: () => Promise<'granted' | 'denied'>;
+	}
+
 	const heroImageSize = `
 		(min-width: 1024px)	688px,
 		(min-width: 769px) calc(100vw - 336px),
@@ -48,15 +52,8 @@
 	}
 
 	function handleOrientation(event: DeviceOrientationEvent) {
-		// const absolute = event.absolute;
-		// const alpha = event.alpha;
-		// const beta = event.beta;
-		// const gamma = event.gamma;
 		if (game?.status === 'playing') {
 			lean = event.gamma || 0;
-
-			// Do stuff with the new orientation data
-			console.log('orientation', event);
 		}
 	}
 
@@ -72,7 +69,8 @@
 		setTimeout(updateTimer, 1000);
 	}
 
-	function createGame() {
+	async function createGame() {
+		await permission();
 		game = {
 			status: 'playing',
 			currentTimer: '00:00',
@@ -81,6 +79,21 @@
 		};
 
 		updateTimer();
+	}
+
+	async function permission() {
+		try {
+			const response = await (DeviceOrientationEvent as any).requestPermission();
+			if (response == 'granted') {
+				window.addEventListener('devicemotion', (e) => {
+					// do something for 'e' here.
+					console.log(e);
+				});
+				window.addEventListener('deviceorientation', handleOrientation, true);
+			}
+		} catch {
+			window.addEventListener('deviceorientation', handleOrientation, true);
+		}
 	}
 
 	onMount(() => {
