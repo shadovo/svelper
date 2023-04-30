@@ -57,7 +57,7 @@
 	let waveImage: HTMLImageElement;
 
 	// Timer
-	let timerInterval: NodeJS.Timeout;
+	let timerInterval: ReturnType<typeof setTimeout>;
 
 	// Game state
 	let game: Game = {
