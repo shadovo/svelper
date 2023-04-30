@@ -1,20 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { tweened, spring } from 'svelte/motion';
+	import { tweened } from 'svelte/motion';
 	import type { Tweened } from 'svelte/motion';
-	import Image from '$lib/components/Image.svelte';
-	import waveImage from './assets/hardbread-wave.png?w=258&imagetools';
-	import waterImage from './assets/hardbread-water.png?w=1024&imagetools';
-	import shipImage from './assets/hardbread-ship.png?w=333&imagetools';
-	import backgroundImage from './assets/hardbread-background.png?w=1024&imagetools';
-
-	type Wave = {
-		direction: 'left' | 'right';
-		animationDuration: number;
-		x: Tweened<number>;
-		id: number;
-	};
+	import { assets } from '$app/paths';
+	import { updateTimer, setUpOrientation, loadImage } from './utils';
 
 	type GameStatus = 'notstarted' | 'playing' | 'won' | 'lost';
 
@@ -26,26 +16,50 @@
 		wavesTotal: number;
 	};
 
-	let waves: Set<Wave>;
+	type Wave = {
+		direction: 'left' | 'right';
+		speed: number;
+		opacity: Tweened<number>;
+		x: number;
+		id: number;
+		done: boolean;
+	};
 
-	let deviceRotation = 0;
+	// Game settings
+	const MAX_LEAN = 45; // degrees
 
-	let shipRotationAcceleration = 0;
-	let shipRotationSpeed = 0;
-	let shipRotation = spring(0, {
-		stiffness: 0.08,
-		damping: 0.5,
-	});
+	// Game constants
+	const SHIP_SIZE = {
+		width: 333 / 2,
+		height: 590 / 2,
+	};
+	const WATER_SIZE = {
+		width: 1024 / 2,
+		height: 238 / 2,
+	};
+	const WAVE_SIZE = {
+		width: 258 / 2,
+		height: 229 / 2,
+	};
 
-	const heroImageSize = `
-		(min-width: 1024px)	688px,
-		(min-width: 769px) calc(100vw - 336px),
-		calc(100vw - 16px)
-	`;
-
-	const MAX_LEAN = 45;
-
+	// Game elements
 	let gameRef: HTMLDivElement;
+	let gameScale = 1;
+
+	// Canvas elements
+	let canvas: HTMLCanvasElement;
+	let ctx: CanvasRenderingContext2D | null;
+
+	// Images
+	let backgroundImage: HTMLImageElement;
+	let waterImage: HTMLImageElement;
+	let shipImage: HTMLImageElement;
+	let waveImage: HTMLImageElement;
+
+	// Timer
+	let timerInterval: NodeJS.Timeout;
+
+	// Game state
 	let game: Game = {
 		status: 'notstarted',
 		currentTimer: '00:00',
@@ -53,315 +67,195 @@
 		endTime: null,
 		wavesTotal: 0,
 	};
-	waves = new Set();
-	shipRotationAcceleration = 0;
-	shipRotationSpeed = 0;
-	shipRotation.set(0, {
-		hard: true,
-	});
-	let gameScale = 1;
-	let hasEventListener = false;
 
-	let shipY = tweened(0, {
-		duration: 2000,
-	});
-	let shipX = tweened(0, {
-		duration: 2000,
-	});
-	let waterOpacity = tweened(1, {
-		delay: 1000,
-		duration: 2000,
-	});
+	// Game loop
+	let lastFrameTime = performance.now();
 
-	// function that gets a rotation in deg and calculates the required x and y to move the object straight down
-	function getXYFromRotation(rotation: number) {
-		const radians = (rotation * Math.PI) / 180;
-		const x = Math.sin(radians);
-		const y = Math.cos(radians);
-		return { x, y };
-	}
+	// Gameplay state
+	let deviceOrientation = 0;
+	let waves: Wave[] = [];
 
 	function handleOrientation(event: DeviceOrientationEvent) {
-		if (game?.status === 'playing') {
-			deviceRotation = -1 * (event.gamma || 0);
-		}
+		const { gamma } = event;
+		deviceOrientation = Math.min(Math.max(gamma || 0, -MAX_LEAN), MAX_LEAN);
 	}
 
-	function updateTimer() {
-		if (game.status === 'playing') {
-			const seconds = Math.floor((new Date().getTime() - (game.startTime?.getTime() || 0)) / 1000);
-			const minutes = Math.floor(seconds / 60);
-			const secondsLeft = seconds % 60;
-			const secondsString = secondsLeft < 10 ? `0${secondsLeft}` : `${secondsLeft}`;
-			const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
-			game.currentTimer = `${minutesString}:${secondsString}`;
-		}
-		setTimeout(updateTimer, 1000);
-	}
+	function render() {
+		if (!ctx) return;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		// Draw background
+		ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-	function reset() {
-		game.status = 'notstarted';
-		shipRotation.set(0, {
-			hard: true,
-		});
-		shipY.set(300, {
-			duration: 0,
-		});
-		shipY.set(0);
-		shipX.set(100, {
-			duration: 0,
-		});
-		shipX.set(0);
-		waterOpacity.set(0, {
-			delay: 0,
-			duration: 0,
-		});
-		waterOpacity.set(1, {
-			delay: 2000,
-			duration: 2000,
-		});
-	}
-
-	async function createGame() {
-		if (!hasEventListener) {
-			await permission();
-		}
-		game = {
-			status: 'playing',
-			currentTimer: '00:00',
-			startTime: new Date(),
-			endTime: null,
-			wavesTotal: 0,
+		// Draw ship
+		ctx.save();
+		const shipRotationPoint = {
+			x: canvas.width / 2,
+			y: canvas.height * 0.66,
 		};
-		waves = new Set();
-		shipRotationAcceleration = 0;
-		shipRotationSpeed = 0;
-		shipRotation.set(0, {
-			hard: true,
-		});
-		handleWave();
-		setTimeout(() => handleWave(), 1000);
-		updateTimer();
-		gameLoop();
-	}
+		ctx.translate(shipRotationPoint.x, shipRotationPoint.y);
+		ctx.rotate((Math.PI / 180) * deviceOrientation);
+		ctx.drawImage(
+			shipImage,
+			-SHIP_SIZE.width / 2,
+			-SHIP_SIZE.height * 0.85,
+			SHIP_SIZE.width,
+			SHIP_SIZE.height,
+		);
+		ctx.restore();
 
-	interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
-		requestPermission?: () => Promise<'granted' | 'denied'>;
-	}
+		// Draw water
+		ctx.drawImage(waterImage, 0, canvas.height * 0.62, WATER_SIZE.width, WATER_SIZE.height);
 
-	async function permission() {
-		try {
-			const response = await (
-				DeviceOrientationEvent as unknown as DeviceOrientationEventiOS
-			)?.requestPermission?.();
-			if (response === 'granted' || response === undefined) {
-				window.addEventListener('deviceorientation', handleOrientation, true);
+		// Draw waves
+		waves.forEach((wave) => {
+			if (!ctx) return;
+			ctx.save();
+			ctx.translate(wave.x, canvas.height * 0.47);
+			if (wave.direction === 'right') {
+				ctx.scale(-1, 1);
 			}
-		} catch {
-			window.addEventListener('deviceorientation', handleOrientation, true);
+			ctx.globalAlpha = get(wave.opacity) || 1;
+			ctx.drawImage(
+				waveImage,
+				WAVE_SIZE.width / 2,
+				WAVE_SIZE.height / 2,
+				WAVE_SIZE.width,
+				WAVE_SIZE.height,
+			);
+			ctx.restore();
+		});
+	}
+
+	function createWave(): Wave {
+		const waveDirection = Math.random() > 0.5 ? 'left' : 'right';
+		return {
+			id: game.wavesTotal++,
+			x: waveDirection === 'left' ? canvas.width : 0,
+			direction: waveDirection,
+			// TODO: make speed depend on time since game.startTime
+			speed: 70,
+			opacity: tweened(1, { duration: 1000 }),
+			done: false,
+		};
+	}
+
+	function gameLoop() {
+		const now = performance.now();
+		const timeSinceLastFrame = now - lastFrameTime;
+		lastFrameTime = now;
+
+		waves.forEach((wave) => {
+			if (wave.direction === 'left') {
+				wave.x -= wave.speed * (timeSinceLastFrame / 1000);
+			} else {
+				wave.x += wave.speed * (timeSinceLastFrame / 1000);
+			}
+			if (
+				!wave.done &&
+				((wave.direction === 'left' &&
+					wave.x + WAVE_SIZE.width * 0.8 < canvas.width / 2 + SHIP_SIZE.width / 2) ||
+					(wave.direction === 'right' &&
+						wave.x - WAVE_SIZE.width * 0.8 > canvas.width / 2 - SHIP_SIZE.width / 2))
+			) {
+				wave.opacity?.set?.(0);
+				wave.done = true;
+				setTimeout(() => {
+					waves = waves.filter((w) => w.id !== wave.id);
+					waves.push(createWave());
+				}, 1000);
+			}
+		});
+
+		// TODO: Chack ship collision with waves
+		// if ship does not lean towards the wave and the wave is close enough, game over
+
+		// TODO: Game over animation
+
+		render();
+		lastFrameTime = performance.now();
+		requestAnimationFrame(gameLoop);
+	}
+
+	// TODO: create reset game function
+
+	async function startGame() {
+		console.log('gameStarted');
+		await setUpOrientation(handleOrientation);
+		if (game.status === 'notstarted') {
+			game.status = 'playing';
+			game.startTime = new Date();
+
+			timerInterval = setInterval(() => {
+				game.currentTimer = updateTimer(game.startTime);
+			}, 1000);
+			waves.push(createWave());
+			setTimeout(() => {
+				waves.push(createWave());
+			}, 1000);
+
+			gameLoop();
 		}
 	}
 
-	function handleWave() {
-		const id = (game.wavesTotal += 1);
-		const animationDuration = 2000 + Math.random() * 3000;
-		const direction = Math.random() > 0.5 ? 'left' : 'right';
-		const startX = direction === 'left' ? 641 : -129;
-		const endX = direction === 'left' ? 258 : 129;
-		const wave: Wave = {
-			direction,
-			animationDuration,
-			x: tweened(startX, {
-				duration: animationDuration,
-			}),
-			id,
-		};
-		waves.add(wave);
-		wave.x.set(endX);
-		setTimeout(() => {
-			if (game.status !== 'playing') {
-				return;
-			}
-			// shipRotationSpeed += direction === 'left' ? -30 : 30;
-			shipRotation.update((value) => value + (direction === 'left' ? -400 : 400));
-			waves.delete(wave);
-			handleWave();
-		}, wave.animationDuration);
-	}
-
-	onMount(() => {
+	onMount(async () => {
+		ctx = canvas.getContext('2d');
 		gameScale = (gameRef.parentElement?.clientWidth || 512) / 512;
+
+		[backgroundImage, waterImage, shipImage, waveImage] = await Promise.all([
+			loadImage(`${assets}/images/games/hardbread/background.png`),
+			loadImage(`${assets}/images/games/hardbread/water.png`),
+			loadImage(`${assets}/images/games/hardbread/ship.png`),
+			loadImage(`${assets}/images/games/hardbread/wave.png`),
+		]);
+
+		render();
+
 		return () => {
 			window.removeEventListener('deviceorientation', handleOrientation, true);
 		};
 	});
-
-	let frame = 0;
-	function gameLoop() {
-		if (game?.status !== 'playing') {
-			shipRotation.set($shipRotation, { hard: true });
-			return;
-		}
-		frame = (frame % 4) + 1;
-		shipRotation.set(deviceRotation);
-		requestAnimationFrame(gameLoop);
-	}
-
-	$: {
-		if (Math.abs($shipRotation) > MAX_LEAN) {
-			game.status = 'lost';
-			const { x, y } = getXYFromRotation($shipRotation);
-			shipY.set(y * 500);
-			shipX.set(x * 500);
-			waterOpacity.set(0);
-		}
-	}
 </script>
 
 <div bind:this={gameRef} class="game" style="transform: scale({gameScale})">
-	{#key frame}
-		<div class="background">
-			<Image
-				alt=""
-				role="presentation"
-				src={backgroundImage}
-				sizes={heroImageSize}
-				aspectRatio="1024/1024"
-				background="transparent"
-			/>
-		</div>
-
-		<div
-			class="ship"
-			style="transform: rotate({$shipRotation}deg) translate({$shipX}px, {$shipY}px)"
-		>
-			<Image
-				alt=""
-				role="presentation"
-				src={shipImage}
-				sizes={heroImageSize}
-				aspectRatio="333/590"
-				background="transparent"
-			/>
-		</div>
-
-		<div class="water" style="opacity: {$waterOpacity}">
-			<Image
-				alt=""
-				role="presentation"
-				src={waterImage}
-				sizes={heroImageSize}
-				aspectRatio="1024/238"
-				background="transparent"
-			/>
-		</div>
-
-		{#if game?.status === 'playing'}
-			{#each [...waves] as wave}
-				{#key get(wave.x)}
-					<div
-						id={`${wave.id}`}
-						class="wave {wave.direction}"
-						style="transform: translateX({get(wave.x)}px) scaleX({wave.direction === 'left'
-							? 1
-							: -1});"
-					>
-						<Image
-							alt=""
-							role="presentation"
-							src={waveImage}
-							sizes={heroImageSize}
-							aspectRatio="258/229"
-							background="transparent"
-						/>
-					</div>
-				{/key}
-			{/each}
-		{/if}
-
-		<div class="warning" style="opacity: {Math.abs($shipRotation) / MAX_LEAN}" />
-		<div class="score-card">
-			{#if game?.status === 'playing'}
-				<p>{game.currentTimer}</p>
-			{:else if game?.status === 'lost'}
-				<p>You sank after {game.currentTimer}</p>
-				<button on:click={reset}>Play again</button>
-			{:else}
-				<button on:click={createGame}>Start</button>
-			{/if}
-		</div>
-	{/key}
+	<canvas width="512" height="512" bind:this={canvas} />
+	<div class="menu">
+		<button on:click={startGame}>Start</button>
+		<span class="timer">{game.currentTimer}</span>
+	</div>
 </div>
 
 <style lang="scss">
 	.game {
+		position: relative;
 		width: 512px;
 		height: 512px;
-		position: relative;
-		transform-origin: top left;
 		overflow: hidden;
+		border: 1px solid #000;
+		transform-origin: top left;
 	}
 
-	.wave,
-	.water,
-	.ship,
-	.background,
-	.warning,
-	.score-card {
+	canvas {
 		position: absolute;
+		inset: 0;
+		width: 512px;
+		height: 512px;
 	}
 
-	.wave.right {
-		width: 129px;
-		top: 290px;
+	.menu {
+		position: absolute;
 		left: 0;
-	}
-	.wave.left {
-		width: 129px;
-		top: 290px;
-		left: 0;
-	}
-
-	.warning {
-		inset: 0 0 80px 0;
-		box-shadow: inset 0 0 60px 0px red;
-	}
-
-	.score-card {
 		bottom: 0;
+		right: 0;
 		height: 80px;
-		background: #115c7c;
-		color: white;
-		width: 100%;
 		display: flex;
-		align-items: center;
 		justify-content: center;
-		font-size: 2rem;
+		align-items: center;
 		gap: var(--gap);
-
-		button {
-			border-radius: 4px;
-			border: 2px solid white;
-			color: white;
-			background: #3085a9;
-			cursor: pointer;
-		}
 	}
 
-	.water {
-		width: 512px;
-		left: 0;
-		top: 315px;
-	}
-
-	.ship {
-		width: 166px;
-		left: 170px;
-		top: 80px;
-		transform-origin: 50% 85%;
-	}
-
-	.background {
-		width: 512px;
+	.timer {
+		font-size: 2rem;
+		width: 200px;
+		text-align: center;
 	}
 </style>
