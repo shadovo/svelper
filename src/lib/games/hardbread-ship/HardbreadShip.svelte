@@ -34,7 +34,7 @@
 	let shipRotationSpeed = 0;
 	let shipRotation = spring(0, {
 		stiffness: 0.08,
-		damping: 0.3,
+		damping: 0.5,
 	});
 
 	const heroImageSize = `
@@ -154,7 +154,7 @@
 			const response = await (
 				DeviceOrientationEvent as unknown as DeviceOrientationEventiOS
 			)?.requestPermission?.();
-			if (response == 'granted') {
+			if (response === 'granted' || response === undefined) {
 				window.addEventListener('deviceorientation', handleOrientation, true);
 			}
 		} catch {
