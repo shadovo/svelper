@@ -45,7 +45,6 @@
 
 	const MAX_LEAN = 45;
 
-	let lastFrameTime: number = 0;
 	let gameRef: HTMLDivElement;
 	let game: Game = {
 		status: 'notstarted',
@@ -146,9 +145,15 @@
 		gameLoop();
 	}
 
+	interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
+		requestPermission?: () => Promise<'granted' | 'denied'>;
+	}
+
 	async function permission() {
 		try {
-			const response = await (DeviceOrientationEvent as any).requestPermission();
+			const response = await (
+				DeviceOrientationEvent as unknown as DeviceOrientationEventiOS
+			)?.requestPermission?.();
 			if (response == 'granted') {
 				window.addEventListener('deviceorientation', handleOrientation, true);
 			}
