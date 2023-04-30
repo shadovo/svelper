@@ -1,10 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { tweened } from 'svelte/motion';
+	import { get } from 'svelte/store';
+	import { tweened, spring } from 'svelte/motion';
+	import type { Tweened } from 'svelte/motion';
 	import Image from '$lib/components/Image.svelte';
+	import waveImage from './assets/hardbread-wave.png?w=258&imagetools';
 	import waterImage from './assets/hardbread-water.png?w=1024&imagetools';
 	import shipImage from './assets/hardbread-ship.png?w=333&imagetools';
 	import backgroundImage from './assets/hardbread-background.png?w=1024&imagetools';
+
+	type Wave = {
+		direction: 'left' | 'right';
+		animationDuration: number;
+		x: Tweened<number>;
+		id: number;
+	};
 
 	type GameStatus = 'notstarted' | 'playing' | 'won' | 'lost';
 
@@ -13,11 +23,19 @@
 		currentTimer: string;
 		startTime: Date | null;
 		endTime: Date | null;
+		wavesTotal: number;
 	};
 
-	interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
-		requestPermission?: () => Promise<'granted' | 'denied'>;
-	}
+	let waves: Set<Wave>;
+
+	let deviceRotation = 0;
+
+	let shipRotationAcceleration = 0;
+	let shipRotationSpeed = 0;
+	let shipRotation = spring(0, {
+		stiffness: 0.08,
+		damping: 0.3,
+	});
 
 	const heroImageSize = `
 		(min-width: 1024px)	688px,
@@ -25,12 +43,24 @@
 		calc(100vw - 16px)
 	`;
 
-	const MAX_LEAN = 35;
+	const MAX_LEAN = 45;
 
+	let lastFrameTime: number = 0;
 	let gameRef: HTMLDivElement;
-	let game: Game;
+	let game: Game = {
+		status: 'notstarted',
+		currentTimer: '00:00',
+		startTime: null,
+		endTime: null,
+		wavesTotal: 0,
+	};
+	waves = new Set();
+	shipRotationAcceleration = 0;
+	shipRotationSpeed = 0;
+	shipRotation.set(0, {
+		hard: true,
+	});
 	let gameScale = 1;
-	let lean = 0;
 	let hasEventListener = false;
 
 	let shipY = tweened(0, {
@@ -54,7 +84,7 @@
 
 	function handleOrientation(event: DeviceOrientationEvent) {
 		if (game?.status === 'playing') {
-			lean = event.gamma || 0;
+			deviceRotation = -1 * (event.gamma || 0);
 		}
 	}
 
@@ -72,7 +102,9 @@
 
 	function reset() {
 		game.status = 'notstarted';
-		lean = 0;
+		shipRotation.set(0, {
+			hard: true,
+		});
 		shipY.set(300, {
 			duration: 0,
 		});
@@ -100,9 +132,18 @@
 			currentTimer: '00:00',
 			startTime: new Date(),
 			endTime: null,
+			wavesTotal: 0,
 		};
-
+		waves = new Set();
+		shipRotationAcceleration = 0;
+		shipRotationSpeed = 0;
+		shipRotation.set(0, {
+			hard: true,
+		});
+		handleWave();
+		setTimeout(() => handleWave(), 1000);
 		updateTimer();
+		gameLoop();
 	}
 
 	async function permission() {
@@ -116,18 +157,55 @@
 		}
 	}
 
+	function handleWave() {
+		const id = (game.wavesTotal += 1);
+		const animationDuration = 2000 + Math.random() * 3000;
+		const direction = Math.random() > 0.5 ? 'left' : 'right';
+		const startX = direction === 'left' ? 641 : -129;
+		const endX = direction === 'left' ? 258 : 129;
+		const wave: Wave = {
+			direction,
+			animationDuration,
+			x: tweened(startX, {
+				duration: animationDuration,
+			}),
+			id,
+		};
+		waves.add(wave);
+		wave.x.set(endX);
+		setTimeout(() => {
+			if (game.status !== 'playing') {
+				return;
+			}
+			// shipRotationSpeed += direction === 'left' ? -30 : 30;
+			shipRotation.update((value) => value + (direction === 'left' ? -400 : 400));
+			waves.delete(wave);
+			handleWave();
+		}, wave.animationDuration);
+	}
+
 	onMount(() => {
 		gameScale = (gameRef.parentElement?.clientWidth || 512) / 512;
-		// window.addEventListener('deviceorientation', handleOrientation, true);
 		return () => {
 			window.removeEventListener('deviceorientation', handleOrientation, true);
 		};
 	});
 
+	let frame = 0;
+	function gameLoop() {
+		if (game?.status !== 'playing') {
+			shipRotation.set($shipRotation, { hard: true });
+			return;
+		}
+		frame = (frame % 4) + 1;
+		shipRotation.set(deviceRotation);
+		requestAnimationFrame(gameLoop);
+	}
+
 	$: {
-		if (Math.abs(lean) > MAX_LEAN) {
+		if (Math.abs($shipRotation) > MAX_LEAN) {
 			game.status = 'lost';
-			const { x, y } = getXYFromRotation(lean);
+			const { x, y } = getXYFromRotation($shipRotation);
 			shipY.set(y * 500);
 			shipX.set(x * 500);
 			waterOpacity.set(0);
@@ -136,49 +214,78 @@
 </script>
 
 <div bind:this={gameRef} class="game" style="transform: scale({gameScale})">
-	<div class="background">
-		<Image
-			alt=""
-			role="presentation"
-			src={backgroundImage}
-			sizes={heroImageSize}
-			aspectRatio="1024/1024"
-			background="transparent"
-		/>
-	</div>
+	{#key frame}
+		<div class="background">
+			<Image
+				alt=""
+				role="presentation"
+				src={backgroundImage}
+				sizes={heroImageSize}
+				aspectRatio="1024/1024"
+				background="transparent"
+			/>
+		</div>
 
-	<div class="ship" style="transform: rotate({lean}deg) translate({$shipX}px, {$shipY}px)">
-		<Image
-			alt=""
-			role="presentation"
-			src={shipImage}
-			sizes={heroImageSize}
-			aspectRatio="333/590"
-			background="transparent"
-		/>
-	</div>
+		<div
+			class="ship"
+			style="transform: rotate({$shipRotation}deg) translate({$shipX}px, {$shipY}px)"
+		>
+			<Image
+				alt=""
+				role="presentation"
+				src={shipImage}
+				sizes={heroImageSize}
+				aspectRatio="333/590"
+				background="transparent"
+			/>
+		</div>
 
-	<div class="water" style="opacity: {$waterOpacity}">
-		<Image
-			alt=""
-			role="presentation"
-			src={waterImage}
-			sizes={heroImageSize}
-			aspectRatio="1024/238"
-			background="transparent"
-		/>
-	</div>
-	<div class="warning" style="opacity: {Math.abs(lean) / MAX_LEAN}" />
-	<div class="score-card">
+		<div class="water" style="opacity: {$waterOpacity}">
+			<Image
+				alt=""
+				role="presentation"
+				src={waterImage}
+				sizes={heroImageSize}
+				aspectRatio="1024/238"
+				background="transparent"
+			/>
+		</div>
+
 		{#if game?.status === 'playing'}
-			<p>{game.currentTimer}</p>
-		{:else if game?.status === 'lost'}
-			<p>You sank after {game.currentTimer}</p>
-			<button on:click={reset}>Play again</button>
-		{:else}
-			<button on:click={createGame}>Start</button>
+			{#each [...waves] as wave}
+				{#key get(wave.x)}
+					<div
+						id={`${wave.id}`}
+						class="wave {wave.direction}"
+						style="transform: translateX({get(wave.x)}px) scaleX({wave.direction === 'left'
+							? 1
+							: -1});"
+					>
+						<Image
+							alt=""
+							role="presentation"
+							src={waveImage}
+							sizes={heroImageSize}
+							aspectRatio="258/229"
+							background="transparent"
+						/>
+					</div>
+				{/key}
+			{/each}
 		{/if}
-	</div>
+
+		<div class="warning" style="opacity: {Math.abs($shipRotation) / MAX_LEAN}" />
+		<div class="score-card">
+			{#if game?.status === 'playing'}
+				<p>{game.currentTimer}</p>
+			{:else if game?.status === 'lost'}
+				<p>You sank after {game.currentTimer}</p>
+				<button on:click={reset}>Play again</button>
+			{:else}
+				<button on:click={createGame}>Start</button>
+			{/if}
+		</div>
+	{/key}
 </div>
 
 <style lang="scss">
@@ -189,12 +296,25 @@
 		transform-origin: top left;
 		overflow: hidden;
 	}
+
+	.wave,
 	.water,
 	.ship,
 	.background,
 	.warning,
 	.score-card {
 		position: absolute;
+	}
+
+	.wave.right {
+		width: 129px;
+		top: 290px;
+		left: 0;
+	}
+	.wave.left {
+		width: 129px;
+		top: 290px;
+		left: 0;
 	}
 
 	.warning {
