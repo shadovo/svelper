@@ -63,7 +63,7 @@
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (width < 768px) {
 		footer {
 			border: none;
 		}

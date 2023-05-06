@@ -89,6 +89,15 @@
 					>
 				</a>
 			</div>
+			<div class="menu-toggle">
+				<button>
+					<svg width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<line x1="3" y1="6" x2="21" y2="6" />
+						<line x1="3" y1="12" x2="21" y2="12" />
+						<line x1="3" y1="18" x2="21" y2="18" />
+					</svg>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -127,14 +136,29 @@
 	.github {
 		height: 100%;
 		width: 150px;
-		padding: var(--gap-half);
 		text-align: right;
 		position: relative;
 		a {
 			display: inline-block;
 			height: 100%;
-			padding: var(--gap-half);
+			padding: var(--gap);
 			color: var(--c-accent);
+		}
+	}
+	.menu-toggle {
+		display: none;
+		height: 100%;
+		width: 150px;
+		padding: var(--gap-half);
+		text-align: right;
+		position: relative;
+
+		button {
+			margin: 0 calc(-1 * var(--gap-half)) 0 auto;
+			border: none;
+			height: 100%;
+			background: none;
+			padding: 0 var(--gap-half);
 		}
 	}
 	nav {
@@ -185,6 +209,38 @@
 
 		&:hover {
 			text-decoration: none;
+		}
+	}
+
+	@media (width < 768px) {
+		.top-bar-spacer {
+			--top-bar-height: 74px;
+		}
+		.content {
+			padding: var(--gap-half);
+		}
+
+		ul {
+			gap: var(--gap);
+		}
+
+		nav a {
+			padding: var(--gap) var(--gap-half);
+		}
+
+		.logo,
+		.github {
+			width: auto;
+		}
+	}
+
+	@media (width < 560px) {
+		nav,
+		.github {
+			display: none;
+		}
+		.menu-toggle {
+			display: block;
 		}
 	}
 </style>

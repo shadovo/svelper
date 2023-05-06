@@ -90,7 +90,7 @@
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (width < 768px) {
 		article {
 			padding: var(--gap);
 		}

@@ -170,7 +170,7 @@
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (width < 768px) {
 		main {
 			--aside-width: 300px;
 			grid-template-columns: 100% 0;

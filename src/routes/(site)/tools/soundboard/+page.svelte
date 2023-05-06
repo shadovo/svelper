@@ -335,7 +335,7 @@ const melody = [
 		max-width: 100%;
 		overflow-x: scroll;
 	}
-	@media (max-width: 500px) {
+	@media (width < 500px) {
 		.notes {
 			font-size: 0.7rem;
 

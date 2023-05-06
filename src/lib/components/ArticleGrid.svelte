@@ -104,7 +104,7 @@
 		font-size: 0.75rem;
 	}
 
-	@media (max-width: 480px) {
+	@media (width < 480px) {
 		.grid {
 			grid-template-columns: repeat(1, minmax(200px, 1fr));
 		}
