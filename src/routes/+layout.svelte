@@ -110,7 +110,7 @@
 		font-family: var(--font-text);
 		color: var(--c-text);
 		overflow-y: scroll;
-		font-size: 18px;
+		font-size: 16px;
 	}
 
 	h1,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
-	import TopBar from '$lib/components/TopBar.svelte';
+	import TopBar from './TopBar.svelte';
 
 	let showAside = false;
 
