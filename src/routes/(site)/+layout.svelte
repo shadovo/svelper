@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
-	import TopBar from './TopBar.svelte';
+	import Navigation from './Navigation.svelte';
 
 	let showAside = false;
 
@@ -10,9 +10,7 @@
 </script>
 
 <div class="content">
-	<header>
-		<TopBar />
-	</header>
+	<Navigation />
 	<main>
 		<slot />
 	</main>
@@ -27,7 +25,7 @@
 
 <style lang="scss">
 	.content {
-		background-image: linear-gradient(
+		/* background-image: linear-gradient(
 				180deg,
 				var(--c-background),
 				rgba(32, 32, 32, 0.01) 50%,
@@ -39,7 +37,7 @@
 			radial-gradient(ellipse at center left, rgb(32 255 255 / 97%), transparent 50%);
 		background-size: 100% 120vh;
 		background-size: 100% clamp(900px, 70vw, 120vh);
-		background-repeat: no-repeat;
+		background-repeat: no-repeat; */
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;

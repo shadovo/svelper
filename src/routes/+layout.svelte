@@ -105,6 +105,14 @@
 		--c-background: transparent;
 	}
 
+	html:has(dialog[open]) {
+		overflow-y: initial;
+	}
+
+	body:has(dialog[open]) {
+		overflow: hidden;
+	}
+
 	html {
 		background: var(--c-background);
 		font-family: var(--font-text);

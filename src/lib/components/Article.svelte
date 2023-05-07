@@ -41,7 +41,7 @@
 		border-radius: var(--gap);
 		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
 		height: 100%;
-		max-width: 860px;
+		max-width: 800px;
 		margin: var(--gap-2) auto;
 
 		& > :global(*:not(:last-child)) {
@@ -68,7 +68,7 @@
 		position: relative;
 		aspect-ratio: 3 / 1;
 		overflow: hidden;
-		border-radius: var(--gap) var(--gap) 0 0;
+		/* border-radius: var(--gap) var(--gap) 0 0; */
 		border-bottom: none;
 
 		img {

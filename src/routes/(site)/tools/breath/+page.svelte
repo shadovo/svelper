@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import BreathingTechnique from '$lib/tools/BreathingTechnique.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
@@ -60,7 +61,7 @@ const breathOutConfig = {
 	<section>
 		<p>
 			This game is also available in an embed version at
-			<a href="/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
+			<a href="{base}/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
 		</p>
 	</section>
 
