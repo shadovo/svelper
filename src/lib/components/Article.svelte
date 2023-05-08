@@ -54,6 +54,12 @@
 		}
 	}
 
+	@media (width < 800px) {
+		article {
+			margin-top: 0;
+		}
+	}
+
 	h2 {
 		font-size: 1.5rem;
 		width: 100%;

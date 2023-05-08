@@ -81,22 +81,46 @@
 	on:close={() => (showSidebar = false)}
 >
 	<div class="sidebar-content">
-		<nav>
-			<ul>
-				<li aria-current={$page.url.pathname.startsWith('/code') ? 'page' : undefined}>
-					<a href="{base}/code">Code</a>
-				</li>
-				<li aria-current={$page.url.pathname.startsWith('/games') ? 'page' : undefined}>
-					<a href="{base}/games">Games</a>
-				</li>
-				<li aria-current={$page.url.pathname.startsWith('/tools') ? 'page' : undefined}>
-					<a href="{base}/tools">Tools</a>
-				</li>
-				<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
-					<a href="{base}/cookies">Cookies</a>
-				</li>
-			</ul>
-		</nav>
+		<div class="top">
+			<h2>Menu</h2>
+			<div class="menu-toggle">
+				<button on:click={() => (showSidebar = !showSidebar)}>
+					<svg width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<line x1="18" y1="6" x2="6" y2="18" />
+						<line x1="6" y1="6" x2="18" y2="18" />
+					</svg>
+				</button>
+			</div>
+		</div>
+		<div class="content">
+			<nav>
+				<ul>
+					<li aria-current={$page.url.pathname === base + '/' ? 'page' : undefined}>
+						<a href="{base}/">Home</a>
+					</li>
+					<li aria-current={$page.url.pathname.startsWith('/code') ? 'page' : undefined}>
+						<a href="{base}/code">Code</a>
+					</li>
+					<li aria-current={$page.url.pathname.startsWith('/games') ? 'page' : undefined}>
+						<a href="{base}/games">Games</a>
+					</li>
+					<li aria-current={$page.url.pathname.startsWith('/tools') ? 'page' : undefined}>
+						<a href="{base}/tools">Tools</a>
+					</li>
+					<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
+						<a href="{base}/cookies">Cookies</a>
+					</li>
+					<li>
+						<a
+							title="Go to Svelper on GitHub"
+							href="https://github.com/shadovo/svelper"
+							target="_blank"
+							rel="noopener noreferrer">GitHub</a
+						>
+					</li>
+				</ul>
+			</nav>
+		</div>
 	</div>
 </dialog>
 
@@ -106,6 +130,30 @@
 		position: relative;
 		height: var(--top-bar-height);
 		inset: 0 0 auto 0;
+	}
+
+	.menu-toggle {
+		display: none;
+		width: 150px;
+		height: 100%;
+		padding: var(--gap-half);
+		text-align: right;
+		position: relative;
+
+		button {
+			margin: 0 calc(-1 * var(--gap-half)) 0 auto;
+			border: none;
+			background: none;
+			padding: 0 var(--gap-half);
+
+			&:hover {
+				background-color: rgba(123, 123, 123, 0.15);
+			}
+		}
+	}
+	svg {
+		height: 100%;
+		color: var(--c-text);
 	}
 	.top-bar {
 		position: fixed;
@@ -119,7 +167,6 @@
 
 		.content {
 			height: 100%;
-
 			margin: 0 auto;
 			display: flex;
 			flex-direction: row;
@@ -130,9 +177,6 @@
 			height: 100%;
 			width: 150px;
 			padding: var(--gap-half);
-			a {
-				/* color: var(--c-text); */
-			}
 		}
 		.github {
 			height: 100%;
@@ -146,31 +190,11 @@
 				color: var(--c-text);
 			}
 		}
-		.menu-toggle {
-			display: none;
-			height: 100%;
-			width: 150px;
-			padding: var(--gap-half);
-			text-align: right;
-			position: relative;
-
-			button {
-				margin: 0 calc(-1 * var(--gap-half)) 0 auto;
-				border: none;
-				height: 100%;
-				background: none;
-				padding: 0 var(--gap-half);
-			}
-		}
 		nav {
 			height: 100%;
 		}
 		h1 {
 			height: 100%;
-		}
-		svg {
-			height: 100%;
-			color: var(--c-text);
 		}
 		ul {
 			display: flex;
@@ -255,6 +279,46 @@
 
 	.sidebar-content {
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: var(--c-text);
+			width: 100%;
+			height: 74px;
+			background-color: rgba(var(--c-background-code-rgb), 0.7);
+			padding: var(--gap-half) var(--gap-half) var(--gap-half) var(--gap);
+		}
+		.content {
+			padding: var(--gap);
+		}
+		ul {
+			display: flex;
+			flex-direction: column;
+		}
+		li {
+			position: relative;
+			&:not(:last-child) {
+				border-bottom: 1px solid #525252;
+				margin: 0;
+			}
+			&[aria-current='page']:after {
+				content: '◄';
+				color: var(--c-accent);
+				position: absolute;
+				inset: 0 0 0 auto;
+				margin: auto;
+				height: fit-content;
+				font-size: 18px;
+			}
+			a {
+				padding: var(--gap) 0;
+				display: block;
+			}
+		}
 	}
 
 	@media (width < 768px) {
@@ -282,13 +346,13 @@
 	}
 
 	@media (width < 560px) {
+		.menu-toggle {
+			display: flex;
+		}
 		.top-bar {
 			nav,
 			.github {
 				display: none;
-			}
-			.menu-toggle {
-				display: block;
 			}
 		}
 	}
