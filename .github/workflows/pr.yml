@@ -107,7 +107,7 @@ jobs:
       - name: Updated config
         run: cat ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
       - name: Run Lighthouse on urls with lighthouserc-pr
-        uses: treosh/lighthouse-ci-action@v9
+        uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc-pr.cjs'
           uploadArtifacts: true # save results as an action artifacts
