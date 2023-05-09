@@ -78,12 +78,6 @@
 		/* border-radius: var(--gap) var(--gap) 0 0; */
 		border-bottom: none;
 
-		img {
-			width: 100%;
-			height: auto;
-			position: absolute;
-		}
-
 		h2 {
 			position: absolute;
 			color: white;
