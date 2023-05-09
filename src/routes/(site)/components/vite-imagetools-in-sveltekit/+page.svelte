@@ -77,7 +77,7 @@ export default defineConfig(() => {
 							// In addition to the original format also generate a WebP version
 							format: 'webp;' + extension,
 							// picture: true means imagetools will generate data suited for the picture element 
-							picture: true,
+							as: 'picture',
 						});
 					}
 					return new URLSearchParams();
@@ -176,8 +176,8 @@ interface ImageSources {
 }
 
 interface Image {
-	fallback: ImageSource;
 	sources: ImageSources;
+	img: ImageSource;
 }
 
 export let src: Image;
@@ -197,7 +197,7 @@ export let loading: 'eager' | 'lazy' = 'eager';`}</SyntaxHighlighting
       {sizes}
     />
   {/each}
-  <img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.fallback.src} {alt} {loading} />
+  <img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.img.src} {alt} {loading} />
 </picture>`}
 		</SyntaxHighlighting>
 		<h4>CSS</h4>
@@ -211,9 +211,9 @@ img {
 		</SyntaxHighlighting>
 		<p>
 			This component defines an interface for an <code>Image</code> object that takes a
-			<code>fallback</code>
-			image source and an object of <code>sources</code> where each key is an image format and the value
-			is an array of image sources for that format at different widths.
+			<code>img</code>
+			fallback source and an object of <code>sources</code> where each key is an image format and the
+			value is an array of image sources for that format at different widths.
 		</p>
 		<p>
 			Inside the <code>picture</code> tag, we loop over the <code>sources</code> object and create a
