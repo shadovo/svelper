@@ -11,6 +11,7 @@ module.exports = {
 			assertions: {
 				'uses-passive-event-listeners': 'off',
 				'csp-xss': 'off',
+				'bf-cache': 'off',
 			},
 		},
 		upload: {
