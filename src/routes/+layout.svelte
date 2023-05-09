@@ -36,6 +36,7 @@
 	}
 
 	html {
+		/* Font settings */
 		--font-title: ui-serif, serif;
 		--font-text: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
 			sans-serif, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
@@ -44,15 +45,16 @@
 		--font-code: Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco,
 			Droid Sans Mono, Source Code Pro, monospace;
 		--font-weight-bold: 700;
-
 		--font-size-base: 16px;
 
+		/* Spacing */
 		--gap-quarter: 0.25rem;
 		--gap-half: 0.5rem;
 		--gap: 1rem;
 		--gap-2: 1.5rem;
 		--gap-3: 2rem;
 
+		/* z-index simplified */
 		--layer-1: 1;
 		--layer-2: 2;
 		--layer-3: 3;
@@ -60,20 +62,26 @@
 		--layer-5: 5;
 		--layer-important: 2147483647;
 
+		/* TODO: reevaluate */
 		--shadow-color: 220 3% 15%;
 		--shadow-strength: 1%;
 
+		/* FIXME: change to surface and border colors instead */
 		--c-table-border: var(--c-text);
-		--c-table-row: #f4f4f5;
+		--c-table-row: #ffffff;
 
 		--c-text: #0d0d0d;
-		--c-background-rgb: 255, 255, 255;
+		--c-accent: #097983;
+		--c-logo: var(--c-accent);
+		/* FIXME: use background, surface-1,-2,-3,-4 */
+		--c-background-rgb: 240, 240, 240;
 		--c-background: rgb(var(--c-background-rgb));
 		--c-background-code-rgb: 249, 249, 249;
 		--c-background-code: rgb(var(--c-background-code-rgb));
-		--c-accent: #0b828d;
-		--c-logo: var(--c-accent);
 
+		/* TODO: add high-contrast, low-contrast */
+
+		/* Prism syntax highlighting */
 		--prism-background: none;
 		--prism-text: #000000;
 		--prism-text-shadow: 0 1px white;
