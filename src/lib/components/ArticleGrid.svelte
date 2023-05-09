@@ -10,6 +10,7 @@
 		tags?: string[];
 	};
 
+	// TODO: update sizes according to new design
 	const imageSizes = `
 		(min-width: 860px)	394px,
 		(min-width: 769px)	calc((100vw - 388px) / 2),

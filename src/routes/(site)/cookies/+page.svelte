@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Article from '$lib/components/Article.svelte';
-	// import cookiesHeroImage from '$img/cookies/cookies.jpg?w=2064;1376;1194;796;688;398&imagetools';
+	// TODO: update sizes according to new design
 	import cookiesHeroImage from '$img/cookies/cookies.png?w=2064;1376;1194;796;688;398&imagetools';
 </script>
 

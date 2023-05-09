@@ -3,6 +3,7 @@
 	import Article from '$lib/components/Article.svelte';
 	import BreathingTechnique from '$lib/tools/BreathingTechnique.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
+	// TODO: update sizes according to new design
 	import breathingHeroImage from '$img/tools/breath.png?w=2064;1376;1194;796;688;398&imagetools';
 
 	const boxBreathing = {
