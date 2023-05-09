@@ -14,7 +14,7 @@ export default defineConfig(() => {
 					if (supportedExtensions.includes(extension)) {
 						return new URLSearchParams({
 							format: 'webp;' + extension,
-							picture: true,
+							as: 'picture',
 						});
 					}
 					return new URLSearchParams();

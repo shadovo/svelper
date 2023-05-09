@@ -9,8 +9,8 @@
 	}
 
 	export interface ImageData {
-		fallback: ImageSource;
 		sources: ImageSources;
+		img: ImageSource;
 	}
 </script>
 
@@ -34,7 +34,7 @@
 	{/each}
 	<img
 		style="width: 100%; aspect-ratio:{aspectRatio}"
-		src={src.fallback.src}
+		src={src.img.src}
 		{alt}
 		{loading}
 		{...role ? { role } : {}}
