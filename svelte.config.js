@@ -11,7 +11,14 @@ const config = {
 			plugins: [autoprefixer()],
 		},
 	}),
-
+	vitePlugin: {
+		experimental: {
+			inspector: {
+				holdMode: true,
+				toggleButtonPos: 'bottom-right',
+			},
+		},
+	},
 	kit: {
 		inlineStyleThreshold: 10000,
 		adapter: adapter({
