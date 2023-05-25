@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
-	// TODO: update sizes according to new design
 	import minesweeperHeroImage from '$img/games/minesweeper.png?w=2064;1376;1194;796;688;398&imagetools';
 </script>
 
@@ -32,7 +30,7 @@
 	<section>
 		<p>
 			This game is also available in an embed version at
-			<a href="{base}/embeds/v1/minesweeper" target="_blank"
+			<a href="/embeds/v1/minesweeper" target="_blank"
 				>https://www.svelper.com/embeds/v1/minesweeper</a
 			>
 		</p>

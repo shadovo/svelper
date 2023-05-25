@@ -152,7 +152,7 @@
 		display: block;
 	}
 
-	@media (width < 768px) {
+	@media (max-width: 768px) {
 		.pagination-controlls {
 			gap: var(--gap-quarter);
 		}
