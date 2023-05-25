@@ -106,7 +106,7 @@
 		}
 	}
 
-	@media (width < 768px) {
+	@media (max-width: 768px) {
 		pre,
 		code {
 			font-size: 0.75rem;

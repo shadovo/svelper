@@ -5,7 +5,6 @@
 	export let image: ImageData | undefined = undefined;
 	export let imageColor: string | undefined = undefined;
 
-	// TODO: update sizes according to new design
 	const heroImageSize = `
 		(min-width: 1024px)	688px,
 		(min-width: 769px) calc(100vw - 336px),
@@ -37,13 +36,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap-2);
-		padding: 0 var(--gap-2) var(--gap-2);
+		padding: var(--gap-2);
 		background-color: var(--c-background);
 		border-radius: var(--gap);
 		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
 		height: 100%;
-		max-width: 800px;
-		margin: var(--gap-2) auto;
 
 		& > :global(*:not(:last-child)) {
 			border-bottom: 1px solid var(--c-text);
@@ -51,7 +48,11 @@
 		}
 
 		& :global(section > p + p) {
-			margin-top: var(--gap-2);
+			margin-top: var(--gap);
+		}
+
+		& :global(h4) {
+			margin-top: var(--gap);
 		}
 	}
 
@@ -65,18 +66,24 @@
 
 	.hero {
 		padding: 0;
-		margin: 0 calc(-1 * var(--gap-2)) calc(-1 * var(--gap-half));
+		margin: calc(-1 * var(--gap-2)) calc(-1 * var(--gap-2)) calc(-1 * var(--gap-half));
 		position: relative;
 		aspect-ratio: 3 / 1;
 		overflow: hidden;
-		/* border-radius: var(--gap) var(--gap) 0 0; */
+		border-radius: var(--gap) var(--gap) 0 0;
 		border-bottom: none;
+
+		img {
+			width: 100%;
+			height: auto;
+			position: absolute;
+		}
 
 		h2 {
 			position: absolute;
 			color: white;
 			bottom: 0;
-			padding: var(--gap-2) var(--gap-2) calc(var(--gap-half) + 2px);
+			padding: var(--gap-half) var(--gap-2) calc(var(--gap-half) + 2px);
 			font-size: 2rem;
 			margin: 0;
 			margin-bottom: -2px;
@@ -85,10 +92,9 @@
 		}
 	}
 
-	@media (width < 768px) {
+	@media (max-width: 768px) {
 		article {
 			padding: var(--gap);
-			margin: 0 auto var(--gap);
 		}
 
 		h2 {

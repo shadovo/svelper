@@ -11,7 +11,7 @@
 
 		--c-text: #f2f2f2;
 		--c-background-rgb: 20, 20, 20;
-		--c-background-code-rgb: 3, 3, 3;
+		--c-background-code: #030303;
 		--c-accent: #39b2bd;
 		--c-logo: var(--c-text);
 
@@ -36,7 +36,6 @@
 	}
 
 	html {
-		/* Font settings */
 		--font-title: ui-serif, serif;
 		--font-text: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
 			sans-serif, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
@@ -45,16 +44,15 @@
 		--font-code: Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco,
 			Droid Sans Mono, Source Code Pro, monospace;
 		--font-weight-bold: 700;
+
 		--font-size-base: 16px;
 
-		/* Spacing */
 		--gap-quarter: 0.25rem;
 		--gap-half: 0.5rem;
 		--gap: 1rem;
 		--gap-2: 1.5rem;
 		--gap-3: 2rem;
 
-		/* z-index simplified */
 		--layer-1: 1;
 		--layer-2: 2;
 		--layer-3: 3;
@@ -62,26 +60,19 @@
 		--layer-5: 5;
 		--layer-important: 2147483647;
 
-		/* TODO: reevaluate */
 		--shadow-color: 220 3% 15%;
 		--shadow-strength: 1%;
 
-		/* FIXME: change to surface and border colors instead */
 		--c-table-border: var(--c-text);
-		--c-table-row: #ffffff;
+		--c-table-row: #f4f4f5;
 
 		--c-text: #0d0d0d;
-		--c-accent: #097983;
-		--c-logo: var(--c-accent);
-		/* FIXME: use background, surface-1,-2,-3,-4 */
-		--c-background-rgb: 240, 240, 240;
+		--c-background-rgb: 255, 255, 255;
 		--c-background: rgb(var(--c-background-rgb));
-		--c-background-code-rgb: 249, 249, 249;
-		--c-background-code: rgb(var(--c-background-code-rgb));
+		--c-background-code: #f9f9f9;
+		--c-accent: #0b828d;
+		--c-logo: var(--c-accent);
 
-		/* TODO: add high-contrast, low-contrast */
-
-		/* Prism syntax highlighting */
 		--prism-background: none;
 		--prism-text: #000000;
 		--prism-text-shadow: 0 1px white;
@@ -113,20 +104,11 @@
 		--c-background: transparent;
 	}
 
-	html:has(dialog[open]) {
-		overflow-y: initial;
-	}
-
-	body:has(dialog[open]) {
-		overflow: hidden;
-	}
-
 	html {
 		background: var(--c-background);
 		font-family: var(--font-text);
 		color: var(--c-text);
 		overflow-y: scroll;
-		font-size: 16px;
 	}
 
 	h1,
@@ -134,30 +116,9 @@
 	h3,
 	h4,
 	h5 {
-		font-family: var(--font-text);
+		font-family: var(--font-accent);
 		line-height: 1.2;
 		margin-bottom: var(--gap-half);
-		font-weight: bold;
-		margin: 0;
-		&:not(:first-child) {
-			margin-top: var(--gap-3);
-		}
-	}
-
-	h1 {
-		font-size: 2.3rem;
-	}
-	h2 {
-		font-size: 1.5rem;
-	}
-	h3 {
-		font-size: 1.4rem;
-	}
-	h4 {
-		font-size: 1.3rem;
-	}
-	h5 {
-		font-size: 1.2rem;
 	}
 
 	p {

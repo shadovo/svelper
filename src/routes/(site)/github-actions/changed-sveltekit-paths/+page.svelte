@@ -289,9 +289,9 @@ jobs:
 			Svelper uses the <code>changed-sveltekit-paths.yml</code> action both to post a comment in the
 			PR and run Lighthouse on only the affected pages in the PR. Implementation can be found here
 			<a
-				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/pr.yml"
+				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/pr-verification.yml"
 				target="_blank"
-				rel="noopener noreferrer">github.com/shadovo/svelper/.../pr.yml</a
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../pr-verification.yml</a
 			>
 		</p>
 	</section>

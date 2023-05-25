@@ -5,14 +5,12 @@
 		title: string;
 		description: string;
 		link: string;
-		image?: ImageData;
+		image: ImageData;
 		imageColor: string | undefined;
-		tags?: string[];
 	};
 
-	// TODO: update sizes according to new design
 	const imageSizes = `
-		(min-width: 860px)	394px,
+		(min-width: 1024px)	312px,
 		(min-width: 769px)	calc((100vw - 388px) / 2),
 		(min-width: 481px)	calc(50vw - 28px),
 		calc(100vw - 48px)`;
@@ -27,26 +25,17 @@
 	{#each articles as article}
 		<a class="card" href={article.link}>
 			<div class="img">
-				{#if article.image}
-					<Image
-						alt=""
-						role="presentation"
-						background={article.imageColor}
-						src={article.image}
-						sizes={imageSizes}
-						aspectRatio="3/1"
-					/>
-				{/if}
+				<Image
+					alt=""
+					role="presentation"
+					background={article.imageColor}
+					src={article.image}
+					sizes={imageSizes}
+					aspectRatio="3/1"
+				/>
 			</div>
 			<h3>{article.title}</h3>
-			<p>{article.description}</p>
-			{#if article.tags}
-				<div class="tag-container">
-					{#each article.tags as tag}
-						<span class="tag">{tag}</span>
-					{/each}
-				</div>
-			{/if}
+			<p>{article.title}</p>
 		</a>
 	{/each}
 </div>
@@ -69,7 +58,6 @@
 		text-decoration: none;
 		color: var(--color-text);
 		transform-origin: center;
-		gap: var(--gap-half);
 
 		&:hover {
 			transform: scale(1.02);
@@ -78,34 +66,20 @@
 
 		> .img {
 			margin: calc(-1 * var(--gap));
-			margin-bottom: 0;
+			margin-bottom: var(--gap);
 			padding: 0;
 		}
 
 		h3 {
-			margin: var(--gap-half) 0 0;
+			margin-bottom: 0.5rem;
 			font-weight: bold;
 		}
 		p {
 			font-weight: normal;
-			flex-grow: 1;
 		}
 	}
 
-	.tag-container {
-		display: flex;
-		gap: var(--gap-half);
-	}
-
-	.tag {
-		background: var(--c-background-code);
-		color: var(--c-text);
-		padding: var(--gap-quarter) var(--gap-half);
-		border-radius: 0.5rem;
-		font-size: 0.75rem;
-	}
-
-	@media (width < 480px) {
+	@media (max-width: 480px) {
 		.grid {
 			grid-template-columns: repeat(1, minmax(200px, 1fr));
 		}
