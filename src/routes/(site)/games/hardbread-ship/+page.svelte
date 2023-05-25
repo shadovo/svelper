@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Article from '$lib/components/Article.svelte';
 	import HardbreadShip from '$lib/games/hardbread-ship/HardbreadShip.svelte';
+	// TODO: update sizes according to new design
 	import hardbreadHeroImage from '$img/games/hardbread.png?w=2064;1376;1194;796;688;398&imagetools';
 </script>
 

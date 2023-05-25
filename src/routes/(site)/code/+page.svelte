@@ -7,12 +7,12 @@
 </script>
 
 <svelte:head>
-	<title>Tools built in Svelte - Svelper</title>
+	<title>Games built in Svelte - Svelper</title>
 	<meta name="description" content="A collection games built with Svelte." />
 </svelte:head>
 
-<Article title="Tools built in Svelte">
-	<section class="content-width">
+<Article title="Code">
+	<section>
 		<ArticleGrid {articles} />
 	</section>
 </Article>
