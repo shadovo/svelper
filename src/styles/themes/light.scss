@@ -1,0 +1,37 @@
+@mixin lightTheme {
+	/* TODO: reevaluate */
+	--shadow-color: 220 3% 15%;
+	--shadow-strength: 1%;
+
+	/* FIXME: change to surface and border colors instead */
+	--c-table-border: var(--c-text);
+	--c-table-row: #ffffff;
+
+	--c-text: #0d0d0d;
+	--c-accent: #097983;
+	--c-logo: var(--c-accent);
+
+	/* FIXME: use background, surface-1,-2,-3,-4 */
+	/* TODO: use actual colors and color-mix to add transparency */
+	--c-background-rgb: 240, 240, 240;
+	--c-background: rgb(var(--c-background-rgb));
+	--c-background-code-rgb: 249, 249, 249;
+	--c-background-code: rgb(var(--c-background-code-rgb));
+
+	/* Prism syntax highlighting */
+	--prism-background: none;
+	--prism-text: #000000;
+	--prism-text-shadow: 0 1px white;
+	--prism-selection-background: #b3d4fc;
+	--prism-comment: #0055ab;
+	--prism-punctuation: #484848;
+	--prism-tag: #905;
+	--prism-number: #905;
+	--prism-string: #3a5700;
+	--prism-url: #9a6e3a;
+	--prism-variable: #f8f8f2;
+	--prism-atrule: #005478;
+	--prism-keyword: #005478;
+	--prism-function: #8a2e41;
+	--prism-regex: #b64a00;
+}

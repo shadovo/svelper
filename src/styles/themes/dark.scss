@@ -1,0 +1,29 @@
+@mixin darkTheme {
+	--shadow-color: 220 40% 2%;
+	--shadow-strength: 25%;
+
+	--c-text: #f2f2f2;
+	--c-background-rgb: 20, 20, 20;
+	--c-background-code-rgb: 3, 3, 3;
+	--c-accent: #39b2bd;
+	--c-logo: var(--c-text);
+
+	--c-table-border: #464646;
+	--c-table-row: #2f2f2f;
+
+	--prism-background: none;
+	--prism-text: #f8f8f2;
+	--prism-text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	--prism-selection-background: none;
+	--prism-comment: #83a3bf;
+	--prism-punctuation: #f8f8f2;
+	--prism-tag: #ff8bb5;
+	--prism-number: #ae81ff;
+	--prism-string: #a6e22e;
+	--prism-url: #8a8a2b;
+	--prism-variable: #f8f8f2;
+	--prism-atrule: #e6db74;
+	--prism-keyword: #66d9ef;
+	--prism-function: #e6db74;
+	--prism-regex: #fd971f;
+}
