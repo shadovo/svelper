@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
+	// TODO: update sizes according to new design
 	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2064;1376;1194;796;688;398&imagetools';
 </script>
 
@@ -34,7 +36,7 @@
 	<section>
 		<p>
 			This game is also available in an embed version at
-			<a href="/embeds/v1/floppy-octty" target="_blank"
+			<a href="{base}/embeds/v1/floppy-octty" target="_blank"
 				>https://www.svelper.com/embeds/v1/floppy-octty</a
 			>
 		</p>

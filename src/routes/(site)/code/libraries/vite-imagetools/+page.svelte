@@ -1,3 +1,7 @@
+<script>
+	import { base } from '$app/paths';
+</script>
+
 <svelte:head>
 	<title>Vite-imagetools - Optimizing images - Svelper</title>
 	<meta
@@ -16,8 +20,8 @@
 		plugin.
 	</p>
 	<p>
-		Check out how Svelper uses it in the <a href="/components/vite-imagetools-in-sveltekit"
-			>vite-imagetools-in-sveltekit</a
+		Check out how Svelper uses it in the <a
+			href="{base}/code/components/vite-imagetools-in-sveltekit">vite-imagetools-in-sveltekit</a
 		> component.
 	</p>
 </section>
