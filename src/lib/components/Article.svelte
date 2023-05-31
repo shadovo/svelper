@@ -37,13 +37,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap-2);
-		padding: 0 var(--gap-2) var(--gap-2);
+		padding: var(--gap-2);
 		background-color: var(--c-background);
 		border-radius: var(--gap);
 		box-shadow: 0 0 10px rgba(var(--c-background-rgb), 0.4);
 		height: 100%;
+		width: calc(100% - var(--gap));
 		max-width: 800px;
 		margin: var(--gap-2) auto;
+		overflow: hidden;
 
 		& > :global(*:not(:last-child)) {
 			border-bottom: 1px solid var(--c-text);
@@ -65,7 +67,8 @@
 
 	.hero {
 		padding: 0;
-		margin: 0 calc(-1 * var(--gap-2)) calc(-1 * var(--gap-half));
+		margin: calc(-1 * var(--gap-2));
+		margin-bottom: 0;
 		position: relative;
 		aspect-ratio: 3 / 1;
 		overflow: hidden;
@@ -88,7 +91,7 @@
 	@media (width < 768px) {
 		article {
 			padding: var(--gap);
-			margin: 0 auto var(--gap);
+			margin: var(--gap-half) auto var(--gap);
 		}
 
 		h2 {

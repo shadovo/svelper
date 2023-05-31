@@ -17,6 +17,7 @@
 	<footer>
 		<p>
 			Thanks for checking out the site! Feel free to use any and all parts of the code available at <a
+				target="_blank"
 				href="https://github.com/shadovo/svelper">github</a
 			> ♥ Oscar.
 		</p>
@@ -25,7 +26,7 @@
 
 <style lang="scss">
 	.content {
-		/* background-image: linear-gradient(
+		background-image: linear-gradient(
 				180deg,
 				var(--c-background),
 				rgba(32, 32, 32, 0.01) 50%,
@@ -37,7 +38,7 @@
 			radial-gradient(ellipse at center left, rgb(32 255 255 / 97%), transparent 50%);
 		background-size: 100% 120vh;
 		background-size: 100% clamp(900px, 70vw, 120vh);
-		background-repeat: no-repeat; */
+		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
