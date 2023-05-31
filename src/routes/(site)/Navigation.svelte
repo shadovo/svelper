@@ -3,6 +3,7 @@
 	import { base } from '$app/paths';
 	import SvelperLogo from '$lib/svg/SvelperLogo.svelte';
 	import GitHubLogo from '$lib/svg/GitHubLogo.svelte';
+	import { beforeNavigate } from '$app/navigation';
 
 	let sidebarEle: HTMLDialogElement | null = null;
 	let showSidebar = false;
@@ -13,6 +14,10 @@
 			showSidebar = false;
 		}
 	}
+
+	beforeNavigate(() => {
+		showSidebar = false;
+	});
 
 	$: {
 		if (showSidebar) {
@@ -280,6 +285,7 @@
 
 	.sidebar-content {
 		width: 100%;
+		min-height: 100%;
 		display: flex;
 		flex-direction: column;
 
