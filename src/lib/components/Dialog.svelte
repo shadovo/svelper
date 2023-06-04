@@ -90,7 +90,7 @@
 		z-index: var(--layer-impoetant);
 		overflow: hidden;
 		transition: opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
-		background: var(--c-background);
+		background: var(--surface-1);
 
 		&::backdrop {
 			background: rgba(75, 75, 75, 0.2);

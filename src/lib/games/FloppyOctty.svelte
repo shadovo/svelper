@@ -274,7 +274,7 @@
 	}
 
 	.game-stats {
-		background: var(--c-background);
+		background: var(--surface-1);
 		border: 2px solid var(--c-text);
 		padding: var(--gap);
 		display: flex;

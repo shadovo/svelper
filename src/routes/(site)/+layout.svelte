@@ -28,9 +28,9 @@
 	.content {
 		background-image: linear-gradient(
 				180deg,
-				var(--c-background),
+				var(--surface-1),
 				rgba(32, 32, 32, 0.01) 50%,
-				var(--c-background) 100%
+				var(--surface-1) 100%
 			),
 			radial-gradient(ellipse at top left, rgb(139 0 255), transparent 50%),
 			radial-gradient(ellipse at top right, rgb(0 206 214 / 89%), transparent 50%),
@@ -54,7 +54,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--c-background-code);
+		background-color: var(--surface-2);
 
 		p {
 			max-width: 860px;

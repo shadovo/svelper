@@ -5,18 +5,14 @@
 
 	/* FIXME: change to surface and border colors instead */
 	--c-table-border: var(--c-text);
-	--c-table-row: #ffffff;
 
 	--c-text: #0d0d0d;
 	--c-accent: #097983;
 	--c-logo: var(--c-accent);
 
-	/* FIXME: use background, surface-1,-2,-3,-4 */
-	/* TODO: use actual colors and color-mix to add transparency */
-	--c-background-rgb: 240, 240, 240;
-	--c-background: rgb(var(--c-background-rgb));
-	--c-background-code-rgb: 249, 249, 249;
-	--c-background-code: rgb(var(--c-background-code-rgb));
+	--surface-1: rgb(240, 240, 240);
+	--surface-2: rgb(249, 249, 249);
+	--surface-3: rgb(255, 255, 255);
 
 	/* Prism syntax highlighting */
 	--prism-background: none;

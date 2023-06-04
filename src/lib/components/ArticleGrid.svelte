@@ -60,7 +60,7 @@
 		background: var(--color-bg);
 		box-shadow: 0 2px 3px 1px rgb(0, 0, 0, 0.3);
 		padding: 1rem;
-		background: var(--c-table-row);
+		background: var(--surface-3);
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -96,7 +96,7 @@
 	}
 
 	.tag {
-		background: var(--c-background-code);
+		background: var(--surface-2);
 		color: var(--c-text);
 		padding: var(--gap-quarter) var(--gap-half);
 		border-radius: 0.5rem;

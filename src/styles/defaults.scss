@@ -1,5 +1,5 @@
 html {
-	background: var(--c-background);
+	background: var(--surface-1);
 	font-family: var(--font-text);
 	color: var(--c-text);
 	overflow-y: scroll;
@@ -68,14 +68,14 @@ li {
 }
 
 code {
-	background-color: var(--c-background-code);
+	background-color: var(--surface-2);
 	padding: 0 4px;
 }
 
 button {
 	display: flex;
 	padding: var(--gap-half) var(--gap);
-	background-color: var(--c-background);
+	background-color: var(--surface-1);
 	border: 3px solid var(--c-text);
 	color: var(--c-text);
 	font-family: var(--font-accent);
@@ -89,7 +89,7 @@ button {
 
 	&[disabled] {
 		background-color: var(--c-text);
-		color: var(--c-background);
+		color: var(--surface-1);
 		cursor: not-allowed;
 	}
 }
