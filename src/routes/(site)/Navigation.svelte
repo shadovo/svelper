@@ -165,7 +165,7 @@
 		position: fixed;
 		height: var(--top-bar-height);
 		inset: 0 0 auto 0;
-		background-color: color-mix(in srgb, var(--surface-2) 30%, transparent);
+		background-color: color-mix(in srgb, var(--surface-2) 70%, transparent);
 		backdrop-filter: grayscale(0.7) blur(10px);
 		font-size: 1.1rem;
 		z-index: 3;
@@ -254,7 +254,7 @@
 		left: auto;
 		bottom: 0;
 		width: 300px;
-		background: color-mix(in srgb, var(--surface-1) 70%, transparent);
+		background: color-mix(in srgb, var(--surface-1) 30%, transparent);
 		backdrop-filter: blur(80px);
 		border: none;
 		transform: translateX(100%);
@@ -296,7 +296,7 @@
 			color: var(--c-text);
 			width: 100%;
 			height: 74px;
-			background-color: color-mix(in srgb, var(--surface-2) 30%, transparent);
+			background-color: color-mix(in srgb, var(--surface-2) 70%, transparent);
 			padding: var(--gap-half) var(--gap-half) var(--gap-half) var(--gap);
 		}
 		.content {

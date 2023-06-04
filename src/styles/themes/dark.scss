@@ -1,30 +1,30 @@
 @mixin darkTheme {
+	--c-text: oklch(0.96 0 0);
+	--c-accent: oklch(0.73 0.17 207.14);
+
+	--surface-1: oklch(0.19 0 0);
+	--surface-2: oklch(0.1 0 0);
+	--surface-3: oklch(0.31 0 0);
+
+	--c-table-border: oklch(0.39 0 0);
+
 	--shadow-color: 220 40% 2%;
 	--shadow-strength: 25%;
 
-	--c-text: #f2f2f2;
-	--c-accent: #39b2bd;
-	--c-logo: var(--c-text);
-
-	--c-table-border: #464646;
-
-	--surface-1: rgb(20, 20, 20);
-	--surface-2: rgb(3, 3, 3);
-	--surface-3: rgb(47, 47, 47);
-
+	/* Prism syntax highlighting */
 	--prism-background: none;
-	--prism-text: #f8f8f2;
+	--prism-text: oklch(0.94 0 0);
 	--prism-text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 	--prism-selection-background: none;
-	--prism-comment: #83a3bf;
-	--prism-punctuation: #f8f8f2;
-	--prism-tag: #ff8bb5;
-	--prism-number: #ae81ff;
-	--prism-string: #a6e22e;
-	--prism-url: #8a8a2b;
-	--prism-variable: #f8f8f2;
-	--prism-atrule: #e6db74;
-	--prism-keyword: #66d9ef;
-	--prism-function: #e6db74;
-	--prism-regex: #fd971f;
+	--prism-comment: oklch(0.57 0.1 299.16);
+	--prism-punctuation: oklch(0.67 0 0);
+	--prism-tag: oklch(0.7 0.26 3.77);
+	--prism-number: oklch(0.65 0.24 301.56);
+	--prism-string: oklch(0.75 0.17 87.26);
+	--prism-url: oklch(0.88 0 0);
+	--prism-variable: oklch(0.98 0.01 0);
+	--prism-atrule: oklch(0.69 0.29 145.5);
+	--prism-keyword: oklch(0.82 0.17 214.03);
+	--prism-function: oklch(0.88 0.26 142.23);
+	--prism-regex: oklch(0.63 0.22 23.89);
 }
