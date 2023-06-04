@@ -10,11 +10,9 @@
 		tags?: string[];
 	};
 
-	// TODO: update sizes according to new design
 	const imageSizes = `
-		(min-width: 860px)	394px,
-		(min-width: 769px)	calc((100vw - 388px) / 2),
-		(min-width: 481px)	calc(50vw - 28px),
+		(min-width: 816px)	368px,
+		(min-width: 481px)	calc(50vw - 32px),
 		calc(100vw - 48px)`;
 </script>
 

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Article from '$lib/components/Article.svelte';
-	// TODO: update sizes according to new design
-	import cookiesHeroImage from '$img/cookies/cookies.png?w=2064;1376;1194;796;688;398&imagetools';
+	import cookiesHeroImage from '$img/cookies/cookies.png?w=2400;1600;1200;800;400&imagetools';
 </script>
 
 <svelte:head>

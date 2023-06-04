@@ -5,10 +5,8 @@
 	export let image: ImageData | undefined = undefined;
 	export let imageColor: string | undefined = undefined;
 
-	// TODO: update sizes according to new design
 	const heroImageSize = `
-		(min-width: 1024px)	688px,
-		(min-width: 769px) calc(100vw - 336px),
+		(min-width: 816px)	800px,
 		calc(100vw - 16px)
 	`;
 </script>

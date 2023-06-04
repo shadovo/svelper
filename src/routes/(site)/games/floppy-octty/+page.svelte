@@ -2,8 +2,7 @@
 	import { base } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
-	// TODO: update sizes according to new design
-	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2064;1376;1194;796;688;398&imagetools';
+	import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;800;400&imagetools';
 </script>
 
 <svelte:head>
