@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 import autoprefixer from 'autoprefixer';
 
@@ -22,6 +22,7 @@ const config = {
 	kit: {
 		inlineStyleThreshold: 10000,
 		adapter: adapter({
+			runtime: 'edge',
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
