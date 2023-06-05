@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Article from '$lib/components/Article.svelte';
 	import HardbreadShip from '$lib/games/hardbread-ship/HardbreadShip.svelte';
-	import hardbreadHeroImage from '$img/games/hardbread.png?w=2064;1376;1194;796;688;398&imagetools';
+	import hardbreadHeroImage from '$img/games/hardbread.png?w=2400;1600;1200;800;400&imagetools';
 </script>
 
 <svelte:head>

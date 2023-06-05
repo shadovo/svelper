@@ -226,7 +226,7 @@
 	/>
 	{#if browser}
 		{#if octtyIsDead}
-			<div class="box flex game-stats">
+			<div class="game-stats">
 				<div>
 					<h1>Game over</h1>
 					<hr />
@@ -241,9 +241,9 @@
 			</div>
 		{/if}
 		{#if !gameInitiated}
-			<div class="box flex game-stats">
+			<div class="game-stats">
 				<div>
-					<h1>Octty Jump</h1>
+					<h1>Floppy Octty</h1>
 					<hr />
 				</div>
 				<div>
@@ -274,11 +274,22 @@
 	}
 
 	.game-stats {
+		background: var(--surface-1);
+		border: 2px solid var(--c-text);
+		padding: var(--gap);
+		display: flex;
+		flex-direction: column;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 180px;
 		gap: var(--gap);
+	}
+	h1 {
+		font-size: 1.4rem;
+		margin: 0;
+		line-height: 1.5;
+		padding-bottom: var(--gap-half);
 	}
 </style>

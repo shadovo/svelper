@@ -74,7 +74,7 @@
 		margin: var(--gap) 0;
 		display: block;
 		overflow-x: auto;
-		background: var(--c-background-code);
+		background: var(--surface-2);
 	}
 
 	pre,
@@ -106,7 +106,7 @@
 		}
 	}
 
-	@media (max-width: 768px) {
+	@media (width < 768px) {
 		pre,
 		code {
 			font-size: 0.75rem;
@@ -115,7 +115,7 @@
 
 	pre {
 		border-radius: 0;
-		background-color: var(--c-background-code);
+		background-color: var(--surface-2);
 		padding-top: var(--gap);
 		padding-right: var(--gap);
 		padding-bottom: var(--gap);
@@ -132,7 +132,7 @@
 
 	div {
 		padding-right: var(--gap);
-		background-color: var(--c-background-code);
+		background-color: var(--surface-2);
 		margin: var(--gap) 0;
 
 		:global(.namespace) {

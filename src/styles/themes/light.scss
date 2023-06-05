@@ -1,0 +1,31 @@
+@mixin lightTheme {
+	--c-text: oklch(0.16 0 0);
+	--c-accent: oklch(0.56 0.13 208.71);
+
+	--surface-1: oklch(0.96 0 0);
+	--surface-2: oklch(0.98 0 0);
+	--surface-3: oklch(1 0 0);
+
+	/* FIXME: change to surface and border colors instead */
+	--c-table-border: var(--c-text);
+
+	/* TODO: reevaluate */
+	--shadow-color: 220 3% 15%;
+	--shadow-strength: 1%;
+
+	/* Prism syntax highlighting */
+	--prism-text: oklch(0.31 0.19 274.87);
+	--prism-text-shadow: 0 1px white;
+	--prism-selection-background: oklch(0.9 0.04 253.62);
+	--prism-comment: oklch(0.6 0 0);
+	--prism-punctuation: oklch(0 0 0);
+	--prism-tag: oklch(0.43 0.29 267.84);
+	--prism-number: oklch(0.5 0.23 2.4);
+	--prism-string: oklch(0.61 0.25 143.69);
+	--prism-url: oklch(0 0 0);
+	--prism-variable: oklch(0.93 0.02 0.2);
+	--prism-atrule: oklch(0.46 0.14 242.42);
+	--prism-keyword: oklch(0.65 0.14 237.57);
+	--prism-function: oklch(0.65 0.33 325.47);
+	--prism-regex: oklch(0.53 0.18 40.88);
+}

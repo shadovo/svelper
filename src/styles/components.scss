@@ -1,0 +1,36 @@
+.button-icon {
+	border-radius: var(--radius-round);
+	padding: var(--gap-quarter);
+	aspect-ratio: 1;
+	flex-shrink: 0;
+	align-items: center;
+	justify-items: center;
+	place-items: center;
+	stroke: currentColor;
+	stroke-width: 3px;
+	border-width: 3px;
+	background-color: transparent;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	gap: var(--gap);
+	align-items: center;
+}
+
+.flex-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.padded {
+	padding: var(--gap) 0;
+}
+
+.box {
+	padding: var(--gap);
+	border: 3px solid var(--c-text);
+	border-radius: var(--radius);
+	background-color: var(--surface-1);
+}

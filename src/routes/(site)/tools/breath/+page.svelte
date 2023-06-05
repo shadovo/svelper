@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import BreathingTechnique from '$lib/tools/BreathingTechnique.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
-	import breathingHeroImage from '$img/tools/breath.png?w=2064;1376;1194;796;688;398&imagetools';
+	import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;800;400&imagetools';
 
 	const boxBreathing = {
 		duration: 4000,
@@ -60,7 +61,7 @@ const breathOutConfig = {
 	<section>
 		<p>
 			This game is also available in an embed version at
-			<a href="/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
+			<a href="{base}/embeds/v1/breath" target="_blank">https://www.svelper.com/embeds/v1/breath</a>
 		</p>
 	</section>
 

@@ -3,7 +3,7 @@
 	import createSoundboard from '$lib/utils/audio/soundboard';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 	import noteFrequencies from '$lib/utils/audio/note-frequencies';
-	import soundboardHeroImage from '$img/tools/soundboard.png?w=2064;1376;1194;796;688;398&imagetools';
+	import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;800;400&imagetools';
 
 	type BassNote = [string, number];
 	type Note = string;
@@ -335,7 +335,7 @@ const melody = [
 		max-width: 100%;
 		overflow-x: scroll;
 	}
-	@media (max-width: 500px) {
+	@media (width < 500px) {
 		.notes {
 			font-size: 0.7rem;
 

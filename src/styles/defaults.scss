@@ -1,0 +1,108 @@
+html {
+	background: var(--surface-1);
+	font-family: var(--font-text);
+	color: var(--c-text);
+	overflow-y: scroll;
+	font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-title);
+	line-height: 1.2;
+	margin-bottom: var(--gap-half);
+	font-weight: bold;
+	margin: 0;
+
+	&:not(:first-child) {
+		margin-top: var(--gap-3);
+	}
+}
+
+h1 {
+	font-size: 2.3rem;
+}
+h2 {
+	font-size: 1.5rem;
+}
+h3 {
+	font-size: 1.4rem;
+}
+h4 {
+	font-size: 1.3rem;
+}
+h5 {
+	font-size: 1.2rem;
+}
+h6 {
+	font-size: 1.1rem;
+}
+
+p {
+	line-height: 1.6;
+}
+
+a {
+	color: var(--c-accent);
+	text-decoration: none;
+	font-weight: bold;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+ul {
+	margin-bottom: var(--gap);
+	list-style: none;
+}
+
+li {
+	margin-bottom: var(--gap-half);
+}
+
+code {
+	background-color: var(--surface-2);
+	padding: 0 4px;
+}
+
+button {
+	display: flex;
+	padding: var(--gap-half) var(--gap);
+	background-color: var(--surface-1);
+	border: 3px solid var(--c-text);
+	color: var(--c-text);
+	font-family: var(--font-accent);
+	font-weight: var(--font-weight-bold);
+	font-size: 1.25rem;
+	flex-shrink: 0;
+
+	&:hover {
+		background-color: rgba(125, 125, 125, 0.2);
+	}
+
+	&[disabled] {
+		background-color: var(--c-text);
+		color: var(--surface-1);
+		cursor: not-allowed;
+	}
+}
+
+/***********************************/
+
+/* Prevent scroll when dialog is open */
+html:has(dialog[open]) {
+	overflow-y: initial;
+}
+
+body:has(dialog[open]) {
+	overflow: hidden;
+}
+
+/**********************************/

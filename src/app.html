@@ -22,13 +22,17 @@
 				get: (searchParams, prop) => searchParams.get(prop),
 			});
 			if (params.theme === 'dark') {
-				document.documentElement.classList.add('theme-dark');
-			}
-			if (params.theme === 'light') {
-				document.documentElement.classList.add('theme-light');
-			}
-			if (params.transparent === 'true') {
-				document.documentElement.classList.add('transparent');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else if (params.theme === 'light') {
+				document.documentElement.setAttribute('data-theme', 'light');
+			} else {
+				const prefersColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)');
+				prefersColorSchemeDark.addEventListener('change', (e) => {
+					const newColorScheme = e.matches ? 'dark' : 'light';
+					document.documentElement.setAttribute('data-theme', newColorScheme);
+				});
+				const colorScheme = prefersColorSchemeDark.matches ? 'dark' : 'light';
+				document.documentElement.setAttribute('data-theme', colorScheme);
 			}
 		</script>
 		%sveltekit.head%

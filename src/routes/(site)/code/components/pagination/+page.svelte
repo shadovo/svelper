@@ -167,7 +167,7 @@
 		> div:nth-child(8n + 6),
 		> div:nth-child(8n + 7),
 		> div:nth-child(8n + 8) {
-			background-color: var(--c-table-row);
+			background-color: var(--surface-3);
 		}
 	}
 </style>

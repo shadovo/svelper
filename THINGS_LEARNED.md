@@ -120,6 +120,12 @@ https://www.npmjs.com/package/vite-imagetools
 
 https://ericportis.com/posts/2014/srcset-sizes/#part-2
 
+## CSS layers
+
+https://css-tricks.com/css-cascade-layers/
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/@import#importing_css_rules_into_a_cascade_layer
+
 ---
 
 # Things I have learnt exists but not explored yet
@@ -131,3 +137,29 @@ https://pnpm.io/
 ## Playwright
 
 https://playwright.dev/
+
+## Unlighthouse
+
+https://unlighthouse.dev/
+
+## Vercel
+
+https://vercel.com/
+
+## Firebase
+
+https://firebase.google.com/
+
+## PaLM
+
+https://ai.google/discover/palm2
+
+## Firebase + PaLM 2
+
+https://www.youtube.com/watch?v=shWEfRlmb6g&ab_channel=BeyondFireship
+
+## Weaviate
+
+https://weaviate.io/
+
+https://www.youtube.com/watch?v=mBcBoGhFndY&ab_channel=BeyondFireship
