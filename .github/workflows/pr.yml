@@ -46,6 +46,25 @@ jobs:
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v3
 
+  deploy-review-app:
+    name: Deploy Review App
+    runs-on: ubuntu-latest
+    needs: [lint, dependency-review]
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: |
+          REVIEW_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "reviewUrl=$REVIEW_URL" >> "$GITHUB_OUTPUT"
+
   changed-paths:
     name: Changed paths
     uses: ./.github/workflows/changed-sveltekit-paths.yml
@@ -53,7 +72,7 @@ jobs:
   comment-changed-paths:
     name: Post comment with changed URLs
     runs-on: ubuntu-latest
-    needs: changed-paths
+    needs: [deploy-review-app, changed-paths]
     permissions:
       pull-requests: write
     steps:
@@ -68,7 +87,7 @@ jobs:
               'URLs affected by changes in this PR',
               '| Reviewed | PR | Reference |',
               '| - | - | - |',
-              ...paths.map(path => `| <li>- [ ] </li> | http://localhost:5173${path} | [pro](https://www.svelper.com${path}) |`),
+              ...paths.map(path => `| <li>- [ ] </li> | ${{needs.deploy-review-app.outputs.reviewUrl}}${path} | [pro](https://www.svelper.com${path}) |`),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs
