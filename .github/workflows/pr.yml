@@ -53,6 +53,8 @@ jobs:
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    outputs:
+      reviewUrl: ${{ steps.deploy-to-vercel.outputs.reviewUrl }}
     steps:
       - uses: actions/checkout@v3
       - name: Install Vercel CLI
@@ -62,6 +64,7 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
+        id: deploy-to-vercel
         run: |
           echo "Deploying to Vercel..."
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >> review-url.txt
