@@ -63,8 +63,13 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: |
+          echo "Deploying to Vercel..."
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >> review-url.txt
+          echo "Review URL:"
+          cat review-url.txt
+          echo "setting output"
           echo "reviewUrl=$(cat review-url.txt)" >> "$GITHUB_OUTPUT"
+          echo "output set"
 
   changed-paths:
     name: Changed paths
@@ -82,6 +87,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.log('needs.deploy-review-app.outputs.reviewUrl:', '${{needs.deploy-review-app.outputs.reviewUrl}}'}}')
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const message = [
               '# URLs updated',
