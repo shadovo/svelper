@@ -110,13 +110,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [changed-paths, deploy-review-app]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
       - name: Format URLs
         id: format-urls
         uses: actions/github-script@v6
@@ -127,7 +120,7 @@ jobs:
             const urls = paths.map(path => {
               return `${reviewUrl}${path}`;
             }).join('\n');
-            core.setOutput('urlsString', urlsString);
+            core.setOutput('urlsString', urls);
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v10
         with:
