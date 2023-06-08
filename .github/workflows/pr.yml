@@ -110,6 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [changed-paths, deploy-review-app]
     steps:
+      - uses: actions/checkout@v3
       - name: Format URLs
         id: format-urls
         uses: actions/github-script@v6
