@@ -12,11 +12,9 @@ const config = {
 		},
 	}),
 	vitePlugin: {
-		experimental: {
-			inspector: {
-				holdMode: true,
-				toggleButtonPos: 'bottom-right',
-			},
+		inspector: {
+			holdMode: true,
+			toggleButtonPos: 'bottom-right',
 		},
 	},
 	kit: {
