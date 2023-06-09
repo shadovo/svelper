@@ -46,6 +46,32 @@ jobs:
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v3
 
+  deploy-review-app:
+    name: Deploy Review App
+    runs-on: ubuntu-latest
+    needs: [lint, dependency-review]
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    outputs:
+      reviewUrl: ${{ steps.deploy-to-vercel.outputs.reviewUrl }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        id: deploy-to-vercel
+        run: |
+          echo "Deploying to Vercel..."
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >> review-url.txt
+          echo "Review URL:"
+          cat review-url.txt
+          echo "reviewUrl=$(cat review-url.txt)" >> "$GITHUB_OUTPUT"
+
   changed-paths:
     name: Changed paths
     uses: ./.github/workflows/changed-sveltekit-paths.yml
@@ -53,7 +79,7 @@ jobs:
   comment-changed-paths:
     name: Post comment with changed URLs
     runs-on: ubuntu-latest
-    needs: changed-paths
+    needs: [deploy-review-app, changed-paths]
     permissions:
       pull-requests: write
     steps:
@@ -62,13 +88,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.log('needs.deploy-review-app.outputs.reviewUrl:', '${{needs.deploy-review-app.outputs.reviewUrl}}');
+            console.log('needs.deploy-review-app.outputs:', '${{needs.deploy-review-app.outputs}}');
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const message = [
               '# URLs updated',
               'URLs affected by changes in this PR',
               '| Reviewed | PR | Reference |',
               '| - | - | - |',
-              ...paths.map(path => `| <li>- [ ] </li> | http://localhost:5173${path} | [pro](https://www.svelper.com${path}) |`),
+              ...paths.map(path => `| <li>- [ ] </li> | ${{needs.deploy-review-app.outputs.reviewUrl}}${path} | [pro](https://www.svelper.com${path}) |`),
             ].join('\n');
             core.setOutput('message', message);
       - name: Comment changed URLs
@@ -80,37 +108,27 @@ jobs:
   lighthouse-pr:
     name: Lighthouse CI
     runs-on: ubuntu-latest
-    needs: [changed-paths, lint]
+    needs: [changed-paths, deploy-review-app]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
       - name: Format URLs
         id: format-urls
         uses: actions/github-script@v6
         with:
           script: |
+            const reviewUrl = '${{needs.deploy-review-app.outputs.reviewUrl}}';
             const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n');
             const urls = paths.map(path => {
-              // if path is empty, it's the root, so we want to use index.html
-              const staticPath = path.replace(/^$/, '/').replace(/\/$/, '/index') + '.html';
-              return `'http://localhost${staticPath}'`;
-            });
-            const urlsString = `url: [${urls.join(', ')}],`;
-            core.setOutput('urlsString', urlsString);
-      - name: Update lighthouse config
-        run: sed -i "s|// {{urls placeholder}}|${{steps.format-urls.outputs.urlsString}} // replaced urls|g" ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
-      - name: Updated config
-        run: cat ${{ github.workspace }}/.lighthouse/lighthouserc-pr.cjs
+              return `${reviewUrl}${path}`;
+            }).join('\n');
+            core.setOutput('urlsString', urls);
       - name: Run Lighthouse on urls with lighthouserc-pr
         uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc-pr.cjs'
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          urls: |
+            ${{ steps.format-urls.outputs.urlsString }}
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

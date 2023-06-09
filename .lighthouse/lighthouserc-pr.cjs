@@ -1,10 +1,7 @@
 module.exports = {
 	ci: {
 		collect: {
-			staticDistDir: './build',
 			numberOfRuns: 1,
-			// URLS are added in .github/workflows/pr-verification.yml
-			// {{urls placeholder}}
 		},
 		assert: {
 			preset: 'lighthouse:no-pwa',
@@ -13,6 +10,7 @@ module.exports = {
 				'csp-xss': 'off',
 				'bf-cache': 'off',
 				'color-contrast': 'off', // temporary disabled due to oklch color space issue
+				'is-crawlable': 'off', // vercel sets noindex for review apps
 			},
 		},
 		upload: {
