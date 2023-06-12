@@ -50,6 +50,9 @@ jobs:
     name: Deploy Review App
     runs-on: ubuntu-latest
     needs: [lint, dependency-review]
+    environment:
+      name: vercel-preview
+      url: ${{ steps.deploy-to-vercel.outputs.reviewUrl }}
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

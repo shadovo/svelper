@@ -76,7 +76,7 @@ jobs:
   deploy-vercel:
     name: Deploy Vercel
     environment:
-      name: production
+      name: vercel-pro
       url: ${{ steps.deploy-to-vercel.outputs.url }}
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
