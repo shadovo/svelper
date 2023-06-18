@@ -1,11 +1,7 @@
 name: 'Lighthouse'
 
 on:
-  workflow_run:
-    workflows: ['Deploy']
-    types:
-      - completed
-  # Allows you to run this workflow manually from the Actions tab
+  deployment:
   workflow_dispatch:
 
 jobs:
