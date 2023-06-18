@@ -2,7 +2,6 @@ name: 'Lighthouse'
 
 on:
   deployment_status:
-  workflow_dispatch:
 
 jobs:
   lighthouse-production:
@@ -16,16 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: treosh/lighthouse-ci-action@v10
         with:
-          node-version: 18
-          cache: 'npm'
-      - name: Run Lighthouse on urls with lighthouserc-production
-        uses: treosh/lighthouse-ci-action@v10
-        with:
-          configPath: './.lighthouse/lighthouserc-production.cjs'
+          configPath: './.lighthouse/lighthouserc.cjs'
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          urls: |
+            ${{ github.event.deployment_status.deployment_url }}
+            ${{ github.event.deployment_status.deployment_url }}/code/github-actions/gh-pages?theme=light
+            ${{ github.event.deployment_status.deployment_url }}/code/github-actions/gh-pages?theme=dark
+            ${{ github.event.deployment_status.deployment_url }}/code/components/pagination
+            ${{ github.event.deployment_status.deployment_url }}/games/minesweeper
+            ${{ github.event.deployment_status.deployment_url }}/embeds/v1/minesweeper
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
   lighthouse-pr:
@@ -41,7 +42,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: treosh/lighthouse-ci-action@v10
         with:
-          configPath: './.lighthouse/lighthouserc-pr.cjs'
+          configPath: './.lighthouse/lighthouserc.cjs'
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
           urls: ${{ github.event.deployment_status.deployment_url }}
