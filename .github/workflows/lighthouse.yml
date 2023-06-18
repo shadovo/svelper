@@ -21,12 +21,12 @@ jobs:
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
           urls: |
-            ${{ github.event.deployment_status.deployment_url }}
-            ${{ github.event.deployment_status.deployment_url }}/code/github-actions/gh-pages?theme=light
-            ${{ github.event.deployment_status.deployment_url }}/code/github-actions/gh-pages?theme=dark
-            ${{ github.event.deployment_status.deployment_url }}/code/components/pagination
-            ${{ github.event.deployment_status.deployment_url }}/games/minesweeper
-            ${{ github.event.deployment_status.deployment_url }}/embeds/v1/minesweeper
+            ${{ github.event.deployment_status.url }}
+            ${{ github.event.deployment_status.url }}/code/github-actions/gh-pages?theme=light
+            ${{ github.event.deployment_status.url }}/code/github-actions/gh-pages?theme=dark
+            ${{ github.event.deployment_status.url }}/code/components/pagination
+            ${{ github.event.deployment_status.url }}/games/minesweeper
+            ${{ github.event.deployment_status.url }}/embeds/v1/minesweeper
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
   lighthouse-pr:
@@ -45,6 +45,6 @@ jobs:
           configPath: './.lighthouse/lighthouserc.cjs'
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
-          urls: ${{ github.event.deployment_status.deployment_url }}
+          urls: ${{ github.event.deployment_status.url }}
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
