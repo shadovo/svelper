@@ -40,6 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: echo "url ${{ github.event.deployment_status.url }}"
+      - run: echo "target_url ${{ github.event.deployment_status.target_url }}"
+      - run: echo "environment_url ${{ github.event.deployment_status.environment_url }}"
+      - run: echo "description ${{ github.event.deployment_status.description }}"
       - uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc.cjs'
