@@ -1,0 +1,29 @@
+name: 'Lighthouse'
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+jobs:
+  lighthouse-production:
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.deployment.production_environment }}
+    permissions:
+      deployments: read
+      actions: read
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Run Lighthouse on urls with lighthouserc-production
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './.lighthouse/lighthouserc-production.cjs'
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
