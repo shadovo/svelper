@@ -22,20 +22,17 @@
 				aspectRatio="3/1"
 				background={imageColor}
 			/>
-			<h2>{title}</h2>
 		</div>
-	{:else}
-		<h2>{title}</h2>
 	{/if}
-	<slot />
+	<h2>{title}</h2>
+	<div class="content">
+		<slot />
+	</div>
 </article>
 
 <style lang="scss">
 	article {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap-2);
-		padding: var(--gap-2);
+		padding: var(--gap-3);
 		background-color: var(--surface-1);
 		border-radius: var(--gap);
 		height: 100%;
@@ -43,10 +40,12 @@
 		max-width: 800px;
 		margin: var(--gap-2) auto;
 		overflow: hidden;
+		font-size: 20px;
+		font-weight: var(--font-weight-light);
+		color: var(--c-text-3);
 
-		& > :global(*:not(:last-child)) {
-			border-bottom: 1px solid var(--c-text);
-			padding-bottom: var(--gap-2);
+		& > :global(section > p) {
+			max-width: 60ch;
 		}
 
 		& :global(section > p + p) {
@@ -55,34 +54,31 @@
 	}
 
 	h2 {
-		font-size: 1.5rem;
+		font-size: 2.3rem;
 		width: 100%;
-		margin: 0;
+		margin: 0 0 var(--gap);
 		padding: 0;
 		border: none;
+		text-wrap: balance;
+		font-weight: var(--font-weight-light);
+		color: var(--c-text);
 	}
 
 	.hero {
 		padding: 0;
-		margin: calc(-1 * var(--gap-2));
-		margin-bottom: 0;
+		margin: calc(-1 * var(--gap-3));
+		margin-bottom: var(--gap-2);
 		position: relative;
 		aspect-ratio: 3 / 1;
 		overflow: hidden;
 		/* border-radius: var(--gap) var(--gap) 0 0; */
 		border-bottom: none;
+	}
 
-		h2 {
-			position: absolute;
-			color: white;
-			bottom: 0;
-			padding: var(--gap-2) var(--gap-2) calc(var(--gap-half) + 2px);
-			font-size: 2rem;
-			margin: 0;
-			margin-bottom: -2px;
-			width: 100%;
-			background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent);
-		}
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap-3);
 	}
 
 	@media (width < 768px) {
@@ -92,13 +88,10 @@
 		}
 
 		h2 {
-			font-size: 1.4rem;
+			font-size: 2rem;
 		}
 		.hero {
 			margin: calc(-1 * var(--gap)) calc(-1 * var(--gap)) var(--gap);
-			h2 {
-				padding-left: var(--gap);
-			}
 		}
 	}
 </style>
