@@ -14,9 +14,10 @@ h5,
 h6 {
 	font-family: var(--font-title);
 	line-height: 1.2;
+	margin-top: var(--gap);
 	margin-bottom: var(--gap-half);
-	font-weight: bold;
-	margin: 0;
+	font-weight: var(--font-weight-light);
+	color: var(--c-text);
 
 	&:not(:first-child) {
 		margin-top: var(--gap-3);
@@ -24,22 +25,24 @@ h6 {
 }
 
 h1 {
-	font-size: 2.3rem;
+	font-size: 3rem;
 }
 h2 {
-	font-size: 1.5rem;
+	font-size: 2.5rem;
 }
 h3 {
-	font-size: 1.4rem;
+	font-size: 1.7rem;
 }
 h4 {
-	font-size: 1.3rem;
+	font-size: 1.6rem;
 }
 h5 {
-	font-size: 1.2rem;
+	font-size: 1em;
+	font-weight: var(--font-weight-bold);
 }
 h6 {
-	font-size: 1.1rem;
+	font-size: 1em;
+	font-weight: var(--font-weight-bold);
 }
 
 p {
@@ -69,6 +72,7 @@ li {
 
 code {
 	background-color: var(--surface-2);
+	color: var(--c-text);
 	padding: 0 4px;
 }
 

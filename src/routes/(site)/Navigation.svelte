@@ -183,6 +183,11 @@
 			height: 100%;
 			width: 150px;
 			padding: var(--gap-half);
+
+			h1 {
+				margin: 0;
+				padding: 0;
+			}
 		}
 		.github {
 			height: 100%;
