@@ -26,8 +26,12 @@
 
 <style lang="scss">
 	.content {
-		background-image: linear-gradient(180deg in lab, transparent 50%, var(--surface-1) 80%),
-			radial-gradient(ellipse at top left in lab, oklch(0.54 0.31 293.09), transparent 50%),
+		background-image:
+		 /* linear-gradient(180deg in lab, transparent 50%, var(--surface-1) 80%), */ radial-gradient(
+				ellipse at top left in lab,
+				oklch(0.54 0.31 293.09),
+				transparent 50%
+			),
 			radial-gradient(ellipse at top right in lab, oklch(0.85 0.19 201.28 / 0.89), transparent 50%),
 			radial-gradient(
 				ellipse at center right in lab,
@@ -36,7 +40,8 @@
 			),
 			radial-gradient(ellipse at center left in lab, oklch(0.85 0.2 194.58 / 0.97), transparent 50%);
 		background-size: 100% 120vh;
-		background-size: 100% clamp(900px, 70vw, 120vh);
+		/* background-size: 100% clamp(900px, 70vw, 120vh); */
+		background-attachment: fixed;
 		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
