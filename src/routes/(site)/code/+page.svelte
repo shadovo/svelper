@@ -1,18 +1,23 @@
 <script lang="ts">
-	import Article from '$lib/components/Article.svelte';
-	import ArticleGrid from '$lib/components/ArticleGrid.svelte';
+	import ArticleCard from '$lib/components/ArticleCard.svelte';
 
 	export let data;
 	let { articles } = data;
 </script>
 
 <svelte:head>
-	<title>Games built in Svelte - Svelper</title>
-	<meta name="description" content="A collection games built with Svelte." />
+	<title>Code tips and tricks for Svelte, CSS and web development in general - Svelper</title>
+	<meta
+		name="description"
+		content="Tips and tricks for Svelte, CSS and web development in general."
+	/>
 </svelte:head>
 
-<Article title="Code">
-	<section>
-		<ArticleGrid {articles} />
-	</section>
-</Article>
+<section>
+	{#each articles as article}
+		<ArticleCard {article} />
+	{/each}
+</section>
+
+<style lang="scss">
+</style>

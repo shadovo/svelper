@@ -1,61 +1,151 @@
 import { base } from '$app/paths';
+import type { ArticlePromo } from '$lib/types/ArticlePromo';
 
-const articles = [
+const articles: ArticlePromo[] = [
 	{
-		title: 'Optimize images in SvelteKit',
-		description: 'Optimize images in SvelteKit using vite-imagetools.',
-		imageColor: '#0f353a',
-		link: `${base}/code/components/vite-imagetools-in-sveltekit`,
-		tags: ['SvelteKit', 'Components'],
+		promotion: {
+			title: 'Optimize images in SvelteKit',
+			description: 'Optimize images in SvelteKit using vite-imagetools.',
+		},
+		url: `${base}/code/components/vite-imagetools-in-sveltekit`,
+		meta: {
+			tags: ['SvelteKit', 'Components'],
+			publishedDate: '2023-04-09',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Syntax highlighting',
-		description: 'Syntax highlighting component for Svelte.',
-		imageColor: '#0f353a',
-		link: `${base}/code/components/syntax-highlighting`,
-		tags: ['Svelte', 'Components'],
+		promotion: {
+			title: 'Changed SvelteKit Paths',
+			description:
+				'Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.',
+		},
+		url: `${base}/code/github-actions/changed-sveltekit-paths`,
+		meta: {
+			tags: ['GitHub Actions', 'SvelteKit'],
+			publishedDate: '2023-04-02',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Changed SvelteKit Paths',
-		description: 'Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.',
-		imageColor: '#6b3b19',
-		link: `${base}/code/github-actions/changed-sveltekit-paths`,
-		tags: ['GitHub Actions', 'SvelteKit'],
+		promotion: {
+			title: 'Pagination component',
+			description: 'A pagination component for Svelte.',
+		},
+		url: `${base}/code/components/pagination`,
+		meta: {
+			tags: ['Svelte', 'Components'],
+			publishedDate: '2022-08-20',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Pagination component',
-		description: 'A pagination component for Svelte.',
-		imageColor: '#6b3b19',
-		link: `${base}/code/components/pagination`,
-		tags: ['Svelte', 'Components'],
+		promotion: {
+			title: 'Animation annoying bounce',
+			description: 'Annimation designed to keep annoying the user to take action.',
+		},
+		url: `${base}/code/animations/annoying-bounce`,
+		meta: {
+			tags: ['CSS', 'Animations'],
+			publishedDate: '2022-08-13',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Animation annoying bounce',
-		description: 'Annimation designed to keep annoying the user to take action.',
-		imageColor: '#0f353a',
-		link: `${base}/code/animations/annoying-bounce`,
-		tags: ['CSS', 'Animations'],
+		promotion: {
+			title: 'Animation attention shake',
+			description: 'Animation to grab the users attention based on an event.',
+		},
+		url: `${base}/code/animations/attention-shake`,
+		meta: {
+			tags: ['CSS', 'Animations'],
+			publishedDate: '2022-08-13',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Deploy Github Page',
-		description: 'Building and deploy to Github Pages from a Github Action.',
-		imageColor: '#0f353a',
-		link: `${base}/code/github-actions/gh-pages`,
-		tags: ['GitHub Actions'],
+		promotion: {
+			title: 'Deploy Github Page',
+			description: 'Building and deploy to Github Pages from a Github Action.',
+		},
+		url: `${base}/code/github-actions/gh-pages`,
+		meta: {
+			tags: ['GitHub Actions'],
+			publishedDate: '2022-08-11',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Dialog component',
-		description: 'A dialog component for Svelte.',
-		imageColor: '#0f353a',
-		link: `${base}/code/components/dialog`,
-		tags: ['Svelte', 'Components'],
+		promotion: {
+			title: 'Syntax highlighting',
+			description: 'Syntax highlighting component for Svelte.',
+		},
+		url: `${base}/code/components/syntax-highlighting`,
+		meta: {
+			tags: ['Svelte', 'Components'],
+			publishedDate: '2022-08-11',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 	{
-		title: 'Animation attention shake',
-		description: 'Animation to grab the users attention based on an event.',
-		imageColor: '#6b3b19',
-		link: `${base}/code/animations/attention-shake`,
-		tags: ['CSS', 'Animations'],
+		promotion: {
+			title: 'Dialog component',
+			description: 'A dialog component for Svelte.',
+		},
+		url: `${base}/code/components/dialog`,
+		meta: {
+			tags: ['Svelte', 'Components'],
+			publishedDate: '2022-08-08',
+		},
+		origin: {
+			author: {
+				name: 'Oscar',
+				profilePicture: '/images/shadovo-profile.png',
+			},
+			publication: 'Svelper',
+		},
 	},
 ];
 
