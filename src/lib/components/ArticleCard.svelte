@@ -44,7 +44,6 @@
 			<div>
 				<h2 style:margin={0}>{article.promotion.title}</h2>
 			</div>
-
 			<p class="description">{article.promotion.description}</p>
 			<div class="tags">
 				{#each article.meta.tags as tag}
@@ -79,11 +78,6 @@
 		}
 	}
 
-	.preview {
-		margin: calc(-1 * var(--gap-3));
-		margin-bottom: 0;
-	}
-
 	.content {
 		display: grid;
 		grid-template-columns: 80px 1fr;
@@ -92,7 +86,6 @@
 	}
 
 	.text {
-		/* padding: var(--gap-2); */
 		display: grid;
 		gap: var(--gap);
 	}
