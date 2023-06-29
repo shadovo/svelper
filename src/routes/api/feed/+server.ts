@@ -4,6 +4,8 @@ import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;8
 import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;800;400&imagetools';
 import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;800;400&imagetools';
 
+export const prerender = false;
+
 const articles: ArticlePromo[] = [
 	{
 		promotion: {
