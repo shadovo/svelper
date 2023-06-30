@@ -5,6 +5,10 @@
 
 	export let article: ArticlePromo;
 
+	const profilePictureSize = `
+		(min-width: 768px)	80px,
+		60px
+	`;
 	const imageSize = `
 		(min-width: 768px)	650px,
 		(min-width: 516px) 500px,
@@ -24,7 +28,12 @@
 		</div>
 	{/if}
 	<div class="content">
-		<img width="100%" src={article.origin.author.profilePicture} alt="" />
+		<img
+			class="profile-picture"
+			sizes={profilePictureSize}
+			src={article.origin.author.profilePicture}
+			alt=""
+		/>
 		<div class="text">
 			<div class="top-row">
 				{#if article.origin.author}
@@ -83,6 +92,11 @@
 		grid-template-columns: 80px 1fr;
 		gap: var(--gap-2);
 		padding: var(--gap-3);
+	}
+
+	.profile-picture {
+		width: 100%;
+		aspect-ratio: 1;
 	}
 
 	.text {
