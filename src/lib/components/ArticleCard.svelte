@@ -28,11 +28,11 @@
 		</div>
 	{/if}
 	<div class="content">
-		<img
-			class="profile-picture"
-			sizes={profilePictureSize}
+		<Image
 			src={article.origin.author.profilePicture}
 			alt=""
+			sizes={profilePictureSize}
+			aspectRatio="1 / 1"
 		/>
 		<div class="text">
 			<div class="top-row">

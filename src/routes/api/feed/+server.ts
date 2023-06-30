@@ -1,8 +1,9 @@
 import type { ArticlePromo } from '$lib/types/ArticlePromo';
-import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;800;400&imagetools';
-import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;800;400&imagetools';
-import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;800;400&imagetools';
-import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;800;400&imagetools';
+import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;1000;1050;800;400&imagetools';
+import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;1050;800;400&imagetools';
+import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;1050;800;400&imagetools';
+import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;1050;800;400&imagetools';
+import shadovoProfileImage from '$img/oscar-head.png?w=240;180;160;120;80;60&imagetools';
 
 export const prerender = false;
 
@@ -20,7 +21,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -39,7 +40,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -58,7 +59,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -77,7 +78,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -96,7 +97,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -115,7 +116,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -133,7 +134,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -151,7 +152,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -169,7 +170,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -187,7 +188,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -205,7 +206,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -223,7 +224,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: '/images/shadovo-profile.png',
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
