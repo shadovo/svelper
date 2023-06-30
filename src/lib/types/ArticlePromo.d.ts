@@ -14,7 +14,7 @@ export type ArticlePromo = {
 	origin: {
 		author: {
 			name: string;
-			profilePicture: string;
+			profilePicture: ImageData;
 		};
 		publication: string;
 	};

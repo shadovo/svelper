@@ -1,7 +1,7 @@
 module.exports = {
 	ci: {
 		collect: {
-			numberOfRuns: 2,
+			numberOfRuns: 3,
 		},
 		assert: {
 			preset: 'lighthouse:no-pwa',

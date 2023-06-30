@@ -42,14 +42,14 @@
 			</div>
 			<nav>
 				<ul>
-					<li aria-current={$page.url.pathname.startsWith('/code') ? 'page' : undefined}>
-						<a href="{base}/code">Code</a>
+					<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+						<a href="{base}/">Home</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/games') ? 'page' : undefined}>
-						<a href="{base}/games">Games</a>
+					<li aria-current={$page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
+						<a href="{base}/widgets">Widgets</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/tools') ? 'page' : undefined}>
-						<a href="{base}/tools">Tools</a>
+					<li aria-current={$page.url.pathname.startsWith('/about') ? 'page' : undefined}>
+						<a href="{base}/about">About</a>
 					</li>
 					<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
 						<a href="{base}/cookies">Cookies</a>
@@ -104,14 +104,11 @@
 					<li aria-current={$page.url.pathname === base + '/' ? 'page' : undefined}>
 						<a href="{base}/">Home</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/code') ? 'page' : undefined}>
-						<a href="{base}/code">Code</a>
+					<li aria-current={$page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
+						<a href="{base}/widgets">Widgets</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/games') ? 'page' : undefined}>
-						<a href="{base}/games">Games</a>
-					</li>
-					<li aria-current={$page.url.pathname.startsWith('/tools') ? 'page' : undefined}>
-						<a href="{base}/tools">Tools</a>
+					<li aria-current={$page.url.pathname.startsWith('/about') ? 'page' : undefined}>
+						<a href="{base}/about">About</a>
 					</li>
 					<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
 						<a href="{base}/cookies">Cookies</a>

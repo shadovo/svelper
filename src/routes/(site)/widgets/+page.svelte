@@ -6,11 +6,8 @@
 </script>
 
 <svelte:head>
-	<title>Code tips and tricks for Svelte, CSS and web development in general - Svelper</title>
-	<meta
-		name="description"
-		content="Tips and tricks for Svelte, CSS and web development in general."
-	/>
+	<title>Widgets, tools and games built in Svelte – Svelper</title>
+	<meta name="description" content="Widgets, tools and games built in Svelte." />
 </svelte:head>
 
 <section>

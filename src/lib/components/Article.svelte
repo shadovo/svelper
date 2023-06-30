@@ -71,7 +71,6 @@
 		position: relative;
 		aspect-ratio: 3 / 1;
 		overflow: hidden;
-		/* border-radius: var(--gap) var(--gap) 0 0; */
 		border-bottom: none;
 	}
 
@@ -85,11 +84,13 @@
 		article {
 			padding: var(--gap);
 			margin: var(--gap-half) auto var(--gap);
+			font-size: 16px;
 		}
 
 		h2 {
-			font-size: 2rem;
+			font-size: 1.7rem;
 		}
+
 		.hero {
 			margin: calc(-1 * var(--gap)) calc(-1 * var(--gap)) var(--gap);
 		}

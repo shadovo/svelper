@@ -54,7 +54,7 @@
 
 	footer {
 		font-size: 0.8rem;
-		padding: var(--gap-2) 0;
+		padding: var(--gap-2) var(--gap);
 		display: flex;
 		align-items: center;
 		justify-content: center;
