@@ -1,5 +1,4 @@
 /// <reference types="@sveltejs/kit" />
-/// <reference types="vite-imagetools" />
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -11,6 +10,7 @@ declare namespace App {
 }
 
 declare module '*&imagetools' {
+	import { Picture } from 'vite-imagetools';
 	/**
 	 * actual types
 	 * - code https://github.com/JonasKruckenberg/imagetools/blob/main/packages/core/src/output-formats.ts
