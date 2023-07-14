@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 import autoprefixer from 'autoprefixer';
+import * as path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -26,6 +27,10 @@ const config = {
 			fallback: null,
 			precompress: true,
 		}),
+		alias: {
+			$img: path.resolve('src/images'),
+			$data: path.resolve('src/data'),
+		},
 	},
 };
 

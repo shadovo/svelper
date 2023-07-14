@@ -1,13 +1,35 @@
-import type { ArticlePromo } from '$lib/types/ArticlePromo';
-import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;1000;1050;800;400&imagetools';
-import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;1050;800;400&imagetools';
-import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;1050;800;400&imagetools';
-import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;1050;800;400&imagetools';
-import shadovoProfileImage from '$img/oscar-head.png?w=240;180;160;120;80;60&imagetools';
+import {
+	minesweeperHeroImage,
+	floppyOcctyHeroImage,
+	soundboardHeroImage,
+	breathingHeroImage,
+	shadovoProfileImage,
+} from '$data/images';
+import { get as getTag, type Tag } from '$data/tags';
+import type { ImageData } from '$lib/components/Image.svelte';
+import { notEmpty } from '$lib/utils/helpers';
 
-export const prerender = false;
+export type ArticlePromo = {
+	url: string;
+	promotion: {
+		title: string;
+		description: string;
+		imageData?: ImageData;
+	};
+	meta: {
+		publishedDate?: string;
+		tags: Tag[];
+	};
+	origin: {
+		author: {
+			name: string;
+			profilePicture: ImageData;
+		};
+		publication: string;
+	};
+};
 
-const articles: ArticlePromo[] = [
+const ARTICLES: Readonly<ArticlePromo>[] = [
 	{
 		promotion: {
 			title: 'Optimize images in SvelteKit',
@@ -15,7 +37,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/components/vite-imagetools-in-sveltekit`,
 		meta: {
-			tags: ['SvelteKit', 'Components'],
+			tags: [getTag('sveltekit'), getTag('components')].filter(notEmpty),
 			publishedDate: '2023-04-09',
 		},
 		origin: {
@@ -34,7 +56,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/github-actions/changed-sveltekit-paths`,
 		meta: {
-			tags: ['GitHub Actions', 'SvelteKit'],
+			tags: [getTag('github-actions'), getTag('sveltekit')].filter(notEmpty),
 			publishedDate: '2023-04-02',
 		},
 		origin: {
@@ -53,7 +75,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/tools/soundboard`,
 		meta: {
-			tags: ['Web API', 'Svelte'],
+			tags: [getTag('web-api'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-22',
 		},
 		origin: {
@@ -72,7 +94,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/games/floppy-octty`,
 		meta: {
-			tags: ['Game', 'Widget', 'Svelte'],
+			tags: [getTag('games'), getTag('widget'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-28',
 		},
 		origin: {
@@ -91,7 +113,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/tools/breath`,
 		meta: {
-			tags: ['Widget', 'Svelte'],
+			tags: [getTag('widget'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-07',
 		},
 		origin: {
@@ -110,7 +132,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/games/minesweeper`,
 		meta: {
-			tags: ['Game', 'Widget', 'Svelte'],
+			tags: [getTag('games'), getTag('widget'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-02-24',
 		},
 		origin: {
@@ -128,7 +150,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/components/pagination`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-20',
 		},
 		origin: {
@@ -146,7 +168,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/animations/annoying-bounce`,
 		meta: {
-			tags: ['CSS', 'Animations'],
+			tags: [getTag('css'), getTag('animation')].filter(notEmpty),
 			publishedDate: '2022-08-13',
 		},
 		origin: {
@@ -164,7 +186,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/animations/attention-shake`,
 		meta: {
-			tags: ['CSS', 'Animations'],
+			tags: [getTag('css'), getTag('animation')].filter(notEmpty),
 			publishedDate: '2022-08-13',
 		},
 		origin: {
@@ -182,7 +204,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/github-actions/gh-pages`,
 		meta: {
-			tags: ['GitHub Actions'],
+			tags: [getTag('github-actions')].filter(notEmpty),
 			publishedDate: '2022-08-11',
 		},
 		origin: {
@@ -200,7 +222,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/components/syntax-highlighting`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-11',
 		},
 		origin: {
@@ -218,7 +240,7 @@ const articles: ArticlePromo[] = [
 		},
 		url: `/code/components/dialog`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-08',
 		},
 		origin: {
@@ -231,10 +253,10 @@ const articles: ArticlePromo[] = [
 	},
 ];
 
-export function GET({ url }) {
-	const tag = url.searchParams.get('tag');
-	const articlesWithTag = tag
-		? articles.filter((article) => article.meta.tags.includes(tag))
-		: articles;
-	return new Response(JSON.stringify(articlesWithTag));
-}
+export const getAll = () => {
+	return [...ARTICLES];
+};
+
+export const getAllByTag = (tagSlug: string) => {
+	return ARTICLES.filter((article) => article.meta.tags.some((tag) => tag.slug === tagSlug));
+};

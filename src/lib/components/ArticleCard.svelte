@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
 	import { relativeTimeFromDates } from '$lib/utils/dates';
-	import type { ArticlePromo } from '$lib/types/ArticlePromo';
+	import type { ArticlePromo } from '$data/articles';
 
 	export let article: ArticlePromo;
 
@@ -16,7 +16,7 @@
 	`;
 </script>
 
-<a class="card" href={article.url}>
+<a class="card surface-blured" href={article.url}>
 	{#if article.promotion.imageData}
 		<div class="preview">
 			<Image
@@ -56,7 +56,7 @@
 			<p class="description">{article.promotion.description}</p>
 			<div class="tags">
 				{#each article.meta.tags as tag}
-					<span class="tag">{tag}</span>
+					<span class="tag">{tag.name}</span>
 				{/each}
 			</div>
 		</div>
@@ -67,12 +67,10 @@
 	.card {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--surface-1);
 		border-radius: var(--gap);
 		height: 100%;
-		width: calc(100% - var(--gap));
-		max-width: 650px;
-		margin: var(--gap-3) auto;
+		width: 100%;
+		margin: 0 auto;
 		overflow: hidden;
 		color: var(--c-text);
 		text-decoration: none;
