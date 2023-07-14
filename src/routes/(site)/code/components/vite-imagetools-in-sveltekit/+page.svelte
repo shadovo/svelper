@@ -116,8 +116,8 @@ export default defineConfig(() => {
 			creating a <code>app.d.ts</code> file in the root of our project and adding the following code:
 		</p>
 		<SyntaxHighlighting language="typescript">
-			{`/// <reference types="vite-imagetools" />
-declare module '*&imagetools' {
+			{`declare module '*&imagetools' {
+  import { Picture } from 'vite-imagetools';
 	/**
 	 * actual types
 	 * - code https://github.com/JonasKruckenberg/imagetools/blob/main/packages/core/src/output-formats.ts
