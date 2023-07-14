@@ -1,4 +1,5 @@
 /// <reference types="@sveltejs/kit" />
+/// <reference types="vite-imagetools" />
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -15,6 +16,6 @@ declare module '*&imagetools' {
 	 * - code https://github.com/JonasKruckenberg/imagetools/blob/main/packages/core/src/output-formats.ts
 	 * - docs https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
 	 */
-	const out;
+	const out: Picture;
 	export default out;
 }

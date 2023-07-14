@@ -1,11 +1,11 @@
-import type { ImageData } from '$lib/components/Image.svelte';
+import type { Picture } from 'vite-imagetools';
 
 export type ArticlePromo = {
 	url: string;
 	promotion: {
 		title: string;
 		description: string;
-		imageData?: ImageData;
+		imageData?: Picture;
 	};
 	meta: {
 		publishedDate?: string;
@@ -14,7 +14,7 @@ export type ArticlePromo = {
 	origin: {
 		author: {
 			name: string;
-			profilePicture: ImageData;
+			profilePicture: Picture;
 		};
 		publication: string;
 	};

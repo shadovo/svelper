@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
-	import type { ImageData } from '$lib/components/Image.svelte';
+	import type { Picture } from 'vite-imagetools';
 
 	export type ArticleData = {
 		title: string;
 		description: string;
 		link: string;
-		image?: ImageData;
+		image?: Picture;
 		imageColor: string | undefined;
 		tags?: string[];
 	};
