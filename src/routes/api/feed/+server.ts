@@ -1,3 +1,5 @@
+import type { RequestHandler } from './$types';
+import type { Picture } from 'vite-imagetools';
 import type { ArticlePromo } from '$lib/types/ArticlePromo';
 import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;1000;1050;800;400&imagetools';
 import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;1050;800;400&imagetools';
@@ -21,7 +23,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -40,7 +42,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -49,7 +51,7 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Soundboard',
 			description: 'Using the Web Audio API to create a soundboard.',
-			imageData: soundboardHeroImage,
+			imageData: soundboardHeroImage as Picture,
 		},
 		url: `/tools/soundboard`,
 		meta: {
@@ -59,7 +61,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -68,7 +70,7 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Floppy Octty',
 			description: 'Underwater adventure in the spirrit of Flappy Bird.',
-			imageData: floppyOcctyHeroImage,
+			imageData: floppyOcctyHeroImage as Picture,
 		},
 		url: `/games/floppy-octty`,
 		meta: {
@@ -78,7 +80,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -87,7 +89,7 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Breathing technique',
 			description: 'A breathing technique to help you relax built in Svelte.',
-			imageData: breathingHeroImage,
+			imageData: breathingHeroImage as Picture,
 		},
 		url: `/tools/breath`,
 		meta: {
@@ -97,7 +99,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -106,7 +108,7 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Minesweepery',
 			description: 'The classic game minesweeper as Svelte component.',
-			imageData: minesweeperHeroImage,
+			imageData: minesweeperHeroImage as Picture,
 		},
 		url: `/games/minesweeper`,
 		meta: {
@@ -116,7 +118,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -134,7 +136,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -152,7 +154,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -170,7 +172,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -188,7 +190,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -206,7 +208,7 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
@@ -224,17 +226,17 @@ const articles: ArticlePromo[] = [
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage,
+				profilePicture: shadovoProfileImage as Picture,
 			},
 			publication: 'Svelper',
 		},
 	},
 ];
 
-export function GET({ url }) {
-	const tag = url.searchParams.get('tag');
+export const GET = (({ url }) => {
+	const tag: string | null = url.searchParams.get('tag');
 	const articlesWithTag = tag
 		? articles.filter((article) => article.meta.tags.includes(tag))
 		: articles;
 	return new Response(JSON.stringify(articlesWithTag));
-}
+}) satisfies RequestHandler;

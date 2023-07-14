@@ -1,21 +1,7 @@
-<script lang="ts" context="module">
-	interface ImageSource {
-		src: string;
-		w: number;
-	}
-
-	interface ImageSources {
-		[format: string]: ImageSource[];
-	}
-
-	export interface ImageData {
-		sources: ImageSources;
-		img: ImageSource;
-	}
-</script>
-
 <script lang="ts">
-	export let src: ImageData;
+	import type { Picture } from 'vite-imagetools';
+
+	export let src: Picture;
 	export let alt: string;
 	export let aspectRatio: string;
 	export let sizes: string;
