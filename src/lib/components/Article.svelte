@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Image, { type ImageData } from '$lib/components/Image.svelte';
+	import type { Picture } from 'vite-imagetools';
+	import Image from '$lib/components/Image.svelte';
 
 	export let title: string;
-	export let image: ImageData | undefined = undefined;
+	export let image: Picture | undefined = undefined;
 	export let imageColor: string | undefined = undefined;
 
 	const heroImageSize = `
