@@ -116,14 +116,15 @@ export default defineConfig(() => {
 			creating a <code>app.d.ts</code> file in the root of our project and adding the following code:
 		</p>
 		<SyntaxHighlighting language="typescript">
-			{`declare module '*&imagetools' {
-  /**
-   * actual types
-   * - code https://github.com/JonasKruckenberg/imagetools/blob/main/packages/core/src/output-formats.ts
-   * - docs https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
-   */
-  const out;
-  export default out;
+			{`/// <reference types="vite-imagetools" />
+declare module '*&imagetools' {
+	/**
+	 * actual types
+	 * - code https://github.com/JonasKruckenberg/imagetools/blob/main/packages/core/src/output-formats.ts
+	 * - docs https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
+	 */
+	const out: Picture;
+	export default out;
 }`}
 		</SyntaxHighlighting>
 		<p>
@@ -166,21 +167,9 @@ export default defineConfig(() => {
 		<p>Here's an example implementation of the <code>Image.svelte</code> component:</p>
 		<h4>Script</h4>
 		<SyntaxHighlighting language="typescript">
-			{`interface ImageSource {
-	src: string;
-	w: number;
-}
+			{`import type { Picture } from 'vite-imagetools';
 
-interface ImageSources {
-	[format: string]: ImageSource[];
-}
-
-interface Image {
-	sources: ImageSources;
-	img: ImageSource;
-}
-
-export let src: Image;
+export let src: Picture;
 export let alt: string;
 export let aspectRatio: string;
 export let sizes: string;
