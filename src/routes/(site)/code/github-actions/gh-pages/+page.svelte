@@ -11,7 +11,7 @@
 	/>
 </svelte:head>
 
-<Article title="Deploy npm build output to GitHub pages.">
+<Article title="Deploy npm build output to GitHub pages">
 	<section>
 		<p>
 			Using GitHub actions to deploy the result of <code>npm build</code> has never been simpler. Following

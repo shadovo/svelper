@@ -126,15 +126,17 @@
 		margin: 0;
 		font-size: 1.5em;
 		font-weight: 500;
-		line-height: 1.6;
-		font-weight: var(--font-weight-light);
+		line-height: 1;
+		font-weight: var(--font-weight-bold);
 		text-wrap: balance;
+		max-width: 20ch;
 	}
 
 	.description {
 		max-width: 60ch;
 		text-wrap: balance;
 		color: var(--c-text-2);
+		font-weight: var(--font-weight-light);
 	}
 
 	.tags {
@@ -153,10 +155,6 @@
 	}
 
 	@media (width < 768px) {
-		.card {
-			max-width: 500px;
-			margin: var(--gap) auto;
-		}
 		.content {
 			padding: var(--gap);
 			grid-template-columns: 60px 1fr;

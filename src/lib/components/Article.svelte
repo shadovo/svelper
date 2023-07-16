@@ -12,7 +12,6 @@
 	`;
 </script>
 
-<h1>{title}</h1>
 <article>
 	{#if image}
 		<div class="hero">
@@ -27,6 +26,7 @@
 		</div>
 	{/if}
 	<div class="content">
+		<h1>{title}</h1>
 		<slot />
 	</div>
 </article>
@@ -57,15 +57,16 @@
 	h1 {
 		width: calc(100% - var(--gap));
 		max-width: 800px;
-		font-size: 6rem;
+		font-size: 3rem;
 		line-height: 1;
 		width: 100%;
-		margin: 72px auto;
+		margin: 0;
 		padding: 0;
 		border: none;
 		text-wrap: balance;
 		font-weight: var(--font-weight-bold);
 		color: var(--c-text);
+		max-width: 20ch;
 	}
 
 	.hero {
@@ -87,7 +88,7 @@
 	@media (width < 768px) {
 		article {
 			padding: var(--gap);
-			margin: var(--gap-half) auto var(--gap);
+			margin: var(--gap) auto;
 			font-size: 16px;
 		}
 

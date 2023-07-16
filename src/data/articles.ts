@@ -32,7 +32,7 @@ export type ArticlePromo = {
 const ARTICLES: Readonly<ArticlePromo>[] = [
 	{
 		promotion: {
-			title: 'Optimize images in SvelteKit',
+			title: 'Using vite-imagetools with SvelteKit',
 			description: 'Optimize images in SvelteKit using vite-imagetools.',
 		},
 		url: `/code/components/vite-imagetools-in-sveltekit`,
@@ -50,7 +50,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Changed SvelteKit Paths',
+			title: 'Affected SvelteKit paths in PR',
 			description:
 				'Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.',
 		},
@@ -107,7 +107,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Breathing technique',
+			title: 'Breathing timer',
 			description: 'A breathing technique to help you relax built in Svelte.',
 			imageData: breathingHeroImage,
 		},
@@ -126,7 +126,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Minesweepery',
+			title: 'Minesweeper',
 			description: 'The classic game minesweeper as Svelte component.',
 			imageData: minesweeperHeroImage,
 		},
@@ -145,7 +145,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Pagination component',
+			title: 'Pagination Svelte component',
 			description: 'A pagination component for Svelte.',
 		},
 		url: `/code/components/pagination`,
@@ -163,7 +163,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Animation annoying bounce',
+			title: 'Annoying bounce animation',
 			description: 'Annimation designed to keep annoying the user to take action.',
 		},
 		url: `/code/animations/annoying-bounce`,
@@ -181,7 +181,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Animation attention shake',
+			title: 'Attention shake animation',
 			description: 'Animation to grab the users attention based on an event.',
 		},
 		url: `/code/animations/attention-shake`,
@@ -199,7 +199,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Deploy Github Page',
+			title: 'Deploy npm build output to GitHub pages',
 			description: 'Building and deploy to Github Pages from a Github Action.',
 		},
 		url: `/code/github-actions/gh-pages`,
@@ -217,7 +217,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Syntax highlighting',
+			title: 'Component with syntax highlighting',
 			description: 'Syntax highlighting component for Svelte.',
 		},
 		url: `/code/components/syntax-highlighting`,
@@ -235,7 +235,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 	},
 	{
 		promotion: {
-			title: 'Dialog component',
+			title: 'Dialog implementation as Svelte component',
 			description: 'A dialog component for Svelte.',
 		},
 		url: `/code/components/dialog`,

@@ -19,47 +19,22 @@
 	/>
 </svelte:head>
 
-<h1>{meta.currentTag?.name ?? 'Svelper, the Svelte helper'}</h1>
 <div class="wrapper">
 	<section>
 		{#each articles as article}
 			<ArticleCard {article} />
 		{/each}
 	</section>
-	<div class="feed-filter">
-		<ul class="surface-blured">
-			{#each tags as tag}
-				<li>
-					<a href="/{tag.tag.slug}">{tag.tag.name} <span>{tag.count}</span></a>
-				</li>
-			{/each}
-		</ul>
-	</div>
 </div>
 
 <style lang="scss">
-	h1 {
-		width: calc(100% - var(--gap));
-		max-width: 800px;
-		font-size: 6rem;
-		line-height: 1;
-		margin: 72px auto;
-		padding: 0;
-		border: none;
-		text-wrap: balance;
-		font-weight: var(--font-weight-bold);
-		color: var(--c-text);
-	}
-
 	.wrapper {
-		margin: 0 auto;
-		display: grid;
-		grid-template-columns: 1fr 220px;
+		margin: var(--gap-2) auto;
 		gap: var(--gap-2);
 		align-items: flex-start;
 		justify-content: center;
 		width: calc(100% - var(--gap));
-		max-width: 800px;
+		max-width: 650px;
 		margin-bottom: var(--gap-3);
 	}
 
@@ -96,6 +71,11 @@
 			justify-content: space-between;
 			gap: var(--gap);
 			color: var(--c-text-2);
+		}
+	}
+	@media (width < 768px) {
+		.wrapper {
+			margin: var(--gap) auto;
 		}
 	}
 </style>
