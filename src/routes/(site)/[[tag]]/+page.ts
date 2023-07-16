@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type { ArticlePromo } from '../../../data/articles.js';
-import { get as getTag, type Tag } from '../../../data/tags';
+import type { ArticlePromo } from '$data/articles.js';
+import { get as getTag, type Tag } from '$data/tags';
 
 export const prerender = false;
 export const ssr = true;
@@ -16,12 +16,10 @@ export const load = (async ({ fetch, params }) => {
 	}
 	const fetchUrl = currentTag ? `/api/feed/${currentTag.slug}` : '/api/feed';
 	const articleRequest = await fetch(fetchUrl);
-	const result = (await articleRequest.json()) as {
+	const { articles, tags } = (await articleRequest.json()) as {
 		articles: ArticlePromo[];
 		tags: { tag: Tag; count: number }[];
 	};
-	const articles: ArticlePromo[] = result.articles;
-	const tags: { tag: Tag; count: number }[] = result.tags;
 
 	return {
 		articles,
