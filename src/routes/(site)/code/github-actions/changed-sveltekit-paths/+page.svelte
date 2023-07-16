@@ -11,7 +11,7 @@
 	/>
 </svelte:head>
 
-<Article title="Affected SvelteKit paths in PR.">
+<Article title="Affected SvelteKit paths in PR">
 	<section>
 		<p>Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.</p>
 		<p>

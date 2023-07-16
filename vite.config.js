@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { imagetools } from 'vite-imagetools';
-import * as path from 'path';
 
 const supportedExtensions = ['png', 'jpg', 'jpeg'];
 
@@ -22,11 +21,6 @@ export default defineConfig(() => {
 			}),
 			sveltekit(),
 		],
-		resolve: {
-			alias: {
-				$img: path.resolve('src/images'),
-			},
-		},
 	};
 	return config;
 });

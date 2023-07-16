@@ -34,3 +34,8 @@
 	border-radius: var(--radius);
 	background-color: var(--surface-1);
 }
+
+.surface-blured {
+	background-color: color-mix(in srgb, var(--surface-2) 70%, transparent);
+	backdrop-filter: grayscale(0.7) blur(10px);
+}

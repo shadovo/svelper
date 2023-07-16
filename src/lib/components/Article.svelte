@@ -25,8 +25,8 @@
 			/>
 		</div>
 	{/if}
-	<h2>{title}</h2>
 	<div class="content">
+		<h1>{title}</h1>
 		<slot />
 	</div>
 </article>
@@ -54,15 +54,19 @@
 		}
 	}
 
-	h2 {
-		font-size: 2.3rem;
+	h1 {
+		width: calc(100% - var(--gap));
+		max-width: 800px;
+		font-size: 3rem;
+		line-height: 1;
 		width: 100%;
-		margin: 0 0 var(--gap);
+		margin: 0;
 		padding: 0;
 		border: none;
 		text-wrap: balance;
-		font-weight: var(--font-weight-light);
+		font-weight: var(--font-weight-bold);
 		color: var(--c-text);
+		max-width: 20ch;
 	}
 
 	.hero {
@@ -84,11 +88,11 @@
 	@media (width < 768px) {
 		article {
 			padding: var(--gap);
-			margin: var(--gap-half) auto var(--gap);
+			margin: var(--gap) auto;
 			font-size: 16px;
 		}
 
-		h2 {
+		h1 {
 			font-size: 1.7rem;
 		}
 
