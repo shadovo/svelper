@@ -3,11 +3,11 @@ export type Tag = {
 	slug: string;
 };
 
-const TAGS: Readonly<Tag>[] = [
+const TAGS: Tag[] = [
 	{ slug: 'sveltekit', name: 'SvelteKit' },
 	{ slug: 'svelte', name: 'Svelte' },
 	{ slug: 'games', name: 'Games' },
-	{ slug: 'widget', name: 'Widget' },
+	{ slug: 'widgets', name: 'Widgets' },
 	{ slug: 'web-api', name: 'Web API' },
 	{ slug: 'github-actions', name: 'GitHub Actions' },
 	{ slug: 'components', name: 'Components' },
@@ -16,10 +16,10 @@ const TAGS: Readonly<Tag>[] = [
 	{ slug: 'animation', name: 'Animation' },
 ];
 
-export const get = (slug: string) => {
+export const get = (slug: string): Tag | undefined => {
 	return TAGS.find((t) => t.slug === slug);
 };
 
-export const getAll = () => {
+export const getAll = (): Tag[] => {
 	return [...TAGS];
 };

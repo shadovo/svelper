@@ -10,7 +10,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
 			} else if (audioContext.state === 'suspended') {
-				audioContext.resume();
+				void audioContext.resume();
 			}
 			const relativeStart = audioContext.currentTime + time;
 			const relativeStop = relativeStart + duration;
@@ -63,7 +63,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
 			} else if (audioContext.state === 'suspended') {
-				audioContext.resume();
+				void audioContext.resume();
 			}
 			const relativeStart = audioContext.currentTime + time;
 			const relativeStop = relativeStart + duration;
@@ -102,7 +102,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
 			} else if (audioContext.state === 'suspended') {
-				audioContext.resume();
+				void audioContext.resume();
 			}
 			const relativeStart = audioContext.currentTime + time;
 			const relativeStop = relativeStart + duration;
@@ -133,7 +133,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
 			} else if (audioContext.state === 'suspended') {
-				audioContext.resume();
+				void audioContext.resume();
 			}
 			const relativeStart = audioContext.currentTime + time;
 			const relativeStop = relativeStart + duration;
@@ -162,7 +162,7 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			if (!audioContext || audioContext.state === 'closed') {
 				audioContext = new AudioContext();
 			} else if (audioContext.state === 'suspended') {
-				audioContext.resume();
+				void audioContext.resume();
 			}
 			const relativeStart = audioContext.currentTime + time;
 			const relativeStop = relativeStart + duration;
@@ -187,10 +187,10 @@ export default function createSoundBoard(suspendIfIdleForInSeconds = 10) {
 			}, suspentionTime);
 		},
 		stop() {
-			audioContext?.suspend();
+			void audioContext?.suspend();
 		},
 		destroy() {
-			audioContext?.close();
+			void audioContext?.close();
 		},
 	};
 }

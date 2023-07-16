@@ -8,12 +8,19 @@ updates:
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'friday'
+      time: '16:00'
+      timezone: 'Europe/Stockholm'
     open-pull-requests-limit: 10
+    groups:
+      eslint:
+        patterns:
+          - '*eslint*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       # Check for updates to GitHub Actions every weekday
-      interval: 'daily'
+      interval: 'weekly'
     open-pull-requests-limit: 10

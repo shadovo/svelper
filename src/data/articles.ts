@@ -4,17 +4,17 @@ import {
 	soundboardHeroImage,
 	breathingHeroImage,
 	shadovoProfileImage,
-} from '$data/images';
-import { get as getTag, type Tag } from '$data/tags';
-import type { ImageData } from '$lib/components/Image.svelte';
+} from './images';
+import { get as getTag, type Tag } from './tags';
 import { notEmpty } from '$lib/utils/helpers';
+import type { Picture } from 'vite-imagetools';
 
 export type ArticlePromo = {
 	url: string;
 	promotion: {
 		title: string;
 		description: string;
-		imageData?: ImageData;
+		imageData?: Picture;
 	};
 	meta: {
 		publishedDate?: string;
@@ -23,7 +23,7 @@ export type ArticlePromo = {
 	origin: {
 		author: {
 			name: string;
-			profilePicture: ImageData;
+			profilePicture: Picture;
 		};
 		publication: string;
 	};
@@ -94,7 +94,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 		},
 		url: `/games/floppy-octty`,
 		meta: {
-			tags: [getTag('games'), getTag('widget'), getTag('svelte')].filter(notEmpty),
+			tags: [getTag('games'), getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-28',
 		},
 		origin: {
@@ -113,7 +113,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 		},
 		url: `/tools/breath`,
 		meta: {
-			tags: [getTag('widget'), getTag('svelte')].filter(notEmpty),
+			tags: [getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-07',
 		},
 		origin: {
@@ -132,7 +132,7 @@ const ARTICLES: Readonly<ArticlePromo>[] = [
 		},
 		url: `/games/minesweeper`,
 		meta: {
-			tags: [getTag('games'), getTag('widget'), getTag('svelte')].filter(notEmpty),
+			tags: [getTag('games'), getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-02-24',
 		},
 		origin: {

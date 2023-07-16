@@ -1,18 +1,19 @@
-import { getAll as getAllArticles } from '$data/articles';
-import { get as getTag } from '$data/tags';
-import { getAllByTag as getAllArticlesByTag } from '$data/articles';
+import { getAll as getAllArticles } from '../../../../data/articles';
+import { get as getTag } from '../../../../data/tags';
+import { getAllByTag as getAllArticlesByTag } from '../../../../data/articles';
+import type { RequestHandler } from './$types';
 
 export const prerender = false;
 
-export function GET({ params }) {
+export const GET = (({ params }) => {
 	const tag = params.tag;
 	const currentTag = tag ? getTag(tag) : undefined;
 	const articles = currentTag ? getAllArticlesByTag(currentTag.slug) : getAllArticles();
 
 	const tags = Object.entries(
 		articles.reduce((tags, article) => {
-			article.meta.tags.forEach((tag) => {
-				tags[tag.slug] = (tags[tag.slug] ?? 0) + 1;
+			article.meta.tags.forEach(({ slug }) => {
+				tags[slug] = (tags[slug] ?? 0) + 1;
 			});
 			return tags;
 		}, {} as Record<string, number>),
@@ -32,4 +33,4 @@ export function GET({ params }) {
 			},
 		}),
 	);
-}
+}) satisfies RequestHandler;
