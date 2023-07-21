@@ -1,48 +1,68 @@
-import type { RequestHandler } from './$types';
+import {
+	minesweeperHeroImage,
+	floppyOcctyHeroImage,
+	soundboardHeroImage,
+	breathingHeroImage,
+	shadovoProfileImage,
+} from './images';
+import { get as getTag, type Tag } from './tags';
+import { notEmpty } from '$lib/utils/helpers';
 import type { Picture } from 'vite-imagetools';
-import type { ArticlePromo } from '$lib/types/ArticlePromo';
-import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;1000;1050;800;400&imagetools';
-import floppyOcctyHeroImage from '$img/games/floppy-octty.png?w=2400;1600;1200;1050;800;400&imagetools';
-import soundboardHeroImage from '$img/tools/soundboard.png?w=2400;1600;1200;1050;800;400&imagetools';
-import breathingHeroImage from '$img/tools/breath.png?w=2400;1600;1200;1050;800;400&imagetools';
-import shadovoProfileImage from '$img/oscar-head.png?w=240;180;160;120;80;60&imagetools';
 
-export const prerender = false;
+export type ArticlePromo = {
+	url: string;
+	promotion: {
+		title: string;
+		description: string;
+		imageData?: Picture;
+	};
+	meta: {
+		publishedDate?: string;
+		tags: Tag[];
+	};
+	origin: {
+		author: {
+			name: string;
+			profilePicture: Picture;
+		};
+		publication: string;
+	};
+};
 
-const articles: ArticlePromo[] = [
+const ARTICLES: Readonly<ArticlePromo>[] = [
 	{
 		promotion: {
-			title: 'Optimize images in SvelteKit',
+			title: 'Using vite-imagetools with SvelteKit',
 			description: 'Optimize images in SvelteKit using vite-imagetools.',
 		},
 		url: `/code/components/vite-imagetools-in-sveltekit`,
 		meta: {
-			tags: ['SvelteKit', 'Components'],
+			tags: [getTag('sveltekit'), getTag('components')].filter(notEmpty),
 			publishedDate: '2023-04-09',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Changed SvelteKit Paths',
+			title: 'Affected SvelteKit paths in PR',
 			description:
 				'Using GitHub actions to find all paths in SvelteKit affected by changes in a PR.',
 		},
 		url: `/code/github-actions/changed-sveltekit-paths`,
 		meta: {
-			tags: ['GitHub Actions', 'SvelteKit'],
+			tags: [getTag('github-actions'), getTag('sveltekit')].filter(notEmpty),
 			publishedDate: '2023-04-02',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -51,17 +71,17 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Soundboard',
 			description: 'Using the Web Audio API to create a soundboard.',
-			imageData: soundboardHeroImage as Picture,
+			imageData: soundboardHeroImage,
 		},
 		url: `/tools/soundboard`,
 		meta: {
-			tags: ['Web API', 'Svelte'],
+			tags: [getTag('web-api'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-22',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
@@ -70,173 +90,173 @@ const articles: ArticlePromo[] = [
 		promotion: {
 			title: 'Floppy Octty',
 			description: 'Underwater adventure in the spirrit of Flappy Bird.',
-			imageData: floppyOcctyHeroImage as Picture,
+			imageData: floppyOcctyHeroImage,
 		},
 		url: `/games/floppy-octty`,
 		meta: {
-			tags: ['Game', 'Widget', 'Svelte'],
+			tags: [getTag('games'), getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-28',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Breathing technique',
+			title: 'Breathing timer',
 			description: 'A breathing technique to help you relax built in Svelte.',
-			imageData: breathingHeroImage as Picture,
+			imageData: breathingHeroImage,
 		},
 		url: `/tools/breath`,
 		meta: {
-			tags: ['Widget', 'Svelte'],
+			tags: [getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-03-07',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Minesweepery',
+			title: 'Minesweeper',
 			description: 'The classic game minesweeper as Svelte component.',
-			imageData: minesweeperHeroImage as Picture,
+			imageData: minesweeperHeroImage,
 		},
 		url: `/games/minesweeper`,
 		meta: {
-			tags: ['Game', 'Widget', 'Svelte'],
+			tags: [getTag('games'), getTag('widgets'), getTag('svelte')].filter(notEmpty),
 			publishedDate: '2023-02-24',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Pagination component',
+			title: 'Pagination Svelte component',
 			description: 'A pagination component for Svelte.',
 		},
 		url: `/code/components/pagination`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-20',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Animation annoying bounce',
+			title: 'Annoying bounce animation',
 			description: 'Annimation designed to keep annoying the user to take action.',
 		},
 		url: `/code/animations/annoying-bounce`,
 		meta: {
-			tags: ['CSS', 'Animations'],
+			tags: [getTag('css'), getTag('animation')].filter(notEmpty),
 			publishedDate: '2022-08-13',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Animation attention shake',
+			title: 'Attention shake animation',
 			description: 'Animation to grab the users attention based on an event.',
 		},
 		url: `/code/animations/attention-shake`,
 		meta: {
-			tags: ['CSS', 'Animations'],
+			tags: [getTag('css'), getTag('animation')].filter(notEmpty),
 			publishedDate: '2022-08-13',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Deploy Github Page',
+			title: 'Deploy npm build output to GitHub pages',
 			description: 'Building and deploy to Github Pages from a Github Action.',
 		},
 		url: `/code/github-actions/gh-pages`,
 		meta: {
-			tags: ['GitHub Actions'],
+			tags: [getTag('github-actions')].filter(notEmpty),
 			publishedDate: '2022-08-11',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Syntax highlighting',
+			title: 'Component with syntax highlighting',
 			description: 'Syntax highlighting component for Svelte.',
 		},
 		url: `/code/components/syntax-highlighting`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-11',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 	{
 		promotion: {
-			title: 'Dialog component',
+			title: 'Dialog implementation as Svelte component',
 			description: 'A dialog component for Svelte.',
 		},
 		url: `/code/components/dialog`,
 		meta: {
-			tags: ['Svelte', 'Components'],
+			tags: [getTag('svelte'), getTag('components')].filter(notEmpty),
 			publishedDate: '2022-08-08',
 		},
 		origin: {
 			author: {
 				name: 'Oscar',
-				profilePicture: shadovoProfileImage as Picture,
+				profilePicture: shadovoProfileImage,
 			},
 			publication: 'Svelper',
 		},
 	},
 ];
 
-export const GET = (({ url }) => {
-	const tag: string | null = url.searchParams.get('tag');
-	const articlesWithTag = tag
-		? articles.filter((article) => article.meta.tags.includes(tag))
-		: articles;
-	return new Response(JSON.stringify(articlesWithTag));
-}) satisfies RequestHandler;
+export const getAll = () => {
+	return [...ARTICLES];
+};
+
+export const getAllByTag = (tagSlug: string) => {
+	return ARTICLES.filter((article) => article.meta.tags.some((tag) => tag.slug === tagSlug));
+};
