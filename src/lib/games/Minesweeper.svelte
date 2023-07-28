@@ -239,6 +239,7 @@
 		width: auto;
 		display: inline-block;
 		padding: var(--gap);
+		background-color: var(--surface-2);
 		border: 3px solid var(--c-text);
 		--c-revealed: #ccc8;
 	}

@@ -1,14 +1,15 @@
+<script context="module" lang="ts">
+	export type BreathConfig = {
+		duration: number;
+		delay: number;
+	};
+</script>
+
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
 	import createSoundboard from '../utils/audio/soundboard';
-
-	type BreathConfig = {
-		duration: number;
-		delay: number;
-	};
 
 	type BreathAlert = {
 		vibrationPattern: number[];
@@ -76,13 +77,11 @@
 	});
 
 	function changeAlert(config: BreathAlert) {
-		if (browser) {
-			if (vibration) {
-				window.navigator?.vibrate?.(config.vibrationPattern);
-			}
-			if (sound) {
-				config.soundPattern.forEach((chord, i) => soundBoard.playNotes(chord, 2, i * 0.3));
-			}
+		if (vibration) {
+			window.navigator?.vibrate?.(config.vibrationPattern);
+		}
+		if (sound) {
+			config.soundPattern.forEach((chord, i) => soundBoard.playNotes(chord, 2, i * 0.3));
 		}
 	}
 
@@ -169,6 +168,7 @@
 		aspect-ratio: 1;
 		border-radius: 50%;
 		border: 1px solid var(--c-text);
+		background-color: var(--surface-1);
 		cursor: pointer;
 	}
 	.inner {
