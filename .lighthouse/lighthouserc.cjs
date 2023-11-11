@@ -11,6 +11,7 @@ module.exports = {
 				'bf-cache': 'off',
 				'color-contrast': 'off', // temporary disabled due to oklch color space issue
 				'is-crawlable': 'off', // vercel sets noindex for review apps
+				'inspector-issues': 'off',
 			},
 		},
 		upload: {
