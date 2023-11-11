@@ -80,6 +80,7 @@
 	</div>
 </header>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={sidebarEle}
 	class:isOpen={showSidebar}
@@ -272,7 +273,9 @@
 			opacity: 1;
 			background: rgba(0, 0, 0, 0);
 			backdrop-filter: blur(0);
-			transition: background 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out;
+			transition:
+				background 0.2s ease-in-out,
+				backdrop-filter 0.2s ease-in-out;
 		}
 
 		&.isOpen {

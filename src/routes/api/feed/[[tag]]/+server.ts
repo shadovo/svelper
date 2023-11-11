@@ -11,12 +11,15 @@ export const GET = (({ params }) => {
 	const articles = currentTag ? getAllArticlesByTag(currentTag.slug) : getAllArticles();
 
 	const tags = Object.entries(
-		articles.reduce((tags, article) => {
-			article.meta.tags.forEach(({ slug }) => {
-				tags[slug] = (tags[slug] ?? 0) + 1;
-			});
-			return tags;
-		}, {} as Record<string, number>),
+		articles.reduce(
+			(tags, article) => {
+				article.meta.tags.forEach(({ slug }) => {
+					tags[slug] = (tags[slug] ?? 0) + 1;
+				});
+				return tags;
+			},
+			{} as Record<string, number>,
+		),
 	)
 		.map(([slug, count]) => ({
 			tag: getTag(slug),

@@ -206,7 +206,6 @@
 			{#each game.board as row, i}
 				<tr>
 					{#each row as cell, j}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<td
 							on:click={() => cellClicked(j, i)}
 							on:contextmenu|preventDefault={() => cellRightClicked(j, i)}

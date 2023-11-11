@@ -92,11 +92,6 @@
 		padding: var(--gap-3);
 	}
 
-	.profile-picture {
-		width: 100%;
-		aspect-ratio: 1;
-	}
-
 	.text {
 		display: grid;
 		gap: var(--gap);
