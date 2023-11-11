@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { imagetools } from 'vite-imagetools';
-import * as path from 'path';
+import path from 'path';
 
 const supportedExtensions = ['png', 'jpg', 'jpeg'];
 
