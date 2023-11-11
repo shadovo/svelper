@@ -62,8 +62,8 @@
 
 {#if formattedCode}
 	<div>
-		<pre bind:this={preEl} class={prismClasses}><code class="language-{language}"
-				>{@html formattedCode}</code
+		<pre bind:this={preEl} class={prismClasses}><code class="language-{language}">
+				{@html formattedCode}</code
 			></pre>
 	</div>
 {/if}

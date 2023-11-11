@@ -3,12 +3,12 @@
 
 	export let data;
 	let articles: typeof data.articles;
-	let tags: typeof data.tags;
-	let meta: typeof data.meta;
+	// let tags: typeof data.tags;
+	// let meta: typeof data.meta;
 
 	$: articles = data.articles;
-	$: tags = data.tags;
-	$: meta = data.meta;
+	// $: tags = data.tags;
+	// $: meta = data.meta;
 </script>
 
 <svelte:head>
@@ -43,7 +43,7 @@
 		gap: var(--gap-3);
 	}
 
-	.feed-filter {
+	/* .feed-filter {
 		display: inline-block;
 		font-size: 1.2em;
 		height: 100%;
@@ -72,7 +72,7 @@
 			gap: var(--gap);
 			color: var(--c-text-2);
 		}
-	}
+	} */
 	@media (width < 768px) {
 		.wrapper {
 			margin: var(--gap) auto;

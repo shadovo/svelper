@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import BreathingTechnique, { type BreathConfig } from '$lib/tools/BreathingTechnique.svelte';
 	import { onMount } from 'svelte';

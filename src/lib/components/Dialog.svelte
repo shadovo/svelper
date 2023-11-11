@@ -31,6 +31,7 @@
 
 <!-- Dialog has native key event to close with escape -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog class="dialog" bind:this={dialogEle} on:click={dialogClick} on:close={dialogClosed}>
 	<div class="dialog-content">
 		<header>
@@ -61,16 +62,14 @@
 </dialog>
 
 <style lang="scss">
-	:global {
+	:global(html:has(dialog[open])) {
 		// css nomarlize sets html overflow-y which causes
 		// issues when trying to lock the scroll position.
-		html:has(dialog[open]) {
-			overflow-y: initial;
-		}
+		overflow-y: initial;
+	}
 
-		body:has(dialog[open]) {
-			overflow: hidden;
-		}
+	:global(body:has(dialog[open])) {
+		overflow: hidden;
 	}
 
 	.dialog {
@@ -82,7 +81,8 @@
 		position: fixed;
 		inset: 0;
 		border: 5px solid var(--c-text);
-		box-shadow: 0 -1px 3px 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+		box-shadow:
+			0 -1px 3px 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
 			0 1px 2px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
 			0 2px 5px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
 			0 4px 12px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),

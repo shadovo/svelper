@@ -1,12 +1,5 @@
 <script lang="ts">
-	import { beforeNavigate } from '$app/navigation';
 	import Navigation from './Navigation.svelte';
-
-	let showAside = false;
-
-	beforeNavigate(() => {
-		showAside = false;
-	});
 </script>
 
 <div class="content">
