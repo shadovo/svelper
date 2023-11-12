@@ -41,8 +41,8 @@
 		max-width: 800px;
 		margin: var(--gap-2) auto;
 		overflow: hidden;
-		font-size: 20px;
-		font-weight: var(--font-weight-light);
+		font-size: 18px;
+		font-weight: var(--font-weight-text);
 		color: var(--c-text-3);
 
 		& > :global(section > p) {
@@ -57,14 +57,11 @@
 	h1 {
 		width: calc(100% - var(--gap));
 		max-width: 800px;
-		font-size: 3rem;
-		line-height: 1;
 		width: 100%;
 		margin: 0;
 		padding: 0;
-		border: none;
 		text-wrap: balance;
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-title);
 		color: var(--c-text);
 		max-width: 20ch;
 	}

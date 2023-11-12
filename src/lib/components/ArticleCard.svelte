@@ -74,7 +74,7 @@
 		overflow: hidden;
 		color: var(--c-text);
 		text-decoration: none;
-		font-weight: var(--font-weight-normal);
+		font-weight: var(--font-weight-text);
 
 		&:hover {
 			text-decoration: none;
@@ -103,7 +103,7 @@
 
 	.date {
 		color: var(--c-text-2);
-		font-weight: var(--font-weight-light);
+		font-weight: var(--font-weight-text);
 
 		&::after {
 			content: '';
@@ -113,16 +113,14 @@
 	}
 
 	.publication {
-		font-weight: var(--font-weight-light);
+		font-weight: var(--font-weight-text);
 		color: var(--c-text-2);
 	}
 
 	h2 {
 		margin: 0;
 		font-size: 1.5em;
-		font-weight: 500;
-		line-height: 1;
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-title);
 		text-wrap: balance;
 		max-width: 20ch;
 	}
@@ -131,7 +129,7 @@
 		max-width: 60ch;
 		text-wrap: balance;
 		color: var(--c-text-2);
-		font-weight: var(--font-weight-light);
+		font-weight: var(--font-weight-text);
 	}
 
 	.tags {
