@@ -179,14 +179,10 @@ export let loading: 'eager' | 'lazy' = 'eager';`}</SyntaxHighlighting
 		<h4>HTML</h4>
 		<SyntaxHighlighting language="svelte">
 			{`<picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">
-  {#each Object.entries(src.sources) as [format, images]}
-    <source
-      srcset={images.map((i) => \`$\{i.src} $\{i.w}w\`).join(', ')}
-      type={'image/' + format}
-      {sizes}
-    />
-  {/each}
-  <img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.img.src} {alt} {loading} />
+	{#each Object.entries(src.sources) as [format, srcset]}
+		<source {srcset} {sizes} type="image/{format}" />
+	{/each}
+	<img style="width: 100%; aspect-ratio:{aspectRatio}" src={src.img.src} {alt} {loading} />
 </picture>`}
 		</SyntaxHighlighting>
 		<h4>CSS</h4>
