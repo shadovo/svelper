@@ -11,12 +11,8 @@
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">
-	{#each Object.entries(src.sources) as [format, images]}
-		<source
-			srcset={images.map((i) => `${i.src} ${i.w}w`).join(', ')}
-			type={'image/' + format}
-			{sizes}
-		/>
+	{#each Object.entries(src.sources) as [format, srcset]}
+		<source {srcset} {sizes} type="image/{format}" />
 	{/each}
 	<img
 		style="width: 100%; aspect-ratio:{aspectRatio}"
