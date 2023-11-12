@@ -3,6 +3,7 @@
 </script>
 
 <div class="content">
+	<div class="background" />
 	<Navigation />
 	<main>
 		<slot />
@@ -18,7 +19,7 @@
 </div>
 
 <style lang="scss">
-	.content {
+	.background {
 		background-image:
 		 /* linear-gradient(180deg in lab, transparent 50%, var(--surface-1) 80%), */ radial-gradient(
 				ellipse at top left in lab,
@@ -33,8 +34,16 @@
 			),
 			radial-gradient(ellipse at center left in lab, oklch(0.85 0.2 194.58 / 0.97), transparent 50%);
 		background-size: 100% 120vh;
-		/* background-size: 100% clamp(900px, 70vw, 120vh); */
-		background-attachment: fixed;
+		background-repeat: no-repeat;
+		flex-direction: column;
+		min-height: 100vh;
+		width: 100%;
+		position: fixed;
+		z-index: -1;
+	}
+
+	.content {
+		position: relative;
 		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
