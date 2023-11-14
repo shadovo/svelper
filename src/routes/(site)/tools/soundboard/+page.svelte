@@ -127,9 +127,12 @@
 		}
 
 		if (playing) {
-			soundLoop = setTimeout(() => {
-				runSoundLoop(beat + 1);
-			}, (60 / TEMPO) * 1000);
+			soundLoop = setTimeout(
+				() => {
+					runSoundLoop(beat + 1);
+				},
+				(60 / TEMPO) * 1000,
+			);
 		}
 	}
 	function clearSoundLoop() {
