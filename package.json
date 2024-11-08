@@ -19,7 +19,7 @@
 		"@playwright/test": "^1.42.1",
 		"@sveltejs/adapter-vercel": "^3.1.0",
 		"@sveltejs/kit": "^1.27.6",
-		"@types/node": "^20.11.25",
+		"@types/node": "^22.9.0",
 		"@types/prismjs": "^1.26.3",
 		"@typescript-eslint/eslint-plugin": "^7.1.1",
 		"@typescript-eslint/parser": "^7.1.1",
