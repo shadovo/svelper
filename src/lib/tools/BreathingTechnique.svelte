@@ -1,8 +1,5 @@
 <script context="module" lang="ts">
-	export type BreathConfig = {
-		duration: number;
-		delay: number;
-	};
+	export type BreathConfig = { duration: number; delay: number };
 </script>
 
 <script lang="ts">
@@ -11,15 +8,9 @@
 	import { fade, fly } from 'svelte/transition';
 	import createSoundboard from '../utils/audio/soundboard';
 
-	type BreathAlert = {
-		vibrationPattern: number[];
-		soundPattern: string[][];
-	};
+	type BreathAlert = { vibrationPattern: number[]; soundPattern: string[][] };
 
-	type BreathValues = BreathConfig &
-		BreathAlert & {
-			value: number;
-		};
+	type BreathValues = BreathConfig & BreathAlert & { value: number };
 
 	const DEFAULT_BREATH_IN_CONFIG: BreathValues = {
 		duration: 4000,
@@ -55,15 +46,9 @@
 	export let sound = true;
 	export let vibration = true;
 
-	let breathInValues: BreathValues = {
-		...DEFAULT_BREATH_IN_CONFIG,
-		...breathInConfig,
-	};
+	let breathInValues: BreathValues = { ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig };
 
-	let breathOutValues: BreathValues = {
-		...DEFAULT_BREATH_OUT_CONFIG,
-		...breathOutConfig,
-	};
+	let breathOutValues: BreathValues = { ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig };
 
 	let directionIsIn = false;
 	let running = false;
@@ -71,10 +56,7 @@
 	let breathTimeout: ReturnType<typeof setTimeout>;
 	let delayTimeout: ReturnType<typeof setTimeout>;
 
-	let breath = tweened(0, {
-		duration: breathOutConfig.duration,
-		delay: 0,
-	});
+	let breath = tweened(0, { duration: breathOutConfig.duration, delay: 0 });
 
 	function changeAlert(config: BreathAlert) {
 		if (vibration) {
@@ -109,21 +91,12 @@
 	function stopTimout() {
 		clearTimeout(breathTimeout);
 		clearTimeout(delayTimeout);
-		breath.set($breath, {
-			delay: 0,
-			duration: 0,
-		});
+		breath.set($breath, { delay: 0, duration: 0 });
 	}
 
 	$: {
-		breathInValues = {
-			...DEFAULT_BREATH_IN_CONFIG,
-			...breathInConfig,
-		};
-		breathOutValues = {
-			...DEFAULT_BREATH_OUT_CONFIG,
-			...breathOutConfig,
-		};
+		breathInValues = { ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig };
+		breathOutValues = { ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig };
 	}
 
 	$: {
@@ -158,7 +131,7 @@
 	{:else}
 		<p transition:fly={{ y: 100, duration: 2000 }} class="direction">OUT</p>
 	{/if}
-	<div class="inner" style="transform: scale({$breath})" />
+	<div class="inner" style="transform: scale({$breath})"></div>
 </div>
 
 <style lang="scss">

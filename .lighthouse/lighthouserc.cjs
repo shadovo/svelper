@@ -1,8 +1,6 @@
 module.exports = {
 	ci: {
-		collect: {
-			numberOfRuns: 3,
-		},
+		collect: { numberOfRuns: 3 },
 		assert: {
 			preset: 'lighthouse:no-pwa',
 			assertions: {
@@ -14,8 +12,8 @@ module.exports = {
 				'inspector-issues': 'off',
 			},
 		},
-		upload: {
-			target: 'temporary-public-storage',
-		},
+		// upload: {
+		// 	target: 'temporary-public-storage',
+		// },
 	},
 };

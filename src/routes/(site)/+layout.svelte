@@ -3,7 +3,7 @@
 </script>
 
 <div class="content">
-	<div class="background" />
+	<div class="background"></div>
 	<Navigation />
 	<main>
 		<slot />
@@ -21,11 +21,8 @@
 <style lang="scss">
 	.background {
 		background-image:
-		 /* linear-gradient(180deg in lab, transparent 50%, var(--surface-1) 80%), */ radial-gradient(
-				ellipse at top left in lab,
-				oklch(0.54 0.31 293.09),
-				transparent 50%
-			),
+		 /* linear-gradient(180deg in lab, transparent 50%, var(--surface-1) 80%), */
+			radial-gradient(ellipse at top left in lab, oklch(0.54 0.31 293.09), transparent 50%),
 			radial-gradient(ellipse at top right in lab, oklch(0.85 0.19 201.28 / 0.89), transparent 50%),
 			radial-gradient(
 				ellipse at center right in lab,

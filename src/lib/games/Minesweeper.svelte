@@ -1,10 +1,5 @@
 <script lang="ts">
-	type Cell = {
-		isMine: boolean;
-		isRevealed: boolean;
-		isFlagged: boolean;
-		adjacentMines: number;
-	};
+	type Cell = { isMine: boolean; isRevealed: boolean; isFlagged: boolean; adjacentMines: number };
 	type Board = Cell[][];
 
 	type GameStatus = 'notstarted' | 'playing' | 'won' | 'lost';
@@ -31,12 +26,7 @@
 		for (let y = 0; y < rows; y++) {
 			board[y] = [];
 			for (let x = 0; x < columns; x++) {
-				board[y][x] = {
-					isMine: false,
-					isRevealed: false,
-					isFlagged: false,
-					adjacentMines: 0,
-				};
+				board[y][x] = { isMine: false, isRevealed: false, isFlagged: false, adjacentMines: 0 };
 			}
 		}
 
@@ -91,10 +81,7 @@
 		game.status = 'lost';
 		game.endTime = new Date();
 		game.board = game.board.map((row) =>
-			row.map((cell) => ({
-				...cell,
-				isRevealed: cell.isRevealed || cell.isMine,
-			})),
+			row.map((cell) => ({ ...cell, isRevealed: cell.isRevealed || cell.isMine })),
 		);
 	}
 
@@ -102,10 +89,7 @@
 		game.status = 'won';
 		game.endTime = new Date();
 		game.board = game.board.map((row) =>
-			row.map((cell) => ({
-				...cell,
-				isFlagged: cell.isFlagged || cell.isMine,
-			})),
+			row.map((cell) => ({ ...cell, isFlagged: cell.isFlagged || cell.isMine })),
 		);
 	}
 
@@ -203,9 +187,9 @@
 	</div>
 	<table>
 		<tbody>
-			{#each game.board as row, i}
+			{#each game.board as row, i (i)}
 				<tr>
-					{#each row as cell, j}
+					{#each row as cell, j (j)}
 						<td
 							on:click={() => cellClicked(j, i)}
 							on:contextmenu|preventDefault={() => cellRightClicked(j, i)}

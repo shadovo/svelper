@@ -10,7 +10,7 @@ export const load = (async ({ fetch, params }) => {
 	const tag = params.tag;
 	const currentTag = tag ? getTag(tag) : undefined;
 	if (tag && !currentTag) {
-		throw error(404, {
+		error(404, {
 			message: 'The page does not exist',
 		});
 	}

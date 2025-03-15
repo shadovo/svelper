@@ -55,7 +55,7 @@
 			</div>
 			<p class="description">{article.promotion.description}</p>
 			<div class="tags">
-				{#each article.meta.tags as tag}
+				{#each article.meta.tags as tag (tag.name)}
 					<span class="tag">{tag.name}</span>
 				{/each}
 			</div>

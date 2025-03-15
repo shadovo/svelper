@@ -1,4 +1,4 @@
-@mixin darkTheme {
+html[data-theme='dark'] {
 	--c-text: oklch(0.96 0 0);
 	--c-text-2: oklch(0.87 0.01 248.11);
 	--c-text-3: oklch(0.8 0 0);

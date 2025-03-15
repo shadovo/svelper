@@ -74,10 +74,7 @@
 		})
 		.map((n) => {
 			if (n) {
-				return {
-					note: n[1],
-					octave: n[2],
-				};
+				return { note: n[1], octave: n[2] };
 			}
 			return null;
 		})
@@ -185,26 +182,28 @@
 		<h3>Notes (sine)</h3>
 		<div class="sidescroll">
 			<table class="notes">
-				<tr
-					><th />
-					{#each octaves as octave}
-						<th>{octave}</th>
-					{/each}
-				</tr>
-				{#each notes as note}
-					<tr>
-						<td>
-							{note}
-						</td>
-						{#each octaves as octave}
-							<td>
-								<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
-									>{`${note}${octave}`}</button
-								>
-							</td>
+				<tbody>
+					<tr
+						><th></th>
+						{#each octaves as octave (octave)}
+							<th>{octave}</th>
 						{/each}
 					</tr>
-				{/each}
+					{#each notes as note (note)}
+						<tr>
+							<td>
+								{note}
+							</td>
+							{#each octaves as octave (octave)}
+								<td>
+									<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
+										>{`${note}${octave}`}</button
+									>
+								</td>
+							{/each}
+						</tr>
+					{/each}
+				</tbody>
 			</table>
 		</div>
 	</section>
@@ -212,26 +211,28 @@
 		<h3>Bass (triangle)</h3>
 		<div class="sidescroll">
 			<table class="notes">
-				<tr
-					><th />
-					{#each octaves as octave}
-						<th>{octave}</th>
-					{/each}
-				</tr>
-				{#each notes as note}
-					<tr>
-						<td>
-							{note}
-						</td>
-						{#each octaves as octave}
-							<td>
-								<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
-									>{`${note}${octave}`}</button
-								>
-							</td>
+				<tbody>
+					<tr
+						><th></th>
+						{#each octaves as octave (octave)}
+							<th>{octave}</th>
 						{/each}
 					</tr>
-				{/each}
+					{#each notes as note (note)}
+						<tr>
+							<td>
+								{note}
+							</td>
+							{#each octaves as octave (octave)}
+								<td>
+									<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
+										>{`${note}${octave}`}</button
+									>
+								</td>
+							{/each}
+						</tr>
+					{/each}
+				</tbody>
 			</table>
 		</div>
 	</section>
