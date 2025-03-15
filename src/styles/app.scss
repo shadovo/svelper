@@ -1,18 +1,8 @@
+@use 'sass:meta';
 @layer resets, vars, theming, defaults, cmoponents;
 @import 'ress' layer(resets);
 @import './vars.scss' layer(vars);
 @import './defaults.scss' layer(defaults);
 @import './components.scss' layer(components);
-
-@import './themes/light.scss';
-@import './themes/dark.scss';
-
-@layer theming {
-	html {
-		@include lightTheme;
-	}
-
-	html[data-theme='dark'] {
-		@include darkTheme;
-	}
-}
+@import './themes/light.scss' layer(theming);
+@import './themes/dark.scss' layer(theming);
