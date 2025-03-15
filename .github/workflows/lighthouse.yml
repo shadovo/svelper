@@ -4,7 +4,7 @@ on:
   deployment_status:
 
 jobs:
-  lighthouse-production:
+  lighthouse:
     permissions:
       deployments: read
       actions: read
