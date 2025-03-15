@@ -10,6 +10,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
+		"postinstall": "svelte-kit sync",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
