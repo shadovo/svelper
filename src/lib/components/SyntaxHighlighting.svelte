@@ -98,9 +98,7 @@
 		hyphens: none;
 
 		&::-moz-selection,
-		&::selection,
-		& ::-moz-selection,
-		& ::selection {
+		&::selection {
 			text-shadow: none;
 			background: var(--prism-selection-background);
 		}

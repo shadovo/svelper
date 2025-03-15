@@ -3,11 +3,7 @@
 	import { tweened } from 'svelte/motion';
 	import { onMount } from 'svelte';
 
-	type BottomPillar = {
-		top: number;
-		x: number;
-		scored?: boolean;
-	};
+	type BottomPillar = { top: number; x: number; scored?: boolean };
 
 	export let width = '300';
 	export let height = '450';
@@ -53,12 +49,8 @@
 		if (octtyIsDead) {
 			return;
 		}
-		octtyDirection.set(-1, {
-			duration: 0,
-		});
-		octtyDirection.set(1, {
-			duration: 1500,
-		});
+		octtyDirection.set(-1, { duration: 0 });
+		octtyDirection.set(1, { duration: 1500 });
 	}
 
 	function createBottomPillar(previousPillarX = RELATIVE_WIDTH + CORAL_SIZE): BottomPillar {
@@ -223,7 +215,7 @@
 		width={RELATIVE_WIDTH}
 		height={RELATIVE_HEIGHT}
 		style="width: {GAME_WIDTH}px; height: {GAME_HEIGHT}px;"
-	/>
+	></canvas>
 	{#if browser}
 		{#if octtyIsDead}
 			<div class="game-stats">
