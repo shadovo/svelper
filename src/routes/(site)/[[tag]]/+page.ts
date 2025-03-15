@@ -10,9 +10,9 @@ export const load = (async ({ fetch, params }) => {
 	const tag = params.tag;
 	const currentTag = tag ? getTag(tag) : undefined;
 	if (tag && !currentTag) {
-		throw error(404, {
-			message: 'The page does not exist',
-		});
+		error(404, {
+        			message: 'The page does not exist',
+        		});
 	}
 	const fetchUrl = currentTag ? `/api/feed/${currentTag.slug}` : '/api/feed';
 	const articleRequest = await fetch(fetchUrl);
