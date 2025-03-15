@@ -4,7 +4,9 @@ on:
   deployment_status:
 
 jobs:
-  lighthouse:
+  lighthouse-production:
+    name: Production
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.deployment.production_environment }}
     permissions:
       deployments: read
       actions: read
@@ -13,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: treosh/lighthouse-ci-action@v12
+      - uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc.cjs'
           # uploadArtifacts: true # save results as an action artifacts
@@ -25,5 +27,25 @@ jobs:
             ${{ github.event.deployment_status.environment_url }}/code/components/pagination
             ${{ github.event.deployment_status.environment_url }}/games/minesweeper
             ${{ github.event.deployment_status.environment_url }}/embeds/v1/minesweeper
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+  lighthouse-pr:
+    name: PR
+    if: ${{ github.event.deployment_status.state == 'success' && !github.event.deployment.production_environment }}
+    permissions:
+      deployments: read
+      actions: read
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "target_url ${{ github.event.deployment_status.target_url }}"
+      - uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './.lighthouse/lighthouserc.cjs'
+          # uploadArtifacts: true # save results as an action artifacts
+          # temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          urls: ${{ github.event.deployment_status.environment_url }}
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
