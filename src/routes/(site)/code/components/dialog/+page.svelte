@@ -149,7 +149,7 @@ const declinedDialog = () => {
 		<h2>Hello!</h2>
 	</div>
 	<div class="flex">
-		{#each longTextParagraphs as paragraph}
+		{#each longTextParagraphs as paragraph (paragraph)}
 			<p>{paragraph}</p>
 		{/each}
 	</div>
@@ -161,7 +161,7 @@ const declinedDialog = () => {
 				<h2>Hello!</h2>
 			</div>
 			<div class="flex">
-				{#each longTextParagraphs as paragraph}
+				{#each longTextParagraphs as paragraph (paragraph)}
 					<p>{paragraph}</p>
 				{/each}
 			</div>

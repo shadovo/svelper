@@ -3,9 +3,7 @@
 	type T = $$Generic;
 	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 	interface $$Slots {
-		default: {
-			item: T;
-		};
+		default: { item: T };
 	}
 	export let items: T[] = [];
 	export let filteredItems: T[] = [];
@@ -20,7 +18,7 @@
 
 <div class="pagination">
 	<div class="pagination-list">
-		{#each filteredItems as item}
+		{#each filteredItems as item (item)}
 			<slot {item} />
 		{/each}
 	</div>

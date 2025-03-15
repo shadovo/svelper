@@ -21,7 +21,7 @@
 
 <div class="wrapper">
 	<section>
-		{#each articles as article}
+		{#each articles as article (article.url)}
 			<ArticleCard {article} />
 		{/each}
 	</section>

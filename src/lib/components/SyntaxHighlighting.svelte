@@ -63,6 +63,7 @@
 {#if formattedCode}
 	<div>
 		<pre bind:this={preEl} class={prismClasses}><code class="language-{language}">
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				{@html formattedCode}</code
 			></pre>
 	</div>

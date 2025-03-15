@@ -11,7 +11,7 @@
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">
-	{#each Object.entries(src.sources) as [format, srcset]}
+	{#each Object.entries(src.sources) as [format, srcset] (srcset)}
 		<source {srcset} {sizes} type="image/{format}" />
 	{/each}
 	<img

@@ -185,16 +185,16 @@
 				<tbody>
 					<tr
 						><th></th>
-						{#each octaves as octave}
+						{#each octaves as octave (octave)}
 							<th>{octave}</th>
 						{/each}
 					</tr>
-					{#each notes as note}
+					{#each notes as note (note)}
 						<tr>
 							<td>
 								{note}
 							</td>
-							{#each octaves as octave}
+							{#each octaves as octave (octave)}
 								<td>
 									<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
 										>{`${note}${octave}`}</button
@@ -214,16 +214,16 @@
 				<tbody>
 					<tr
 						><th></th>
-						{#each octaves as octave}
+						{#each octaves as octave (octave)}
 							<th>{octave}</th>
 						{/each}
 					</tr>
-					{#each notes as note}
+					{#each notes as note (note)}
 						<tr>
 							<td>
 								{note}
 							</td>
-							{#each octaves as octave}
+							{#each octaves as octave (octave)}
 								<td>
 									<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
 										>{`${note}${octave}`}</button

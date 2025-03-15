@@ -16,6 +16,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@eslint/compat": "^1.2.7",
 		"@playwright/test": "^1.51.0",
 		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@sveltejs/kit": "^2.19.1",
@@ -39,6 +40,7 @@
 		"svelte-preprocess": "^6.0.3",
 		"tslib": "^2.8.1",
 		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.26.1",
 		"vite": "^6.2.2",
 		"vite-imagetools": "^7.0.5"
 	}

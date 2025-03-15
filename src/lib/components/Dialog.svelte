@@ -29,9 +29,6 @@
 	}
 </script>
 
-<!-- Dialog has native key event to close with escape -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog class="dialog" bind:this={dialogEle} on:click={dialogClick} on:close={dialogClosed}>
 	<div class="dialog-content">
 		<header>
