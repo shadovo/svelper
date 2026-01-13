@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Article from '$lib/components/Article.svelte';
 	import landingHeroImage from '$img/landing.png?w=2064;1376;1194;796;688;398&imagetools';
+	import { resolve } from '$app/paths';
 </script>
 
 <svelte:head>
@@ -39,15 +40,16 @@
 			> in the project.
 		</p>
 		<p>
-			If you need a break from coding, why not try playing one of my <a href="/games">games</a> I've
-			included in Svelper. These games are a great way to take your mind off coding for a little while
-			and have some fun. However, I've also found that games can be a great way to practice your coding
-			skills so the source code for each game is also linked to and available on GitHub.
+			If you need a break from coding, why not try playing one of my <a href={resolve('/games')}
+				>games</a
+			> I've included in Svelper. These games are a great way to take your mind off coding for a little
+			while and have some fun. However, I've also found that games can be a great way to practice your
+			coding skills so the source code for each game is also linked to and available on GitHub.
 		</p>
 		<p>
-			In addition to the games, I've also included some <a href="/tools">tools</a> like a breathing timer
-			that shows you a timer for relaxing and mindful breathing. This tool can be a helpful way to reduce
-			stress and stay focused during long coding sessions.
+			In addition to the games, I've also included some <a href={resolve('/tools')}>tools</a> like a
+			breathing timer that shows you a timer for relaxing and mindful breathing. This tool can be a helpful
+			way to reduce stress and stay focused during long coding sessions.
 		</p>
 		<p>
 			Of course, Svelper is always a work in progress, and I'm constantly adding new resources and

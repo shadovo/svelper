@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import BreathingTechnique, { type BreathConfig } from '$lib/tools/BreathingTechnique.svelte';
 	import { onMount } from 'svelte';
 
@@ -12,17 +12,17 @@
 	let breathOutConfig: BreathConfig;
 
 	onMount(() => {
-		if ($page.url.searchParams.has('breathInTime')) {
-			breathInTime = Number($page.url.searchParams.get('breathInTime'));
+		if (page.url.searchParams.has('breathInTime')) {
+			breathInTime = Number(page.url.searchParams.get('breathInTime'));
 		}
-		if ($page.url.searchParams.has('breathInHold')) {
-			breathInHold = Number($page.url.searchParams.get('breathInHold'));
+		if (page.url.searchParams.has('breathInHold')) {
+			breathInHold = Number(page.url.searchParams.get('breathInHold'));
 		}
-		if ($page.url.searchParams.has('breathOutTime')) {
-			breathOutTime = Number($page.url.searchParams.get('breathOutTime'));
+		if (page.url.searchParams.has('breathOutTime')) {
+			breathOutTime = Number(page.url.searchParams.get('breathOutTime'));
 		}
-		if ($page.url.searchParams.has('breathOutHold')) {
-			breathOutHold = Number($page.url.searchParams.get('breathOutHold'));
+		if (page.url.searchParams.has('breathOutHold')) {
+			breathOutHold = Number(page.url.searchParams.get('breathOutHold'));
 		}
 		breathInConfig = {
 			duration: breathInTime,
