@@ -14,7 +14,7 @@ jobs:
       security-events: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './.lighthouse/lighthouserc.cjs'
@@ -39,7 +39,7 @@ jobs:
       security-events: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: echo "target_url ${{ github.event.deployment_status.target_url }}"
       - uses: treosh/lighthouse-ci-action@v10
         with:
