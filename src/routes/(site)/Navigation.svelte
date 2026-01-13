@@ -19,7 +19,7 @@
 		showSidebar = false;
 	});
 
-	$effect(() => {
+	$effect.pre(() => {
 		if (showSidebar) {
 			sidebarEle?.showModal();
 		} else {
