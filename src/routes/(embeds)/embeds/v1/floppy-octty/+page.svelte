@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import FloppyOctty from '$lib/games/FloppyOctty.svelte';
 
 	let width: string | undefined;
 	let height: string | undefined;
 
 	if (browser) {
-		width = $page.url.searchParams.get('width') ?? undefined;
-		height = $page.url.searchParams.get('height') ?? undefined;
+		width = page.url.searchParams.get('width') ?? undefined;
+		height = page.url.searchParams.get('height') ?? undefined;
 	}
 </script>
 
