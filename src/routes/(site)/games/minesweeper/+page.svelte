@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import Article from '$lib/components/Article.svelte';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
 	import minesweeperHeroImage from '$img/games/minesweeper.png?w=2400;1600;1200;800;400&imagetools';
@@ -31,7 +31,7 @@
 	<section>
 		<p>
 			This game is also available in an embed version at
-			<a href="{base}/embeds/v1/minesweeper" target="_blank"
+			<a href={resolve('/embeds/v1/minesweeper')} target="_blank"
 				>https://www.svelper.com/embeds/v1/minesweeper</a
 			>
 		</p>

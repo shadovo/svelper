@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { base } from '$app/paths';
+	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 	import SvelperLogo from '$lib/svg/SvelperLogo.svelte';
 	import GitHubLogo from '$lib/svg/GitHubLogo.svelte';
 	import { beforeNavigate } from '$app/navigation';
 
-	let sidebarEle: HTMLDialogElement | null = null;
-	let showSidebar = false;
+	let sidebarEle: HTMLDialogElement | null = $state(null);
+	let showSidebar = $state(false);
 
 	function sidebarClick(event: MouseEvent) {
 		const ele = event?.target as HTMLDialogElement | undefined;
@@ -19,7 +19,7 @@
 		showSidebar = false;
 	});
 
-	$: {
+	$effect.pre(() => {
 		if (showSidebar) {
 			sidebarEle?.showModal();
 		} else {
@@ -27,7 +27,7 @@
 				sidebarEle?.close();
 			}, 200);
 		}
-	}
+	});
 </script>
 
 <header class="top-bar-spacer">
@@ -35,24 +35,24 @@
 		<div class="content">
 			<div class="logo">
 				<h1>
-					<a href={base || '/'}>
+					<a href={resolve('/')}>
 						<SvelperLogo />
 					</a>
 				</h1>
 			</div>
 			<nav>
 				<ul>
-					<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-						<a href="{base}/">Home</a>
+					<li aria-current={page.url.pathname === '/' ? 'page' : undefined}>
+						<a href={resolve('/')}>Home</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
-						<a href="{base}/widgets">Widgets</a>
+					<li aria-current={page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
+						<a href={resolve('/widgets')}>Widgets</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/about') ? 'page' : undefined}>
-						<a href="{base}/about">About</a>
+					<li aria-current={page.url.pathname.startsWith('/about') ? 'page' : undefined}>
+						<a href={resolve('/about')}>About</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
-						<a href="{base}/cookies">Cookies</a>
+					<li aria-current={page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
+						<a href={resolve('/cookies')}>Cookies</a>
 					</li>
 				</ul>
 			</nav>
@@ -67,7 +67,7 @@
 				</a>
 			</div>
 			<div class="menu-toggle">
-				<button on:click={() => (showSidebar = !showSidebar)} aria-label="Toggle sidebar menu">
+				<button onclick={() => (showSidebar = !showSidebar)} aria-label="Toggle sidebar menu">
 					<svg width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<title>Show menu</title>
 						<line x1="3" y1="6" x2="21" y2="6" />
@@ -82,14 +82,14 @@
 <dialog
 	bind:this={sidebarEle}
 	class:isOpen={showSidebar}
-	on:click={sidebarClick}
-	on:close={() => (showSidebar = false)}
+	onclick={sidebarClick}
+	onclose={() => (showSidebar = false)}
 >
 	<div class="sidebar-content">
 		<div class="top">
 			<h2>Menu</h2>
 			<div class="menu-toggle">
-				<button on:click={() => (showSidebar = !showSidebar)} aria-label="Toggle sidebar menue">
+				<button onclick={() => (showSidebar = !showSidebar)} aria-label="Toggle sidebar menue">
 					<svg width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<line x1="18" y1="6" x2="6" y2="18" />
 						<line x1="6" y1="6" x2="18" y2="18" />
@@ -100,17 +100,17 @@
 		<div class="content">
 			<nav>
 				<ul>
-					<li aria-current={$page.url.pathname === base + '/' ? 'page' : undefined}>
-						<a href="{base}/">Home</a>
+					<li aria-current={page.url.pathname === '/' ? 'page' : undefined}>
+						<a href={resolve('/')}>Home</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
-						<a href="{base}/widgets">Widgets</a>
+					<li aria-current={page.url.pathname.startsWith('/widgets') ? 'page' : undefined}>
+						<a href={resolve('/widgets')}>Widgets</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/about') ? 'page' : undefined}>
-						<a href="{base}/about">About</a>
+					<li aria-current={page.url.pathname.startsWith('/about') ? 'page' : undefined}>
+						<a href={resolve('/about')}>About</a>
 					</li>
-					<li aria-current={$page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
-						<a href="{base}/cookies">Cookies</a>
+					<li aria-current={page.url.pathname.startsWith('/cookie') ? 'page' : undefined}>
+						<a href={resolve('/cookies')}>Cookies</a>
 					</li>
 					<li>
 						<a

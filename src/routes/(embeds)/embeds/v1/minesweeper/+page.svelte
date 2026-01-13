@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Minesweeper from '$lib/games/Minesweeper.svelte';
 
 	let columns: string | undefined;
@@ -8,9 +8,9 @@
 	let mines: string | undefined;
 
 	if (browser) {
-		columns = $page.url.searchParams.get('columns') ?? undefined;
-		rows = $page.url.searchParams.get('rows') ?? undefined;
-		mines = $page.url.searchParams.get('mines') ?? undefined;
+		columns = page.url.searchParams.get('columns') ?? undefined;
+		rows = page.url.searchParams.get('rows') ?? undefined;
+		mines = page.url.searchParams.get('mines') ?? undefined;
 	}
 </script>
 

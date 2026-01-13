@@ -2,6 +2,7 @@
 	import Image from '$lib/components/Image.svelte';
 	import { relativeTimeFromDates } from '$lib/utils/dates';
 	import type { ArticlePromo } from '$data/articles';
+	import { resolve } from '$app/paths';
 
 	export let article: ArticlePromo;
 
@@ -16,7 +17,7 @@
 	`;
 </script>
 
-<a class="card surface-blured" href={article.url}>
+<a class="card surface-blured" href={resolve(article.url)}>
 	{#if article.promotion.imageData}
 		<div class="preview">
 			<Image
