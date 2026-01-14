@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tick } from 'svelte';
+	import { tick, onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-yaml.js';
@@ -22,7 +22,6 @@
 	let fakeCodeEl: HTMLElement | undefined = $state();
 	let code: string | undefined = $state();
 	let formattedCode: string | undefined = $state();
-	let prismInitialized = false;
 
 	const updateHighlight = async () => {
 		// code variable if they are using a prop
@@ -40,17 +39,14 @@
 		}
 	};
 
-	// Initialize Prism settings once
-	$effect(() => {
-		if (!prismInitialized) {
-			Prism.plugins.NormalizeWhitespace.setDefaults({
-				'remove-trailing': true,
-				'remove-indent': true,
-				'left-trim': true,
-				'right-trim': true,
-			});
-			prismInitialized = true;
-		}
+	// Initialize Prism settings once on mount
+	onMount(() => {
+		Prism.plugins.NormalizeWhitespace.setDefaults({
+			'remove-trailing': true,
+			'remove-indent': true,
+			'left-trim': true,
+			'right-trim': true,
+		});
 	});
 
 	// creates the prism classes
