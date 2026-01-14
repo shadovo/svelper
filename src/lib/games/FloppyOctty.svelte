@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { Tween } from 'svelte/motion';
+	import { onMount } from 'svelte';
 
 	type BottomPillar = { top: number; x: number; scored?: boolean };
 
@@ -192,8 +193,8 @@
 		requestAnimationFrame(gameLoop);
 	}
 
-	$effect(() => {
-		const context = canvas?.getContext('2d');
+	onMount(() => {
+		const context = canvas.getContext('2d');
 		if (context) {
 			ctx = context;
 			render();
