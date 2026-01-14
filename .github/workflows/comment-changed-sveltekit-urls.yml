@@ -12,8 +12,8 @@ on:
         required: true
         type: string
       pr_number:
-        description: 'The PR number to comment on. If not provided, will try to detect from context.'
-        required: false
+        description: 'The PR number to comment on'
+        required: true
         type: number
 
 jobs:
@@ -41,36 +41,7 @@ jobs:
           script: |
             const reviewUrl = process.env.REVIEW_URL;
             const prodUrl = process.env.PROD_URL;
-            let prNumber = process.env.PR_NUMBER ? parseInt(process.env.PR_NUMBER) : null;
-            
-            // If PR number not provided, try to detect from context
-            if (!prNumber) {
-              if (context.payload.pull_request) {
-                prNumber = context.payload.pull_request.number;
-                console.log('Detected PR number from pull_request context:', prNumber);
-              } else if (context.payload.deployment) {
-                // Try to find PR from deployment SHA
-                const sha = context.payload.deployment.sha;
-                console.log('Looking for PR associated with deployment SHA:', sha);
-                if (sha) {
-                  const prs = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    commit_sha: sha
-                  });
-                  if (prs.data.length > 0) {
-                    const openPr = prs.data.find(pr => pr.state === 'open');
-                    prNumber = openPr ? openPr.number : prs.data[0].number;
-                    console.log('Found PR number from deployment:', prNumber);
-                  }
-                }
-              }
-            }
-            
-            if (!prNumber) {
-              console.log('No PR number found, skipping comment');
-              return;
-            }
+            const prNumber = parseInt(process.env.PR_NUMBER);
             
             try {
               // Get changed files from the PR
