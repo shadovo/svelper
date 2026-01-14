@@ -1,0 +1,18 @@
+name: 'Comment Changed URLs on Deploy'
+
+on:
+  deployment_status:
+
+jobs:
+  comment-changed-urls:
+    name: Comment changed URLs
+    # Only run on successful non-production deployments (i.e., PR preview deployments)
+    if: ${{ github.event.deployment_status.state == 'success' && !github.event.deployment.production_environment }}
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
+    with:
+      review_url: ${{ github.event.deployment_status.environment_url }}
+      prod_url: 'https://svelper.com'
+      commit_sha: ${{ github.event.deployment.sha }}
