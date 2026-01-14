@@ -1,25 +1,25 @@
-<script lang="ts">
-	/* eslint-disable-next-line no-undef */
-	type T = $$Generic;
-	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-	interface $$Slots {
-		default: { item: T };
+<script lang="ts" generics="T">
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		items?: T[];
+		page?: number;
+		itemsPerPage?: number;
+		children?: Snippet<[T]>;
 	}
-	export let items: T[] = [];
-	export let filteredItems: T[] = [];
-	export let page = 0;
-	export let itemsPerPage = 5;
 
-	let maxPage = 1;
+	let { items = [], page = $bindable(0), itemsPerPage = 5, children }: Props = $props();
 
-	$: maxPage = Math.ceil(items.length / itemsPerPage) - 1;
-	$: filteredItems = items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
+	let maxPage = $derived(Math.ceil(items.length / itemsPerPage) - 1);
+	let filteredItems = $derived(
+		items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage),
+	);
 </script>
 
 <div class="pagination">
 	<div class="pagination-list">
 		{#each filteredItems as item (item)}
-			<slot {item} />
+			{@render children?.(item)}
 		{/each}
 	</div>
 	<div class="pagination-controlls">
@@ -28,7 +28,7 @@
 			aria-label="previous page"
 			class="button-icon arrow"
 			class:hidden={page === 0}
-			on:click={() => (page = page - 1)}
+			onclick={() => (page = page - 1)}
 		>
 			<svg width="24" height="24" viewBox="0 0 24 24">
 				<polyline fill="none" points="16,6 8,12 16,18" />
@@ -40,7 +40,7 @@
 				aria-label="first page"
 				class="first pagination-button"
 				class:shown={page > 2}
-				on:click={() => (page = 0)}>1</button
+				onclick={() => (page = 0)}>1</button
 			>
 
 			<!-- ... -->
@@ -51,7 +51,7 @@
 				aria-label="Go to page {page - 1}"
 				class="pagination-button"
 				class:shown={page > 1 && page < 4}
-				on:click={() => (page = page - 2)}>{page - 1}</button
+				onclick={() => (page = page - 2)}>{page - 1}</button
 			>
 
 			<!-- previous page -->
@@ -59,7 +59,7 @@
 				aria-label="Go to page {page}"
 				class="pagination-button"
 				class:shown={page > 0}
-				on:click={() => (page = page - 1)}>{page}</button
+				onclick={() => (page = page - 1)}>{page}</button
 			>
 
 			<!-- current page -->
@@ -70,7 +70,7 @@
 				aria-label="Go to page {page + 2}"
 				class="pagination-button"
 				class:shown={page < maxPage}
-				on:click={() => (page = page + 1)}>{page + 2}</button
+				onclick={() => (page = page + 1)}>{page + 2}</button
 			>
 
 			<!-- next next page -->
@@ -78,7 +78,7 @@
 				aria-label="Go to page {page + 3}"
 				class="pagination-button"
 				class:shown={page > maxPage - 4 && page < maxPage - 1}
-				on:click={() => (page = page + 2)}>{page + 3}</button
+				onclick={() => (page = page + 2)}>{page + 3}</button
 			>
 
 			<!-- ... -->
@@ -89,7 +89,7 @@
 				aria-label="last page"
 				class="pagination-button last"
 				class:shown={page < maxPage - 2}
-				on:click={() => (page = maxPage)}>{maxPage + 1}</button
+				onclick={() => (page = maxPage)}>{maxPage + 1}</button
 			>
 		</div>
 
@@ -98,7 +98,7 @@
 			aria-label="next page"
 			class="button-icon arrow"
 			class:hidden={page === maxPage}
-			on:click={() => (page = page + 1)}
+			onclick={() => (page = page + 1)}
 		>
 			<svg width="24" height="24" viewBox="0 0 24 24">
 				<polyline fill="none" points="8,6 16,12 8,18" />

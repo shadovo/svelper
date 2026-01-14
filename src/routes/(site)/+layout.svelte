@@ -1,12 +1,19 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Navigation from './Navigation.svelte';
+
+	interface Props {
+		children?: Snippet;
+	}
+
+	let { children }: Props = $props();
 </script>
 
 <div class="content">
 	<div class="background"></div>
 	<Navigation />
 	<main>
-		<slot />
+		{@render children?.()}
 	</main>
 	<footer>
 		<p>

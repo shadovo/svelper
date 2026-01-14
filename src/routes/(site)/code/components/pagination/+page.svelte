@@ -82,13 +82,17 @@
 		>
 		<SyntaxHighlighting language="html"
 			>{`	
-	<Pagination items={smallItems} itemsPerPage={4} let:item>
-		<p>{item}</p>
+	<Pagination items={smallItems} itemsPerPage={4}>
+		{#snippet children(item)}
+			<p>{item}</p>
+		{/snippet}
 	</Pagination>	
 	`}</SyntaxHighlighting
 		>
-		<Pagination items={smallItems} itemsPerPage={4} let:item>
-			<p>{item}</p>
+		<Pagination items={smallItems} itemsPerPage={4}>
+			{#snippet children(item)}
+				<p>{item}</p>
+			{/snippet}
 		</Pagination>
 	</section>
 	<section>
@@ -111,20 +115,24 @@
 		>
 		<SyntaxHighlighting language="html"
 			>{`
-		<Pagination {items} itemsPerPage={4} let:item>
-			<div class="row">
-				<h4>{item.title}</h4>
-				<p>{item.text}</p>
-			</div>
+		<Pagination {items} itemsPerPage={4}>
+			{#snippet children(item)}
+				<div class="row">
+					<h4>{item.title}</h4>
+					<p>{item.text}</p>
+				</div>
+			{/snippet}
 		</Pagination>
 	`}</SyntaxHighlighting
 		>
 
-		<Pagination items={largeItems} itemsPerPage={4} let:item>
-			<div class="row">
-				<h4>{item.title}</h4>
-				<p>{item.text}</p>
-			</div>
+		<Pagination items={largeItems} itemsPerPage={4}>
+			{#snippet children(item)}
+				<div class="row">
+					<h4>{item.title}</h4>
+					<p>{item.text}</p>
+				</div>
+			{/snippet}
 		</Pagination>
 	</section>
 </Article>

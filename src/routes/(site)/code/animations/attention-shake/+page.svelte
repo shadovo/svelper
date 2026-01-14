@@ -2,7 +2,7 @@
 	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 
-	let animattionRunning = false;
+	let animattionRunning = $state(false);
 </script>
 
 <svelte:head>
@@ -19,8 +19,8 @@
 		<p>This is a shaking animation to grab attention.</p>
 		<button
 			class:attentionShake={animattionRunning}
-			on:click={() => (animattionRunning = true)}
-			on:animationend={() => (animattionRunning = false)}
+			onclick={() => (animattionRunning = true)}
+			onanimationend={() => (animattionRunning = false)}
 		>
 			Play animation
 		</button>

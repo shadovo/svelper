@@ -15,33 +15,37 @@
 		endTime: Date | null;
 	};
 
-	export let columns = '9';
-	export let rows = '10';
-	export let mines = '10';
+	interface Props {
+		columns?: string;
+		rows?: string;
+		mines?: string;
+	}
 
-	let game: Game;
+	let { columns = '9', rows = '10', mines = '10' }: Props = $props();
 
-	function createGame(columns: number, rows: number, mines: number) {
+	let game: Game = $state(createInitialGame(Number(columns), Number(rows), Number(mines)));
+
+	function createInitialGame(cols: number, rws: number, mns: number): Game {
 		const board: Cell[][] = [];
-		for (let y = 0; y < rows; y++) {
+		for (let y = 0; y < rws; y++) {
 			board[y] = [];
-			for (let x = 0; x < columns; x++) {
+			for (let x = 0; x < cols; x++) {
 				board[y][x] = { isMine: false, isRevealed: false, isFlagged: false, adjacentMines: 0 };
 			}
 		}
 
 		let minesPlaced = 0;
-		while (minesPlaced < mines) {
-			const x = Math.floor(Math.random() * columns);
-			const y = Math.floor(Math.random() * rows);
+		while (minesPlaced < mns) {
+			const x = Math.floor(Math.random() * cols);
+			const y = Math.floor(Math.random() * rws);
 			if (!board[y][x].isMine) {
 				board[y][x].isMine = true;
 				minesPlaced++;
 			}
 		}
 
-		for (let y = 0; y < rows; y++) {
-			for (let x = 0; x < columns; x++) {
+		for (let y = 0; y < rws; y++) {
+			for (let x = 0; x < cols; x++) {
 				if (board[y][x].isMine) {
 					continue;
 				}
@@ -53,7 +57,7 @@
 						}
 						const nx = x + dx;
 						const ny = y + dy;
-						if (nx < 0 || nx >= columns || ny < 0 || ny >= rows) {
+						if (nx < 0 || nx >= cols || ny < 0 || ny >= rws) {
 							continue;
 						}
 						if (board[ny][nx].isMine) {
@@ -65,15 +69,15 @@
 			}
 		}
 
-		game = {
+		return {
 			status: 'notstarted',
 			board: board,
 			currentTimer: '00:00',
 			startTime: null,
 			endTime: null,
-			columns,
-			rows,
-			mines,
+			columns: cols,
+			rows: rws,
+			mines: mns,
 		};
 	}
 
@@ -157,10 +161,6 @@
 		}
 		setTimeout(updateTimer, 1000);
 	}
-
-	$: {
-		createGame(Number(columns), Number(rows), Number(mines));
-	}
 </script>
 
 <div class="board {game.status}">
@@ -171,7 +171,9 @@
 			>
 		</div>
 		<div class="stat">
-			<button on:click={() => createGame(Number(columns), Number(rows), Number(mines))}>
+			<button
+				onclick={() => (game = createInitialGame(Number(columns), Number(rows), Number(mines)))}
+			>
 				{#if game.status === 'notstarted' || game.status === 'playing'}
 					🙂
 				{:else if game.status === 'won'}
@@ -191,8 +193,11 @@
 				<tr>
 					{#each row as cell, j (j)}
 						<td
-							on:click={() => cellClicked(j, i)}
-							on:contextmenu|preventDefault={() => cellRightClicked(j, i)}
+							onclick={() => cellClicked(j, i)}
+							oncontextmenu={(e) => {
+								e.preventDefault();
+								cellRightClicked(j, i);
+							}}
 							class:revealed={cell.isRevealed}
 							class:mine={cell.isRevealed && cell.isMine}
 						>
