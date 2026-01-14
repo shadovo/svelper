@@ -41,7 +41,12 @@ jobs:
           script: |
             const reviewUrl = process.env.REVIEW_URL;
             const prodUrl = process.env.PROD_URL;
-            const prNumber = parseInt(process.env.PR_NUMBER);
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+            
+            if (!prNumber || isNaN(prNumber)) {
+              core.setFailed('Invalid PR number provided');
+              return;
+            }
             
             try {
               // Get changed files from the PR
