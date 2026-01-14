@@ -105,13 +105,14 @@
 		breath.set($breath, { delay: 0, duration: 0 });
 	}
 
-	$effect(() => {
+	function handleClick() {
+		running = !running;
 		if (running) {
 			toggleDirection();
 		} else {
 			stopTimout();
 		}
-	});
+	}
 
 	$effect(() => {
 		return () => {
@@ -123,7 +124,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<div class="outer" onclick={() => (running = !running)}>
+<div class="outer" onclick={handleClick}>
 	{#if !running}
 		<p transition:fade class="direction">START</p>
 	{:else if hold}
