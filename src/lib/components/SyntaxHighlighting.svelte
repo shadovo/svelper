@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Dummy change to test changed-sveltekit-paths workflow
 	import { tick, onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 	import Prism from 'prismjs';
