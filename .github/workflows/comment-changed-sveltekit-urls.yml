@@ -51,6 +51,12 @@ jobs:
             let prNumber = parseInt(process.env.PR_NUMBER, 10) || 0;
             const commitSha = process.env.COMMIT_SHA;
             
+            // Validate required inputs
+            if (!reviewUrl) {
+              core.setFailed('review_url is required but was not provided.');
+              return;
+            }
+            
             // If no PR number provided, try to detect from commit SHA
             if (!prNumber && commitSha) {
               console.log(`No PR number provided, detecting from commit SHA: ${commitSha}`);
