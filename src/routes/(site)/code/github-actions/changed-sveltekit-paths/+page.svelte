@@ -51,9 +51,15 @@ on:
 				required: true
 				type: string
 			pr_number:
-				description: 'The PR number to comment on. Auto-detected if not provided.'
+				description: 'The PR number to comment on (optional - auto-detected from commit_sha if not provided)'
 				required: false
 				type: number
+				default: 0
+			commit_sha:
+				description: 'Commit SHA to find the associated PR (used when pr_number is not provided)'
+				required: false
+				type: string
+				default: ''
 
 jobs:
 	comment-changed-urls:
@@ -76,19 +82,29 @@ jobs:
 					REVIEW_URL: $\{{ inputs.review_url }}
 					PROD_URL: $\{{ inputs.prod_url }}
 					PR_NUMBER: $\{{ inputs.pr_number }}
+					COMMIT_SHA: $\{{ inputs.commit_sha }}
 				with:
 					script: |
 						const reviewUrl = process.env.REVIEW_URL;
 						const prodUrl = process.env.PROD_URL;
-						let prNumber = process.env.PR_NUMBER ? parseInt(process.env.PR_NUMBER) : null;
-						
-						// Auto-detect PR number from context if not provided
-						if (!prNumber && context.payload.pull_request) {
-							prNumber = context.payload.pull_request.number;
+						let prNumber = parseInt(process.env.PR_NUMBER, 10) || 0;
+						const commitSha = process.env.COMMIT_SHA;
+
+						// If no PR number provided, try to detect from commit SHA
+						if (!prNumber && commitSha) {
+							const prs = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+								owner: context.repo.owner,
+								repo: context.repo.repo,
+								commit_sha: commitSha
+							});
+							if (prs.data.length > 0) {
+								const openPr = prs.data.find(pr => pr.state === 'open') || prs.data[0];
+								prNumber = openPr.number;
+							}
 						}
-						
+
 						if (!prNumber) {
-							console.log('No PR number found, skipping');
+							core.setFailed('Could not determine PR number.');
 							return;
 						}
 						
@@ -110,7 +126,7 @@ jobs:
 						);
 						const paths = await getChangedPagePaths('$\{{ github.workspace }}', changedFiles);
 						
-						// Format and post comment
+						// Format comment message
 						let message;
 						if (paths.length === 0) {
 							message = '# URLs changed in this PR\\n\\nNo pages were affected.';
@@ -127,12 +143,31 @@ jobs:
 							].join('\\n');
 						}
 						
-						await github.rest.issues.createComment({
+						// Find existing comment to update (if any)
+						const comments = await github.rest.issues.listComments({
 							owner: context.repo.owner,
 							repo: context.repo.repo,
 							issue_number: prNumber,
-							body: message
 						});
+						const botComment = comments.data.find(c => 
+							c.user.type === 'Bot' && c.body.includes('# URLs changed in this PR')
+						);
+						
+						if (botComment) {
+							await github.rest.issues.updateComment({
+								owner: context.repo.owner,
+								repo: context.repo.repo,
+								comment_id: botComment.id,
+								body: message
+							});
+						} else {
+							await github.rest.issues.createComment({
+								owner: context.repo.owner,
+								repo: context.repo.repo,
+								issue_number: prNumber,
+								body: message
+							});
+						}
 `}
 		</SyntaxHighlighting>
 		<p>
@@ -283,11 +318,16 @@ jobs:
 		with:
 			review_url: $\{{ github.event.deployment_status.environment_url }}
 			prod_url: 'https://mysite.com'
+			commit_sha: $\{{ github.event.deployment.sha }}
 `}
 		</SyntaxHighlighting>
 		<p>
-			The workflow automatically detects the PR number from the context, but you can also pass it
-			explicitly using the <code>pr_number</code> input.
+			The workflow detects the PR number from the <code>commit_sha</code> when triggered from
+			deployment events. You can also pass <code>pr_number</code> explicitly if preferred.
+		</p>
+		<p>
+			When a comment already exists from a previous run, it will be updated instead of creating a
+			new one, keeping the PR thread clean.
 		</p>
 		<p>
 			Svelper uses this workflow to post a comment with Review and Production links when Vercel
