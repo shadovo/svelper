@@ -3,14 +3,12 @@ name: 'PR'
 on:
   pull_request:
     branches: ['main']
-
-env:
-  VERCEL_PROJECT_NAME: svelper
-  VERCEL_SCOPE_SLUG: shadovo
+  deployment_status:
 
 jobs:
   lint:
     name: Lint & Check
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,6 +27,7 @@ jobs:
 
   dependency-review:
     name: Dependency review
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
@@ -36,60 +35,12 @@ jobs:
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v4
 
-  build-review-url:
-    name: Build Vercel review URL
-    runs-on: ubuntu-latest
-    permissions: {}
-    outputs:
-      review_url: ${{ steps.build-url.outputs.review_url }}
-    steps:
-      - name: Build Vercel preview URL
-        id: build-url
-        uses: actions/github-script@v7
-        env:
-          BRANCH_NAME: ${{ github.head_ref }}
-          PROJECT_NAME: ${{ env.VERCEL_PROJECT_NAME }}
-          SCOPE_SLUG: ${{ env.VERCEL_SCOPE_SLUG }}
-        with:
-          script: |
-            const branchName = process.env.BRANCH_NAME;
-            const projectName = process.env.PROJECT_NAME;
-            const scopeSlug = process.env.SCOPE_SLUG;
-
-            // Sanitize branch name according to Vercel's rules:
-            // 1. Convert to lowercase
-            // 2. Replace non-alphanumeric characters with hyphens
-            // 3. Replace multiple consecutive hyphens with a single hyphen
-            // 4. Remove all leading and trailing hyphens
-            const sanitizedBranch = branchName
-              .toLowerCase()
-              .replace(/[^a-z0-9]/g, '-')
-              .replace(/-+/g, '-')
-              .replace(/^-+|-+$/g, '');
-
-            // Build the URL prefix: <project-name>-git-<branch-name>-<scope-slug>
-            let urlPrefix = `${projectName}-git-${sanitizedBranch}-${scopeSlug}`;
-
-            // Vercel truncates to 63 characters before .vercel.app
-            const maxLength = 63;
-            if (urlPrefix.length > maxLength) {
-              // Truncate and remove any trailing hyphens that may result
-              urlPrefix = urlPrefix.substring(0, maxLength).replace(/-+$/, '');
-            }
-
-            const reviewUrl = `https://${urlPrefix}.vercel.app`;
-
-            console.log(`Branch name: ${branchName}`);
-            console.log(`Sanitized branch: ${sanitizedBranch}`);
-            console.log(`Generated review URL: ${reviewUrl}`);
-
-            core.setOutput('review_url', reviewUrl);
-
   comment-changed-urls:
     name: Comment changed URLs
-    needs: build-review-url
+    # Only run on successful non-production deployments (i.e., PR preview deployments)
+    if: ${{ github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && !github.event.deployment.production_environment }}
     uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
     with:
-      review_url: ${{ needs.build-review-url.outputs.review_url }}
+      review_url: ${{ github.event.deployment_status.environment_url }}
       prod_url: 'https://svelper.com'
-      pr_number: ${{ github.event.pull_request.number }}
+      commit_sha: ${{ github.event.deployment.sha }}
