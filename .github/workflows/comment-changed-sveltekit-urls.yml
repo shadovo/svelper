@@ -1,0 +1,158 @@
+name: Comment Changed SvelteKit URLs
+
+on:
+  workflow_call:
+    inputs:
+      review_url:
+        description: 'Base URL for the review/preview environment (e.g., https://my-app-git-branch.vercel.app)'
+        required: true
+        type: string
+      prod_url:
+        description: 'Base URL for the production environment (e.g., https://svelper.com)'
+        required: true
+        type: string
+      pr_number:
+        description: 'The PR number to comment on. If not provided, will try to detect from context.'
+        required: false
+        type: number
+
+jobs:
+  comment-changed-urls:
+    name: Comment changed URLs
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Detect and comment changed URLs
+        uses: actions/github-script@v7
+        env:
+          REVIEW_URL: ${{ inputs.review_url }}
+          PROD_URL: ${{ inputs.prod_url }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+        with:
+          script: |
+            const reviewUrl = process.env.REVIEW_URL;
+            const prodUrl = process.env.PROD_URL;
+            let prNumber = process.env.PR_NUMBER ? parseInt(process.env.PR_NUMBER) : null;
+            
+            // If PR number not provided, try to detect from context
+            if (!prNumber) {
+              if (context.payload.pull_request) {
+                prNumber = context.payload.pull_request.number;
+                console.log('Detected PR number from pull_request context:', prNumber);
+              } else if (context.payload.deployment) {
+                // Try to find PR from deployment SHA
+                const sha = context.payload.deployment.sha;
+                console.log('Looking for PR associated with deployment SHA:', sha);
+                if (sha) {
+                  const prs = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    commit_sha: sha
+                  });
+                  if (prs.data.length > 0) {
+                    const openPr = prs.data.find(pr => pr.state === 'open');
+                    prNumber = openPr ? openPr.number : prs.data[0].number;
+                    console.log('Found PR number from deployment:', prNumber);
+                  }
+                }
+              }
+            }
+            
+            if (!prNumber) {
+              console.log('No PR number found, skipping comment');
+              return;
+            }
+            
+            try {
+              // Get changed files from the PR
+              const files = await github.paginate(
+                github.rest.pulls.listFiles,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  per_page: 100
+                }
+              );
+              const changedFiles = files.map(file => file.filename);
+              
+              if (changedFiles.length === 0) {
+                console.log('No files changed in this PR');
+                return;
+              }
+              
+              console.log('Changed files:', changedFiles.length);
+              
+              // Import the detection script
+              const { default: getChangedPagePaths } = await import('${{ github.workspace }}/.github/scripts/detect-changed-sveltekit-paths.js');
+              const paths = await getChangedPagePaths('${{ github.workspace }}', changedFiles);
+              
+              console.log('Changed paths:', paths);
+              
+              // Format the comment message
+              let message;
+              if (paths.length === 0) {
+                message = '# URLs changed in this PR\n\nNo pages were affected by the changes in this PR.';
+              } else {
+                const tableRows = paths.map(p => {
+                  const reviewLink = `${reviewUrl}${p}`;
+                  const prodLink = `${prodUrl}${p}`;
+                  return `| [${p}](${reviewLink}) | [pro](${prodLink}) |`;
+                });
+                
+                message = [
+                  '# URLs changed in this PR',
+                  '',
+                  '| Review | Production |',
+                  '| --- | --- |',
+                  ...tableRows,
+                ].join('\n');
+              }
+              
+              // Find existing comment to update (if any)
+              const comments = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+              });
+              
+              const botComment = comments.data.find(comment => 
+                comment.user.type === 'Bot' && 
+                comment.body.includes('# URLs changed in this PR')
+              );
+              
+              if (botComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: message
+                });
+                console.log('Updated existing comment');
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  body: message
+                });
+                console.log('Created new comment');
+              }
+            } catch (error) {
+              core.error(`Failed to process changed SvelteKit paths: ${error.message || String(error)}`);
+              if (error.stack) {
+                core.error(error.stack);
+              }
+              core.setFailed('Error while detecting changed SvelteKit paths. See logs above for details.');
+            }
