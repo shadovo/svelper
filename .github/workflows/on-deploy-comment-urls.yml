@@ -2,11 +2,14 @@ name: Comment URLs on Deploy
 
 on:
   deployment_status:
+  repository_dispatch:
+    types: [vercel-deployment]
 
 jobs:
-  comment-urls:
-    # Only run when a deployment succeeds and it's a preview environment (not production)
+  # For deployment_status events (traditional Vercel integration)
+  comment-urls-deployment-status:
     if: >
+      github.event_name == 'deployment_status' &&
       github.event.deployment_status.state == 'success' &&
       github.event.deployment_status.environment != 'Production'
     uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
@@ -14,3 +17,16 @@ jobs:
       review_url: ${{ github.event.deployment_status.environment_url }}
       prod_url: 'https://svelper.com'
       commit_sha: ${{ github.event.deployment.sha }}
+
+  # For repository_dispatch events (newer Vercel integration)
+  comment-urls-repository-dispatch:
+    if: >
+      github.event_name == 'repository_dispatch' &&
+      github.event.client_payload.deployment_url != ''
+    uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
+    with:
+      review_url: ${{ github.event.client_payload.deployment_url }}
+      prod_url: 'https://svelper.com'
+      # repository_dispatch may include pr_number in client_payload
+      pr_number: ${{ github.event.client_payload.pr_number || 0 }}
+      commit_sha: ${{ github.event.client_payload.commit_sha || github.event.client_payload.sha || '' }}
