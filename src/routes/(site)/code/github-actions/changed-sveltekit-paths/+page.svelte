@@ -65,37 +65,16 @@ jobs:
 				with:
 					script: |
 						// Get changed files using GitHub API instead of tj-actions/changed-files
-						async function getChangedFiles() {
-							if (context.payload.pull_request) {
-								// For pull requests, list files from the PR
-								const files = await github.paginate(
-									github.rest.pulls.listFiles,
-									{
-										owner: context.repo.owner,
-										repo: context.repo.repo,
-										pull_number: context.payload.pull_request.number,
-										per_page: 100
-									}
-								);
-								return files.map(file => file.filename);
-							} else {
-								// For pushes, compare commits
-								const base = context.payload.before;
-								const head = context.payload.after;
-								// Handle edge cases like branch creation where before may be all zeros
-								if (!base || base === '0000000000000000000000000000000000000000') {
-									return [];
-								}
-								const response = await github.rest.repos.compareCommits({
-									owner: context.repo.owner,
-									repo: context.repo.repo,
-									base,
-									head
-								});
-								return (response.data.files || []).map(file => file.filename);
+						const files = await github.paginate(
+							github.rest.pulls.listFiles,
+							{
+								owner: context.repo.owner,
+								repo: context.repo.repo,
+								pull_number: context.payload.pull_request.number,
+								per_page: 100
 							}
-						}
-						const changedFiles = await getChangedFiles();
+						);
+						const changedFiles = files.map(file => file.filename);
 						const { default: getChangedPagePaths } = await import('$\{{ github.workspace }}/.github/scripts/detect-changed-sveltekit-paths.js')
 						const pathsChanged = await getChangedPagePaths(
 							'$\{{ github.workspace }}',
