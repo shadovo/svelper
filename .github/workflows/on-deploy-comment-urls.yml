@@ -1,0 +1,16 @@
+name: Comment URLs on Deploy
+
+on:
+  deployment_status:
+
+jobs:
+  comment-urls:
+    # Only run when a deployment succeeds and it's a preview environment (not production)
+    if: >
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment_status.environment != 'Production'
+    uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
+    with:
+      review_url: ${{ github.event.deployment_status.environment_url }}
+      prod_url: 'https://svelper.com'
+      commit_sha: ${{ github.event.deployment.sha }}
