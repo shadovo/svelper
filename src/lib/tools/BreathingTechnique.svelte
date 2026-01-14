@@ -45,18 +45,21 @@
 		vibration?: boolean;
 	}
 
-	let { 
-		breathInConfig = DEFAULT_BREATH_IN_CONFIG, 
-		breathOutConfig = DEFAULT_BREATH_OUT_CONFIG, 
-		sound = true, 
-		vibration = true 
+	let {
+		breathInConfig = DEFAULT_BREATH_IN_CONFIG,
+		breathOutConfig = DEFAULT_BREATH_OUT_CONFIG,
+		sound = true,
+		vibration = true,
 	}: Props = $props();
 
 	let soundBoard = createSoundboard();
 
 	let breathInValues: BreathValues = $derived({ ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig });
 
-	let breathOutValues: BreathValues = $derived({ ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig });
+	let breathOutValues: BreathValues = $derived({
+		...DEFAULT_BREATH_OUT_CONFIG,
+		...breathOutConfig,
+	});
 
 	let directionIsIn = $state(false);
 	let running = $state(false);

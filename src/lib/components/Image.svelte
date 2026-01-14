@@ -11,7 +11,15 @@
 		role?: string;
 	}
 
-	let { src, alt, aspectRatio, sizes, background = 'transparent', loading = 'eager', role }: Props = $props();
+	let {
+		src,
+		alt,
+		aspectRatio,
+		sizes,
+		background = 'transparent',
+		loading = 'eager',
+		role,
+	}: Props = $props();
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">

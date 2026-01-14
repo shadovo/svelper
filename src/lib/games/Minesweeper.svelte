@@ -200,7 +200,10 @@
 					{#each row as cell, j (j)}
 						<td
 							onclick={() => cellClicked(j, i)}
-							oncontextmenu={(e) => { e.preventDefault(); cellRightClicked(j, i); }}
+							oncontextmenu={(e) => {
+								e.preventDefault();
+								cellRightClicked(j, i);
+							}}
 							class:revealed={cell.isRevealed}
 							class:mine={cell.isRevealed && cell.isMine}
 						>

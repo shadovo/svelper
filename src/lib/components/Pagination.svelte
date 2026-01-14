@@ -11,7 +11,9 @@
 	let { items = [], page = $bindable(0), itemsPerPage = 5, children }: Props = $props();
 
 	let maxPage = $derived(Math.ceil(items.length / itemsPerPage) - 1);
-	let filteredItems = $derived(items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage));
+	let filteredItems = $derived(
+		items.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage),
+	);
 </script>
 
 <div class="pagination">

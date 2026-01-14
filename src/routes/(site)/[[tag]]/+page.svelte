@@ -1,22 +1,15 @@
 <script lang="ts">
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
 	import type { ArticlePromo } from '$data/articles';
-	import type { Tag } from '$data/tags';
 
 	interface Props {
 		data: {
 			articles: ArticlePromo[];
-			tags: { tag: Tag; count: number }[];
-			meta: {
-				currentTag: Tag | undefined;
-			};
 		};
 	}
 
 	let { data }: Props = $props();
 	let articles = $derived(data.articles);
-	// let tags = $derived(data.tags);
-	// let meta = $derived(data.meta);
 </script>
 
 <svelte:head>
