@@ -104,7 +104,7 @@ jobs:
 						}
 
 						if (!prNumber) {
-							core.setFailed('Could not determine PR number.');
+							core.setFailed('Could not determine PR number. Please provide pr_number or commit_sha input.');
 							return;
 						}
 						
@@ -129,7 +129,7 @@ jobs:
 						// Format comment message
 						let message;
 						if (paths.length === 0) {
-							message = '# URLs changed in this PR\\n\\nNo pages were affected.';
+							message = '# URLs changed in this PR\\n\\nNo pages were affected by the changes in this PR.';
 						} else {
 							const rows = paths.map(p => 
 								\`| [$\{p}]($\{reviewUrl}$\{p}) | [pro]($\{prodUrl}$\{p}) |\`
