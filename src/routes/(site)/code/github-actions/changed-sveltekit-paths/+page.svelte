@@ -28,65 +28,120 @@
 		</p>
 	</section>
 	<section>
-		<h3>Step 1 - Create a reusable GitHub Action</h3>
+		<h3>Step 1 - Create the reusable workflow</h3>
 		<p>
-			In your project add a YAML file at <code>.guthub/workflows</code> called
-			<code>changed-sveltekit-paths.yml</code>. This will be our reusable action that we can call
-			form any other workflow.
+			In your project add a YAML file at <code>.github/workflows</code> called
+			<code>comment-changed-sveltekit-urls.yml</code>. This is a reusable action that takes
+			<code>review_url</code> and <code>prod_url</code> as inputs and handles everything from finding
+			changed files to posting a comment on the PR.
 		</p>
-		<p>Add the following code to <code>changed-sveltekit-paths.yml</code>:</p>
+		<p>Add the following code to <code>comment-changed-sveltekit-urls.yml</code>:</p>
 		<SyntaxHighlighting language="yaml">
-			{`name: Changed SvelteKit paths
+			{`name: Comment Changed SvelteKit URLs
 
 on:
 	workflow_call:
-		outputs:
-			pathsChanged:
-				description: 'The changed paths'
-				value: $\{{ jobs.changed-paths-job.outputs.output1 }}
+		inputs:
+			review_url:
+				description: 'Base URL for the review/preview environment'
+				required: true
+				type: string
+			prod_url:
+				description: 'Base URL for the production environment'
+				required: true
+				type: string
+			pr_number:
+				description: 'The PR number to comment on. Auto-detected if not provided.'
+				required: false
+				type: number
 
 jobs:
-	changed-paths-job:
-		name: Changed paths
+	comment-changed-urls:
+		name: Comment changed URLs
+		permissions:
+			contents: read
+			pull-requests: write
 		runs-on: ubuntu-latest
-		outputs:
-			output1: $\{{ steps.changed-paths.outputs.pathsChanged }}
 		steps:
-			- uses: actions/checkout@v4
+			- uses: actions/checkout@v6
 				with:
 					fetch-depth: 0
-			- uses: actions/setup-node@v4
+			- uses: actions/setup-node@v6
 				with:
-					node-version: 20
+					node-version: 24
 					cache: 'npm'
-			- name: Get changed files
-				id: changed-files
-				uses: tj-actions/changed-files@v35
-				with:
-					json: true
-			- name: List all changed paths
-				id: changed-paths
-				uses: actions/github-script@v6
+			- name: Detect and comment changed URLs
+				uses: actions/github-script@v7
+				env:
+					REVIEW_URL: $\{{ inputs.review_url }}
+					PROD_URL: $\{{ inputs.prod_url }}
+					PR_NUMBER: $\{{ inputs.pr_number }}
 				with:
 					script: |
-						const { default: getChangedPagePaths } = await import('$\{{ github.workspace }}/.github/scripts/detect-changed-sveltekit-paths.js')
-						const pathsChanged = await getChangedPagePaths(
-							'$\{{ github.workspace }}',
-							JSON.parse("$\{{ steps.changed-files.outputs.all_changed_files }}")
+						const reviewUrl = process.env.REVIEW_URL;
+						const prodUrl = process.env.PROD_URL;
+						let prNumber = process.env.PR_NUMBER ? parseInt(process.env.PR_NUMBER) : null;
+						
+						// Auto-detect PR number from context if not provided
+						if (!prNumber && context.payload.pull_request) {
+							prNumber = context.payload.pull_request.number;
+						}
+						
+						if (!prNumber) {
+							console.log('No PR number found, skipping');
+							return;
+						}
+						
+						// Get changed files from the PR
+						const files = await github.paginate(
+							github.rest.pulls.listFiles,
+							{
+								owner: context.repo.owner,
+								repo: context.repo.repo,
+								pull_number: prNumber,
+								per_page: 100
+							}
 						);
-						console.log('Changed paths');
-						pathsChanged.forEach(path => {
-							console.log('Paths changed:', path);
+						const changedFiles = files.map(file => file.filename);
+						
+						// Import the detection script
+						const { default: getChangedPagePaths } = await import(
+							'$\{{ github.workspace }}/.github/scripts/detect-changed-sveltekit-paths.js'
+						);
+						const paths = await getChangedPagePaths('$\{{ github.workspace }}', changedFiles);
+						
+						// Format and post comment
+						let message;
+						if (paths.length === 0) {
+							message = '# URLs changed in this PR\\n\\nNo pages were affected.';
+						} else {
+							const rows = paths.map(p => 
+								\`| [$\{p}]($\{reviewUrl}$\{p}) | [pro]($\{prodUrl}$\{p}) |\`
+							);
+							message = [
+								'# URLs changed in this PR',
+								'',
+								'| Review | Production |',
+								'| --- | --- |',
+								...rows,
+							].join('\\n');
+						}
+						
+						await github.rest.issues.createComment({
+							owner: context.repo.owner,
+							repo: context.repo.repo,
+							issue_number: prNumber,
+							body: message
 						});
-						core.setOutput("pathsChanged", pathsChanged.join('\\n'));
 `}
 		</SyntaxHighlighting>
 		<p>
 			The most up to date version of this file can be found at
 			<a
-				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/changed-sveltekit-paths.yml"
+				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/comment-changed-sveltekit-urls.yml"
 				target="_blank"
-				rel="noopener noreferrer">github.com/shadovo/svelper/.../changed-sveltekit-paths.yml</a
+				rel="noopener noreferrer"
+				>github.com/shadovo/svelper/.../comment-changed-sveltekit-urls.yml</a
 			>
 		</p>
 	</section>
@@ -94,7 +149,7 @@ jobs:
 		<h3>Step 2 - Add the script file.</h3>
 		<p>In addition to the file we created above we will also add the script that it will use.</p>
 		<p>
-			In your project add a file at <code>.guthub/scripts</code> called
+			In your project add a file at <code>.github/scripts</code> called
 			<code>detect-changed-sveltekit-paths.js</code>.
 		</p>
 		<p>
@@ -104,115 +159,86 @@ jobs:
 			{`import path from 'path';
 import fs from 'fs';
 
+// Note: Only detects imports from $lib/ or relative paths (./ ../)
+// Changes to npm packages won't be detected
 const MATCH_IMPORTS = /import\\s+(?:[\\w*\\s{},]+\\s+from\\s+?|)["']((?:\\$lib\\/|\\.+\\/).*?)["']/g;
 
 const PAGE_FILES = ['+page.svelte', '+page.js', '+page.ts'];
 const LAYOUT_FILES = ['+layout.svelte', '+layout.js', '+layout.ts'];
 
 function findFiles(sveltekitProjectPath, dir, ending) {
-	// Get all files and directories in the given directory
 	const files = fs.readdirSync(path.join(sveltekitProjectPath, dir));
-
-	// Initialize an array to store the matching files
 	let matchingFiles = [];
-
-	// Loop through all the files and directories
 	for (const file of files) {
 		const filePath = path.join(dir, file);
 		const stat = fs.statSync(path.join(sveltekitProjectPath, filePath));
-
-		// Check if the current item is a directory
 		if (stat.isDirectory()) {
-			// Recursively search for files in the subdirectory
 			matchingFiles = matchingFiles.concat(findFiles(sveltekitProjectPath, filePath, ending));
-		} else {
-			// Check if the current file matches the pattern
-			if (file.endsWith(ending)) {
-				// Add the matching file to the array
-				matchingFiles.push(filePath);
-			}
+		} else if (file.endsWith(ending)) {
+			matchingFiles.push(filePath);
 		}
 	}
-
-	// Return the array of matching files
 	return matchingFiles;
 }
 
 function getPathOfPage(pagePath) {
-	return (
-		path
-			.dirname(pagePath)
-			// remove routes folder names
-			.replace('src/routes', '')
-			// remove layout group folders
-			.replace(/\\/\\(.*\\)/g, '')
-	);
+	return path.dirname(pagePath)
+		.replace('src/routes', '')
+		.replace(/\\/\\(.*\\)/g, '');
 }
 
-function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
-	const fileContent = fs.readFileSync(path.join(sveltekitProjectPath, filePath), 'utf-8');
-	let currentMatch;
+function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles, visited = new Set()) {
+	if (visited.has(filePath)) return false;
+	visited.add(filePath);
+
+	const fullPath = path.join(sveltekitProjectPath, filePath);
+	let fileContent;
+	try {
+		fileContent = fs.readFileSync(fullPath, 'utf-8');
+	} catch {
+		return false;
+	}
+
+	const importRegex = new RegExp(MATCH_IMPORTS.source, MATCH_IMPORTS.flags);
+	let match;
 	const deps = [];
-	while (null != (currentMatch = MATCH_IMPORTS.exec(fileContent))) {
-		deps.push(currentMatch[1]);
+	while ((match = importRegex.exec(fileContent))) {
+		deps.push(match[1]);
 	}
-	const normalizedDeps = deps
-		.map((dep) => {
-			if (dep.match(/^\\.+\\//)) {
-				return path.join(path.dirname(filePath), dep);
-			}
-			return dep.replace('$lib', 'src/lib');
-		})
-		.map((depPath) => {
-			if (path.extname(depPath) === '') {
-				if (fs.existsSync(depPath + '.ts')) {
-					return depPath + '.ts';
-				} else if (fs.existsSync(depPath + '.js')) {
-					return depPath + '.js';
-				}
-			}
-			return depPath;
-		});
-	if (normalizedDeps.some((importPath) => changedFiles.includes(importPath))) {
-		return true;
-	}
-	for (const dep of normalizedDeps) {
-		if (fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles)) {
-			return true;
+
+	const normalizedDeps = deps.map(dep => {
+		if (dep.match(/^\\.+\\//)) {
+			return path.join(path.dirname(filePath), dep);
 		}
-	}
+		return dep.replace('$lib', 'src/lib');
+	}).map(depPath => {
+		if (path.extname(depPath) === '') {
+			const fullDep = path.join(sveltekitProjectPath, depPath);
+			if (fs.existsSync(fullDep + '.svelte')) return depPath + '.svelte';
+			if (fs.existsSync(fullDep + '.ts')) return depPath + '.ts';
+			if (fs.existsSync(fullDep + '.js')) return depPath + '.js';
+		}
+		return depPath;
+	});
+
+	if (normalizedDeps.some(p => changedFiles.includes(p))) return true;
+	return normalizedDeps.some(dep => 
+		fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles, visited)
+	);
 }
 
 export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) {
-	// All pages in the project
 	const allPages = findFiles(sveltekitProjectPath, 'src/routes', '+page.svelte');
-
-	// Changed pages
-	const changedPages = changedFiles.filter((file) =>
-		PAGE_FILES.some((pageFile) => file.endsWith(pageFile)),
-	);
-
-	// Pages changed due to a layout change
+	const changedPages = changedFiles.filter(f => PAGE_FILES.some(pf => f.endsWith(pf)));
 	const changedLayoutPages = changedFiles
-		.filter((file) => LAYOUT_FILES.some((layoutFile) => file.endsWith(layoutFile)))
-		.map((file) => LAYOUT_FILES.reduce((res, layoutFile) => res.replace(layoutFile, ''), file))
-		.map((path) => allPages.filter((page) => page.startsWith(path)))
-		.flat();
-
-	// Pages that depend on changed files
-	const pagesWithChangedDependencies = allPages.filter((page) => {
-		return fileContainsChangedDependencies(sveltekitProjectPath, page, changedFiles);
-	});
-
-	// Combine the two arrays and remove duplicates
-	const changedPaths = new Set([
-		...changedPages,
-		...changedLayoutPages,
-		...pagesWithChangedDependencies,
-	]);
-
-	// Return the paths of the changed pages
-	return [...changedPaths].map((page) => getPathOfPage(page)).sort();
+		.filter(f => LAYOUT_FILES.some(lf => f.endsWith(lf)))
+		.map(f => LAYOUT_FILES.reduce((r, lf) => r.replace(lf, ''), f))
+		.flatMap(p => allPages.filter(page => page.startsWith(p)));
+	const pagesWithChangedDeps = allPages.filter(page => 
+		fileContainsChangedDependencies(sveltekitProjectPath, page, changedFiles)
+	);
+	const changedPaths = new Set([...changedPages, ...changedLayoutPages, ...pagesWithChangedDeps]);
+	return [...changedPaths].map(getPathOfPage).sort();
 }
 `}
 		</SyntaxHighlighting>
@@ -227,71 +253,49 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 		</p>
 	</section>
 	<section>
-		<h3>Step 3 - Use the list of changed paths!</h3>
-		<p>
-			Now you have everything you need to get a list of paths affected by the changes in your PR.
-		</p>
-		<p>Some examples of what you can use it for:</p>
-		<ul class="list">
-			<li>Post links to those pages as a PR comment.</li>
-			<li>
-				You can also use it to run tests on only the affected pages. This can be useful if you have
-				a large application with many pages and you want to run tests on only the pages that have
-				changed.
-			</li>
-			<li>
-				Run Lighthoiuse on only the affected pages to make sure you haven't introduced any
-				performance or accessability regressions.
-			</li>
-		</ul>
-		<h4>Example of a workflow posting a comment to the PR.</h4>
+		<h3>Step 3 - Use the reusable workflow</h3>
+		<p>Now you can call the workflow from anywhere! Here are some examples:</p>
+		<h4>Example 1: Trigger from a PR workflow</h4>
 		<SyntaxHighlighting language="yaml">
-			{`name: Post changed URLs
-
+			{`name: PR Comment
 on:
 	pull_request:
 		branches: ['main']
-	
-jobs:
-	changed-paths:
-		name: Changed URLs
-		uses: ./.github/workflows/changed-sveltekit-paths.yml
 
-	comment-changed-paths:
-		name: Post comment with changed URLs
-		runs-on: ubuntu-latest
-		needs: changed-paths
-		steps:
-			- name: Format message
-				id: format-message
-				uses: actions/github-script@v6
-				with:
-					script: |
-						const paths = \`$\{{ needs.changed-paths.outputs.pathsChanged }}\`.split('\\n');
-						const message = [
-							'# URLs updated',
-							'URLs affected by changes in this PR',
-							...paths.map(path => \`- http://localhost:5173$\{path}\`),
-						].join('\\n');
-						core.setOutput('message', message);
-			- name: Comment changed URLs
-				uses: mshick/add-pr-comment@v2
-				with:
-					message: |
-						$\{{ steps.format-message.outputs.message }}
+jobs:
+	comment-urls:
+		uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
+		with:
+			review_url: 'https://my-preview-app.vercel.app'
+			prod_url: 'https://mysite.com'
+`}
+		</SyntaxHighlighting>
+		<h4>Example 2: Trigger from deployment status (Vercel)</h4>
+		<SyntaxHighlighting language="yaml">
+			{`name: Comment on Deploy
+on:
+	deployment_status:
+
+jobs:
+	comment-urls:
+		if: github.event.deployment_status.state == 'success'
+		uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
+		with:
+			review_url: $\{{ github.event.deployment_status.environment_url }}
+			prod_url: 'https://mysite.com'
 `}
 		</SyntaxHighlighting>
 		<p>
-			You can of course change <code>http://localhost:5173</code> to point to your PR app domain/path
-			if you prefere.
+			The workflow automatically detects the PR number from the context, but you can also pass it
+			explicitly using the <code>pr_number</code> input.
 		</p>
 		<p>
-			Svelper uses the <code>changed-sveltekit-paths.yml</code> action both to post a comment in the
-			PR and run Lighthouse on only the affected pages in the PR. Implementation can be found here
+			Svelper uses this workflow to post a comment with Review and Production links when Vercel
+			deploys a PR. See the implementation at
 			<a
-				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/pr.yml"
+				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/comment-changed-urls.yml"
 				target="_blank"
-				rel="noopener noreferrer">github.com/shadovo/svelper/.../pr.yml</a
+				rel="noopener noreferrer">github.com/shadovo/svelper/.../comment-changed-urls.yml</a
 			>
 		</p>
 	</section>
