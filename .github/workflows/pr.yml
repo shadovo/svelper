@@ -46,18 +46,37 @@ jobs:
       - name: Format message
         id: format-message
         uses: actions/github-script@v7
+        env:
+          PATHS_CHANGED: ${{ needs.changed-paths.outputs.pathsChanged }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
           script: |
-            const paths = `${{ needs.changed-paths.outputs.pathsChanged }}`.split('\n').filter(p => p.trim());
+            const paths = (process.env.PATHS_CHANGED || '').split('\n').filter(p => p.trim());
+            const prNumber = process.env.PR_NUMBER;
+
             if (paths.length === 0) {
-              core.setOutput('message', '# No SvelteKit paths affected\nNo pages were affected by the changes in this PR.');
+              core.setOutput('message', '# URLs changed in this PR\n\nNo pages were affected by the changes in this PR.');
               return;
             }
+
+            // Build table with Review and Production links
+            const reviewBaseUrl = `https://svelper-git-pr-${prNumber}-shadovo.vercel.app`;
+            const productionBaseUrl = 'https://svelper.com';
+
+            const tableRows = paths.map(p => {
+              const reviewUrl = `${reviewBaseUrl}${p}`;
+              const productionUrl = `${productionBaseUrl}${p}`;
+              return `| [${p}](${reviewUrl}) | [${p}](${productionUrl}) |`;
+            });
+
             const message = [
-              '# URLs updated',
-              'URLs affected by changes in this PR:',
-              ...paths.map(path => `- https://svelper.com${path}`),
+              '# URLs changed in this PR',
+              '',
+              '| Review | Production |',
+              '| --- | --- |',
+              ...tableRows,
             ].join('\n');
+
             core.setOutput('message', message);
       - name: Comment changed URLs
         uses: mshick/add-pr-comment@v2

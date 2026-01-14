@@ -1,6 +1,9 @@
 import path from 'path';
 import fs from 'fs';
 
+// Note: This regex only matches imports from $lib/ or relative paths (./  ../).
+// It does not detect imports from npm packages or absolute paths.
+// Changes to node_modules dependencies won't be detected.
 const MATCH_IMPORTS = /import\s+(?:[\w*\s{},]+\s+from\s+?|)["']((?:\$lib\/|\.+\/).*?)["']/g;
 
 const PAGE_FILES = ['+page.svelte', '+page.js', '+page.ts'];
@@ -46,13 +49,38 @@ function getPathOfPage(pagePath) {
 	);
 }
 
-function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changedFiles) {
-	const fileContent = fs.readFileSync(path.join(sveltekitProjectPath, filePath), 'utf-8');
+function fileContainsChangedDependencies(
+	sveltekitProjectPath,
+	filePath,
+	changedFiles,
+	visited = new Set(),
+) {
+	// Prevent infinite recursion from circular dependencies
+	if (visited.has(filePath)) {
+		return false;
+	}
+	visited.add(filePath);
+
+	const fullPath = path.join(sveltekitProjectPath, filePath);
+
+	// Handle file read errors gracefully
+	let fileContent;
+	try {
+		fileContent = fs.readFileSync(fullPath, 'utf-8');
+	} catch (error) {
+		// File doesn't exist or can't be read - skip it
+		console.warn(`Warning: Could not read file ${fullPath}: ${error.message}`);
+		return false;
+	}
+
+	// Create a new regex instance to avoid lastIndex issues with global flag
+	const importRegex = new RegExp(MATCH_IMPORTS.source, MATCH_IMPORTS.flags);
 	let currentMatch;
 	const deps = [];
-	while (null != (currentMatch = MATCH_IMPORTS.exec(fileContent))) {
+	while (null != (currentMatch = importRegex.exec(fileContent))) {
 		deps.push(currentMatch[1]);
 	}
+
 	const normalizedDeps = deps
 		.map((dep) => {
 			if (dep.match(/^\.+\//)) {
@@ -62,22 +90,30 @@ function fileContainsChangedDependencies(sveltekitProjectPath, filePath, changed
 		})
 		.map((depPath) => {
 			if (path.extname(depPath) === '') {
-				if (fs.existsSync(depPath + '.ts')) {
+				// Check for .svelte, .ts, and .js extensions
+				const fullDepPath = path.join(sveltekitProjectPath, depPath);
+				if (fs.existsSync(fullDepPath + '.svelte')) {
+					return depPath + '.svelte';
+				} else if (fs.existsSync(fullDepPath + '.ts')) {
 					return depPath + '.ts';
-				} else if (fs.existsSync(depPath + '.js')) {
+				} else if (fs.existsSync(fullDepPath + '.js')) {
 					return depPath + '.js';
 				}
 			}
 			return depPath;
 		});
+
 	if (normalizedDeps.some((importPath) => changedFiles.includes(importPath))) {
 		return true;
 	}
+
 	for (const dep of normalizedDeps) {
-		if (fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles)) {
+		if (fileContainsChangedDependencies(sveltekitProjectPath, dep, changedFiles, visited)) {
 			return true;
 		}
 	}
+
+	return false;
 }
 
 export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) {
