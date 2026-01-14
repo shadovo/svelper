@@ -140,7 +140,8 @@ jobs:
 			<a
 				href="https://github.com/shadovo/svelper/blob/main/.github/workflows/comment-changed-sveltekit-urls.yml"
 				target="_blank"
-				rel="noopener noreferrer">github.com/shadovo/svelper/.../comment-changed-sveltekit-urls.yml</a
+				rel="noopener noreferrer"
+				>github.com/shadovo/svelper/.../comment-changed-sveltekit-urls.yml</a
 			>
 		</p>
 	</section>
@@ -253,9 +254,7 @@ export default function getChangedPagePaths(sveltekitProjectPath, changedFiles) 
 	</section>
 	<section>
 		<h3>Step 3 - Use the reusable workflow</h3>
-		<p>
-			Now you can call the workflow from anywhere! Here are some examples:
-		</p>
+		<p>Now you can call the workflow from anywhere! Here are some examples:</p>
 		<h4>Example 1: Trigger from a PR workflow</h4>
 		<SyntaxHighlighting language="yaml">
 			{`name: PR Comment

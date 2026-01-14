@@ -50,13 +50,13 @@ jobs:
             const prodUrl = process.env.PROD_URL;
             let prNumber = parseInt(process.env.PR_NUMBER, 10) || 0;
             const commitSha = process.env.COMMIT_SHA;
-            
+
             // Validate required inputs
             if (!reviewUrl) {
               core.setFailed('review_url is required but was not provided.');
               return;
             }
-            
+
             // If no PR number provided, try to detect from commit SHA
             if (!prNumber && commitSha) {
               console.log(`No PR number provided, detecting from commit SHA: ${commitSha}`);
@@ -73,12 +73,12 @@ jobs:
                 console.log(`Found PR #${prNumber} from commit`);
               }
             }
-            
+
             if (!prNumber) {
               core.setFailed('Could not determine PR number. Please provide pr_number or commit_sha input.');
               return;
             }
-            
+
             try {
               // Get changed files from the PR
               const files = await github.paginate(
