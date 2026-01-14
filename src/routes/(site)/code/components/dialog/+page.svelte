@@ -5,14 +5,14 @@
 	import srcOscar from '$img/oscar-head.svg';
 	import lorem from '$lib/utils/lorem-ipsum';
 
-	let showSimpleDialog = false;
-	let showCustomHeaderDialog = false;
-	let showCustomFooterDialog = false;
-	let showScrollingDialog = false;
+	let showSimpleDialog = $state(false);
+	let showCustomHeaderDialog = $state(false);
+	let showCustomFooterDialog = $state(false);
+	let showScrollingDialog = $state(false);
 
 	let longTextParagraphs = lorem.slice(0, 10);
 
-	let acceptedDialogOption: boolean | undefined;
+	let acceptedDialogOption: boolean | undefined = $state(undefined);
 
 	const acceptDialog = () => {
 		acceptedDialogOption = true;
@@ -44,7 +44,7 @@
 		<ul class="list">
 			<li>Click outside the dialog to close it.</li>
 			<li>Add a title via attribute.</li>
-			<li>Slots for custom header and/or footer.</li>
+			<li>Snippets for custom header and/or footer.</li>
 		</ul>
 		<p>
 			Check out the implementation at <a
@@ -62,7 +62,7 @@
 	<p>Hello world</p>
 </Dialog>`}</SyntaxHighlighting
 		>
-		<button on:click={() => (showSimpleDialog = !showSimpleDialog)}>Show modal!</button>
+		<button onclick={() => (showSimpleDialog = !showSimpleDialog)}>Show modal!</button>
 		<Dialog title="Simple dialog" bind:show={showSimpleDialog}>
 			<p>Hello world</p>
 		</Dialog>
@@ -72,19 +72,23 @@
 		<p>The follwing code will show a dialog with a custom header.</p>
 		<SyntaxHighlighting language="html"
 			>{`<Dialog bind:show={showCustomHeaderDialog}>
-	<div slot="header" class="flex-row">
-		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
-		<h4>Hi! It's me!</h4>
-	</div>
+	{#snippet header()}
+		<div class="flex-row">
+			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+			<h4>Hi! It's me!</h4>
+		</div>
+	{/snippet}
 	<p>Hello world</p>
 </Dialog>`}</SyntaxHighlighting
 		>
-		<button on:click={() => (showCustomHeaderDialog = !showCustomHeaderDialog)}>Show modal!</button>
+		<button onclick={() => (showCustomHeaderDialog = !showCustomHeaderDialog)}>Show modal!</button>
 		<Dialog bind:show={showCustomHeaderDialog}>
-			<div slot="header" class="flex-row">
-				<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
-				<h4>Hi! It's me!</h4>
-			</div>
+			{#snippet header()}
+				<div class="flex-row">
+					<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+					<h4>Hi! It's me!</h4>
+				</div>
+			{/snippet}
 			<p>Hello world</p>
 		</Dialog>
 	</section>
@@ -103,22 +107,25 @@ const declinedDialog = () => {
 		>
 		<SyntaxHighlighting language="html"
 			>{`<Dialog bind:show={showCustomFooterDialog}>
-	<div slot="header" class="flex-row">
-		<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
-		<h4>Hi! It's me!</h4>
-	</div>
+	{#snippet header()}
+		<div class="flex-row">
+			<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+			<h4>Hi! It's me!</h4>
+		</div>
+	{/snippet}
 	<div class="flex">
 		<p>This is a dialog with custom header and footer.</p>
 	</div>
-	<div class="dialog__footer" slot="footer">
-		<button on:click={declinedDialog}>No way!</button>
-		<button on:click={acceptDialog}>Sure!</button>
-	</div>
+	{#snippet footer()}
+		<div class="dialog__footer">
+			<button onclick={declinedDialog}>No way!</button>
+			<button onclick={acceptDialog}>Sure!</button>
+		</div>
+	{/snippet}
 </Dialog>`}</SyntaxHighlighting
 		>
 		<div class="flex-row">
-			<button on:click={() => (showCustomFooterDialog = !showCustomFooterDialog)}
-				>Show modal!</button
+			<button onclick={() => (showCustomFooterDialog = !showCustomFooterDialog)}>Show modal!</button
 			>
 			{#if acceptedDialogOption === true}
 				<p>You have accepted the info in the modal!</p>
@@ -127,17 +134,21 @@ const declinedDialog = () => {
 			{/if}
 		</div>
 		<Dialog bind:show={showCustomFooterDialog}>
-			<div slot="header" class="flex-row">
-				<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
-				<h4>Hi! It's me!</h4>
-			</div>
+			{#snippet header()}
+				<div class="flex-row">
+					<img src={srcOscar} alt="Avatar of the author" height="50" width="50" />
+					<h4>Hi! It's me!</h4>
+				</div>
+			{/snippet}
 			<div class="flex">
 				<p>This is a dialog with custom header and footer.</p>
 			</div>
-			<div class="dialog__footer" slot="footer">
-				<button on:click={declinedDialog}>No way!</button>
-				<button on:click={acceptDialog}>Sure!</button>
-			</div>
+			{#snippet footer()}
+				<div class="dialog__footer">
+					<button onclick={declinedDialog}>No way!</button>
+					<button onclick={acceptDialog}>Sure!</button>
+				</div>
+			{/snippet}
 		</Dialog>
 	</section>
 	<section>
@@ -145,9 +156,11 @@ const declinedDialog = () => {
 		<p>This will show a dialog with scroll</p>
 		<SyntaxHighlighting language="html"
 			>{`<Dialog bind:show={showScrollingDialog}>
-	<div class="dialog__header" slot="header">
-		<h2>Hello!</h2>
-	</div>
+	{#snippet header()}
+		<div class="dialog__header">
+			<h2>Hello!</h2>
+		</div>
+	{/snippet}
 	<div class="flex">
 		{#each longTextParagraphs as paragraph (paragraph)}
 			<p>{paragraph}</p>
@@ -155,11 +168,13 @@ const declinedDialog = () => {
 	</div>
 </Dialog>`}</SyntaxHighlighting
 		>
-		<button on:click={() => (showScrollingDialog = !showScrollingDialog)}>Show modal!</button>
+		<button onclick={() => (showScrollingDialog = !showScrollingDialog)}>Show modal!</button>
 		<Dialog bind:show={showScrollingDialog}>
-			<div class="dialog__header" slot="header">
-				<h2>Hello!</h2>
-			</div>
+			{#snippet header()}
+				<div class="dialog__header">
+					<h2>Hello!</h2>
+				</div>
+			{/snippet}
 			<div class="flex">
 				{#each longTextParagraphs as paragraph (paragraph)}
 					<p>{paragraph}</p>

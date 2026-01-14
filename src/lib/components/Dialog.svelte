@@ -1,8 +1,17 @@
 <script lang="ts">
-	export let show = false;
-	export let title: string | null = null;
+	import type { Snippet } from 'svelte';
 
-	let dialogEle: HTMLDialogElement | null = null;
+	interface Props {
+		show?: boolean;
+		title?: string | null;
+		header?: Snippet;
+		footer?: Snippet;
+		children?: Snippet;
+	}
+
+	let { show = $bindable(false), title = null, header, footer, children }: Props = $props();
+
+	let dialogEle: HTMLDialogElement | null = $state(null);
 
 	const dialogClosed = () => {
 		show = false;
@@ -20,26 +29,26 @@
 		show = false;
 	};
 
-	$: {
+	$effect.pre(() => {
 		if (show) {
 			dialogEle?.showModal();
 		} else {
 			dialogEle?.close();
 		}
-	}
+	});
 </script>
 
-<dialog class="dialog" bind:this={dialogEle} on:click={dialogClick} on:close={dialogClosed}>
+<dialog class="dialog" bind:this={dialogEle} onclick={dialogClick} onclose={dialogClosed}>
 	<div class="dialog-content">
 		<header>
-			{#if $$slots?.header}
+			{#if header}
 				<div class="header-content">
-					<slot name="header" />
+					{@render header()}
 				</div>
 			{:else if title}
 				<h2 class="header-content">{title}</h2>
 			{/if}
-			<button class="button-icon" on:click={closeDialog} type="button" title="Close dialog">
+			<button class="button-icon" onclick={closeDialog} type="button" title="Close dialog">
 				<title>Close dialog icon</title>
 				<svg width="24" height="24" viewBox="0 0 24 24">
 					<line x1="18" y1="6" x2="6" y2="18" />
@@ -48,11 +57,11 @@
 			</button>
 		</header>
 		<article>
-			<slot />
+			{@render children?.()}
 		</article>
-		{#if $$slots?.footer}
+		{#if footer}
 			<footer>
-				<slot name="footer" />
+				{@render footer()}
 			</footer>
 		{/if}
 	</div>
