@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { tweened } from 'svelte/motion';
-	import { onMount } from 'svelte';
+	import { Tween } from 'svelte/motion';
 
 	type BottomPillar = { top: number; x: number; scored?: boolean };
 
@@ -37,7 +36,7 @@
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
 	let gameInitiated = $state(false);
-	let octtyDirection = tweened(-1, { duration: 1000 });
+	let octtyDirection = new Tween(-1, { duration: 1000 });
 	let octtyPosY = (RELATIVE_HEIGHT - GROUND_HEIGHT) / 2;
 	let octtyIsDead = $state(false);
 	let score = $state(0);
@@ -138,7 +137,7 @@
 		pillarDistancePerTick = relativeSize(BASE_SIDESCROLL_SPEED * (timeSinceLastFrame / TICK));
 
 		// Update Octty pos
-		octtyPosY += octtyDistancePerTick * $octtyDirection;
+		octtyPosY += octtyDistancePerTick * octtyDirection.current;
 		// Update pillar pos
 		BOTTOM_PILLARS.forEach((bottomPillar, i) => {
 			bottomPillar.x -= pillarDistancePerTick;
@@ -193,8 +192,8 @@
 		requestAnimationFrame(gameLoop);
 	}
 
-	onMount(() => {
-		const context = canvas.getContext('2d');
+	$effect(() => {
+		const context = canvas?.getContext('2d');
 		if (context) {
 			ctx = context;
 			render();

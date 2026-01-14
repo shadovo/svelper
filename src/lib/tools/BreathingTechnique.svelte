@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { tweened } from 'svelte/motion';
+	import { Tween } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
 	import createSoundboard from '../utils/audio/soundboard';
 
@@ -67,7 +67,7 @@
 	let breathTimeout: ReturnType<typeof setTimeout>;
 	let delayTimeout: ReturnType<typeof setTimeout>;
 
-	let breath = tweened(0, { duration: breathOutConfig.duration, delay: 0 });
+	let breath = new Tween(0, { duration: breathOutConfig.duration, delay: 0 });
 
 	function changeAlert(config: BreathAlert) {
 		if (vibration) {
@@ -102,7 +102,7 @@
 	function stopTimout() {
 		clearTimeout(breathTimeout);
 		clearTimeout(delayTimeout);
-		breath.set($breath, { delay: 0, duration: 0 });
+		breath.set(breath.current, { delay: 0, duration: 0 });
 	}
 
 	function toggleRunning() {
@@ -140,7 +140,7 @@
 	{:else}
 		<p transition:fly={{ y: 100, duration: 2000 }} class="direction">OUT</p>
 	{/if}
-	<div class="inner" style="transform: scale({$breath})"></div>
+	<div class="inner" style="transform: scale({breath.current})"></div>
 </div>
 
 <style lang="scss">

@@ -1,17 +1,22 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import BreathingTechnique, { type BreathConfig } from '$lib/tools/BreathingTechnique.svelte';
-	import { onMount } from 'svelte';
 
-	let breathInTime = 4000;
-	let breathInHold = 700;
-	let breathOutTime = 6000;
-	let breathOutHold = 700;
+	let breathInTime = $state(4000);
+	let breathInHold = $state(700);
+	let breathOutTime = $state(6000);
+	let breathOutHold = $state(700);
 
-	let breathInConfig: BreathConfig;
-	let breathOutConfig: BreathConfig;
+	let breathInConfig: BreathConfig = $derived({
+		duration: breathInTime,
+		delay: breathInHold,
+	});
+	let breathOutConfig: BreathConfig = $derived({
+		duration: breathOutTime,
+		delay: breathOutHold,
+	});
 
-	onMount(() => {
+	$effect(() => {
 		if (page.url.searchParams.has('breathInTime')) {
 			breathInTime = Number(page.url.searchParams.get('breathInTime'));
 		}
@@ -24,14 +29,6 @@
 		if (page.url.searchParams.has('breathOutHold')) {
 			breathOutHold = Number(page.url.searchParams.get('breathOutHold'));
 		}
-		breathInConfig = {
-			duration: breathInTime,
-			delay: breathInHold,
-		};
-		breathOutConfig = {
-			duration: breathOutTime,
-			delay: breathOutHold,
-		};
 	});
 </script>
 
