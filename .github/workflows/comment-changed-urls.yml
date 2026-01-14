@@ -27,22 +27,35 @@ jobs:
           script: |
             // Get the PR associated with this deployment
             const deployment = context.payload.deployment;
+            
+            // Try to get PR ID from deployment payload (if Vercel includes it)
             if (deployment && deployment.payload && deployment.payload.pr_id) {
+              console.log('Found PR ID in deployment payload:', deployment.payload.pr_id);
               return deployment.payload.pr_id;
             }
-            // Fallback: try to find PR by ref
-            const ref = deployment?.ref;
-            if (ref) {
-              const prs = await github.rest.pulls.list({
+            
+            // Try to find PR by deployment SHA (deployment.sha contains the commit SHA)
+            const sha = deployment?.sha;
+            console.log('Deployment SHA:', sha);
+            
+            if (sha) {
+              // Find PRs associated with this commit
+              const prs = await github.rest.repos.listPullRequestsAssociatedWithCommit({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                state: 'open',
-                head: `${context.repo.owner}:${ref}`
+                commit_sha: sha
               });
+              console.log('Found PRs:', prs.data.length);
               if (prs.data.length > 0) {
-                return prs.data[0].number;
+                // Return the first open PR (or the first one if none are open)
+                const openPr = prs.data.find(pr => pr.state === 'open');
+                const prNumber = openPr ? openPr.number : prs.data[0].number;
+                console.log('Using PR number:', prNumber);
+                return prNumber;
               }
             }
+            
+            console.log('No PR found for this deployment');
             return null;
           result-encoding: string
       - name: Get changed files and format comment
