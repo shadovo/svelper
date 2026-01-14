@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onMount, afterUpdate, tick } from 'svelte';
+	import { tick, onMount } from 'svelte';
+	import type { Snippet } from 'svelte';
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-yaml.js';
 	import 'prismjs/components/prism-typescript.js';
@@ -10,12 +11,17 @@
 	import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 	import 'prismjs/themes/prism.css';
 
-	export let language = 'javascript';
+	interface Props {
+		language?: string;
+		children?: Snippet;
+	}
 
-	let preEl: HTMLElement | undefined;
-	let fakeCodeEl: HTMLElement | undefined;
-	let code: string | undefined;
-	let formattedCode: string | undefined;
+	let { language = 'javascript', children }: Props = $props();
+
+	let preEl: HTMLElement | undefined = $state();
+	let fakeCodeEl: HTMLElement | undefined = $state();
+	let code: string | undefined = $state();
+	let formattedCode: string | undefined = $state();
 
 	const updateHighlight = async () => {
 		// code variable if they are using a prop
@@ -40,24 +46,26 @@
 			'left-trim': true,
 			'right-trim': true,
 		});
-		updateHighlight();
-	});
-
-	afterUpdate(() => {
-		updateHighlight();
 	});
 
 	// creates the prism classes
-	$: prismClasses = `language-${language} line-numbers`;
+	let prismClasses = $derived(`language-${language} line-numbers`);
 
-	// Only run if Prism is defined and we code
-	$: if (typeof Prism !== 'undefined' && code) {
-		formattedCode = Prism.highlight(code, Prism.languages[language], language);
-	}
+	// Run updateHighlight when code changes
+	$effect(() => {
+		updateHighlight();
+	});
+
+	// Only run if Prism is defined and we have code
+	$effect(() => {
+		if (typeof Prism !== 'undefined' && code) {
+			formattedCode = Prism.highlight(code, Prism.languages[language], language);
+		}
+	});
 </script>
 
 <code style:display={formattedCode ? 'none' : ''} class="placeholder" bind:this={fakeCodeEl}
-	><slot /></code
+	>{@render children?.()}</code
 >
 
 {#if formattedCode}

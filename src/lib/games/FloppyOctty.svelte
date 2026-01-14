@@ -5,8 +5,13 @@
 
 	type BottomPillar = { top: number; x: number; scored?: boolean };
 
-	export let width = '300';
-	export let height = '450';
+	interface Props {
+		width?: string;
+		height?: string;
+	}
+
+	let { width = '300', height = '450' }: Props = $props();
+
 	const GAME_WIDTH = Math.max(300, parseInt(width));
 	const GAME_HEIGHT = Math.max(300, parseInt(height));
 	const PIXEL_RATIO = browser ? window.devicePixelRatio : 1;
@@ -31,15 +36,15 @@
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
-	let gameInitiated = false;
+	let gameInitiated = $state(false);
 	let octtyDirection = tweened(-1, { duration: 1000 });
 	let octtyPosY = (RELATIVE_HEIGHT - GROUND_HEIGHT) / 2;
-	let octtyIsDead = false;
-	let score = 0;
+	let octtyIsDead = $state(false);
+	let score = $state(0);
 	let octtyDistancePerTick = BASE_OCTTY_DISTANCE_PER_TICK;
 	let pillarDistancePerTick = BASE_SIDESCROLL_SPEED;
 	let lastFrameTime = performance.now();
-	let highScore = 0;
+	let highScore = $state(0);
 
 	function getRandomArbitrary(min: number, max: number) {
 		return Math.random() * (max - min) + min;
@@ -204,8 +209,8 @@
 >
 	<canvas
 		tabindex="0"
-		on:click={jump}
-		on:keydown={(e) => {
+		onclick={jump}
+		onkeydown={(e) => {
 			if (e.key === ' ') {
 				e.preventDefault();
 				jump();
@@ -228,7 +233,7 @@
 					<p class="game-high-score">Highscore: {highScore}</p>
 				</div>
 				<div>
-					<button class="center game-restart" on:click={setupGame}>Restart</button>
+					<button class="center game-restart" onclick={setupGame}>Restart</button>
 				</div>
 			</div>
 		{/if}
@@ -242,7 +247,7 @@
 					<p>Use the spacebar or click to jump</p>
 				</div>
 				<div>
-					<button class="center game-start" on:click={setupGame}>Start</button>
+					<button class="center game-start" onclick={setupGame}>Start</button>
 				</div>
 			</div>
 		{/if}

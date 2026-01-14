@@ -1,13 +1,17 @@
 <script lang="ts">
 	import type { Picture } from 'vite-imagetools';
 
-	export let src: Picture;
-	export let alt: string;
-	export let aspectRatio: string;
-	export let sizes: string;
-	export let background = 'transparent';
-	export let loading: 'eager' | 'lazy' = 'eager';
-	export let role: string | undefined = undefined;
+	interface Props {
+		src: Picture;
+		alt: string;
+		aspectRatio: string;
+		sizes: string;
+		background?: string;
+		loading?: 'eager' | 'lazy';
+		role?: string;
+	}
+
+	let { src, alt, aspectRatio, sizes, background = 'transparent', loading = 'eager', role }: Props = $props();
 </script>
 
 <picture style="width: 100%; aspect-ratio:{aspectRatio}; background-color: {background}">

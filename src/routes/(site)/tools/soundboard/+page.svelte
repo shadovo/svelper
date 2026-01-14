@@ -63,7 +63,7 @@
 		[['A4'], [], true, false, false],
 	];
 	const TEMPO = 240;
-	let playing = false;
+	let playing = $state(false);
 	let soundboard = createSoundboard();
 	let soundLoop: ReturnType<typeof setTimeout>;
 	let currentMelody = melody;
@@ -136,13 +136,13 @@
 		clearTimeout(soundLoop);
 	}
 
-	$: {
+	$effect(() => {
 		if (playing) {
 			runSoundLoop();
 		} else {
 			clearSoundLoop();
 		}
-	}
+	});
 </script>
 
 <svelte:head>
@@ -173,9 +173,9 @@
 	<section>
 		<h3>Drums</h3>
 		<div class="flex-row flex-wrap">
-			<button on:click={() => soundboard.playHiHat()}>Hi-hat</button>
-			<button on:click={() => soundboard.playSnare()}>Snare</button>
-			<button on:click={() => soundboard.playKickDrum()}>Kick drum</button>
+			<button onclick={() => soundboard.playHiHat()}>Hi-hat</button>
+			<button onclick={() => soundboard.playSnare()}>Snare</button>
+			<button onclick={() => soundboard.playKickDrum()}>Kick drum</button>
 		</div>
 	</section>
 	<section>
@@ -196,7 +196,7 @@
 							</td>
 							{#each octaves as octave (octave)}
 								<td>
-									<button on:click={() => soundboard.playNotes([`${note}${octave}`])}
+									<button onclick={() => soundboard.playNotes([`${note}${octave}`])}
 										>{`${note}${octave}`}</button
 									>
 								</td>
@@ -225,7 +225,7 @@
 							</td>
 							{#each octaves as octave (octave)}
 								<td>
-									<button on:click={() => soundboard.playBass([`${note}${octave}`], 2)}
+									<button onclick={() => soundboard.playBass([`${note}${octave}`], 2)}
 										>{`${note}${octave}`}</button
 									>
 								</td>
@@ -265,7 +265,7 @@ const melody = [
 ];
 `}
 		</SyntaxHighlighting>
-		<button on:click={() => togglePlay(melody)}>{playing ? 'Pause' : 'Play'}</button>
+		<button onclick={() => togglePlay(melody)}>{playing ? 'Pause' : 'Play'}</button>
 	</section>
 
 	<section>
@@ -318,7 +318,7 @@ const melody = [
 ];
 `}
 		</SyntaxHighlighting>
-		<button on:click={() => togglePlay(melody2)}>{playing ? 'Pause' : 'Play'}</button>
+		<button onclick={() => togglePlay(melody2)}>{playing ? 'Pause' : 'Play'}</button>
 	</section>
 </Article>
 

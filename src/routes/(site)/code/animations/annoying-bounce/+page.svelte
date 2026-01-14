@@ -2,7 +2,7 @@
 	import Article from '$lib/components/Article.svelte';
 	import SyntaxHighlighting from '$lib/components/SyntaxHighlighting.svelte';
 
-	let animationRunning = false;
+	let animationRunning = $state(false);
 </script>
 
 <svelte:head>
@@ -22,8 +22,8 @@
 		</p>
 		<button
 			class:annoyingBounce={animationRunning}
-			on:click={() => (animationRunning = true)}
-			on:animationend={() => (animationRunning = false)}
+			onclick={() => (animationRunning = true)}
+			onanimationend={() => (animationRunning = false)}
 		>
 			Play animation
 		</button>

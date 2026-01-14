@@ -4,7 +4,11 @@
 	import type { ArticlePromo } from '$data/articles';
 	import { resolve } from '$app/paths';
 
-	export let article: ArticlePromo;
+	interface Props {
+		article: ArticlePromo;
+	}
+
+	let { article }: Props = $props();
 
 	const profilePictureSize = `
 		(min-width: 768px)	80px,

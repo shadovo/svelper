@@ -1,10 +1,16 @@
 <script lang="ts">
 	import type { Picture } from 'vite-imagetools';
+	import type { Snippet } from 'svelte';
 	import Image from '$lib/components/Image.svelte';
 
-	export let title: string;
-	export let image: Picture | undefined = undefined;
-	export let imageColor: string | undefined = undefined;
+	interface Props {
+		title: string;
+		image?: Picture;
+		imageColor?: string;
+		children?: Snippet;
+	}
+
+	let { title, image, imageColor, children }: Props = $props();
 
 	const heroImageSize = `
 		(min-width: 816px)	800px,
@@ -27,7 +33,7 @@
 	{/if}
 	<div class="content">
 		<h1>{title}</h1>
-		<slot />
+		{@render children?.()}
 	</div>
 </article>
 

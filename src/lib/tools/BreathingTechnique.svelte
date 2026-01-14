@@ -1,9 +1,8 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	export type BreathConfig = { duration: number; delay: number };
 </script>
 
 <script lang="ts">
-	import { onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
 	import createSoundboard from '../utils/audio/soundboard';
@@ -39,20 +38,29 @@
 		soundPattern: [['B3', 'D3', 'F3', 'A3']],
 	};
 
+	interface Props {
+		breathInConfig?: BreathConfig;
+		breathOutConfig?: BreathConfig;
+		sound?: boolean;
+		vibration?: boolean;
+	}
+
+	let { 
+		breathInConfig = DEFAULT_BREATH_IN_CONFIG, 
+		breathOutConfig = DEFAULT_BREATH_OUT_CONFIG, 
+		sound = true, 
+		vibration = true 
+	}: Props = $props();
+
 	let soundBoard = createSoundboard();
 
-	export let breathInConfig: BreathConfig = DEFAULT_BREATH_IN_CONFIG;
-	export let breathOutConfig: BreathConfig = DEFAULT_BREATH_OUT_CONFIG;
-	export let sound = true;
-	export let vibration = true;
+	let breathInValues: BreathValues = $derived({ ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig });
 
-	let breathInValues: BreathValues = { ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig };
+	let breathOutValues: BreathValues = $derived({ ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig });
 
-	let breathOutValues: BreathValues = { ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig };
-
-	let directionIsIn = false;
-	let running = false;
-	let hold = false;
+	let directionIsIn = $state(false);
+	let running = $state(false);
+	let hold = $state(false);
 	let breathTimeout: ReturnType<typeof setTimeout>;
 	let delayTimeout: ReturnType<typeof setTimeout>;
 
@@ -94,28 +102,25 @@
 		breath.set($breath, { delay: 0, duration: 0 });
 	}
 
-	$: {
-		breathInValues = { ...DEFAULT_BREATH_IN_CONFIG, ...breathInConfig };
-		breathOutValues = { ...DEFAULT_BREATH_OUT_CONFIG, ...breathOutConfig };
-	}
-
-	$: {
+	$effect(() => {
 		if (running) {
 			toggleDirection();
 		} else {
 			stopTimout();
 		}
-	}
+	});
 
-	onDestroy(() => {
-		stopTimout();
-		soundBoard.destroy();
+	$effect(() => {
+		return () => {
+			stopTimout();
+			soundBoard.destroy();
+		};
 	});
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="outer" on:click={() => (running = !running)}>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<div class="outer" onclick={() => (running = !running)}>
 	{#if !running}
 		<p transition:fade class="direction">START</p>
 	{:else if hold}
