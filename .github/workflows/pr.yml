@@ -3,12 +3,10 @@ name: 'PR'
 on:
   pull_request:
     branches: ['main']
-  deployment_status:
 
 jobs:
   lint:
     name: Lint & Check
-    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -27,20 +25,9 @@ jobs:
 
   dependency-review:
     name: Dependency review
-    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v6
       - name: 'Dependency review'
         uses: actions/dependency-review-action@v4
-
-  comment-changed-urls:
-    name: Comment changed URLs
-    # Only run on successful non-production deployments (i.e., PR preview deployments)
-    if: ${{ github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && !github.event.deployment.production_environment }}
-    uses: ./.github/workflows/comment-changed-sveltekit-urls.yml
-    with:
-      review_url: ${{ github.event.deployment_status.environment_url }}
-      prod_url: 'https://svelper.com'
-      commit_sha: ${{ github.event.deployment.sha }}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	// Updated dummy change to test changed-sveltekit-paths workflow for Vercel URL construction
+	// Dummy change to test changed-sveltekit-paths workflow
 	import { tick, onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 	import Prism from 'prismjs';
