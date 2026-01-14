@@ -81,10 +81,6 @@
 		};
 	}
 
-	function createGame(cols: number, rws: number, mns: number) {
-		game = createInitialGame(cols, rws, mns);
-	}
-
 	function gameOver() {
 		game.status = 'lost';
 		game.endTime = new Date();
@@ -165,10 +161,6 @@
 		}
 		setTimeout(updateTimer, 1000);
 	}
-
-	$effect(() => {
-		createGame(Number(columns), Number(rows), Number(mines));
-	});
 </script>
 
 <div class="board {game.status}">
@@ -179,7 +171,9 @@
 			>
 		</div>
 		<div class="stat">
-			<button onclick={() => createGame(Number(columns), Number(rows), Number(mines))}>
+			<button
+				onclick={() => (game = createInitialGame(Number(columns), Number(rows), Number(mines)))}
+			>
 				{#if game.status === 'notstarted' || game.status === 'playing'}
 					🙂
 				{:else if game.status === 'won'}

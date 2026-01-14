@@ -5,6 +5,7 @@
 <script lang="ts">
 	import { Tween } from 'svelte/motion';
 	import { fade, fly } from 'svelte/transition';
+	import { onDestroy } from 'svelte';
 	import createSoundboard from '../utils/audio/soundboard';
 
 	type BreathAlert = { vibrationPattern: number[]; soundPattern: string[][] };
@@ -114,11 +115,9 @@
 		}
 	}
 
-	$effect(() => {
-		return () => {
-			stopTimout();
-			soundBoard.destroy();
-		};
+	onDestroy(() => {
+		stopTimout();
+		soundBoard.destroy();
 	});
 </script>
 

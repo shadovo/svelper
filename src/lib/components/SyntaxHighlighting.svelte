@@ -39,7 +39,6 @@
 		}
 	};
 
-	// Initialize Prism settings once on mount
 	onMount(() => {
 		Prism.plugins.NormalizeWhitespace.setDefaults({
 			'remove-trailing': true,
