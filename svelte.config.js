@@ -21,7 +21,6 @@ const config = {
 	kit: {
 		inlineStyleThreshold: 10000,
 		adapter: adapter({
-			runtime: 'edge',
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
