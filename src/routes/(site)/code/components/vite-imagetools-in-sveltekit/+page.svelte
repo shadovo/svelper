@@ -25,8 +25,8 @@
 				rel="noopener noreferrer"
 				target="_blank">vite-imagetools</a
 			>
-			that can help you optimize your images and make them load faster. In this tutorial, we'll show
-			you how to use
+			that can help you optimize your images and make them load faster. In this tutorial, we'll show you
+			how to use
 			<code>vite-imagetools</code> in a SvelteKit project to improve your website's performance.
 		</p>
 	</section>
@@ -255,8 +255,8 @@ const imageSizes = \`
 		</p>
 		<p>
 			We also add the <code>&imagetools</code> at the end of the import so that the import matches
-			the module declaration we previously added to our <code>app.d.ts</code> file to get TypeScript
-			to stop complaining.
+			the module declaration we previously added to our <code>app.d.ts</code> file to get TypeScript to
+			stop complaining.
 		</p>
 		<p>
 			<code>imageSizes</code> is the set of sizes that the image can have based on the screen width.

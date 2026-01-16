@@ -55,8 +55,8 @@
 				<div class="type"><code>Number</code></div>
 				<div class="default"><code>0</code></div>
 				<div class="description">
-					The selected page. Either as a one time start value or with <code>bind:page</code> to have
-					updates synced to the parent as well.
+					The selected page. Either as a one time start value or with <code>bind:page</code> to have updates
+					synced to the parent as well.
 				</div>
 			</div>
 		</div>
