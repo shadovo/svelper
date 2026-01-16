@@ -47,9 +47,9 @@
 			coding skills so the source code for each game is also linked to and available on GitHub.
 		</p>
 		<p>
-			In addition to the games, I've also included some <a href={resolve('/tools')}>tools</a> like a
-			breathing timer that shows you a timer for relaxing and mindful breathing. This tool can be a helpful
-			way to reduce stress and stay focused during long coding sessions.
+			In addition to the games, I've also included some <a href={resolve('/tools')}>tools</a> like a breathing
+			timer that shows you a timer for relaxing and mindful breathing. This tool can be a helpful way
+			to reduce stress and stay focused during long coding sessions.
 		</p>
 		<p>
 			Of course, Svelper is always a work in progress, and I'm constantly adding new resources and
